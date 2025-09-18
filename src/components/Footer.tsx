@@ -28,35 +28,35 @@ const Footer = () => {
     <footer className="bg-card border-t border-border">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
-        <div className="py-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="py-8 sm:py-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {/* Company Info */}
-            <div className="space-y-4">
-              <h3 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+            <div className="space-y-3 sm:space-y-4 sm:col-span-2 lg:col-span-1">
+              <h3 className="text-xl sm:text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
                 Lade Stack
               </h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                 Empowering developers with cutting-edge AI tools and solutions. 
                 Building the future of development, one tool at a time.
               </p>
-              <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+              <div className="flex items-center space-x-2 text-xs sm:text-sm text-muted-foreground">
                 <span>Made with</span>
-                <Heart className="w-4 h-4 text-red-500 fill-current" />
+                <Heart className="w-3 h-3 sm:w-4 sm:h-4 text-red-500 fill-current" />
                 <span>and</span>
-                <Code className="w-4 h-4 text-primary" />
+                <Code className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
                 <span>by Girish Lade</span>
               </div>
             </div>
 
             {/* Company Links */}
             <div>
-              <h4 className="text-lg font-semibold text-foreground mb-4">Company</h4>
-              <ul className="space-y-3">
+              <h4 className="text-base sm:text-lg font-semibold text-foreground mb-3 sm:mb-4">Company</h4>
+              <ul className="space-y-2 sm:space-y-3">
                 {footerLinks.company.map((link) => (
                   <li key={link.name}>
                     <a
                       href={link.href}
-                      className="text-muted-foreground hover:text-primary transition-smooth"
+                      className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-smooth"
                     >
                       {link.name}
                     </a>
@@ -67,13 +67,13 @@ const Footer = () => {
 
             {/* Legal Links */}
             <div>
-              <h4 className="text-lg font-semibold text-foreground mb-4">Legal & Support</h4>
-              <ul className="space-y-3">
+              <h4 className="text-base sm:text-lg font-semibold text-foreground mb-3 sm:mb-4">Legal & Support</h4>
+              <ul className="space-y-2 sm:space-y-3">
                 {footerLinks.legal.map((link) => (
                   <li key={link.name}>
                     <a
                       href={link.href}
-                      className="text-muted-foreground hover:text-primary transition-smooth"
+                      className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-smooth"
                     >
                       {link.name}
                     </a>
@@ -84,15 +84,15 @@ const Footer = () => {
 
             {/* Social Links */}
             <div>
-              <h4 className="text-lg font-semibold text-foreground mb-4">Connect</h4>
-              <ul className="space-y-3">
+              <h4 className="text-base sm:text-lg font-semibold text-foreground mb-3 sm:mb-4">Connect</h4>
+              <ul className="space-y-2 sm:space-y-3">
                 {footerLinks.social.map((link) => (
                   <li key={link.name}>
                     <a
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-primary transition-smooth"
+                      className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-smooth"
                     >
                       {link.name}
                     </a>
@@ -104,12 +104,12 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="py-6 border-t border-border">
-          <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
-            <div className="text-sm text-muted-foreground">
+        <div className="py-4 sm:py-6 border-t border-border">
+          <div className="flex flex-col sm:flex-row items-center justify-between space-y-3 sm:space-y-0">
+            <div className="text-xs sm:text-sm text-muted-foreground text-center sm:text-left">
               © {currentYear} Lade Stack. All rights reserved.
             </div>
-            <div className="flex items-center space-x-6 text-sm">
+            <div className="flex items-center space-x-4 sm:space-x-6 text-xs sm:text-sm">
               <a
                 href="#privacy"
                 className="text-muted-foreground hover:text-primary transition-smooth"
