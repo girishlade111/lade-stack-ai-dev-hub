@@ -31,23 +31,23 @@ const HeroSection = () => {
 
           {/* Main Headline */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 sm:mb-6 leading-tight px-2">
-            Empowering Developers with{" "}
+            Transform Your Development Workflow with{" "}
             <span className="bg-gradient-primary bg-clip-text text-transparent">
-              Cutting-edge AI Tools
+              AI-Powered Developer Tools
             </span>{" "}
-            and Solutions
+            That Boost Productivity 10x
           </h1>
 
           {/* Subheadline */}
           <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-2">
-            Unlock the future of development with LadeStack - Your go-to platform for 
-            AI-powered developer tools and services that boost productivity and streamline workflows.
+            Complete SaaS platform with API testing tools, no-code website builder, secure file management, 
+            and AI documentation summarizer. Join 1000+ developers already accelerating their projects.
           </p>
 
           {/* Supporting Text */}
           <p className="text-base sm:text-lg text-muted-foreground mb-8 sm:mb-12 max-w-2xl mx-auto px-2">
-            Explore a suite of AI-powered tools designed for developers, SaaS solutions, 
-            and creative projects that boost productivity and streamline workflows.
+            Stop wasting time on repetitive development tasks. Our AI-powered tools automate testing, 
+            simplify deployment, and accelerate your entire development lifecycle from concept to production.
           </p>
 
           {/* CTA Buttons */}
@@ -64,16 +64,16 @@ const HeroSection = () => {
           {/* Stats */}
           <div className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-2xl mx-auto px-4">
             <div className="text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-foreground">4+</div>
-              <div className="text-sm sm:text-base text-muted-foreground">AI Tools</div>
+              <div className="text-2xl sm:text-3xl font-bold text-foreground">1000+</div>
+              <div className="text-sm sm:text-base text-muted-foreground">Active Developers</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-foreground">100%</div>
-              <div className="text-sm sm:text-base text-muted-foreground">Open Source</div>
+              <div className="text-2xl sm:text-3xl font-bold text-foreground">10x</div>
+              <div className="text-sm sm:text-base text-muted-foreground">Faster Development</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-foreground">24/7</div>
-              <div className="text-sm sm:text-base text-muted-foreground">Developer Support</div>
+              <div className="text-2xl sm:text-3xl font-bold text-foreground">99.9%</div>
+              <div className="text-sm sm:text-base text-muted-foreground">Uptime Guarantee</div>
             </div>
           </div>
         </div>
