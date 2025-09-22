@@ -17,10 +17,10 @@ const Footer = () => {
       { name: "Documentation", href: "#docs" },
     ],
     social: [
-      { name: "GitHub", href: "https://github.com/girishlade" },
-      { name: "LinkedIn", href: "https://linkedin.com/in/girishlade" },
-      { name: "Instagram", href: "https://instagram.com/girishlade" },
-      { name: "CodePen", href: "https://codepen.io/girishlade" },
+      { name: "GitHub", href: "https://github.com/girishlade111" },
+      { name: "LinkedIn", href: "https://www.linkedin.com/in/girish-lade-075bba201/" },
+      { name: "Instagram", href: "https://www.instagram.com/girish_lade_/" },
+      { name: "CodePen", href: "https://codepen.io/Girish-Lade-the-looper" },
     ],
   };
 

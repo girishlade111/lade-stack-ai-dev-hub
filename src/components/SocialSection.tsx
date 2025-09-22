@@ -7,37 +7,37 @@ const SocialSection = () => {
       platform: "GitHub",
       username: "Girish Lade",
       description: "Explore my open-source contributions and projects. I'm committed to sharing my code and collaborating with the developer community.",
-      url: "https://github.com/girishlade",
+      url: "https://github.com/girishlade111",
       icon: Github,
-      color: "hover:text-gray-900 dark:hover:text-gray-100",
-      bgColor: "hover:bg-gray-100 dark:hover:bg-gray-800",
+      color: "hover:text-primary",
+      bgColor: "hover:bg-primary/10",
     },
     {
       platform: "LinkedIn",
       username: "Girish Lade",
       description: "Connect with me professionally and stay updated on my latest projects, career insights, and industry thoughts.",
-      url: "https://linkedin.com/in/girishlade",
+      url: "https://www.linkedin.com/in/girish-lade-075bba201/",
       icon: Linkedin,
-      color: "hover:text-blue-600",
-      bgColor: "hover:bg-blue-50 dark:hover:bg-blue-950",
+      color: "hover:text-primary",
+      bgColor: "hover:bg-primary/10",
     },
     {
       platform: "Instagram",
       username: "Girish Lade",
       description: "Follow my journey in tech, behind-the-scenes content, and personal insights into the world of development.",
-      url: "https://instagram.com/girishlade",
+      url: "https://www.instagram.com/girish_lade_/",
       icon: Instagram,
-      color: "hover:text-pink-600",
-      bgColor: "hover:bg-pink-50 dark:hover:bg-pink-950",
+      color: "hover:text-primary",
+      bgColor: "hover:bg-primary/10",
     },
     {
       platform: "CodePen",
       username: "Girish Lade",
       description: "Check out my creative coding experiments, UI/UX prototypes, and interactive web development demos.",
-      url: "https://codepen.io/girishlade",
+      url: "https://codepen.io/Girish-Lade-the-looper",
       icon: Code2,
-      color: "hover:text-green-600",
-      bgColor: "hover:bg-green-50 dark:hover:bg-green-950",
+      color: "hover:text-primary",
+      bgColor: "hover:bg-primary/10",
     },
   ];
 
@@ -68,7 +68,7 @@ const SocialSection = () => {
               </p>
               <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
                 <a 
-                  href="https://github.com/girishlade" 
+                  href="https://github.com/girishlade111" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="group"
