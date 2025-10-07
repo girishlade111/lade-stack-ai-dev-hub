@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Calendar, Clock, Tag, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
@@ -264,6 +265,12 @@ const Blog = () => {
                   <Button variant="hero" className="w-full sm:w-auto">
                     Subscribe
                   </Button>
+                </div>
+                
+                <div className="mt-6">
+                  <Link to="/contact" className="text-primary hover:underline">
+                    Have suggestions for blog topics? Contact us
+                  </Link>
                 </div>
               </div>
             </div>

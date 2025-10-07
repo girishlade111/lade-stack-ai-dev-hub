@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ExternalLink, Code, Globe, FileText, Brain } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
@@ -200,6 +201,12 @@ const Projects = () => {
                   <Button variant="outline" size="lg" className="w-full sm:w-auto">
                     View Pricing Plans
                   </Button>
+                </div>
+                
+                <div className="mt-6">
+                  <Link to="/contact" className="text-primary hover:underline">
+                    Have questions? Contact our sales team
+                  </Link>
                 </div>
               </div>
             </div>

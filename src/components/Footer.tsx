@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Heart, Code } from "lucide-react";
 
 const Footer = () => {
@@ -32,9 +33,11 @@ const Footer = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {/* Company Info */}
             <div className="space-y-3 sm:space-y-4 sm:col-span-2 lg:col-span-1">
-              <h3 className="text-xl sm:text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                Lade Stack
-              </h3>
+              <Link to="/">
+                <h3 className="text-xl sm:text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                  Lade Stack
+                </h3>
+              </Link>
               <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                 Empowering developers with cutting-edge AI tools and solutions. 
                 Building the future of development, one tool at a time.
@@ -54,12 +57,12 @@ const Footer = () => {
               <ul className="space-y-2 sm:space-y-3">
                 {footerLinks.company.map((link) => (
                   <li key={link.name}>
-                    <a
-                      href={link.href}
+                    <Link
+                      to={link.href}
                       className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-smooth"
                     >
                       {link.name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

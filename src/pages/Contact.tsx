@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -193,6 +194,12 @@ const Contact = () => {
                         <Send className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                       </Button>
                     </form>
+                    
+                    <div className="mt-6 text-center">
+                      <Link to="/projects" className="text-primary hover:underline">
+                        Learn more about our projects
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -251,6 +258,12 @@ const Contact = () => {
                   <Button variant="outline" size="lg" className="w-full sm:w-auto">
                     Live Chat
                   </Button>
+                </div>
+                
+                <div className="mt-6">
+                  <Link to="/about" className="text-primary hover:underline">
+                    Learn more about our company
+                  </Link>
                 </div>
               </div>
             </div>
