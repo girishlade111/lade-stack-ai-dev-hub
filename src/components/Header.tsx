@@ -21,7 +21,7 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link to="/">
+            <Link to="/" className="transition-smooth hover:opacity-90">
               <h1 className="text-xl sm:text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
                 Lade Stack
               </h1>
@@ -34,9 +34,10 @@ const Header = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className="text-sm xl:text-base text-muted-foreground hover:text-foreground transition-smooth font-medium"
+                className="text-sm xl:text-base text-muted-foreground hover:text-foreground transition-smooth font-medium relative group"
               >
                 {item.name}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
               </Link>
             ))}
           </nav>
@@ -52,7 +53,7 @@ const Header = () => {
               GitHub
             </a>
             <ThemeToggle />
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" className="transition-smooth hover:scale-105">
               Get Started
             </Button>
           </div>
@@ -64,6 +65,7 @@ const Header = () => {
               variant="ghost"
               size="icon"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="transition-smooth hover:scale-110"
             >
               {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
@@ -72,13 +74,13 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-border">
+          <div className="md:hidden py-4 border-t border-border animate-slide-up">
             <nav className="flex flex-col space-y-4">
               {navigationItems.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className="text-muted-foreground hover:text-foreground transition-smooth font-medium py-2"
+                  className="text-muted-foreground hover:text-foreground transition-smooth font-medium py-2 px-4 rounded-lg hover:bg-muted"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
@@ -89,11 +91,11 @@ const Header = () => {
                   href="https://github.com/girishlade"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground transition-smooth py-2"
+                  className="text-muted-foreground hover:text-foreground transition-smooth py-2 px-4 rounded-lg hover:bg-muted"
                 >
                   GitHub Profile
                 </a>
-                <Button variant="outline" size="sm" className="w-fit">
+                <Button variant="outline" size="sm" className="w-fit transition-smooth hover:scale-105">
                   Get Started
                 </Button>
               </div>

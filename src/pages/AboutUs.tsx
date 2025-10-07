@@ -34,7 +34,7 @@ const AboutUs = () => {
         {/* Hero Section */}
         <section className="py-12 sm:py-16 lg:py-20 bg-gradient-subtle">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto text-center">
+            <div className="max-w-4xl mx-auto text-center animate-slide-up">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
                 About <span className="bg-gradient-primary bg-clip-text text-transparent">Lade Stack</span>
               </h1>
@@ -49,7 +49,7 @@ const AboutUs = () => {
         {/* Story Section */}
         <section className="py-12 sm:py-16 lg:py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-4xl mx-auto animate-fade-in">
               <div className="bg-card rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-medium border border-border">
                 <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4 sm:mb-6">
                   Our Story
@@ -77,7 +77,7 @@ const AboutUs = () => {
         <section className="py-12 sm:py-16 lg:py-20 bg-gradient-subtle">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-12 sm:mb-16">
+              <div className="text-center mb-12 sm:mb-16 animate-fade-in">
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">
                   Core <span className="bg-gradient-primary bg-clip-text text-transparent">Values</span>
                 </h2>
@@ -88,10 +88,11 @@ const AboutUs = () => {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                {values.map((value) => (
+                {values.map((value, index) => (
                   <div
                     key={value.title}
-                    className="bg-card rounded-lg sm:rounded-xl p-4 sm:p-6 shadow-subtle border border-border hover:shadow-medium transition-smooth group"
+                    className="bg-card rounded-lg sm:rounded-xl p-4 sm:p-6 shadow-subtle border border-border hover:shadow-medium transition-smooth group animate-slide-up"
+                    style={{ animationDelay: `${index * 0.1}s` }}
                   >
                     <div className="flex items-start space-x-3 sm:space-x-4">
                       <div className="flex-shrink-0">
@@ -119,7 +120,7 @@ const AboutUs = () => {
         <section className="py-12 sm:py-16 lg:py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12 sm:mb-16">
+              <div className="text-center mb-12 sm:mb-16 animate-fade-in">
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">
                   Meet Our <span className="bg-gradient-primary bg-clip-text text-transparent">Team</span>
                 </h2>
@@ -129,10 +130,10 @@ const AboutUs = () => {
                 </p>
               </div>
 
-              <div className="bg-card rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-medium border border-border">
+              <div className="bg-card rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-medium border border-border animate-slide-up">
                 <div className="flex flex-col md:flex-row items-center gap-6 sm:gap-8">
                   <div className="flex-shrink-0">
-                    <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-gradient-primary flex items-center justify-center text-primary-foreground text-4xl font-bold">
+                    <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-gradient-primary flex items-center justify-center text-primary-foreground text-4xl font-bold transition-smooth hover:scale-105">
                       GL
                     </div>
                   </div>
@@ -150,10 +151,10 @@ const AboutUs = () => {
                 </div>
               </div>
               
-              <div className="mt-8 text-center">
+              <div className="mt-8 text-center animate-fade-in">
                 <Link 
                   to="/contact" 
-                  className="inline-flex items-center px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+                  className="inline-flex items-center px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-smooth hover:scale-105"
                 >
                   Get in Touch
                 </Link>
