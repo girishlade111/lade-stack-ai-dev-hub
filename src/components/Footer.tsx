@@ -5,10 +5,10 @@ const Footer = () => {
 
   const footerLinks = {
     company: [
-      { name: "About Us", href: "#about" },
-      { name: "Projects", href: "#projects" },
-      { name: "Blog", href: "#blog" },
-      { name: "Contact", href: "#contact" },
+      { name: "About Us", href: "/about" },
+      { name: "Projects", href: "/projects" },
+      { name: "Blog", href: "/blog" },
+      { name: "Contact", href: "/contact" },
     ],
     legal: [
       { name: "Privacy Policy", href: "#privacy" },
