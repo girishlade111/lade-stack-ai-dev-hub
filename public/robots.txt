@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ladestack.com/sitemap.xml
+Sitemap: https://ladestack.in/sitemap.xml
 
 # Google AdsBot
 User-agent: AdsBot-Google
@@ -57,9 +57,9 @@ Disallow: /backup/
 Crawl-delay: 10
 
 # Host
-Host: https://ladestack.com
+Host: https://ladestack.in
 
 # Sitemaps for different content types
-Sitemap: https://ladestack.com/sitemap.xml
-Sitemap: https://ladestack.com/sitemap-pages.xml
-Sitemap: https://ladestack.com/sitemap-blog.xml
+Sitemap: https://ladestack.in/sitemap.xml
+Sitemap: https://ladestack.in/sitemap-pages.xml
+Sitemap: https://ladestack.in/sitemap-blog.xml

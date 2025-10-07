@@ -11,7 +11,7 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email Us",
-      content: "support@ladestack.com",
+      content: "support@ladestack.in",
       description: "Our support team responds within 24 hours"
     },
     {

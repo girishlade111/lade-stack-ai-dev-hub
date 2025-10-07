@@ -144,7 +144,7 @@ const PrivacyPolicy = () => {
                 </p>
                 <div className="bg-muted rounded-lg p-4 mb-6">
                   <p className="text-foreground font-medium">Lade Stack</p>
-                  <p className="text-muted-foreground">Email: privacy@ladestack.com</p>
+                  <p className="text-muted-foreground">Email: privacy@ladestack.in</p>
                   <p className="text-muted-foreground">Address: San Francisco, CA</p>
                 </div>
 
