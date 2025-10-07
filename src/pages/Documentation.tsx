@@ -132,10 +132,12 @@ const Documentation = () => {
                 <div className="relative">
                   <input
                     type="text"
+                    id="documentation-search"
+                    name="documentation-search"
                     placeholder="Search documentation..."
                     className="w-full px-4 py-3 sm:py-4 rounded-lg sm:rounded-xl border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                   />
-                  <Button className="absolute right-2 top-1/2 transform -translate-y-1/2">
+                  <Button className="absolute right-2 top-1/2 transform -translate-y-1/2" aria-label="Search documentation">
                     Search
                   </Button>
                 </div>

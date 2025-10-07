@@ -137,11 +137,24 @@
 @layer base {
   * {
     @apply border-border;
+    -webkit-text-size-adjust: 100%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 
   body {
     @apply bg-background text-foreground;
     scroll-behavior: smooth;
+    text-size-adjust: 100%;
+  }
+  
+  input, textarea, select {
+    -webkit-user-select: auto;
+    -moz-user-select: auto;
+    -ms-user-select: auto;
+    user-select: auto;
   }
 }
 

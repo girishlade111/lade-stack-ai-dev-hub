@@ -259,6 +259,8 @@ const Blog = () => {
                 <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
                   <input
                     type="email"
+                    id="blog-subscription-email"
+                    name="blog-subscription-email"
                     placeholder="Your email address"
                     className="flex-1 px-4 py-2 sm:py-3 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                   />

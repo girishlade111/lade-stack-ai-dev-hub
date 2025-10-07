@@ -4,7 +4,7 @@ import heroBg from "@/assets/hero-bg-clean.jpg";
 
 const HeroSection = () => {
   return (
-    <section id="home" className="relative min-h-screen flex items-center pt-16 px-4 sm:px-6 lg:px-8">
+    <section id="home" className="relative min-h-screen flex items-center pt-24 sm:pt-32 px-4 sm:px-6 lg:px-8">
       {/* Background Image */}
       <div 
         className="absolute inset-0 z-0"

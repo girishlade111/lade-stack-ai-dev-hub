@@ -44,14 +44,6 @@ const Header = () => {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-2 lg:space-x-4">
-            <a
-              href="https://github.com/girishlade"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-muted-foreground hover:text-foreground transition-smooth"
-            >
-              GitHub
-            </a>
             <ThemeToggle />
             <Button variant="outline" size="sm" className="transition-smooth hover:scale-105">
               Get Started
@@ -66,6 +58,7 @@ const Header = () => {
               size="icon"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="transition-smooth hover:scale-110"
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             >
               {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
@@ -87,14 +80,6 @@ const Header = () => {
                 </Link>
               ))}
               <div className="flex flex-col space-y-3 pt-4 border-t border-border">
-                <a
-                  href="https://github.com/girishlade"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground transition-smooth py-2 px-4 rounded-lg hover:bg-muted"
-                >
-                  GitHub Profile
-                </a>
                 <Button variant="outline" size="sm" className="w-fit transition-smooth hover:scale-105">
                   Get Started
                 </Button>

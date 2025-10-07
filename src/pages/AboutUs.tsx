@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Lightbulb, Users, Award, Eye } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import girishImage from "@/assets/girish.jpg";
 
 const AboutUs = () => {
   const values = [
@@ -133,9 +134,11 @@ const AboutUs = () => {
               <div className="bg-card rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-medium border border-border animate-slide-up">
                 <div className="flex flex-col md:flex-row items-center gap-6 sm:gap-8">
                   <div className="flex-shrink-0">
-                    <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-gradient-primary flex items-center justify-center text-primary-foreground text-4xl font-bold transition-smooth hover:scale-105">
-                      GL
-                    </div>
+                    <img 
+                      src={girishImage} 
+                      alt="Girish Lade - Founder & Lead Developer" 
+                      className="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover transition-smooth hover:scale-105"
+                    />
                   </div>
                   <div className="flex-1 text-center md:text-left">
                     <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-2">

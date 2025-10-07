@@ -128,6 +128,8 @@ const SocialSection = () => {
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md mx-auto">
                 <input
                   type="email"
+                  id="social-email"
+                  name="social-email"
                   placeholder="Enter your email"
                   className="flex-1 px-3 py-2 sm:px-4 sm:py-3 rounded-lg border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent text-sm sm:text-base"
                 />
