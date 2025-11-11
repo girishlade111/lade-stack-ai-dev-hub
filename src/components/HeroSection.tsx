@@ -31,33 +31,40 @@ const HeroSection = () => {
 
           {/* Main Headline */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 sm:mb-6 leading-tight px-2">
-            Transform Your Development Workflow with{" "}
+            Transform your dev workflow with{" "}
             <span className="bg-gradient-primary bg-clip-text text-transparent">
-              AI-Powered Developer Tools
-            </span>{" "}
-            That Boost Productivity 10x
+              AI-powered tools
+            </span>
           </h1>
 
           {/* Subheadline */}
           <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-2">
-            Complete SaaS platform with API testing tools, no-code website builder, secure file management, 
-            and AI documentation summarizer. Join 1000+ developers already accelerating their projects.
-          </p>
-
-          {/* Supporting Text */}
-          <p className="text-base sm:text-lg text-muted-foreground mb-8 sm:mb-12 max-w-2xl mx-auto px-2">
-            Stop wasting time on repetitive development tasks. Our AI-powered tools automate testing, 
-            simplify deployment, and accelerate your entire development lifecycle from concept to production.
+            Code, compile, and enhance HTML/CSS/JS in one smart editor.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4">
-            <Button variant="hero" size="lg" className="group w-full sm:w-auto">
-              Get Started Now
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4 mb-8 sm:mb-12">
+            <Button
+              variant="hero"
+              size="lg"
+              className="group w-full sm:w-auto"
+              onClick={() => window.open('https://code.ladestack.in/', '_blank')}
+            >
+              Start coding with AI
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button variant="outline" size="lg" className="w-full sm:w-auto">
-              Explore Projects
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full sm:w-auto"
+              onClick={() => {
+                const featuresSection = document.querySelector('#features');
+                if (featuresSection) {
+                  featuresSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
+              Explore Tools
             </Button>
           </div>
 

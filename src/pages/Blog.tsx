@@ -139,10 +139,12 @@ const Blog = () => {
                           day: 'numeric' 
                         })}
                       </div>
-                      <Button variant="outline" className="group">
-                        Read Article
-                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                      </Button>
+                      <Link to={`/blog/${featuredPost.id}`}>
+                        <Button variant="outline" className="group">
+                          Read Article
+                          <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                   <div className="md:w-1/3 bg-gradient-primary flex items-center justify-center min-h-64 md:min-h-auto">
@@ -225,10 +227,12 @@ const Blog = () => {
                             day: 'numeric' 
                           })}
                         </div>
-                        <Button variant="ghost" size="sm" className="group/btn p-0 h-auto text-primary hover:text-primary/80">
-                          Read More
-                          <ArrowRight className="w-3 h-3 ml-1 group-hover/btn:translate-x-1 transition-transform" />
-                        </Button>
+                        <Link to={`/blog/${post.id}`}>
+                          <Button variant="ghost" size="sm" className="group/btn p-0 h-auto text-primary hover:text-primary/80">
+                            Read More
+                            <ArrowRight className="w-3 h-3 ml-1 group-hover/btn:translate-x-1 transition-transform" />
+                          </Button>
+                        </Link>
                       </div>
                     </div>
                   </div>
