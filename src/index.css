@@ -6,67 +6,72 @@
 
 @layer base {
   :root {
-    /* Background & Surfaces */
+    /* Background & Surfaces - Modern Base */
     --background: 0 0% 100%;
-    --foreground: 215 25% 15%;
+    --foreground: 220 12% 10%;
     
-    /* Cards & Elevated Surfaces */
+    /* Cards & Elevated Surfaces - Glass Effect */
     --card: 0 0% 100%;
-    --card-foreground: 215 25% 15%;
+    --card-foreground: 220 12% 10%;
     
     /* Popover & Dropdown */
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 15%;
+    --popover-foreground: 220 12% 10%;
     
-    /* Primary Brand Colors - Professional Blue */
-    --primary: 217 91% 60%;
+    /* Primary Brand Colors - Sophisticated Indigo/Navy */
+    --primary: 220 90% 45%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 217 91% 55%;
+    --primary-hover: 220 90% 40%;
     
-    /* Secondary - Subtle Gray */
-    --secondary: 215 15% 95%;
-    --secondary-foreground: 215 25% 15%;
+    /* Secondary - Modern Slate */
+    --secondary: 220 9% 96%;
+    --secondary-foreground: 220 12% 15%;
     
     /* Muted Text & Backgrounds */
-    --muted: 215 15% 97%;
-    --muted-foreground: 215 15% 45%;
+    --muted: 220 9% 98%;
+    --muted-foreground: 220 6% 40%;
     
-    /* Accent - Tech Purple */
-    --accent: 263 85% 65%;
-    --accent-foreground: 0 0% 100%;
+    /* Accent - Modern Electric Blue */
+    --accent: 200 100% 60%;
+    --accent-foreground: 220 12% 10%;
     
     /* Success & Positive Actions */
-    --success: 142 76% 36%;
+    --success: 150 60% 45%;
     --success-foreground: 0 0% 100%;
     
     /* Destructive Actions */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     
-    /* Borders & Inputs */
-    --border: 215 15% 90%;
-    --input: 215 15% 90%;
-    --ring: 217 91% 60%;
+    /* Borders & Inputs - Subtle */
+    --border: 220 9% 90%;
+    --input: 220 9% 90%;
+    --ring: 220 90% 45%;
     
     /* Design System Variables */
-    --radius: 0.75rem;
+    --radius: 1rem;
     
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
-    --gradient-hero: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(215 20% 98%) 100%);
+    /* Modern Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(220 9% 98%) 50%, hsl(200 100% 95%) 100%);
     --gradient-subtle: linear-gradient(145deg, hsl(var(--muted)) 0%, hsl(0 0% 100%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(220 9% 99%) 100%);
+    --gradient-glass: linear-gradient(145deg, hsl(0 0% 100% / 0.8) 0%, hsl(220 9% 95% / 0.8) 100%);
     
-    /* Shadows */
-    --shadow-subtle: 0 1px 3px 0 hsl(215 15% 15% / 0.1);
-    --shadow-medium: 0 4px 6px -1px hsl(215 15% 15% / 0.1);
-    --shadow-large: 0 20px 25px -5px hsl(215 15% 15% / 0.1);
-    --shadow-glow: 0 0 20px hsl(var(--primary) / 0.3);
+    /* Enhanced Shadows & Depth */
+    --shadow-subtle: 0 1px 2px 0 hsl(220 12% 10% / 0.05);
+    --shadow-medium: 0 4px 6px -1px hsl(220 12% 10% / 0.05), 0 2px 4px -1px hsl(220 12% 10% / 0.02);
+    --shadow-large: 0 20px 25px -5px hsl(220 12% 10% / 0.08), 0 10px 10px -5px hsl(220 12% 10% / 0.02);
+    --shadow-xl: 0 25px 50px -12px hsl(220 12% 10% / 0.15);
+    --shadow-glow: 0 0 20px hsl(var(--primary) / 0.2), 0 0 40px hsl(var(--primary) / 0.1);
+    --shadow-inner: inset 0 2px 4px 0 hsl(220 12% 10% / 0.05);
     
-    /* Transitions */
-    --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    /* Enhanced Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     --transition-fade: all 0.3s ease-in-out;
     --transition-slide: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-elastic: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     --sidebar-background: 0 0% 98%;
 
@@ -86,51 +91,61 @@
   }
 
   .dark {
-    /* Background & Surfaces - Dark Mode */
-    --background: 215 25% 8%;
-    --foreground: 0 0% 95%;
+    /* Background & Surfaces - Modern Dark */
+    --background: 220 13% 9%;
+    --foreground: 210 40% 98%;
     
-    /* Cards & Elevated Surfaces */
-    --card: 215 25% 10%;
-    --card-foreground: 0 0% 95%;
+    /* Cards & Elevated Surfaces - Glass Dark */
+    --card: 220 13% 12%;
+    --card-foreground: 210 40% 98%;
     
     /* Popover & Dropdown */
-    --popover: 215 25% 10%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 220 13% 12%;
+    --popover-foreground: 210 40% 98%;
     
-    /* Primary Brand Colors - Brighter for dark */
-    --primary: 217 91% 65%;
-    --primary-foreground: 215 25% 8%;
-    --primary-hover: 217 91% 70%;
+    /* Primary Brand Colors - Enhanced for dark */
+    --primary: 220 90% 55%;
+    --primary-foreground: 220 13% 9%;
+    --primary-hover: 220 90% 60%;
     
-    /* Secondary - Dark Gray */
-    --secondary: 215 25% 15%;
-    --secondary-foreground: 0 0% 95%;
+    /* Secondary - Modern Dark Slate */
+    --secondary: 220 13% 18%;
+    --secondary-foreground: 210 40% 98%;
     
     /* Muted Text & Backgrounds */
-    --muted: 215 25% 12%;
-    --muted-foreground: 215 10% 60%;
+    --muted: 220 13% 15%;
+    --muted-foreground: 220 5% 65%;
     
-    /* Accent - Brighter Tech Purple */
-    --accent: 263 85% 70%;
-    --accent-foreground: 215 25% 8%;
+    /* Accent - Brighter Electric Blue */
+    --accent: 200 100% 70%;
+    --accent-foreground: 220 13% 9%;
     
     /* Success & Positive Actions */
-    --success: 142 76% 45%;
-    --success-foreground: 0 0% 100%;
+    --success: 150 60% 55%;
+    --success-foreground: 220 13% 9%;
     
     /* Destructive Actions */
     --destructive: 0 84% 65%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive-foreground: 210 40% 98%;
     
-    /* Borders & Inputs */
-    --border: 215 25% 18%;
-    --input: 215 25% 18%;
-    --ring: 217 91% 65%;
+    /* Borders & Inputs - Dark */
+    --border: 220 13% 20%;
+    --input: 220 13% 20%;
+    --ring: 220 90% 55%;
     
-    /* Gradients - Adjusted for dark mode */
-    --gradient-hero: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(215 25% 6%) 100%);
-    --gradient-subtle: linear-gradient(145deg, hsl(var(--muted)) 0%, hsl(215 25% 10%) 100%);
+    /* Modern Dark Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(220 13% 9%) 0%, hsl(220 13% 12%) 50%, hsl(200 100% 15%) 100%);
+    --gradient-subtle: linear-gradient(145deg, hsl(var(--muted)) 0%, hsl(220 13% 12%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(220 13% 12%) 0%, hsl(220 13% 10%) 100%);
+    --gradient-glass: linear-gradient(145deg, hsl(220 13% 12% / 0.8) 0%, hsl(220 13% 8% / 0.8) 100%);
+    
+    /* Enhanced Dark Shadows */
+    --shadow-subtle: 0 1px 2px 0 hsl(220 13% 9% / 0.1);
+    --shadow-medium: 0 4px 6px -1px hsl(220 13% 9% / 0.1), 0 2px 4px -1px hsl(220 13% 9% / 0.05);
+    --shadow-large: 0 20px 25px -5px hsl(220 13% 9% / 0.2), 0 10px 10px -5px hsl(220 13% 9% / 0.1);
+    --shadow-xl: 0 25px 50px -12px hsl(220 13% 9% / 0.3);
+    --shadow-glow: 0 0 20px hsl(var(--primary) / 0.4), 0 0 40px hsl(var(--primary) / 0.2);
+    --shadow-inner: inset 0 2px 4px 0 hsl(220 13% 9% / 0.1);
   }
 }
 
