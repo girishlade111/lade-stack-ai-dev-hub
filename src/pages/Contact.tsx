@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -7,6 +8,106 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const Contact = () => {
+  useEffect(() => {
+    // SEO Meta Tags
+    document.title = "Contact Lade Stack - Get in Touch for AI Development Support";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Get in touch with Lade Stack for AI development support, technical assistance, and enterprise solutions. Our team responds within 24 hours.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = 'Get in touch with Lade Stack for AI development support, technical assistance, and enterprise solutions. Our team responds within 24 hours.';
+      document.head.appendChild(meta);
+    }
+
+    // Keywords
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (metaKeywords) {
+      metaKeywords.setAttribute('content', 'Lade Stack contact, AI development support, technical assistance, enterprise solutions, customer support, software development help');
+    } else {
+      const keywordsMeta = document.createElement('meta');
+      keywordsMeta.name = 'keywords';
+      keywordsMeta.content = 'Lade Stack contact, AI development support, technical assistance, enterprise solutions, customer support, software development help';
+      document.head.appendChild(keywordsMeta);
+    }
+
+    // Open Graph Meta Tags
+    const updateMetaTag = (property: string, content: string) => {
+      let tag = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement;
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('property', property);
+        document.head.appendChild(tag);
+      }
+      tag.content = content;
+    };
+
+    updateMetaTag('og:title', 'Contact Lade Stack - Get in Touch for AI Development Support');
+    updateMetaTag('og:description', 'Get in touch with Lade Stack for AI development support, technical assistance, and enterprise solutions.');
+    updateMetaTag('og:type', 'website');
+    updateMetaTag('og:url', window.location.href);
+    updateMetaTag('og:image', `${window.location.origin}/og-contact.png`);
+
+    // Twitter Meta Tags
+    const updateTwitterMeta = (name: string, content: string) => {
+      let tag = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('name', name);
+        document.head.appendChild(tag);
+      }
+      tag.content = content;
+    };
+
+    updateTwitterMeta('twitter:card', 'summary_large_image');
+    updateTwitterMeta('twitter:title', 'Contact Lade Stack - AI Development Support');
+    updateTwitterMeta('twitter:description', 'Get in touch for AI development support and technical assistance.');
+
+    // JSON-LD Structured Data
+    const contactStructuredData = {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "Contact Lade Stack",
+      "description": "Get in touch with Lade Stack for AI development support, technical assistance, and enterprise solutions.",
+      "url": "https://ladestack.in/contact",
+      "mainEntity": {
+        "@type": "Organization",
+        "name": "Lade Stack",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "girishlade111@gmail.com",
+          "contactType": "customer support",
+          "availableLanguage": "English",
+          "hoursAvailable": {
+            "@type": "OpeningHours",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "09:00",
+            "closes": "18:00"
+          }
+        }
+      },
+      "potentialAction": {
+        "@type": "ContactAction",
+        "target": "https://ladestack.in/contact"
+      }
+    };
+
+    let scriptTag = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement;
+    if (!scriptTag) {
+      scriptTag = document.createElement('script') as HTMLScriptElement;
+      scriptTag.type = 'application/ld+json';
+      document.head.appendChild(scriptTag);
+    }
+    scriptTag.textContent = JSON.stringify(contactStructuredData);
+
+  }, []);
   const contactInfo = [
     {
       icon: Mail,

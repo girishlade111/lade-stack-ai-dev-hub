@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Lightbulb, Users, Award, Eye } from "lucide-react";
 import Header from "@/components/Header";
@@ -5,6 +6,99 @@ import Footer from "@/components/Footer";
 import girishImage from "@/assets/girish.jpg";
 
 const AboutUs = () => {
+  useEffect(() => {
+    // SEO Meta Tags
+    document.title = "About Lade Stack - AI-Powered Development Tools & Modern Developer Hub";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Learn about Lade Stack\'s mission to democratize AI-powered development tools. Founded by Girish Lade, we provide enterprise-grade tools for developers worldwide.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = 'Learn about Lade Stack\'s mission to democratize AI-powered development tools. Founded by Girish Lade, we provide enterprise-grade tools for developers worldwide.';
+      document.head.appendChild(meta);
+    }
+
+    // Keywords
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (metaKeywords) {
+      metaKeywords.setAttribute('content', 'Lade Stack about, AI development tools, Girish Lade founder, software development, artificial intelligence, developer productivity');
+    } else {
+      const keywordsMeta = document.createElement('meta');
+      keywordsMeta.name = 'keywords';
+      keywordsMeta.content = 'Lade Stack about, AI development tools, Girish Lade founder, software development, artificial intelligence, developer productivity';
+      document.head.appendChild(keywordsMeta);
+    }
+
+    // Open Graph Meta Tags
+    const updateMetaTag = (property: string, content: string) => {
+      let tag = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement;
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('property', property);
+        document.head.appendChild(tag);
+      }
+      tag.content = content;
+    };
+
+    updateMetaTag('og:title', 'About Lade Stack - AI-Powered Development Tools');
+    updateMetaTag('og:description', 'Learn about Lade Stack\'s mission to democratize AI-powered development tools and empower developers worldwide with enterprise-grade tools.');
+    updateMetaTag('og:type', 'website');
+    updateMetaTag('og:url', window.location.href);
+    updateMetaTag('og:image', `${window.location.origin}/og-about.png`);
+
+    // Twitter Meta Tags
+    const updateTwitterMeta = (name: string, content: string) => {
+      let tag = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('name', name);
+        document.head.appendChild(tag);
+      }
+      tag.content = content;
+    };
+
+    updateTwitterMeta('twitter:card', 'summary_large_image');
+    updateTwitterMeta('twitter:title', 'About Lade Stack - AI-Powered Development Tools');
+    updateTwitterMeta('twitter:description', 'Learn about Lade Stack\'s mission to democratize AI-powered development tools.');
+
+    // JSON-LD Structured Data
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Lade Stack",
+      "description": "AI-powered development tools and software development platform founded by Girish Lade.",
+      "url": "https://ladestack.in",
+      "logo": "https://ladestack.in/logo.png",
+      "foundingDate": "2020",
+      "founder": {
+        "@type": "Person",
+        "name": "Girish Lade",
+        "jobTitle": "Founder & Lead Developer",
+        "url": "https://ladestack.in/about"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "girishlade111@gmail.com",
+        "contactType": "customer support"
+      },
+      "sameAs": [
+        "https://www.instagram.com/girish_lade_/",
+        "https://www.linkedin.com/in/girish-lade-075bba201/",
+        "https://github.com/girishlade111",
+        "https://codepen.io/Girish-Lade-the-looper"
+      ]
+    };
+
+    let scriptTag = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement;
+    if (!scriptTag) {
+      scriptTag = document.createElement('script') as HTMLScriptElement;
+      scriptTag.type = 'application/ld+json';
+      document.head.appendChild(scriptTag);
+    }
+    scriptTag.textContent = JSON.stringify(structuredData);
+
+  }, []);
   const values = [
     {
       icon: Lightbulb,

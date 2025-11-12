@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Calendar, Clock, Tag, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -5,6 +6,104 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const Blog = () => {
+  useEffect(() => {
+    // SEO Meta Tags
+    document.title = "Lade Stack Blog - AI Development & Software Engineering Insights";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Insights, tutorials, and industry perspectives on AI-powered development, software engineering best practices, and the future of technology.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = 'Insights, tutorials, and industry perspectives on AI-powered development, software engineering best practices, and the future of technology.';
+      document.head.appendChild(meta);
+    }
+
+    // Keywords
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (metaKeywords) {
+      metaKeywords.setAttribute('content', 'AI development, software engineering, developer productivity, API design, no-code platforms, web security, DevOps, programming tutorials');
+    } else {
+      const keywordsMeta = document.createElement('meta');
+      keywordsMeta.name = 'keywords';
+      keywordsMeta.content = 'AI development, software engineering, developer productivity, API design, no-code platforms, web security, DevOps, programming tutorials';
+      document.head.appendChild(keywordsMeta);
+    }
+
+    // Open Graph Meta Tags
+    const updateMetaTag = (property: string, content: string) => {
+      let tag = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement;
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('property', property);
+        document.head.appendChild(tag);
+      }
+      tag.content = content;
+    };
+
+    updateMetaTag('og:title', 'Lade Stack Blog - AI Development & Software Engineering Insights');
+    updateMetaTag('og:description', 'Insights, tutorials, and industry perspectives on AI-powered development and software engineering best practices.');
+    updateMetaTag('og:type', 'website');
+    updateMetaTag('og:url', window.location.href);
+    updateMetaTag('og:image', `${window.location.origin}/og-blog.png`);
+
+    // Twitter Meta Tags
+    const updateTwitterMeta = (name: string, content: string) => {
+      let tag = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('name', name);
+        document.head.appendChild(tag);
+      }
+      tag.content = content;
+    };
+
+    updateTwitterMeta('twitter:card', 'summary_large_image');
+    updateTwitterMeta('twitter:title', 'Lade Stack Blog - AI Development & Software Engineering');
+    updateTwitterMeta('twitter:description', 'Insights, tutorials, and industry perspectives on AI-powered development.');
+
+    // JSON-LD Structured Data for Blog
+    const blogStructuredData = {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "Lade Stack Blog",
+      "description": "Insights, tutorials, and industry perspectives on AI-powered development, software engineering best practices, and the future of technology.",
+      "url": "https://ladestack.in/blog",
+      "author": {
+        "@type": "Person",
+        "name": "Girish Lade",
+        "url": "https://ladestack.in/about"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lade Stack",
+        "url": "https://ladestack.in",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://ladestack.in/logo.png"
+        }
+      },
+      "datePublished": "2024-03-25",
+      "dateModified": "2024-06-15",
+      "inLanguage": "en-US",
+      "potentialAction": [
+        {
+          "@type": "ReadAction",
+          "target": ["https://ladestack.in/blog"]
+        }
+      ]
+    };
+
+    let scriptTag = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement;
+    if (!scriptTag) {
+      scriptTag = document.createElement('script') as HTMLScriptElement;
+      scriptTag.type = 'application/ld+json';
+      document.head.appendChild(scriptTag);
+    }
+    scriptTag.textContent = JSON.stringify(blogStructuredData);
+
+  }, []);
+
   const blogPosts = [
     {
       id: 1,
