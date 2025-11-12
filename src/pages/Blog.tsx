@@ -107,58 +107,166 @@ const Blog = () => {
   const blogPosts = [
     {
       id: 1,
-      title: "The Future of AI in Software Development",
-      excerpt: "How artificial intelligence is transforming the way we build, test, and deploy applications in 2024 and beyond.",
+      title: "The Future of AI in Software Development: Complete Guide 2024",
+      excerpt: "Comprehensive guide to AI-powered development tools, trends, and technologies transforming software engineering in 2024. Learn how AI is reshaping coding, testing, and deployment.",
       date: "2024-06-15",
-      readTime: "5 min read",
+      readTime: "18 min read",
       category: "AI Innovation",
       image: "ai-development",
     },
     {
       id: 2,
-      title: "10 Productivity Hacks for Developers",
-      excerpt: "Proven techniques to boost your coding efficiency and reduce burnout while maintaining high-quality output.",
+      title: "10 Proven Developer Productivity Hacks: Boost Efficiency by 300%",
+      excerpt: "Discover the most effective productivity strategies used by top developers at Google, Microsoft, and Amazon. Complete guide to coding efficiency, workflow optimization, and burnout prevention.",
       date: "2024-05-28",
-      readTime: "8 min read",
+      readTime: "25 min read",
       category: "Productivity",
       image: "developer-productivity",
     },
     {
       id: 3,
-      title: "Building Scalable APIs with Modern Tools",
-      excerpt: "Best practices for designing and implementing APIs that can handle enterprise-level traffic and data volumes.",
-      date: "2024-05-12",
-      readTime: "12 min read",
+      title: "Building Scalable REST APIs: Complete Architecture Guide 2024",
+      excerpt: "Master REST API architecture, design patterns, performance optimization, security best practices, and deployment strategies for production-ready APIs at scale.",
+      date: "2024-05-20",
+      readTime: "28 min read",
       category: "API Development",
-      image: "api-development",
+      image: "api-architecture",
     },
     {
       id: 4,
-      title: "The Rise of No-Code Development Platforms",
-      excerpt: "Why no-code tools are revolutionizing software development and empowering non-technical team members.",
-      date: "2024-04-30",
-      readTime: "6 min read",
-      category: "No-Code",
-      image: "no-code-platforms",
+      title: "No-Code Revolution: Build Apps Without Coding in 2024",
+      excerpt: "Complete guide to no-code/low-code platforms, visual development tools, and automation workflows. Learn to build production apps, websites, and APIs without writing a single line of code.",
+      date: "2024-05-15",
+      readTime: "32 min read",
+      category: "No-Code Development",
+      image: "no-code-development",
     },
     {
       id: 5,
-      title: "Security Best Practices for Modern Web Apps",
-      excerpt: "Essential security measures every development team should implement to protect their applications and user data.",
-      date: "2024-04-18",
-      readTime: "10 min read",
+      title: "Web Application Security: Complete Guide to OWASP Top 10 in 2024",
+      excerpt: "Master web security fundamentals, OWASP Top 10 vulnerabilities, security best practices, and advanced protection strategies for modern web applications and APIs.",
+      date: "2024-05-10",
+      readTime: "35 min read",
       category: "Security",
       image: "web-security",
     },
     {
       id: 6,
-      title: "Optimizing CI/CD Pipelines for Faster Deployments",
-      excerpt: "How to streamline your continuous integration and deployment processes to reduce deployment times by 50%.",
-      date: "2024-04-05",
-      readTime: "9 min read",
+      title: "DevOps Best Practices 2024: Complete CI/CD & Automation Guide",
+      excerpt: "Master DevOps principles, CI/CD pipelines, infrastructure automation, monitoring strategies, and cloud-native deployment patterns for modern software delivery.",
+      date: "2024-05-05",
+      readTime: "38 min read",
       category: "DevOps",
-      image: "ci-cd-optimization",
+      image: "devops-automation",
     },
+    {
+      id: 7,
+      title: "Machine Learning in Software Engineering: Complete Integration Guide 2024",
+      excerpt: "Master ML integration in software development workflows, from predictive debugging to automated testing and intelligent code optimization. Complete guide for modern engineering teams.",
+      date: "2024-08-22",
+      readTime: "28 min read",
+      category: "AI Innovation",
+      image: "ml-software-engineering",
+    },
+    {
+      id: 8,
+      title: "Remote Developer Productivity: Master Work-From-Home Efficiency 2024",
+      excerpt: "Complete guide to remote work productivity strategies, virtual collaboration tools, time management techniques, and maintaining team productivity in distributed teams.",
+      date: "2024-08-15",
+      readTime: "30 min read",
+      category: "Productivity",
+      image: "remote-productivity",
+    },
+    {
+      id: 9,
+      title: "GraphQL vs REST APIs: Modern API Architecture Decision Guide 2024",
+      excerpt: "Comprehensive comparison of GraphQL and REST architectures, performance analysis, use case recommendations, and migration strategies for modern API development.",
+      date: "2024-08-10",
+      readTime: "26 min read",
+      category: "API Development",
+      image: "graphql-vs-rest",
+    },
+    {
+      id: 10,
+      title: "Advanced No-Code Business Process Automation: Enterprise Implementation 2024",
+      excerpt: "Deep dive into enterprise no-code automation platforms, complex workflow design, integration patterns, and scaling strategies for large organizations.",
+      date: "2024-08-05",
+      readTime: "34 min read",
+      category: "No-Code Development",
+      image: "nocode-automation",
+    },
+    {
+      id: 11,
+      title: "Cloud Security Architecture: Multi-Cloud Protection Strategies 2024",
+      excerpt: "Advanced cloud security frameworks, multi-cloud protection strategies, compliance automation, and incident response for modern cloud-native applications.",
+      date: "2024-07-30",
+      readTime: "32 min read",
+      category: "Security",
+      image: "cloud-security",
+    },
+    {
+      id: 12,
+      title: "Kubernetes at Scale: Advanced Orchestration and Auto-Scaling Strategies 2024",
+      excerpt: "Master advanced Kubernetes deployment patterns, auto-scaling strategies, multi-cluster management, and production optimization for enterprise environments.",
+      date: "2024-07-25",
+      readTime: "36 min read",
+      category: "DevOps",
+      image: "kubernetes-scale",
+    },
+    {
+      id: 13,
+      title: "Computer Vision in Web Applications: Real-Time Image Processing 2024",
+      excerpt: "Comprehensive guide to implementing computer vision features in web applications, real-time image processing, and AI-powered visual experiences.",
+      date: "2024-09-15",
+      readTime: "24 min read",
+      category: "AI Innovation",
+      image: "computer-vision-web",
+    },
+    {
+      id: 14,
+      title: "Developer Mental Health and Burnout Prevention: Sustainable Coding Practices 2024",
+      excerpt: "Essential guide to maintaining developer mental health, preventing burnout, sustainable coding practices, and building resilient development teams.",
+      date: "2024-09-10",
+      readTime: "22 min read",
+      category: "Productivity",
+      image: "developer-wellness",
+    },
+    {
+      id: 15,
+      title: "API Rate Limiting and Throttling: Advanced Strategies for High-Traffic Applications 2024",
+      excerpt: "Master advanced rate limiting strategies, intelligent throttling, API gateway optimization, and performance management for high-traffic applications.",
+      date: "2024-09-05",
+      readTime: "29 min read",
+      category: "API Development",
+      image: "api-rate-limiting",
+    },
+    {
+      id: 16,
+      title: "No-Code to Pro-Code: Hybrid Development Strategies for Modern Teams 2024",
+      excerpt: "Complete guide to bridging no-code and traditional development, hybrid team strategies, and scalable business application development approaches.",
+      date: "2024-09-01",
+      readTime: "31 min read",
+      category: "No-Code Development",
+      image: "hybrid-nocode-procode",
+    },
+    {
+      id: 17,
+      title: "Zero Trust Security Architecture: Implementation Guide for Modern Organizations 2024",
+      excerpt: "Master zero trust security principles, implementation strategies, network segmentation, and security automation for comprehensive protection.",
+      date: "2024-08-28",
+      readTime: "33 min read",
+      category: "Security",
+      image: "zero-trust-security",
+    },
+    {
+      id: 18,
+      title: "Observability and Monitoring: Complete Guide to Modern System Monitoring 2024",
+      excerpt: "Comprehensive guide to observability platforms, distributed tracing, metrics collection, and intelligent monitoring for cloud-native applications.",
+      date: "2024-08-20",
+      readTime: "35 min read",
+      category: "DevOps",
+      image: "observability-monitoring",
+    }
   ];
 
   const categories = [
@@ -292,11 +400,25 @@ const Blog = () => {
                     key={post.id}
                     className="bg-card rounded-xl sm:rounded-2xl overflow-hidden shadow-medium border border-border hover:shadow-large transition-smooth group"
                   >
-                    <div className="h-48 bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-                      <div className="text-primary-foreground text-center">
-                        <div className="text-2xl font-bold mb-1">{post.image.split('-')[0]}</div>
-                        <div className="text-lg capitalize">{post.image.split('-').slice(1).join(' ')}</div>
-                      </div>
+                    <div className="h-48 overflow-hidden">
+                      <img
+                        src={`/blog-covers/${post.image}.svg`}
+                        alt={post.title}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          // Fallback to gradient if image fails to load
+                          e.currentTarget.style.display = 'none';
+                          const fallback = document.createElement('div');
+                          fallback.className = 'h-48 bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center';
+                          fallback.innerHTML = `
+                            <div class="text-primary-foreground text-center">
+                              <div class="text-2xl font-bold mb-1">${post.image.split('-')[0]}</div>
+                              <div class="text-lg capitalize">${post.image.split('-').slice(1).join(' ')}</div>
+                            </div>
+                          `;
+                          e.currentTarget.parentNode.appendChild(fallback);
+                        }}
+                      />
                     </div>
                     
                     <div className="p-5 sm:p-6">
