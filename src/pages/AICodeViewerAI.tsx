@@ -257,11 +257,6 @@ const AICodeViewerAI = () => {
                       </a>
                     </Button>
                   </motion.div>
-                  <Button variant="outline" size="lg" asChild className="px-8 py-4 text-lg border-gray-300 hover:border-gray-400 dark:border-gray-600 dark:hover:border-gray-500">
-                    <Link to="https://ladestack.in" target="_blank">
-                      Visit LadeStack.in
-                    </Link>
-                  </Button>
                 </div>
               </motion.div>
             </div>

@@ -69,9 +69,9 @@ const ProjectDetail = () => {
     {
       id: "file-management",
       icon: FileText,
-      title: "Cloud File Management & CDN",
-      shortDescription: "Scalable file storage with global CDN, automatic optimization, and team collaboration.",
-      fullDescription: "Our Cloud File Management platform provides enterprise-grade file storage with global CDN distribution. Features automatic image optimization, advanced encryption, and comprehensive access controls. The platform is SOC2 compliant and includes team collaboration features, version control, and intelligent file organization. Perfect for businesses that need reliable, secure, and scalable file storage solutions.",
+      title: "File Sharing Platform",
+      shortDescription: "Enterprise file sharing platform with global CDN, intelligent collaboration, and lifetime free access.",
+      fullDescription: "Transform your file sharing experience with our advanced File Sharing Platform. Built for modern teams, this enterprise-grade solution offers lightning-fast global content delivery, intelligent file organization, and seamless collaboration features. Experience secure, scalable file management with automatic optimization, version control, and real-time synchronization across all devices. Whether you're sharing documents, media files, or project assets, our platform ensures your content is always accessible, secure, and optimized for peak performance.",
       features: [
         "Global CDN - Fast file delivery worldwide",
         "Auto Optimization - Automatic image and file compression",
@@ -156,7 +156,7 @@ const ProjectDetail = () => {
         "Educators teaching modern web development practices"
       ],
       integrations: ["VS Code", "GitHub", "GitLab", "Bitbucket", "Chrome DevTools", "Figma", "Adobe XD", "Slack", "Microsoft Teams"],
-      pricing: "100% Free - Lifetime access for all users"
+      pricing: "Lifetime free of cost to all users"
     }
   ];
 
@@ -258,9 +258,14 @@ const ProjectDetail = () => {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-3 mb-8">
-                <Button size="lg" className="flex-1" asChild={project.id === "ai-code-viewer"}>
+                <Button size="lg" className="flex-1" asChild={project.id === "ai-code-viewer" || project.id === "file-management"}>
                   {project.id === "ai-code-viewer" ? (
                     <Link to="/ai-code-viewer-ai">
+                      Start Free Trial
+                      <ExternalLink className="w-4 h-4 ml-2" />
+                    </Link>
+                  ) : project.id === "file-management" ? (
+                    <Link to="/file-sharing-platform">
                       Start Free Trial
                       <ExternalLink className="w-4 h-4 ml-2" />
                     </Link>
@@ -386,10 +391,17 @@ const ProjectDetail = () => {
                     <span>24/7 AI support and updates</span>
                   </div>
                 </div>
-                <Button size="lg" className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-lg" asChild={project.id === "ai-code-viewer"}>
+                <Button size="lg" className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-lg" asChild={project.id === "ai-code-viewer" || project.id === "file-management"}>
                   {project.id === "ai-code-viewer" ? (
                     <Link to="/ai-code-viewer-ai">
                       Start Using AI Tool Now
+                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </Link>
+                  ) : project.id === "file-management" ? (
+                    <Link to="/file-sharing-platform">
+                      Start Using LadeShare Now
                       <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                       </svg>

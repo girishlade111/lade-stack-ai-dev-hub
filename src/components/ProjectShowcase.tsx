@@ -23,6 +23,8 @@ interface Project {
   primaryColor: string;
   secondaryColor: string;
   mockupSvg: string;
+  category: string;
+  pricingModel: string;
 }
 
 const ProjectShowcase = () => {
@@ -93,14 +95,16 @@ const ProjectShowcase = () => {
         <rect x="80" y="320" width="640" height="200" fill="#f8fafc" rx="12"/>
         <rect x="100" y="340" width="600" height="60" fill="#ffffff" rx="8"/>
         <text x="120" y="375" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#374151">AI Website Generator</text>
-      </svg>`
+      </svg>`,
+      category: "SaaS / Documentation",
+      pricingModel: "Lifetime free of cost to all users"
     },
     {
       id: "file-management",
       icon: FileText,
-      title: "Cloud File Management & CDN",
-      description: "Scalable file storage with global CDN, automatic optimization, and team collaboration.",
-      fullDescription: "Enterprise-grade file storage with global distribution. Secure, fast, and collaborative file management with automatic optimization and advanced security features.",
+      title: "File Sharing Platform",
+      description: "Enterprise file sharing platform with global CDN, intelligent collaboration, and lifetime free access.",
+      fullDescription: "Transform your file sharing experience with our advanced File Sharing Platform. Built for modern teams, this enterprise-grade solution offers lightning-fast global content delivery, intelligent file organization, and seamless collaboration features. Experience secure, scalable file management with automatic optimization, version control, and real-time synchronization across all devices. Whether you're sharing documents, media files, or project assets, our platform ensures your content is always accessible, secure, and optimized for peak performance.",
       features: ["Global CDN", "Auto Optimization", "Enterprise Security", "Team Collaboration"],
       stats: { users: "10K+", time: "< 1min", rating: "4.9", uptime: "99.95%" },
       status: "Live",
@@ -126,7 +130,9 @@ const ProjectShowcase = () => {
         <rect x="350" y="160" width="380" height="200" fill="#ffffff" rx="12"/>
         <rect x="370" y="210" width="300" height="20" fill="#f3f4f6" rx="10"/>
         <rect x="370" y="210" width="240" height="20" fill="#10b981" rx="10"/>
-      </svg>`
+      </svg>`,
+      category: "SaaS / Website Builder",
+      pricingModel: "Lifetime free of cost to all users"
     },
     {
       id: "documentation-ai",
@@ -159,7 +165,9 @@ const ProjectShowcase = () => {
         </g>
         <rect x="70" y="370" width="320" height="150" fill="#f0fdf4" rx="12"/>
         <rect x="410" y="370" width="320" height="150" fill="#eff6ff" rx="12"/>
-      </svg>`
+      </svg>`,
+      category: "SaaS / API Testing",
+      pricingModel: "Lifetime free of cost to all users"
     },
     {
       id: "ai-code-viewer",
@@ -196,7 +204,9 @@ const ProjectShowcase = () => {
         <text x="510" y="165" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff">AI Suggestion</text>
         <rect x="70" y="450" width="330" height="70" fill="#f8fafc" rx="8"/>
         <rect x="420" y="450" width="330" height="70" fill="#f0fdf4" rx="8"/>
-      </svg>`
+      </svg>`,
+      category: "SaaS / Code Editor",
+      pricingModel: "Lifetime free of cost to all users"
     }
   ];
 

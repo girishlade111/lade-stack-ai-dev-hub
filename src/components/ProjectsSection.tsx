@@ -32,8 +32,8 @@ const ProjectsSection = () => {
     {
       id: "file-management",
       icon: FileText,
-      title: "Cloud File Management",
-      description: "Scalable file storage with global CDN, automatic optimization, and team collaboration.",
+      title: "File Sharing Platform",
+      description: "Enterprise file sharing platform with global CDN, intelligent collaboration, and lifetime free access.",
       features: ["Global CDN", "Auto Optimization", "Enterprise Security"],
       stats: { users: "10K+", time: "< 1min", rating: "4.9" },
       status: "Live",
