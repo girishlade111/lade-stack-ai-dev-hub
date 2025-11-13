@@ -36,7 +36,7 @@ const ProjectDetail = () => {
         "Product teams validating API functionality"
       ],
       integrations: ["GitHub Actions", "Jenkins", "GitLab CI", "CircleCI", "Slack", "Microsoft Teams"],
-      pricing: "Starting at $29/month for teams of 5"
+      pricing: "100% Free - Lifetime access for all users"
     },
     {
       id: "website-builder",
@@ -64,7 +64,7 @@ const ProjectDetail = () => {
         "Startups creating landing pages and MVPs"
       ],
       integrations: ["Stripe", "PayPal", "Google Analytics", "Mailchimp", "Shopify", "WooCommerce"],
-      pricing: "Starting at $19/month for personal websites"
+      pricing: "100% Free - Lifetime access for all users"
     },
     {
       id: "file-management",
@@ -92,7 +92,7 @@ const ProjectDetail = () => {
         "Enterprises needing secure file collaboration"
       ],
       integrations: ["AWS S3", "Google Cloud", "Azure", "Slack", "Microsoft 365", "Adobe Creative Suite"],
-      pricing: "Starting at $39/month for 1TB storage"
+      pricing: "100% Free - Lifetime access for all users"
     },
     {
       id: "documentation-ai",
@@ -120,7 +120,7 @@ const ProjectDetail = () => {
         "New developer onboarding"
       ],
       integrations: ["GitHub", "GitLab", "Bitbucket", "VS Code", "IntelliJ", "Slack"],
-      pricing: "Starting at $49/month for teams of 10"
+      pricing: "100% Free - Lifetime access for all users"
     },
     {
       id: "ai-code-viewer",
@@ -258,9 +258,18 @@ const ProjectDetail = () => {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-3 mb-8">
-                <Button size="lg" className="flex-1">
-                  Start Free Trial
-                  <ExternalLink className="w-4 h-4 ml-2" />
+                <Button size="lg" className="flex-1" asChild={project.id === "ai-code-viewer"}>
+                  {project.id === "ai-code-viewer" ? (
+                    <Link to="/ai-code-viewer-ai">
+                      Start Free Trial
+                      <ExternalLink className="w-4 h-4 ml-2" />
+                    </Link>
+                  ) : (
+                    <>
+                      Start Free Trial
+                      <ExternalLink className="w-4 h-4 ml-2" />
+                    </>
+                  )}
                 </Button>
                 <Button variant="outline" size="lg" className="flex-1">
                   View Pricing
@@ -339,12 +348,64 @@ const ProjectDetail = () => {
         <section className="py-8 sm:py-12 border-t border-border">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
-              <div className="border border-border rounded-lg p-6 text-center">
-                <h2 className="text-lg font-semibold text-foreground mb-2">Pricing</h2>
-                <p className="text-sm text-muted-foreground mb-4">{project.pricing}</p>
-                <Button size="lg">
-                  Start Your Free Trial
+              <div className="border border-border rounded-lg p-6 text-center bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20">
+                <div className="mb-4">
+                  <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <h2 className="text-xl font-bold text-foreground mb-2">Lifetime Free Access</h2>
+                  <p className="text-sm text-green-700 dark:text-green-300 font-medium mb-4">
+                    ✨ Powered by Advanced AI - No Hidden Costs, No Limits ✨
+                  </p>
+                </div>
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                    <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Unlimited usage for all features</span>
+                  </div>
+                  <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                    <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>AI-powered enhancements and optimizations</span>
+                  </div>
+                  <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                    <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Premium integrations and collaboration tools</span>
+                  </div>
+                  <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                    <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>24/7 AI support and updates</span>
+                  </div>
+                </div>
+                <Button size="lg" className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-lg" asChild={project.id === "ai-code-viewer"}>
+                  {project.id === "ai-code-viewer" ? (
+                    <Link to="/ai-code-viewer-ai">
+                      Start Using AI Tool Now
+                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </Link>
+                  ) : (
+                    <>
+                      Start Using AI Tool Now
+                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </>
+                  )}
                 </Button>
+                <p className="text-xs text-muted-foreground mt-3">
+                  💡 AI-enhanced development tools • Forever free • No credit card required
+                </p>
               </div>
             </div>
           </div>

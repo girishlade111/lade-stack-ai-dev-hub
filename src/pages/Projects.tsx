@@ -12,7 +12,6 @@ const Projects = () => {
       title: "AI-Powered API Testing Platform",
       description: "Revolutionary API testing suite with intelligent test generation, automated regression testing, and real-time performance monitoring. Supports REST, GraphQL, and WebSocket APIs with zero-config setup.",
       features: ["AI Test Generation", "Performance Analytics", "CI/CD Integration"],
-      gradient: "from-blue-500 to-cyan-500",
       coverImage: "/api-testing-project.svg",
     },
     {
@@ -21,7 +20,6 @@ const Projects = () => {
       title: "No-Code Website Builder with AI",
       description: "Enterprise-grade website builder powered by GPT-4. Generate responsive, SEO-optimized websites from simple prompts. Includes e-commerce, analytics, and custom domain support.",
       features: ["GPT-4 Generation", "SEO Optimization", "E-commerce Ready"],
-      gradient: "from-purple-500 to-pink-500",
       coverImage: "/website-builder-project.svg",
     },
     {
@@ -30,7 +28,6 @@ const Projects = () => {
       title: "Cloud File Management & CDN",
       description: "Scalable file storage with global CDN, automatic image optimization, and team collaboration features. SOC2 compliant with advanced encryption and access controls.",
       features: ["Global CDN", "Auto Optimization", "Enterprise Security"],
-      gradient: "from-green-500 to-emerald-500",
       coverImage: "/file-management-project.svg",
     },
     {
@@ -39,7 +36,6 @@ const Projects = () => {
       title: "Technical Documentation AI",
       description: "Advanced AI that understands code context and generates comprehensive documentation, API specs, and technical summaries. Integrates with GitHub, GitLab, and popular IDEs.",
       features: ["Code Context AI", "IDE Integration", "Multi-language Support"],
-      gradient: "from-orange-500 to-red-500",
       coverImage: "/documentation-ai-project.svg",
     },
     {
@@ -48,7 +44,6 @@ const Projects = () => {
       title: "AI-Powered HTML, CSS & JS Code Viewer, Compiler, Editor & Enhancer",
       description: "Revolutionary AI-powered code editor with real-time compilation, intelligent code enhancement, and advanced debugging capabilities. Perfect for front-end developers who want to create, test, and optimize their web applications instantly.",
       features: ["AI Code Enhancement", "Real-time Compilation", "Advanced Code Editor"],
-      gradient: "from-indigo-500 to-purple-500",
       coverImage: "/ai-code-viewer-project.svg",
     },
   ];
@@ -103,10 +98,10 @@ const Projects = () => {
                 {projects.map((project, index) => (
                   <div
                     key={project.id}
-                    className="border border-border rounded-lg overflow-hidden hover:bg-muted/30 transition-colors duration-200"
+                    className="border border-border rounded-lg overflow-hidden hover:border-border/80 transition-all duration-300 hover:shadow-lg bg-card dark:bg-card/80"
                   >
                     {/* Cover Image */}
-                    <div className="h-28 sm:h-32 lg:h-36 bg-gradient-to-br from-muted to-muted/50 flex items-center justify-center relative overflow-hidden">
+                    <div className="h-28 sm:h-32 lg:h-36 bg-muted dark:bg-muted/30 flex items-center justify-center relative overflow-hidden">
                       <img
                         src={project.coverImage}
                         alt={project.title}
@@ -118,8 +113,7 @@ const Projects = () => {
                           objectPosition: 'center'
                         }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/20 via-transparent to-transparent" />
-                      <div className="absolute top-2 left-2 w-6 h-6 bg-foreground/90 backdrop-blur-sm rounded-lg flex items-center justify-center shadow-sm">
+                      <div className="absolute top-2 left-2 w-6 h-6 bg-foreground rounded-lg flex items-center justify-center shadow-sm">
                         <project.icon className="w-3 h-3 text-background" />
                       </div>
                       <div className="absolute top-2 right-2 w-6 h-6 bg-foreground text-background text-xs rounded-full flex items-center justify-center font-medium shadow-sm">
@@ -142,7 +136,7 @@ const Projects = () => {
                         {project.features.map((feature) => (
                           <span
                             key={feature}
-                            className="px-2 py-1 bg-muted text-muted-foreground text-xs rounded border border-border"
+                            className="px-2 py-1 bg-muted dark:bg-muted/50 text-muted-foreground text-xs rounded border border-border"
                           >
                             {feature}
                           </span>
@@ -151,7 +145,7 @@ const Projects = () => {
 
                       {/* Action Button */}
                       <div className="pt-2">
-                        <Button variant="outline" size="sm" className="w-full text-xs hover:bg-muted/50" asChild>
+                        <Button variant="outline" size="sm" className="w-full text-xs hover:bg-muted/80 dark:hover:bg-muted/60 border-border hover:border-border/80 transition-all duration-300" asChild>
                           <Link to={`/projects/${project.id}`}>
                             Learn More
                             <ExternalLink className="w-3 h-3 ml-1" />
@@ -183,7 +177,7 @@ const Projects = () => {
                 {caseStudies.map((study) => (
                   <div
                     key={study.company}
-                    className="border border-border rounded-lg p-4 hover:bg-muted/30 transition-colors duration-200"
+                    className="border border-border rounded-lg p-4 hover:border-border/80 transition-all duration-300 hover:shadow-md bg-card dark:bg-card/80"
                   >
                     <div className="flex items-center mb-3">
                       <div className="w-8 h-8 bg-foreground text-background rounded-full flex items-center justify-center font-bold text-xs mr-3">
@@ -215,7 +209,7 @@ const Projects = () => {
         <section className="py-8 sm:py-12">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto">
-              <div className="border border-border rounded-lg p-4 text-center">
+              <div className="border border-border rounded-lg p-4 text-center bg-card dark:bg-card/80">
                 <h3 className="text-sm font-semibold text-foreground mb-2">
                   Start Your 14-Day Free Trial - No Credit Card Required
                 </h3>
@@ -228,11 +222,17 @@ const Projects = () => {
                     Start Free Trial
                   </Button>
                   <Button variant="outline" size="sm" className="w-full sm:w-auto">
-                    View Pricing Plans
+                    ✨ All Tools Lifetime Free
                   </Button>
                 </div>
                 
                 <div className="mt-3">
+                  <div className="flex items-center justify-center gap-2 text-xs text-foreground font-medium">
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>AI-Powered • No Credit Card Required • Forever Free</span>
+                  </div>
                   <Link to="/contact" className="text-xs text-muted-foreground hover:underline">
                     Have questions? Contact our sales team
                   </Link>

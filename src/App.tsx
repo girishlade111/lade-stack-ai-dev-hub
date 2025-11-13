@@ -21,6 +21,7 @@ const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 const Support = lazy(() => import("./pages/Support"));
 const Documentation = lazy(() => import("./pages/Documentation"));
+const AICodeViewerAI = lazy(() => import("./pages/AICodeViewerAI"));
 
 // Lightweight loading fallback
 const PageLoader = () => (
@@ -78,6 +79,7 @@ const App = () => (
               <Route path="/terms" element={<TermsOfService />} />
               <Route path="/support" element={<Support />} />
               <Route path="/docs" element={<Documentation />} />
+              <Route path="/ai-code-viewer-ai" element={<AICodeViewerAI />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

@@ -85,7 +85,7 @@ const ProjectsSection = () => {
           {/* Compact Metrics - Mobile optimized */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6 sm:mb-8">
             {metrics.map((metric, index) => (
-              <Card key={index} className="border border-border p-3 text-center hover:bg-muted/30 transition-fast performance-optimized">
+              <Card key={index} className="border border-border p-3 text-center hover:border-border/80 transition-all duration-300 hover:shadow-md bg-card dark:bg-card/80">
                 <CardContent className="p-0">
                   <div className="w-6 h-6 bg-foreground rounded flex items-center justify-center mx-auto mb-2">
                     <metric.icon className="w-3 h-3 text-background" />
@@ -106,10 +106,10 @@ const ProjectsSection = () => {
             {projects.map((project, index) => (
               <Card
                 key={project.id}
-                className="border border-border overflow-hidden hover:bg-muted/30 transition-fast will-change-transform"
+                className="border border-border overflow-hidden hover:border-border/80 transition-all duration-300 hover:shadow-lg bg-card dark:bg-card/80 will-change-transform"
               >
                 {/* Cover Image */}
-                <div className="h-24 sm:h-28 lg:h-32 bg-gradient-to-br from-muted to-muted/50 flex items-center justify-center relative overflow-hidden">
+                <div className="h-24 sm:h-28 lg:h-32 bg-muted dark:bg-muted/30 flex items-center justify-center relative overflow-hidden">
                   <img
                     src={project.coverImage}
                     alt={project.title}
@@ -121,13 +121,12 @@ const ProjectsSection = () => {
                       objectPosition: 'center'
                     }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/20 via-transparent to-transparent" />
-                  <div className="absolute top-2 left-2 w-6 h-6 bg-foreground/90 backdrop-blur-sm rounded-lg flex items-center justify-center shadow-sm">
+                  <div className="absolute top-2 left-2 w-6 h-6 bg-foreground rounded-lg flex items-center justify-center shadow-sm">
                     <project.icon className="w-3 h-3 text-background" />
                   </div>
                   <Badge
                     variant="secondary"
-                    className="absolute top-2 right-2 text-xs px-2 py-1 bg-background/80 backdrop-blur-sm shadow-sm"
+                    className="absolute top-2 right-2 text-xs px-2 py-1 bg-background/80 backdrop-blur-sm shadow-sm border border-border"
                   >
                     {project.status}
                   </Badge>
@@ -147,7 +146,7 @@ const ProjectsSection = () => {
                     {project.features.map((feature) => (
                       <span
                         key={feature}
-                        className="px-2 py-0.5 bg-muted text-muted-foreground text-xs rounded border"
+                        className="px-2 py-0.5 bg-muted dark:bg-muted/50 text-muted-foreground text-xs rounded border border-border"
                       >
                         {feature}
                       </span>
@@ -156,19 +155,19 @@ const ProjectsSection = () => {
 
                   {/* Compact Stats */}
                   <div className="grid grid-cols-3 gap-2 mb-3">
-                    <div className="text-center p-2 border border-border rounded">
+                    <div className="text-center p-2 border border-border rounded bg-card/50 dark:bg-card/30">
                       <div className="text-xs font-semibold text-foreground">
                         {project.stats.users}
                       </div>
                       <div className="text-xs text-muted-foreground">Users</div>
                     </div>
-                    <div className="text-center p-2 border border-border rounded">
+                    <div className="text-center p-2 border border-border rounded bg-card/50 dark:bg-card/30">
                       <div className="text-xs font-semibold text-foreground">
                         {project.stats.time}
                       </div>
                       <div className="text-xs text-muted-foreground">Setup</div>
                     </div>
-                    <div className="text-center p-2 border border-border rounded">
+                    <div className="text-center p-2 border border-border rounded bg-card/50 dark:bg-card/30">
                       <div className="flex items-center justify-center gap-1 mb-1">
                         <Star className="w-3 h-3 text-muted-foreground fill-current" />
                         <span className="text-xs font-semibold text-foreground">
@@ -183,7 +182,7 @@ const ProjectsSection = () => {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="w-full text-xs hover:bg-muted/50 transition-fast touch-target touch-manipulation"
+                    className="w-full text-xs hover:bg-muted/80 dark:hover:bg-muted/60 transition-all duration-300 touch-target touch-manipulation border-border hover:border-border/80"
                     asChild
                   >
                     <Link to={`/projects/${project.id}`}>
@@ -197,7 +196,7 @@ const ProjectsSection = () => {
           </div>
 
           {/* Call to Action - Simplified */}
-          <Card className="border border-border p-4 text-center performance-optimized">
+          <Card className="border border-border p-4 text-center hover:border-border/80 transition-all duration-300 bg-card dark:bg-card/80">
             <CardContent className="p-0">
               <h3 className="text-sm font-semibold text-foreground mb-2">
                 Join 50,000+ Developers
@@ -208,19 +207,23 @@ const ProjectsSection = () => {
               <div className="flex flex-col sm:flex-row gap-2 justify-center items-center">
                 <Button
                   size="sm"
-                  variant="outline"
-                  className="text-xs hover:bg-muted/50 transition-fast touch-target touch-manipulation"
+                  className="text-xs hover:bg-muted/50 transition-all duration-300 transform hover:scale-105 touch-target touch-manipulation"
                 >
-                  Start free trial
+                  ✨ Start Free Trial
                 </Button>
                 <Button
                   size="sm"
-                  variant="ghost"
-                  className="text-xs hover:bg-muted/50 transition-fast touch-target touch-manipulation"
-                  onClick={() => safeWindowOpen('https://ladestack.in/pricing')}
+                  variant="outline"
+                  className="text-xs hover:bg-muted/50 transition-all duration-300 transform hover:scale-105 touch-target touch-manipulation"
                 >
-                  View pricing
+                  🎉 All Tools Lifetime Free
                 </Button>
+              </div>
+              <div className="mt-3 flex items-center justify-center gap-2 text-xs text-foreground font-medium">
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                <span>AI-Powered • No Credit Card • Forever Free</span>
               </div>
               <p className="text-xs text-muted-foreground mt-3">
                 Free plan • 24/7 support • Cancel anytime
