@@ -44,28 +44,30 @@ const ProjectShowcase = () => {
       stats: { users: "Many", time: "Quick", rating: "Excellent", uptime: "Reliable" },
       status: "Live",
       coverImage: "/api-testing-project.svg",
-      gradient: "from-blue-500 via-cyan-500 to-teal-500",
-      primaryColor: "#3B82F6",
-      secondaryColor: "#06B6D4",
+      gradient: "from-gray-800 via-gray-700 to-gray-900",
+      primaryColor: "#000000",
+      secondaryColor: "#6B7280",
       mockupSvg: `<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="apiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#06B6D4;stop-opacity:1" />
+            <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#374151;stop-opacity:1" />
           </linearGradient>
         </defs>
         <rect width="800" height="600" fill="url(#apiGradient)" rx="20"/>
         <rect x="50" y="80" width="700" height="440" fill="rgba(255,255,255,0.95)" rx="20"/>
-        <rect x="70" y="100" width="660" height="60" fill="#f1f5f9" rx="12"/>
+        <rect x="70" y="100" width="660" height="60" fill="#f8fafc" rx="12"/>
         <circle cx="100" cy="130" r="8" fill="#ef4444"/>
         <circle cx="125" cy="130" r="8" fill="#f59e0b"/>
         <circle cx="150" cy="130" r="8" fill="#10b981"/>
-        <text x="190" y="138" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1e293b">API Testing Dashboard</text>
+        <text x="190" y="138" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#111827">API Testing Dashboard</text>
         <rect x="290" y="180" width="440" height="320" fill="#ffffff" rx="12"/>
-        <rect x="310" y="200" width="400" height="200" fill="#f8fafc" rx="8"/>
+        <rect x="310" y="200" width="400" height="200" fill="#f9fafb" rx="8"/>
         <polyline points="330,350 360,320 390,340 420,280 450,300 480,250 510,270 540,220 570,240 600,200 630,220 660,180"
-                  fill="none" stroke="#3b82f6" stroke-width="3"/>
-      </svg>`
+                  fill="none" stroke="#111827" stroke-width="3"/>
+      </svg>`,
+      category: "API / Testing",
+      pricingModel: "Free for developers"
     },
     {
       id: "website-builder",
@@ -77,27 +79,27 @@ const ProjectShowcase = () => {
       stats: { users: "Growing", time: "Fast", rating: "Great", uptime: "Stable" },
       status: "Live",
       coverImage: "/website-builder-project.svg",
-      gradient: "from-purple-500 via-pink-500 to-rose-500",
-      primaryColor: "#8B5CF6",
-      secondaryColor: "#EC4899",
+      gradient: "from-gray-900 via-gray-800 to-gray-700",
+      primaryColor: "#000000",
+      secondaryColor: "#9CA3AF",
       mockupSvg: `<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="webGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#EC4899;stop-opacity:1" />
+            <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#374151;stop-opacity:1" />
           </linearGradient>
         </defs>
         <rect width="800" height="600" fill="url(#webGradient)" rx="20"/>
         <rect x="50" y="50" width="700" height="500" fill="rgba(255,255,255,0.95)" rx="20"/>
-        <rect x="80" y="80" width="300" height="200" fill="#1f2937" rx="8"/>
+        <rect x="80" y="80" width="300" height="200" fill="#111827" rx="8"/>
         <rect x="85" y="85" width="290" height="170" fill="#ffffff" rx="4"/>
-        <rect x="450" y="100" width="120" height="240" fill="#1f2937" rx="20"/>
-        <rect x="80" y="320" width="640" height="200" fill="#f8fafc" rx="12"/>
+        <rect x="450" y="100" width="120" height="240" fill="#111827" rx="20"/>
+        <rect x="80" y="320" width="640" height="200" fill="#f9fafb" rx="12"/>
         <rect x="100" y="340" width="600" height="60" fill="#ffffff" rx="8"/>
-        <text x="120" y="375" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#374151">AI Website Generator</text>
+        <text x="120" y="375" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#111827">AI Website Generator</text>
       </svg>`,
-      category: "SaaS / Documentation",
-      pricingModel: "Lifetime free of cost to all users"
+      category: "Website Builder",
+      pricingModel: "Free tier available"
     },
     {
       id: "file-management",
@@ -109,30 +111,30 @@ const ProjectShowcase = () => {
       stats: { users: "Active", time: "Instant", rating: "Excellent", uptime: "Excellent" },
       status: "Live",
       coverImage: "/file-management-project.svg",
-      gradient: "from-green-500 via-emerald-500 to-teal-500",
-      primaryColor: "#10B981",
-      secondaryColor: "#14B8A6",
+      gradient: "from-gray-800 via-gray-700 to-gray-900",
+      primaryColor: "#000000",
+      secondaryColor: "#6B7280",
       mockupSvg: `<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="cloudGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#059669;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
+            <stop offset="0%" style="stop-color:#1f2937;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
           </linearGradient>
         </defs>
         <rect width="800" height="600" fill="url(#cloudGradient)" rx="20"/>
         <rect x="50" y="80" width="700" height="440" fill="rgba(255,255,255,0.9)" rx="20"/>
         <g transform="translate(120, 180)">
-          <ellipse cx="150" cy="80" rx="120" ry="60" fill="#e0f2fe" stroke="#0891b2" stroke-width="2"/>
-          <rect x="120" y="60" width="25" height="30" fill="#3b82f6" rx="3"/>
-          <rect x="155" y="65" width="25" height="30" fill="#10b981" rx="3"/>
-          <rect x="190" y="60" width="25" height="30" fill="#f59e0b" rx="3"/>
+          <ellipse cx="150" cy="80" rx="120" ry="60" fill="#f3f4f6" stroke="#374151" stroke-width="2"/>
+          <rect x="120" y="60" width="25" height="30" fill="#111827" rx="3"/>
+          <rect x="155" y="65" width="25" height="30" fill="#374151" rx="3"/>
+          <rect x="190" y="60" width="25" height="30" fill="#6b7280" rx="3"/>
         </g>
         <rect x="350" y="160" width="380" height="200" fill="#ffffff" rx="12"/>
         <rect x="370" y="210" width="300" height="20" fill="#f3f4f6" rx="10"/>
-        <rect x="370" y="210" width="240" height="20" fill="#10b981" rx="10"/>
+        <rect x="370" y="210" width="240" height="20" fill="#111827" rx="10"/>
       </svg>`,
-      category: "SaaS / Website Builder",
-      pricingModel: "Lifetime free of cost to all users"
+      category: "File Management",
+      pricingModel: "Free for personal use"
     },
     {
       id: "documentation-ai",
@@ -144,30 +146,30 @@ const ProjectShowcase = () => {
       stats: { users: "Growing", time: "Quick", rating: "Good", uptime: "High" },
       status: "Beta",
       coverImage: "/documentation-ai-project.svg",
-      gradient: "from-orange-500 via-red-500 to-pink-500",
-      primaryColor: "#F97316",
-      secondaryColor: "#EF4444",
+      gradient: "from-gray-900 via-gray-800 to-gray-700",
+      primaryColor: "#000000",
+      secondaryColor: "#9CA3AF",
       mockupSvg: `<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="aiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#ea580c;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#dc2626;stop-opacity:1" />
+            <stop offset="0%" style="stop-color:#111827;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
           </linearGradient>
         </defs>
         <rect width="800" height="600" fill="url(#aiGradient)" rx="20"/>
         <rect x="50" y="60" width="700" height="480" fill="rgba(255,255,255,0.95)" rx="20"/>
         <rect x="70" y="150" width="660" height="120" fill="#ffffff" rx="12"/>
-        <rect x="90" y="190" width="620" height="70" fill="#1f2937" rx="8"/>
-        <rect x="100" y="200" width="80" height="4" fill="#10b981" rx="2"/>
+        <rect x="90" y="190" width="620" height="70" fill="#111827" rx="8"/>
+        <rect x="100" y="200" width="80" height="4" fill="#374151" rx="2"/>
         <g transform="translate(400, 300)">
-          <circle cx="0" cy="0" r="50" fill="#fef2f2" stroke="#ea580c" stroke-width="3"/>
-          <path d="M-25,0 L25,0 M0,-25 L0,25" stroke="#ea580c" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="0" cy="0" r="50" fill="#f9fafb" stroke="#111827" stroke-width="3"/>
+          <path d="M-25,0 L25,0 M0,-25 L0,25" stroke="#111827" stroke-width="2" stroke-linecap="round"/>
         </g>
-        <rect x="70" y="370" width="320" height="150" fill="#f0fdf4" rx="12"/>
-        <rect x="410" y="370" width="320" height="150" fill="#eff6ff" rx="12"/>
+        <rect x="70" y="370" width="320" height="150" fill="#f9fafb" rx="12"/>
+        <rect x="410" y="370" width="320" height="150" fill="#f9fafb" rx="12"/>
       </svg>`,
-      category: "SaaS / API Testing",
-      pricingModel: "Lifetime free of cost to all users"
+      category: "AI Documentation",
+      pricingModel: "Free trial available"
     },
     {
       id: "ai-code-viewer",
@@ -179,34 +181,34 @@ const ProjectShowcase = () => {
       stats: { users: "Popular", time: "Instant", rating: "Great", uptime: "Reliable" },
       status: "Live",
       coverImage: "/ai-code-viewer-project.svg",
-      gradient: "from-indigo-500 via-purple-500 to-violet-500",
-      primaryColor: "#6366F1",
-      secondaryColor: "#8B5CF6",
+      gradient: "from-gray-800 via-gray-700 to-gray-900",
+      primaryColor: "#000000",
+      secondaryColor: "#6B7280",
       mockupSvg: `<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="codeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+            <stop offset="0%" style="stop-color:#111827;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
           </linearGradient>
         </defs>
         <rect width="800" height="600" fill="url(#codeGradient)" rx="20"/>
-        <rect x="50" y="50" width="700" height="500" fill="rgba(31,41,55,0.95)" rx="20"/>
-        <rect x="70" y="70" width="660" height="40" fill="#374151" rx="10"/>
-        <circle cx="90" cy="90" r="6" fill="#ef4444"/>
-        <circle cx="110" cy="90" r="6" fill="#f59e0b"/>
-        <circle cx="130" cy="90" r="6" fill="#10b981"/>
-        <rect x="290" y="120" width="450" height="400" fill="#0f172a" rx="8"/>
-        <rect x="340" y="140" width="300" height="320" fill="#1e293b" rx="4"/>
-        <text x="350" y="160" font-family="Courier, monospace" font-size="12" fill="#f87171"><div class="container"></text>
-        <text x="370" y="180" font-family="Courier, monospace" font-size="12" fill="#fbbf24">  <h1></text>
-        <text x="390" y="200" font-family="Courier, monospace" font-size="12" fill="#d1d5db">    AI-Powered Code Editor</text>
-        <rect x="500" y="140" width="120" height="60" fill="#4f46e5" rx="8"/>
-        <text x="510" y="165" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff">AI Suggestion</text>
-        <rect x="70" y="450" width="330" height="70" fill="#f8fafc" rx="8"/>
-        <rect x="420" y="450" width="330" height="70" fill="#f0fdf4" rx="8"/>
+        <rect x="50" y="50" width="700" height="500" fill="rgba(255,255,255,0.95)" rx="20"/>
+        <rect x="70" y="70" width="660" height="40" fill="#f3f4f6" rx="10"/>
+        <circle cx="90" cy="90" r="6" fill="#374151"/>
+        <circle cx="110" cy="90" r="6" fill="#6b7280"/>
+        <circle cx="130" cy="90" r="6" fill="#111827"/>
+        <rect x="290" y="120" width="450" height="400" fill="#ffffff" rx="8"/>
+        <rect x="340" y="140" width="300" height="320" fill="#f9fafb" rx="4"/>
+        <text x="350" y="160" font-family="ui-monospace, SFMono-Regular, monospace" font-size="12" fill="#111827"><div className="container"></text>
+        <text x="370" y="180" font-family="ui-monospace, SFMono-Regular, monospace" font-size="12" fill="#374151">  <h1></text>
+        <text x="390" y="200" font-family="ui-monospace, SFMono-Regular, monospace" font-size="12" fill="#6b7280">    AI-Powered Code Editor</text>
+        <rect x="500" y="140" width="120" height="60" fill="#111827" rx="8"/>
+        <text x="510" y="165" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#ffffff">AI Suggestion</text>
+        <rect x="70" y="450" width="330" height="70" fill="#f9fafb" rx="8"/>
+        <rect x="420" y="450" width="330" height="70" fill="#f9fafb" rx="8"/>
       </svg>`,
-      category: "SaaS / Code Editor",
-      pricingModel: "Lifetime free of cost to all users"
+      category: "Code Editor",
+      pricingModel: "Free tier available"
     }
   ];
 
@@ -241,153 +243,116 @@ const ProjectShowcase = () => {
   }, [projects.length]);
 
   return (
-    <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-background to-muted/20">
+    <section className="py-20 sm:py-24 lg:py-32 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-12 lg:mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-              Interactive Project Gallery
+          <div className="text-center mb-16 lg:mb-24">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground mb-8">
+              Our Products
             </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Explore our AI-powered development tools through immersive showcases with real-time previews and interactive demos.
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              A comprehensive suite of AI-powered development tools designed to accelerate your workflow and enhance productivity.
             </p>
           </div>
 
           {/* Project Showcases */}
-          <div className="space-y-16 lg:space-y-24">
+          <div className="space-y-12 lg:space-y-16">
             {projects.map((project, index) => (
               <div
                 key={project.id}
                 ref={(el) => (projectRefs.current[index] = el)}
                 data-index={index}
-                className={`transition-all duration-1000 ${
-                  visibleProjects.has(index) 
-                    ? 'opacity-100 translate-y-0' 
+                className={`transition-all duration-700 ${
+                  visibleProjects.has(index)
+                    ? 'opacity-100 translate-y-0'
                     : 'opacity-0 translate-y-8'
                 }`}
               >
-                <div className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 lg:gap-12 items-center`}>
-                  {/* Project Visual */}
-                  <div className="flex-1 w-full">
-                    <div className="relative group">
-                      <div className="relative overflow-hidden rounded-2xl shadow-2xl transition-transform duration-500 group-hover:scale-105">
-                        {/* Main project image with responsive aspect ratio */}
-                        <div
-                          className="relative w-full"
-                          style={{ aspectRatio: '16/9' }}
-                        >
-                          <img
-                            src={project.coverImage}
-                            alt={project.title}
-                            className="w-full h-full object-cover object-center"
-                            loading="lazy"
-                          />
-                          
-                          {/* Gradient overlay for text readability */}
-                          <div className="absolute inset-0 bg-gradient-to-br from-black/10 via-transparent to-black/20 group-hover:from-black/5 group-hover:to-black/10 transition-all duration-300" />
-                          
-                          {/* Floating status badge */}
-                          <div className="absolute top-4 left-4 flex items-center gap-2">
-                            <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                              <project.icon className="w-5 h-5 text-white" />
-                            </div>
-                            <Badge
-                              variant="secondary"
-                              className="bg-white/20 backdrop-blur-sm text-white border-white/30"
-                            >
-                              {project.status}
-                            </Badge>
-                          </div>
+                <div className="max-w-4xl mx-auto">
+                  {/* Project Header */}
+                  <div className="text-center mb-12">
+                    <div className="inline-flex items-center gap-3 mb-4">
+                      <div className="w-8 h-8 bg-foreground/10 rounded-lg flex items-center justify-center">
+                        <project.icon className="w-4 h-4 text-foreground" />
+                      </div>
+                      <span className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+                        {project.category}
+                      </span>
+                    </div>
+                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-foreground mb-4">
+                      {project.title}
+                    </h3>
+                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                      {project.description}
+                    </p>
+                  </div>
 
-                          {/* Demo availability indicator */}
-                          <div className="absolute bottom-4 right-4">
-                            <div className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium">
-                              Demo Available
-                            </div>
-                          </div>
-                        </div>
+                  {/* Project Visual */}
+                  <div className="relative mb-12">
+                    <div className="relative overflow-hidden border border-border/50 transition-all duration-300 hover:border-border">
+                      <div
+                        className="relative w-full bg-muted/30"
+                        style={{ aspectRatio: '16/9' }}
+                      >
+                        <img
+                          src={project.coverImage}
+                          alt={project.title}
+                          className="w-full h-full object-cover object-center opacity-90 hover:opacity-100 transition-opacity duration-300"
+                          loading="lazy"
+                        />
                       </div>
                       
-                      {/* Ambient glow effect */}
-                      <div className={`absolute -inset-4 bg-gradient-to-r ${project.gradient} opacity-20 blur-2xl -z-10 rounded-2xl transition-opacity duration-500 ${visibleProjects.has(index) ? 'opacity-20' : 'opacity-0'}`} />
+                      {/* Subtle border overlay */}
+                      <div className="absolute inset-0 border border-border/20 pointer-events-none" />
                     </div>
                   </div>
 
-                  {/* Project Content */}
-                  <div className="flex-1 space-y-6">
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-3">
-                        <div 
-                          className="w-12 h-12 rounded-xl flex items-center justify-center"
-                          style={{ backgroundColor: `${project.primaryColor}20` }}
-                        >
-                          <project.icon className="w-6 h-6" style={{ color: project.primaryColor }} />
-                        </div>
-                        <div>
-                          <h3 className="text-2xl sm:text-3xl font-bold text-foreground">
-                            {project.title}
-                          </h3>
-                        </div>
-                      </div>
-                      
-                      <p className="text-lg text-muted-foreground leading-relaxed">
-                        {project.fullDescription}
-                      </p>
-
-                      {/* Feature highlights */}
-                      <div className="grid grid-cols-2 gap-3">
+                  {/* Project Details */}
+                  <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+                    {/* Features */}
+                    <div>
+                      <h4 className="text-lg font-semibold text-foreground mb-6">Key Features</h4>
+                      <div className="space-y-3">
                         {project.features.map((feature, idx) => (
-                          <div key={idx} className="flex items-center gap-2">
-                            <div 
-                              className="w-2 h-2 rounded-full"
-                              style={{ backgroundColor: project.primaryColor }}
-                            />
-                            <span className="text-sm text-foreground font-medium">{feature}</span>
+                          <div key={idx} className="flex items-center gap-3">
+                            <div className="w-1.5 h-1.5 bg-foreground rounded-full" />
+                            <span className="text-foreground">{feature}</span>
                           </div>
                         ))}
                       </div>
-
-                      {/* Stats */}
-                      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                        <div className="text-center p-3 bg-muted/50 rounded-lg">
-                          <div className="text-lg font-bold text-foreground">{project.stats.users}</div>
-                          <div className="text-xs text-muted-foreground">Users</div>
+                      
+                      <div className="mt-8 p-4 bg-muted/30 border border-border/50">
+                        <div className="flex items-center justify-between text-sm">
+                          <span className="text-muted-foreground">Status</span>
+                          <span className="text-foreground font-medium">{project.status}</span>
                         </div>
-                        <div className="text-center p-3 bg-muted/50 rounded-lg">
-                          <div className="text-lg font-bold text-foreground">{project.stats.time}</div>
-                          <div className="text-xs text-muted-foreground">Setup</div>
-                        </div>
-                        <div className="text-center p-3 bg-muted/50 rounded-lg">
-                          <div className="flex items-center justify-center gap-1 mb-1">
-                            <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                            <span className="text-lg font-bold text-foreground">{project.stats.rating}</span>
-                          </div>
-                          <div className="text-xs text-muted-foreground">Rating</div>
-                        </div>
-                        <div className="text-center p-3 bg-muted/50 rounded-lg">
-                          <div className="text-lg font-bold text-foreground">{project.stats.uptime}</div>
-                          <div className="text-xs text-muted-foreground">Uptime</div>
+                        <div className="flex items-center justify-between text-sm mt-2">
+                          <span className="text-muted-foreground">Pricing</span>
+                          <span className="text-foreground font-medium">{project.pricingModel}</span>
                         </div>
                       </div>
                     </div>
 
-                    {/* CTA */}
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      <Button size="lg" className="flex-1" asChild>
-                        <Link to={`/projects/${project.id}`}>
-                          Learn More
-                          <ExternalLink className="w-4 h-4 ml-2" />
-                        </Link>
-                      </Button>
-                      <Button 
-                        size="lg" 
-                        variant="outline" 
-                        className="flex-1"
-                        style={{ borderColor: project.primaryColor, color: project.primaryColor }}
-                      >
-                        View Demo
-                      </Button>
+                    {/* Description & Actions */}
+                    <div>
+                      <h4 className="text-lg font-semibold text-foreground mb-6">Overview</h4>
+                      <p className="text-muted-foreground leading-relaxed mb-8">
+                        {project.fullDescription}
+                      </p>
+
+                      {/* Action Buttons */}
+                      <div className="space-y-3">
+                        <Button size="lg" className="w-full bg-foreground text-background hover:bg-foreground/90" asChild>
+                          <Link to={`/projects/${project.id}`}>
+                            Learn More
+                            <ExternalLink className="w-4 h-4 ml-2" />
+                          </Link>
+                        </Button>
+                        <Button size="lg" variant="outline" className="w-full border-foreground text-foreground hover:bg-foreground hover:text-background">
+                          View Demo
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -396,23 +361,25 @@ const ProjectShowcase = () => {
           </div>
 
           {/* Bottom CTA */}
-          <div className="mt-16 lg:mt-24 text-center">
-            <div className="bg-gradient-to-r from-muted/50 to-muted/30 rounded-2xl p-8 lg:p-12">
-              <h3 className="text-2xl lg:text-3xl font-bold text-foreground mb-4">
-                Ready to Transform Your Development Workflow?
-              </h3>
-              <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                Join developers who are already saving significant time with our AI-powered development tools.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Button size="lg">
-                  Start Free Trial
-                </Button>
-                <Button size="lg" variant="outline" asChild>
-                  <Link to="/projects">
-                    View All Projects
-                  </Link>
-                </Button>
+          <div className="mt-20 lg:mt-32">
+            <div className="max-w-3xl mx-auto text-center">
+              <div className="border border-border/50 bg-muted/20 p-12 lg:p-16">
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-foreground mb-6">
+                  Ready to get started?
+                </h3>
+                <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                  Explore our comprehensive suite of AI-powered development tools and see how they can enhance your workflow.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 px-8">
+                    Get Started
+                  </Button>
+                  <Button size="lg" variant="outline" className="border-foreground text-foreground hover:bg-foreground hover:text-background px-8" asChild>
+                    <Link to="/projects">
+                      View All Products
+                    </Link>
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
