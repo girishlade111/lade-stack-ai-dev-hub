@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 const Projects = () => {
   const projects = [
     {
+      id: "api-testing",
       icon: Code,
       title: "AI-Powered API Testing Platform",
       description: "Revolutionary API testing suite with intelligent test generation, automated regression testing, and real-time performance monitoring. Supports REST, GraphQL, and WebSocket APIs with zero-config setup.",
@@ -14,6 +15,7 @@ const Projects = () => {
       gradient: "from-blue-500 to-cyan-500",
     },
     {
+      id: "website-builder",
       icon: Globe,
       title: "No-Code Website Builder with AI",
       description: "Enterprise-grade website builder powered by GPT-4. Generate responsive, SEO-optimized websites from simple prompts. Includes e-commerce, analytics, and custom domain support.",
@@ -21,6 +23,7 @@ const Projects = () => {
       gradient: "from-purple-500 to-pink-500",
     },
     {
+      id: "file-management",
       icon: FileText,
       title: "Cloud File Management & CDN",
       description: "Scalable file storage with global CDN, automatic image optimization, and team collaboration features. SOC2 compliant with advanced encryption and access controls.",
@@ -28,11 +31,20 @@ const Projects = () => {
       gradient: "from-green-500 to-emerald-500",
     },
     {
+      id: "documentation-ai",
       icon: Brain,
       title: "Technical Documentation AI",
       description: "Advanced AI that understands code context and generates comprehensive documentation, API specs, and technical summaries. Integrates with GitHub, GitLab, and popular IDEs.",
       features: ["Code Context AI", "IDE Integration", "Multi-language Support"],
       gradient: "from-orange-500 to-red-500",
+    },
+    {
+      id: "ai-code-viewer",
+      icon: Brain,
+      title: "AI-Powered HTML, CSS & JS Code Viewer, Compiler, Editor & Enhancer",
+      description: "Revolutionary AI-powered code editor with real-time compilation, intelligent code enhancement, and advanced debugging capabilities. Perfect for front-end developers who want to create, test, and optimize their web applications instantly.",
+      features: ["AI Code Enhancement", "Real-time Compilation", "Advanced Code Editor"],
+      gradient: "from-indigo-500 to-purple-500",
     },
   ];
 
@@ -72,8 +84,8 @@ const Projects = () => {
                 Our Projects
               </h1>
               <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-                Four powerful SaaS tools that cover your entire development lifecycle. Each tool saves 10+ hours per week and integrates seamlessly with your existing workflow.
-              </p>
+              Five powerful SaaS tools that cover your entire development lifecycle. Each tool saves 10+ hours per week and integrates seamlessly with your existing workflow.
+            </p>
             </div>
           </div>
         </section>
@@ -85,7 +97,7 @@ const Projects = () => {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 {projects.map((project, index) => (
                   <div
-                    key={project.title}
+                    key={project.id}
                     className="border border-border rounded-lg p-4 hover:bg-muted/30 transition-colors duration-200"
                   >
                     {/* Project Icon */}
@@ -122,9 +134,11 @@ const Projects = () => {
 
                       {/* Action Button */}
                       <div className="pt-2">
-                        <Button variant="outline" size="sm" className="w-full text-xs hover:bg-muted/50">
-                          Learn More
-                          <ExternalLink className="w-3 h-3 ml-1" />
+                        <Button variant="outline" size="sm" className="w-full text-xs hover:bg-muted/50" asChild>
+                          <Link to={`/projects/${project.id}`}>
+                            Learn More
+                            <ExternalLink className="w-3 h-3 ml-1" />
+                          </Link>
                         </Button>
                       </div>
                     </div>

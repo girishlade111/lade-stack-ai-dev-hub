@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { Link } from "react-router-dom";
 import { ExternalLink, Code, Globe, FileText, Brain, Star, Clock, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,6 +10,7 @@ const ProjectsSection = () => {
   // Memoize data to prevent re-renders
   const projects = useMemo(() => [
     {
+      id: "api-testing",
       icon: Code,
       title: "AI-Powered API Testing",
       description: "Revolutionary API testing suite with intelligent test generation and real-time monitoring.",
@@ -17,6 +19,7 @@ const ProjectsSection = () => {
       status: "Live"
     },
     {
+      id: "website-builder",
       icon: Globe,
       title: "No-Code Website Builder",
       description: "Enterprise-grade website builder powered by GPT-4 with responsive design generation.",
@@ -25,6 +28,7 @@ const ProjectsSection = () => {
       status: "Live"
     },
     {
+      id: "file-management",
       icon: FileText,
       title: "Cloud File Management",
       description: "Scalable file storage with global CDN, automatic optimization, and team collaboration.",
@@ -33,12 +37,22 @@ const ProjectsSection = () => {
       status: "Live"
     },
     {
+      id: "documentation-ai",
       icon: Brain,
       title: "Technical Documentation AI",
       description: "Advanced AI that understands code context and generates comprehensive documentation.",
       features: ["Code Context AI", "IDE Integration", "Multi-language"],
       stats: { users: "8K+", time: "< 3min", rating: "4.7" },
       status: "Beta"
+    },
+    {
+      id: "ai-code-viewer",
+      icon: Brain,
+      title: "AI Code Viewer & Editor",
+      description: "Revolutionary AI-powered code editor with real-time compilation and intelligent enhancement.",
+      features: ["AI Code Enhancement", "Real-time Compilation", "Advanced Code Editor"],
+      stats: { users: "12K+", time: "< 1min", rating: "4.8" },
+      status: "Live"
     }
   ], []);
 
@@ -56,10 +70,10 @@ const ProjectsSection = () => {
           {/* Minimal Section Header */}
           <div className="text-center mb-6 sm:mb-8">
             <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground mb-3">
-              Four AI Solutions
+              Five AI Solutions
             </h2>
             <p className="text-sm text-muted-foreground max-w-3xl mx-auto">
-              Comprehensive development ecosystem: API testing, website building, file management, and documentation.
+              Comprehensive development ecosystem: API testing, website building, file management, documentation, and code editing.
             </p>
           </div>
 
@@ -86,7 +100,7 @@ const ProjectsSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 sm:mb-8">
             {projects.map((project, index) => (
               <Card
-                key={index}
+                key={project.id}
                 className="border border-border p-4 hover:bg-muted/30 transition-fast will-change-transform"
               >
                 <CardHeader className="p-3">
@@ -158,10 +172,12 @@ const ProjectsSection = () => {
                     variant="outline"
                     size="sm"
                     className="w-full text-xs hover:bg-muted/50 transition-fast touch-target touch-manipulation"
-                    onClick={() => safeWindowOpen('https://code.ladestack.in')}
+                    asChild
                   >
-                    <span>Explore</span>
-                    <ExternalLink className="w-3 h-3 ml-1" />
+                    <Link to={`/projects/${project.id}`}>
+                      <span>Explore</span>
+                      <ExternalLink className="w-3 h-3 ml-1" />
+                    </Link>
                   </Button>
                 </CardContent>
               </Card>
