@@ -43,7 +43,7 @@ const AICodeViewerAI = () => {
       document.title = "CodeEnhance AI - AI-Powered HTML, CSS & JS Code Viewer, Compiler, Editor & Enhancer";
 
       // Meta Description
-      let metaDescription = document.querySelector('meta[name="description"]');
+      const metaDescription = document.querySelector('meta[name="description"]');
       if (metaDescription) {
         metaDescription.setAttribute('content', 'Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance. The ultimate development tool for modern web creators.');
       } else {

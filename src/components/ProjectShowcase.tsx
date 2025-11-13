@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { ExternalLink, Code, Globe, FileText, Brain, Star, Users, Clock } from "lucide-react";
+import { ExternalLink, Code, Globe, FileText, Brain, Star, Users, Clock, LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import BentoImageGrid from "@/components/BentoImageGrid";
 
 interface Project {
   id: string;
-  icon: any;
+  icon: LucideIcon;
   title: string;
   description: string;
   fullDescription: string;
@@ -358,6 +359,28 @@ const ProjectShowcase = () => {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Bento Image Grid Section */}
+          <div className="mt-20 lg:mt-32">
+            <div className="text-center mb-12">
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-foreground mb-4">
+                Visual Showcase Gallery
+              </h3>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Explore our comprehensive suite of AI-powered tools through visual examples and interface previews
+              </p>
+            </div>
+            <BentoImageGrid 
+              images={[
+                { src: "/api-testing-project.svg", alt: "API Testing Platform", size: "large" },
+                { src: "/website-builder-project.svg", alt: "Website Builder Interface", size: "medium" },
+                { src: "/file-management-project.svg", alt: "File Management System", size: "medium" },
+                { src: "/documentation-ai-project.svg", alt: "Documentation AI Tool", size: "small" },
+                { src: "/ai-code-viewer-project.svg", alt: "AI Code Viewer Interface", size: "small" },
+                { src: "/AIcode.png", alt: "Code Enhancement Features", size: "small" }
+              ]}
+            />
           </div>
 
           {/* Bottom CTA */}

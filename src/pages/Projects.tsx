@@ -3,6 +3,7 @@ import { ExternalLink, Code, Globe, FileText, Brain } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import BentoImageGrid from "@/components/BentoImageGrid";
 
 const Projects = () => {
   const projects = [
@@ -153,6 +154,25 @@ const Projects = () => {
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Bento Image Grid */}
+        <section className="py-8 sm:py-12">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-lg font-semibold text-foreground mb-6 text-center">Project Visual Showcase</h2>
+              <BentoImageGrid 
+                images={[
+                  { src: "/api-testing-project.svg", alt: "API Testing Platform", size: "large" },
+                  { src: "/website-builder-project.svg", alt: "Website Builder", size: "medium" },
+                  { src: "/file-management-project.svg", alt: "File Management", size: "medium" },
+                  { src: "/documentation-ai-project.svg", alt: "Documentation AI", size: "small" },
+                  { src: "/ai-code-viewer-project.svg", alt: "AI Code Viewer", size: "small" },
+                  { src: "/AIcode.png", alt: "Code Enhancement", size: "small" }
+                ]}
+              />
             </div>
           </div>
         </section>

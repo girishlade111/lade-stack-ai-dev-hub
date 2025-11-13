@@ -4,9 +4,58 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import BentoImageGrid from "@/components/BentoImageGrid";
 
 const ProjectDetail = () => {
   const { projectId } = useParams();
+
+  // Project-specific images for bento grid
+  const getProjectImages = (projectId: string) => {
+    const imageMap: { [key: string]: any[] } = {
+      "api-testing": [
+        { src: "/api-testing-project.svg", alt: "API Testing Dashboard Main View", size: "large" },
+        { src: "/api-testing-project.svg", alt: "Test Results Overview", size: "medium" },
+        { src: "/api-testing-project.svg", alt: "Performance Analytics", size: "small" },
+        { src: "/api-testing-project.svg", alt: "CI/CD Integration", size: "small" },
+        { src: "/api-testing-project.svg", alt: "Mock Server Interface", size: "medium" },
+        { src: "/api-testing-project.svg", alt: "Test History Analytics", size: "small" }
+      ],
+      "website-builder": [
+        { src: "/website-builder-project.svg", alt: "Website Builder Main Interface", size: "large" },
+        { src: "/website-builder-project.svg", alt: "Design Preview", size: "medium" },
+        { src: "/website-builder-project.svg", alt: "E-commerce Setup", size: "small" },
+        { src: "/website-builder-project.svg", alt: "SEO Configuration", size: "small" },
+        { src: "/website-builder-project.svg", alt: "Template Library", size: "medium" },
+        { src: "/website-builder-project.svg", alt: "Drag & Drop Editor", size: "small" }
+      ],
+      "file-management": [
+        { src: "/file-management-project.svg", alt: "File Management Dashboard", size: "large" },
+        { src: "/file-management-project.svg", alt: "Global CDN Performance", size: "medium" },
+        { src: "/file-management-project.svg", alt: "Enterprise Security", size: "small" },
+        { src: "/file-management-project.svg", alt: "Team Collaboration", size: "small" },
+        { src: "/file-management-project.svg", alt: "Version Control", size: "medium" },
+        { src: "/file-management-project.svg", alt: "Smart Organization", size: "small" }
+      ],
+      "documentation-ai": [
+        { src: "/documentation-ai-project.svg", alt: "Documentation AI Interface", size: "large" },
+        { src: "/documentation-ai-project.svg", alt: "Code Context Analysis", size: "medium" },
+        { src: "/documentation-ai-project.svg", alt: "IDE Integration", size: "small" },
+        { src: "/documentation-ai-project.svg", alt: "API Spec Generation", size: "small" },
+        { src: "/documentation-ai-project.svg", alt: "Interactive Documentation", size: "medium" },
+        { src: "/documentation-ai-project.svg", alt: "Version History Tracking", size: "small" }
+      ],
+      "ai-code-viewer": [
+        { src: "/ai-code-viewer-project.svg", alt: "AI Code Viewer Main Interface", size: "large" },
+        { src: "/AIcode.png", alt: "Real-time Compilation", size: "medium" },
+        { src: "/ai-code-viewer-project.svg", alt: "AI Code Enhancement", size: "small" },
+        { src: "/AIcode.png", alt: "Performance Analysis", size: "small" },
+        { src: "/ai-code-viewer-project.svg", alt: "Multi-file Support", size: "medium" },
+        { src: "/AIcode.png", alt: "Collaborative Editing", size: "small" }
+      ]
+    };
+    
+    return imageMap[projectId] || imageMap["api-testing"]; // fallback
+  };
 
   // Project data - same as in Projects.tsx but with more detailed content
   const projects = [
@@ -310,6 +359,18 @@ const ProjectDetail = () => {
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Bento Image Grid - Project Specific */}
+        <section className="py-8 sm:py-12 border-t border-border">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-lg font-semibold text-foreground mb-6">Visual Interface Showcase</h2>
+              <BentoImageGrid 
+                images={getProjectImages(projectId || "api-testing")}
+              />
             </div>
           </div>
         </section>
