@@ -16,101 +16,90 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
-      {/* Modern glass morphism header with enhanced backdrop */}
-      <div className="absolute inset-0 bg-gradient-glass backdrop-blur-2xl border-b border-border/50 shadow-lg" />
-      
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="flex items-center justify-between h-18 sm:h-20">
-          {/* Enhanced Logo */}
+        <div className="flex items-center justify-between h-14 sm:h-16">
+          {/* Minimal Logo */}
           <div className="flex-shrink-0">
-            <Link to="/" className="group transition-all duration-300 hover:scale-105">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
-                  <span className="text-white font-bold text-lg sm:text-xl">L</span>
+            <Link to="/" className="group transition-all duration-200 hover:opacity-70">
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 bg-foreground rounded flex items-center justify-center">
+                  <span className="text-background font-semibold text-xs">L</span>
                 </div>
-                <h1 className="text-xl sm:text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent group-hover:opacity-90 transition-all duration-300">
+                <h1 className="text-sm font-semibold text-foreground">
                   Lade Stack
                 </h1>
               </div>
             </Link>
           </div>
 
-          {/* Enhanced Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8 xl:space-x-12">
+          {/* Compact Desktop Navigation */}
+          <nav className="hidden lg:flex items-center space-x-6">
             {navigationItems.map((item, index) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className="text-sm xl:text-base text-muted-foreground hover:text-foreground transition-all duration-300 font-medium relative group"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className="text-xs text-muted-foreground hover:text-foreground transition-all duration-200 font-medium relative group"
               >
                 <span className="relative z-10">{item.name}</span>
-                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-primary transition-all duration-300 group-hover:w-full" />
-                <div className="absolute inset-0 bg-primary/5 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 -z-10" />
+                <div className="absolute bottom-0 left-0 w-0 h-px bg-foreground transition-all duration-200 group-hover:w-full" />
               </Link>
             ))}
           </nav>
 
-          {/* Enhanced Desktop Actions */}
-          <div className="hidden md:flex items-center space-x-3 lg:space-x-6">
-            <div className="relative group">
-              <ThemeToggle />
-            </div>
+          {/* Compact Desktop Actions */}
+          <div className="hidden md:flex items-center space-x-2">
+            <ThemeToggle />
             <Button
-              variant="outline"
+              variant="ghost"
               size="sm"
-              className="relative overflow-hidden group border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-lg backdrop-blur-sm"
+              className="text-xs hover:bg-muted/50 transition-all duration-200"
             >
-              <span className="relative z-10">Get Started</span>
-              <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 transition-all duration-300" />
+              Get started
             </Button>
           </div>
 
-          {/* Enhanced Mobile Actions */}
-          <div className="flex md:hidden items-center space-x-3">
+          {/* Compact Mobile Actions */}
+          <div className="flex md:hidden items-center space-x-2">
             <ThemeToggle />
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="relative group transition-all duration-300 hover:scale-110 hover:bg-primary/10"
+              className="relative group transition-all duration-200 hover:bg-muted/50"
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             >
-              <div className="relative z-10 transition-transform duration-300 group-data-[state=open]:rotate-180">
-                {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              <div className="relative z-10 transition-transform duration-200 group-data-[state=open]:rotate-180">
+                {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
               </div>
             </Button>
           </div>
         </div>
 
-        {/* Enhanced Mobile Navigation */}
+        {/* Minimal Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden relative animate-slide-up">
-            <div className="absolute top-0 left-0 right-0 bg-gradient-glass backdrop-blur-2xl border-t border-border/50 shadow-xl rounded-b-2xl mt-2" />
-            <div className="relative py-6 px-4 space-y-2">
+            <div className="absolute top-0 left-0 right-0 bg-background/95 backdrop-blur border-t border-border shadow-lg rounded-b-md mt-1" />
+            <div className="relative py-4 px-3 space-y-1">
               <nav className="flex flex-col space-y-1">
                 {navigationItems.map((item, index) => (
                   <Link
                     key={item.name}
                     to={item.href}
-                    className="text-foreground hover:text-primary transition-all duration-300 font-medium py-3 px-4 rounded-xl hover:bg-primary/5 border border-transparent hover:border-primary/20 group relative overflow-hidden"
+                    className="text-foreground hover:text-muted-foreground transition-all duration-200 font-medium py-2 px-3 rounded hover:bg-muted/30 text-sm"
                     onClick={() => setIsMenuOpen(false)}
-                    style={{ animationDelay: `${index * 100}ms` }}
                   >
-                    <span className="relative z-10">{item.name}</span>
-                    <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-5 transition-all duration-300" />
+                    {item.name}
                   </Link>
                 ))}
               </nav>
-              <div className="flex flex-col space-y-3 pt-6 border-t border-border/50 mt-6">
+              <div className="flex flex-col space-y-2 pt-4 border-t border-border mt-4">
                 <Button
-                  variant="outline"
+                  variant="ghost"
                   size="sm"
-                  className="w-full relative overflow-hidden group border-2 hover:border-primary/50 transition-all duration-300"
+                  className="w-full text-xs hover:bg-muted/50 transition-all duration-200"
                 >
-                  <span className="relative z-10">Get Started</span>
-                  <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 transition-all duration-300" />
+                  Get started
                 </Button>
               </div>
             </div>

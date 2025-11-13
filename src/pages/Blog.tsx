@@ -294,14 +294,13 @@ const Blog = () => {
       <Header />
       <main className="pt-16">
         {/* Hero Section */}
-        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-subtle">
+        <section className="py-8 sm:py-12">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-                Lade Stack <span className="bg-gradient-primary bg-clip-text text-transparent">Blog</span>
+            <div className="max-w-3xl mx-auto text-center">
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground mb-3">
+                Lade Stack Blog
               </h1>
-              <div className="w-16 sm:w-20 h-1 bg-gradient-primary mx-auto mb-6 sm:mb-8 rounded-full" />
-              <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
                 Insights, tutorials, and industry perspectives on AI-powered development, software engineering best practices, and the future of technology.
               </p>
             </div>

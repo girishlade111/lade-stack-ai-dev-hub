@@ -6,57 +6,57 @@
 
 @layer base {
   :root {
-    /* Background & Surfaces - Modern Base */
+    /* Background & Surfaces - Matte Black & White */
     --background: 0 0% 100%;
-    --foreground: 220 12% 10%;
+    --foreground: 0 0% 0%;
     
-    /* Cards & Elevated Surfaces - Glass Effect */
+    /* Cards & Elevated Surfaces - Clean White */
     --card: 0 0% 100%;
-    --card-foreground: 220 12% 10%;
+    --card-foreground: 0 0% 0%;
     
     /* Popover & Dropdown */
     --popover: 0 0% 100%;
-    --popover-foreground: 220 12% 10%;
+    --popover-foreground: 0 0% 0%;
     
-    /* Primary Brand Colors - Sophisticated Indigo/Navy */
-    --primary: 220 90% 45%;
+    /* Primary - Pure Black */
+    --primary: 0 0% 0%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 220 90% 40%;
+    --primary-hover: 0 0% 10%;
     
-    /* Secondary - Modern Slate */
-    --secondary: 220 9% 96%;
-    --secondary-foreground: 220 12% 15%;
+    /* Secondary - Light Gray */
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 0%;
     
     /* Muted Text & Backgrounds */
-    --muted: 220 9% 98%;
-    --muted-foreground: 220 6% 40%;
+    --muted: 0 0% 98%;
+    --muted-foreground: 0 0% 40%;
     
-    /* Accent - Modern Electric Blue */
-    --accent: 200 100% 60%;
-    --accent-foreground: 220 12% 10%;
+    /* Accent - Medium Gray */
+    --accent: 0 0% 50%;
+    --accent-foreground: 0 0% 100%;
     
     /* Success & Positive Actions */
-    --success: 150 60% 45%;
+    --success: 0 0% 30%;
     --success-foreground: 0 0% 100%;
     
     /* Destructive Actions */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     
-    /* Borders & Inputs - Subtle */
-    --border: 220 9% 90%;
-    --input: 220 9% 90%;
-    --ring: 220 90% 45%;
+    /* Borders & Inputs - Subtle Gray */
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 0%;
     
     /* Design System Variables */
-    --radius: 1rem;
+    --radius: 0.375rem;
     
-    /* Modern Gradients */
+    /* Minimal Gradients - Grayscale Only */
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(220 9% 98%) 50%, hsl(200 100% 95%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(0 0% 98%) 50%, hsl(0 0% 95%) 100%);
     --gradient-subtle: linear-gradient(145deg, hsl(var(--muted)) 0%, hsl(0 0% 100%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(220 9% 99%) 100%);
-    --gradient-glass: linear-gradient(145deg, hsl(0 0% 100% / 0.8) 0%, hsl(220 9% 95% / 0.8) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(0 0% 99%) 100%);
+    --gradient-glass: linear-gradient(145deg, hsl(0 0% 100% / 0.8) 0%, hsl(0 0% 95% / 0.8) 100%);
     
     /* Enhanced Shadows & Depth */
     --shadow-subtle: 0 1px 2px 0 hsl(220 12% 10% / 0.05);
@@ -91,53 +91,53 @@
   }
 
   .dark {
-    /* Background & Surfaces - Modern Dark */
-    --background: 220 13% 9%;
-    --foreground: 210 40% 98%;
+    /* Background & Surfaces - Matte Dark */
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
     
-    /* Cards & Elevated Surfaces - Glass Dark */
-    --card: 220 13% 12%;
-    --card-foreground: 210 40% 98%;
+    /* Cards & Elevated Surfaces - Dark Gray */
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 100%;
     
     /* Popover & Dropdown */
-    --popover: 220 13% 12%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 100%;
     
-    /* Primary Brand Colors - Enhanced for dark */
-    --primary: 220 90% 55%;
-    --primary-foreground: 220 13% 9%;
-    --primary-hover: 220 90% 60%;
+    /* Primary - Light Gray for dark mode */
+    --primary: 0 0% 85%;
+    --primary-foreground: 0 0% 0%;
+    --primary-hover: 0 0% 80%;
     
-    /* Secondary - Modern Dark Slate */
-    --secondary: 220 13% 18%;
-    --secondary-foreground: 210 40% 98%;
+    /* Secondary - Dark Gray */
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 100%;
     
     /* Muted Text & Backgrounds */
-    --muted: 220 13% 15%;
-    --muted-foreground: 220 5% 65%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
     
-    /* Accent - Brighter Electric Blue */
-    --accent: 200 100% 70%;
-    --accent-foreground: 220 13% 9%;
+    /* Accent - Medium Gray */
+    --accent: 0 0% 50%;
+    --accent-foreground: 0 0% 100%;
     
     /* Success & Positive Actions */
-    --success: 150 60% 55%;
-    --success-foreground: 220 13% 9%;
+    --success: 0 0% 70%;
+    --success-foreground: 0 0% 0%;
     
     /* Destructive Actions */
     --destructive: 0 84% 65%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
     
     /* Borders & Inputs - Dark */
-    --border: 220 13% 20%;
-    --input: 220 13% 20%;
-    --ring: 220 90% 55%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 0% 85%;
     
-    /* Modern Dark Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(220 13% 9%) 0%, hsl(220 13% 12%) 50%, hsl(200 100% 15%) 100%);
-    --gradient-subtle: linear-gradient(145deg, hsl(var(--muted)) 0%, hsl(220 13% 12%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(220 13% 12%) 0%, hsl(220 13% 10%) 100%);
-    --gradient-glass: linear-gradient(145deg, hsl(220 13% 12% / 0.8) 0%, hsl(220 13% 8% / 0.8) 100%);
+    /* Minimal Dark Gradients - Grayscale Only */
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 0%) 0%, hsl(0 0% 8%) 50%, hsl(0 0% 12%) 100%);
+    --gradient-subtle: linear-gradient(145deg, hsl(var(--muted)) 0%, hsl(0 0% 8%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 8%) 0%, hsl(0 0% 6%) 100%);
+    --gradient-glass: linear-gradient(145deg, hsl(0 0% 8% / 0.8) 0%, hsl(0 0% 4% / 0.8) 100%);
     
     /* Enhanced Dark Shadows */
     --shadow-subtle: 0 1px 2px 0 hsl(220 13% 9% / 0.1);
