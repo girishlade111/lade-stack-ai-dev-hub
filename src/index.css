@@ -6,55 +6,37 @@
 
 @layer base {
   :root {
-    /* Background & Surfaces - Matte Black & White */
+    /* Light Theme */
     --background: 0 0% 100%;
     --foreground: 0 0% 0%;
-    
-    /* Cards & Elevated Surfaces - Clean White */
     --card: 0 0% 100%;
     --card-foreground: 0 0% 0%;
-    
-    /* Popover & Dropdown */
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 0%;
-    
-    /* Primary - Pure Black */
-    --primary: 0 0% 0%;
+    --primary: 200 100% 50%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 0 0% 10%;
-    
-    /* Secondary - Light Gray */
+    --primary-hover: 200 100% 45%;
     --secondary: 0 0% 96%;
     --secondary-foreground: 0 0% 0%;
-    
-    /* Muted Text & Backgrounds */
     --muted: 0 0% 98%;
     --muted-foreground: 0 0% 40%;
-    
-    /* Accent - Medium Gray */
-    --accent: 0 0% 50%;
+    --accent: 200 100% 50%;
     --accent-foreground: 0 0% 100%;
-    
-    /* Success & Positive Actions */
-    --success: 0 0% 30%;
+    --success: 142 71% 45%;
     --success-foreground: 0 0% 100%;
-    
-    /* Destructive Actions */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    
-    /* Borders & Inputs - Subtle Gray */
     --border: 0 0% 90%;
     --input: 0 0% 90%;
-    --ring: 0 0% 0%;
-    
-    /* Design System Variables */
+    --ring: 200 100% 50%;
     --radius: 0.375rem;
-    
-    /* Optimized Transitions - Reduced for mobile */
     --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --gradient-start: 200 100% 50%;
+    --gradient-end: 142 71% 45%;
+    --glass-bg: rgba(255, 255, 255, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.2);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -67,47 +49,32 @@
   }
 
   .dark {
-    /* Background & Surfaces - Matte Dark */
     --background: 0 0% 0%;
     --foreground: 0 0% 100%;
-    
-    /* Cards & Elevated Surfaces - Dark Gray */
     --card: 0 0% 8%;
     --card-foreground: 0 0% 100%;
-    
-    /* Popover & Dropdown */
     --popover: 0 0% 8%;
     --popover-foreground: 0 0% 100%;
-    
-    /* Primary - Light Gray for dark mode */
     --primary: 0 0% 85%;
     --primary-foreground: 0 0% 0%;
     --primary-hover: 0 0% 80%;
-    
-    /* Secondary - Dark Gray */
     --secondary: 0 0% 15%;
     --secondary-foreground: 0 0% 100%;
-    
-    /* Muted Text & Backgrounds */
     --muted: 0 0% 12%;
     --muted-foreground: 0 0% 60%;
-    
-    /* Accent - Medium Gray */
     --accent: 0 0% 50%;
     --accent-foreground: 0 0% 100%;
-    
-    /* Success & Positive Actions */
-    --success: 0 0% 70%;
+    --success: 142 71% 60%;
     --success-foreground: 0 0% 0%;
-    
-    /* Destructive Actions */
     --destructive: 0 84% 65%;
     --destructive-foreground: 0 0% 100%;
-    
-    /* Borders & Inputs - Dark */
     --border: 0 0% 20%;
     --input: 0 0% 20%;
     --ring: 0 0% 85%;
+    --gradient-start: 0 0% 85%;
+    --gradient-end: 142 71% 60%;
+    --glass-bg: rgba(0, 0, 0, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.1);
   }
 }
 
@@ -364,6 +331,125 @@
   }
 }
 
+/* Advanced Typing Animation */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: hsl(var(--primary));
+  }
+}
+
+@keyframes cursor {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+/* Glassmorphism Effects */
+.glassmorphism {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+}
+
+.glassmorphism-dark {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* Animated Counter */
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-count-up {
+  animation: countUp 0.6s ease-out forwards;
+}
+
+/* Staggered AI Suggestions */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-stagger {
+  animation: slideInUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.animate-stagger-1 { animation-delay: 0.1s; }
+.animate-stagger-2 { animation-delay: 0.2s; }
+.animate-stagger-3 { animation-delay: 0.3s; }
+.animate-stagger-4 { animation-delay: 0.4s; }
+.animate-stagger-5 { animation-delay: 0.5s; }
+
+/* Enhanced Hover Effects */
+.hover-lift {
+  transition: var(--transition-smooth);
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Gradient Text Animation */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background: linear-gradient(45deg,
+    hsl(var(--gradient-start)),
+    hsl(var(--gradient-end)),
+    hsl(var(--gradient-start))
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 3s ease-in-out infinite;
+}
+
 .code-icon-container {
   transition: var(--transition-smooth);
 }
@@ -378,4 +464,30 @@
 
 .code-icon-container:hover .code-bg {
   animation: codeIconGlow 1.5s ease-in-out infinite;
+}
+
+/* Theme Switcher Animations */
+.theme-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced glowing effects for CTAs */
+.cta-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.cta-glow:hover::before {
+  left: 100%;
 }

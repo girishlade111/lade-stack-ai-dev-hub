@@ -1,11 +1,139 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Play, Sparkles, Zap, Brain, Code2, Monitor, Eye, Mail, Github, Linkedin } from "lucide-react";
+import { ArrowLeft, ExternalLink, Play, Sparkles, Zap, Brain, Code2, Monitor, Eye, Mail, Github, Linkedin, X, Users, Gift, Star, TrendingUp, Clock, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useTheme } from "@/components/ThemeProvider";
+import AnimatedEditor from "@/components/AnimatedEditor";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
+import { CounterStats } from "@/components/AnimatedCounter";
 
 const AICodeViewerAI = () => {
+  const [email, setEmail] = useState('');
+  const [betaEmail, setBetaEmail] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const { theme } = useTheme();
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Simulate newsletter signup
+    setIsSubmitted(true);
+    setTimeout(() => setIsSubmitted(false), 3000);
+  };
+
+  const handleBetaSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Simulate beta access signup
+    setIsSubmitted(true);
+    setTimeout(() => setIsSubmitted(false), 3000);
+  };
+
+  // SEO Meta Tags Implementation
+  useEffect(() => {
+    // Page Title
+    document.title = "CodeEnhance AI - AI-Powered HTML, CSS & JS Code Viewer, Compiler, Editor & Enhancer";
+
+    // Meta Description
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance. The ultimate development tool for modern web creators.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = 'Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance. The ultimate development tool for modern web creators.';
+      document.head.appendChild(meta);
+    }
+
+    // Keywords
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (metaKeywords) {
+      metaKeywords.setAttribute('content', 'AI code enhancer, HTML CSS JS compiler, code editor, frontend development, AI code viewer, web development tools, code optimization, AI development');
+    } else {
+      const keywordsMeta = document.createElement('meta');
+      keywordsMeta.name = 'keywords';
+      keywordsMeta.content = 'AI code enhancer, HTML CSS JS compiler, code editor, frontend development, AI code viewer, web development tools, code optimization, AI development';
+      document.head.appendChild(keywordsMeta);
+    }
+
+    // Open Graph Meta Tags
+    const updateMetaTag = (property: string, content: string) => {
+      let tag = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement;
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('property', property);
+        document.head.appendChild(tag);
+      }
+      tag.content = content;
+    };
+
+    updateMetaTag('og:title', 'CodeEnhance AI - AI-Powered Frontend Development Tool');
+    updateMetaTag('og:description', 'Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance.');
+    updateMetaTag('og:type', 'website');
+    updateMetaTag('og:url', window.location.href);
+    updateMetaTag('og:image', `${window.location.origin}/ai-code-viewer-project.svg`);
+    updateMetaTag('og:site_name', 'Lade Stack');
+
+    // Twitter Meta Tags
+    const updateTwitterMeta = (name: string, content: string) => {
+      let tag = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('name', name);
+        document.head.appendChild(tag);
+      }
+      tag.content = content;
+    };
+
+    updateTwitterMeta('twitter:card', 'summary_large_image');
+    updateTwitterMeta('twitter:title', 'CodeEnhance AI - AI-Powered Frontend Development');
+    updateTwitterMeta('twitter:description', 'Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance.');
+
+    // Schema.org JSON-LD
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "CodeEnhance AI",
+      "description": "AI-powered HTML, CSS & JS code viewer, compiler, editor, and enhancer for modern web development",
+      "url": window.location.href,
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "creator": {
+        "@type": "Person",
+        "name": "Girish Lade",
+        "url": "https://ladestack.in",
+        "email": "girishlade111@gmail.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lade Stack",
+        "url": "https://ladestack.in"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "156"
+      }
+    };
+
+    let script = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement;
+    if (!script) {
+      script = document.createElement('script');
+      script.type = 'application/ld+json';
+      document.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(schema);
+  }, []);
+
   const features = [
     {
       icon: Brain,
@@ -296,6 +424,100 @@ const AICodeViewerAI = () => {
           </div>
         </section>
 
+        {/* AI Demo Modal Section */}
+        <section className="py-20 bg-gray-50 dark:bg-gray-800/50">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto text-center">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="space-y-8"
+              >
+                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                  Try AI Enhancement Demo
+                </h2>
+                <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                  See how AI can transform your code with intelligent improvements and optimizations
+                </p>
+                
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button size="lg" className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 text-lg font-medium">
+                      <Gift className="w-5 h-5 mr-2" />
+                      Try AI Enhancement Demo
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle className="flex items-center gap-2">
+                        <Sparkles className="w-5 h-5" />
+                        AI Code Enhancement Demo
+                      </DialogTitle>
+                    </DialogHeader>
+                    
+                    <div className="space-y-6">
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div>
+                          <label className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2 block">
+                            Your Code (Input)
+                          </label>
+                          <Textarea
+                            placeholder="Paste your code here..."
+                            className="font-mono text-sm h-48"
+                            defaultValue={`function createButton() {
+  return '<button onclick="alert()">Click</button>';
+}`}
+                          />
+                        </div>
+                        
+                        <div>
+                          <label className="text-sm font-medium text-blue-600 dark:text-blue-400 mb-2 block">
+                            AI Enhanced Version
+                          </label>
+                          <pre className="text-sm font-mono text-gray-800 dark:text-gray-200 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg h-48 overflow-x-auto">
+{`function createButton() {
+  const button = document.createElement('button');
+  button.textContent = 'Click me';
+  button.className = 'btn-primary';
+  button.setAttribute('aria-label', 'Primary action button');
+  
+  button.addEventListener('click', (event) => {
+    event.preventDefault();
+    handleClick();
+  });
+  
+  return button;
+}`}</pre>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-center justify-center">
+                        <Button className="bg-blue-600 hover:bg-blue-700">
+                          <Sparkles className="w-4 h-4 mr-2" />
+                          Enhance This Code
+                        </Button>
+                      </div>
+                      
+                      <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                        <h4 className="font-medium text-blue-900 dark:text-blue-100 mb-2">AI Improvements Made:</h4>
+                        <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-1">
+                          <li>✅ Added semantic HTML structure</li>
+                          <li>✅ Implemented proper accessibility attributes</li>
+                          <li>✅ Separated concerns (no inline handlers)</li>
+                          <li>✅ Added proper event handling with preventDefault</li>
+                          <li>✅ Enhanced security and maintainability</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
         {/* AI Magic in Action */}
         <section className="py-20 bg-gray-900 text-white">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -418,10 +640,11 @@ const AICodeViewerAI = () => {
                 <div className="flex flex-col md:flex-row items-center gap-8">
                   <div className="flex-shrink-0">
                     <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-green-500 rounded-full flex items-center justify-center">
-                      <img 
-                        src="/src/assets/girish.jpg" 
-                        alt="Girish Lade" 
+                      <img
+                        src="/src/assets/girish.jpg"
+                        alt="Girish Lade"
                         className="w-30 h-30 rounded-full object-cover"
+                        loading="lazy"
                         onError={(e) => {
                           e.currentTarget.style.display = 'none';
                           e.currentTarget.nextElementSibling?.classList.remove('hidden');
@@ -448,6 +671,100 @@ const AICodeViewerAI = () => {
                   </div>
                 </div>
               </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Newsletter/Beta Access Section */}
+        <section className="py-20 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="text-center mb-12"
+              >
+                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                  Stay Updated & Get Early Access
+                </h2>
+                <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                  Join our community of developers and be the first to know about new features and updates
+                </p>
+              </motion.div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* Newsletter Signup */}
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700"
+                >
+                  <div className="text-center mb-6">
+                    <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mx-auto mb-4">
+                      <Mail className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                      Newsletter
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      Get the latest updates and developer tips
+                    </p>
+                  </div>
+
+                  <form onSubmit={handleNewsletterSubmit} className="space-y-4">
+                    <Input
+                      type="email"
+                      placeholder="Enter your email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      className="w-full"
+                    />
+                    <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700" disabled={isSubmitted}>
+                      {isSubmitted ? 'Thanks for subscribing!' : 'Subscribe to Newsletter'}
+                    </Button>
+                  </form>
+                </motion.div>
+
+                {/* Beta Access */}
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  viewport={{ once: true }}
+                  className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700"
+                >
+                  <div className="text-center mb-6">
+                    <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center mx-auto mb-4">
+                      <Users className="w-6 h-6 text-green-600 dark:text-green-400" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                      Beta Access
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      Get early access to new features
+                    </p>
+                  </div>
+
+                  <form onSubmit={handleBetaSubmit} className="space-y-4">
+                    <Input
+                      type="email"
+                      placeholder="Enter your email"
+                      value={betaEmail}
+                      onChange={(e) => setBetaEmail(e.target.value)}
+                      required
+                      className="w-full"
+                    />
+                    <Button type="submit" className="w-full bg-green-600 hover:bg-green-700" disabled={isSubmitted}>
+                      {isSubmitted ? 'Application submitted!' : 'Join Beta Program'}
+                    </Button>
+                  </form>
+                </motion.div>
+              </div>
             </div>
           </div>
         </section>
