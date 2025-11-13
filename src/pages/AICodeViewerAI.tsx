@@ -10,7 +10,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useTheme } from "@/components/ThemeProvider";
 import AnimatedEditor from "@/components/AnimatedEditor";
-import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 const AICodeViewerAI = () => {
   const [email, setEmail] = useState('');
