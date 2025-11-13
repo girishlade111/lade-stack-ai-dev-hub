@@ -256,9 +256,9 @@ const ProjectDetail = () => {
                 </div>
               </div>
 
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3 mb-8">
-                <Button size="lg" className="flex-1" asChild={project.id === "ai-code-viewer" || project.id === "file-management"}>
+              {/* CTA Button */}
+              <div className="flex justify-center mb-8">
+                <Button size="lg" className="text-lg px-8 py-6" asChild={project.id === "ai-code-viewer" || project.id === "file-management"}>
                   {project.id === "ai-code-viewer" ? (
                     <Link to="/ai-code-viewer-ai">
                       Start Free Trial
@@ -275,9 +275,6 @@ const ProjectDetail = () => {
                       <ExternalLink className="w-4 h-4 ml-2" />
                     </>
                   )}
-                </Button>
-                <Button variant="outline" size="lg" className="flex-1">
-                  View Pricing
                 </Button>
               </div>
             </div>
