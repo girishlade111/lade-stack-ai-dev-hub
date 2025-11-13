@@ -36,11 +36,14 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {/* Minimal Company Info */}
             <div className="md:col-span-2">
-              <Link to="/" className="group transition-fast hover:opacity-70 inline-flex items-center gap-2 mb-3">
-                <div className="w-6 h-6 bg-foreground rounded flex items-center justify-center flex-shrink-0">
-                  <span className="text-background font-semibold text-xs">L</span>
+              <Link to="/" className="group logo-container transition-all duration-300 hover:scale-105 inline-flex items-center gap-2 mb-3">
+                <div className="relative w-6 h-6 bg-foreground rounded-md flex items-center justify-center overflow-hidden group-hover:shadow-lg group-hover:shadow-foreground/25 transition-all duration-300 flex-shrink-0">
+                  <div className="text-background text-xs font-mono font-bold">
+                    {"</>"}
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
-                <h3 className="text-sm font-semibold text-foreground">
+                <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
                   Lade Stack
                 </h3>
               </Link>
