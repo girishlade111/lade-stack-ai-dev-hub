@@ -1,10 +1,13 @@
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
-import { Heart, Code } from "lucide-react";
+import { Heart } from "lucide-react";
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
+  // Memoize current year to prevent re-renders
+  const currentYear = useMemo(() => new Date().getFullYear(), []);
 
-  const footerLinks = {
+  // Memoize footer links to prevent re-renders
+  const footerLinks = useMemo(() => ({
     company: [
       { name: "About Us", href: "/about" },
       { name: "Projects", href: "/projects" },
@@ -23,26 +26,24 @@ const Footer = () => {
       { name: "Instagram", href: "https://www.instagram.com/girish_lade_/" },
       { name: "CodePen", href: "https://codepen.io/Girish-Lade-the-looper" },
     ],
-  };
+  }), []);
 
   return (
     <footer className="border-t border-border bg-background">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Compact Footer Content */}
-        <div className="py-8">
+        <div className="py-6 sm:py-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {/* Minimal Company Info */}
             <div className="md:col-span-2">
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-6 h-6 bg-foreground rounded flex items-center justify-center">
+              <Link to="/" className="group transition-fast hover:opacity-70 inline-flex items-center gap-2 mb-3">
+                <div className="w-6 h-6 bg-foreground rounded flex items-center justify-center flex-shrink-0">
                   <span className="text-background font-semibold text-xs">L</span>
                 </div>
-                <Link to="/" className="transition-all duration-200 hover:opacity-70">
-                  <h3 className="text-sm font-semibold text-foreground">
-                    Lade Stack
-                  </h3>
-                </Link>
-              </div>
+                <h3 className="text-sm font-semibold text-foreground">
+                  Lade Stack
+                </h3>
+              </Link>
               <p className="text-xs text-muted-foreground leading-relaxed max-w-sm mb-3">
                 AI-powered development tools and solutions for modern developers.
               </p>
@@ -51,7 +52,7 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Compact Links */}
+            {/* Compact Links - Mobile optimized */}
             <div>
               <h4 className="text-xs font-semibold text-foreground mb-3">
                 Company
@@ -61,7 +62,7 @@ const Footer = () => {
                   <li key={link.name}>
                     <Link
                       to={link.href}
-                      className="text-xs text-muted-foreground hover:text-foreground transition-all duration-200"
+                      className="text-xs text-muted-foreground hover:text-foreground transition-fast touch-target touch-manipulation"
                     >
                       {link.name}
                     </Link>
@@ -79,7 +80,7 @@ const Footer = () => {
                   <li key={link.name}>
                     <Link
                       to={link.href}
-                      className="text-xs text-muted-foreground hover:text-foreground transition-all duration-200"
+                      className="text-xs text-muted-foreground hover:text-foreground transition-fast touch-target touch-manipulation"
                     >
                       {link.name}
                     </Link>
@@ -89,15 +90,15 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Minimal Social Links */}
+          {/* Minimal Social Links - Mobile optimized */}
           <div className="mt-6 pt-6 border-t border-border">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-4 sm:space-y-0">
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-4 overflow-x-auto">
                 <a
                   href="https://github.com/girishlade111"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-muted-foreground hover:text-foreground transition-all duration-200"
+                  className="text-xs text-muted-foreground hover:text-foreground transition-fast whitespace-nowrap touch-target touch-manipulation"
                   aria-label="GitHub"
                 >
                   GitHub
@@ -106,14 +107,14 @@ const Footer = () => {
                   href="https://www.linkedin.com/in/girish-lade-075bba201/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-muted-foreground hover:text-foreground transition-all duration-200"
+                  className="text-xs text-muted-foreground hover:text-foreground transition-fast whitespace-nowrap touch-target touch-manipulation"
                   aria-label="LinkedIn"
                 >
                   LinkedIn
                 </a>
                 <a
                   href="mailto:girishlade111@gmail.com"
-                  className="text-xs text-muted-foreground hover:text-foreground transition-all duration-200"
+                  className="text-xs text-muted-foreground hover:text-foreground transition-fast whitespace-nowrap touch-target touch-manipulation"
                   aria-label="Email"
                 >
                   Email

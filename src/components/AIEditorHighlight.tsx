@@ -1,66 +1,67 @@
-import { ArrowRight, Code, Zap, Shield, Share, Sparkles, Play, Monitor, Layers, Bot } from 'lucide-react';
+import { useMemo } from 'react';
+import { ArrowRight, Code, Zap, Shield, Share, Bot } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
 const AIEditorHighlight = () => {
-  const features = [
+  // Memoize data to prevent re-renders
+  const features = useMemo(() => [
     {
       icon: Zap,
       title: "Lightning-Fast Preview",
-      description: "Real-time code compilation with sub-100ms response times",
+      description: "Real-time code compilation",
       stat: "<100ms"
     },
     {
       icon: Shield,
       title: "Production-Grade Security",
-      description: "AI-powered security audit with SOC2 compliance",
+      description: "AI-powered security audit",
       stat: "SOC2"
     },
     {
       icon: Code,
       title: "Smart Error Detection",
-      description: "Predictive debugging with automated fixes",
+      description: "Predictive debugging",
       stat: "99.9%"
     },
     {
       icon: Share,
       title: "Instant Collaboration",
-      description: "Real-time code sharing with team members",
+      description: "Real-time code sharing",
       stat: "24/7"
     }
-  ];
+  ], []);
 
-  const demos = [
+  const demos = useMemo(() => [
     {
-      icon: Monitor,
+      icon: Code,
       title: "Desktop Editor",
       description: "Full-featured IDE experience",
       status: "Available"
     },
     {
-      icon: Play,
+      icon: Zap,
       title: "Live Preview",
       description: "Instant code execution",
       status: "Real-time"
     },
     {
-      icon: Layers,
+      icon: Share,
       title: "Multi-Panel",
       description: "Split-view development",
       status: "Premium"
     }
-  ];
+  ], []);
 
   return (
-    <section id="ai-editor" className="py-12 sm:py-16 relative overflow-hidden">
-      {/* Clean background */}
+    <section id="ai-editor" className="py-8 sm:py-12 lg:py-16 relative overflow-hidden">
       <div className="absolute inset-0 -z-10 bg-background" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          {/* Minimal Section Header */}
-          <div className="text-center mb-8">
+          {/* Minimal Section Header - Mobile optimized */}
+          <div className="text-center mb-6 sm:mb-8">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-muted border border-border mb-4">
               <Bot className="w-3 h-3 text-muted-foreground" />
               <Badge variant="secondary" className="text-xs">
@@ -78,15 +79,15 @@ const AIEditorHighlight = () => {
             
             <p className="text-sm text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Revolutionary AI-powered development environment that transforms your HTML, CSS, and JavaScript
-              into production-ready applications with enterprise-grade security.
+              into production-ready applications.
             </p>
           </div>
 
-          {/* Compact Main Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
+          {/* Main Content - Mobile-first grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6 sm:mb-8">
             {/* Main Editor Preview */}
             <div className="lg:col-span-2">
-              <Card className="border border-border p-4 hover:bg-muted/30 transition-colors duration-200">
+              <Card className="border border-border p-4 hover:bg-muted/30 transition-fast performance-optimized">
                 <CardHeader className="p-3">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
@@ -135,7 +136,7 @@ function optimizeCode(code) {
                     <Button
                       size="sm"
                       variant="outline"
-                      className="flex-1 text-xs hover:bg-muted/50 transition-colors duration-200"
+                      className="flex-1 text-xs hover:bg-muted/50 transition-fast touch-target touch-manipulation"
                       onClick={() => window.open('https://code.ladestack.in/', '_blank')}
                     >
                       <Code className="w-3 h-3 mr-1" />
@@ -145,10 +146,10 @@ function optimizeCode(code) {
                     <Button
                       size="sm"
                       variant="ghost"
-                      className="flex-1 text-xs hover:bg-muted/50 transition-colors duration-200"
+                      className="flex-1 text-xs hover:bg-muted/50 transition-fast touch-target touch-manipulation"
                       onClick={() => window.open('https://code.ladestack.in/docs', '_blank')}
                     >
-                      <Play className="w-3 h-3 mr-1" />
+                      <Zap className="w-3 h-3 mr-1" />
                       Watch Demo
                     </Button>
                   </div>
@@ -161,7 +162,7 @@ function optimizeCode(code) {
               {demos.map((demo, index) => (
                 <Card
                   key={index}
-                  className="border border-border p-3 hover:bg-muted/30 transition-colors duration-200 cursor-pointer"
+                  className="border border-border p-3 hover:bg-muted/30 transition-fast cursor-pointer touch-target touch-manipulation"
                   onClick={() => window.open('https://code.ladestack.in/', '_blank')}
                 >
                   <div className="flex items-start justify-between mb-2">
@@ -181,12 +182,12 @@ function optimizeCode(code) {
             </div>
           </div>
 
-          {/* Compact Features Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+          {/* Features Grid - Optimized for mobile */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 sm:mb-8">
             {features.map((feature, index) => (
               <Card
                 key={index}
-                className="border border-border p-3 hover:bg-muted/30 transition-colors duration-200"
+                className="border border-border p-3 hover:bg-muted/30 transition-fast will-change-transform"
               >
                 <CardContent className="p-0">
                   <div className="flex items-start gap-3">
@@ -203,7 +204,7 @@ function optimizeCode(code) {
                         <h3 className="text-sm font-medium text-foreground">
                           {feature.title}
                         </h3>
-                        <Badge variant="secondary" className="text-xs px-1.5 py-0.5">
+                        <Badge variant="secondary" className="text-xs px-1.5 py-0.5 flex-shrink-0">
                           {feature.stat}
                         </Badge>
                       </div>
@@ -217,9 +218,9 @@ function optimizeCode(code) {
             ))}
           </div>
 
-          {/* Compact Stats Section */}
-          <Card className="border border-border p-4">
-            <CardContent className="p-0 text-center">
+          {/* Stats Section - Simplified */}
+          <Card className="border border-border p-4 text-center performance-optimized">
+            <CardContent className="p-0">
               <div className="mb-4">
                 <h3 className="text-sm font-semibold text-foreground mb-2">
                   Trusted by Developers Worldwide
@@ -229,14 +230,14 @@ function optimizeCode(code) {
                 </p>
               </div>
               
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3">
                 {[
                   { value: "50K+", label: "Developers" },
                   { value: "99.9%", label: "Uptime" },
                   { value: "10x", label: "Faster" },
                   { value: "24/7", label: "Support" }
                 ].map((stat, index) => (
-                  <div key={index} className="text-center p-2 border border-border rounded hover:bg-muted/30 transition-colors duration-200">
+                  <div key={index} className="text-center p-2 border border-border rounded hover:bg-muted/30 transition-fast">
                     <div className="text-sm font-semibold text-foreground mb-1">
                       {stat.value}
                     </div>

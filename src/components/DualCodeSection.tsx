@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Copy, Check } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
@@ -18,8 +17,15 @@ const DualCodeSection = ({
   title = "Code Transformation", 
   description = "See how our AI editor transforms your code" 
 }: CodeSectionProps) => {
+  const [activeTab, setActiveTab] = useState<'normal' | 'enhanced'>('normal');
   const [copiedNormal, setCopiedNormal] = useState(false);
   const [copiedEnhanced, setCopiedEnhanced] = useState(false);
+
+  // Memoize code blocks to prevent unnecessary re-renders
+  const codeBlocks = useMemo(() => ({
+    normal: normalCode,
+    enhanced: enhancedCode
+  }), [normalCode, enhancedCode]);
 
   const copyToClipboard = async (text: string, type: 'normal' | 'enhanced') => {
     try {
@@ -46,74 +52,85 @@ const DualCodeSection = ({
           variant="ghost"
           size="sm"
           onClick={() => copyToClipboard(code, type)}
-          className="h-8 px-2"
+          className="h-8 px-2 touch-target touch-manipulation"
           aria-label={`Copy ${type} code`}
         >
-          {copiedNormal && type === 'normal' ? (
-            <Check className="w-4 h-4 text-success" />
-          ) : copiedEnhanced && type === 'enhanced' ? (
+          {(copiedNormal && type === 'normal') || (copiedEnhanced && type === 'enhanced') ? (
             <Check className="w-4 h-4 text-success" />
           ) : (
             <Copy className="w-4 h-4" />
           )}
         </Button>
       </div>
-      <pre className="bg-muted/50 rounded-lg p-4 overflow-x-auto text-sm font-mono">
-        <code className="text-foreground/90">{code}</code>
+      <pre className="bg-muted/50 rounded-lg p-3 sm:p-4 overflow-x-auto text-xs sm:text-sm font-mono">
+        <code className="text-foreground/90 whitespace-pre-wrap">{code}</code>
       </pre>
     </div>
   );
 
   return (
-    <section id="code-comparison" className="py-16 sm:py-24 bg-muted/30">
+    <section id="code-comparison" className="py-8 sm:py-12 lg:py-16 bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4">
+          {/* Header - Mobile optimized */}
+          <div className="text-center mb-6 sm:mb-8">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-3">
               {title}
             </h2>
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
               {description}
             </p>
           </div>
 
-          {/* Code Comparison */}
-          <Card className="border-2 hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <CardTitle className="text-xl sm:text-2xl text-center">
+          {/* Code Comparison - Mobile-first */}
+          <Card className="border-2 hover:shadow-lg transition-fast performance-optimized">
+            <CardHeader className="p-4">
+              <CardTitle className="text-lg sm:text-xl text-center">
                 Normal vs Enhanced by Lade Stack's AI editor
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-6">
-              <Tabs defaultValue="normal" className="w-full">
-                <TabsList className="grid w-full grid-cols-2 mb-6">
-                  <TabsTrigger value="normal" className="text-sm sm:text-base">
-                    Normal Code
-                  </TabsTrigger>
-                  <TabsTrigger value="enhanced" className="text-sm sm:text-base">
-                    Enhanced Code
-                  </TabsTrigger>
-                </TabsList>
-                
-                <TabsContent value="normal" className="mt-0">
-                  <div className="space-y-4">
-                    <p className="text-sm text-muted-foreground">
+            <CardContent className="p-4 pt-0 space-y-4">
+              {/* Simple tab alternative for better mobile performance */}
+              <div className="flex gap-1 bg-muted/50 rounded-lg p-1">
+                <button
+                  onClick={() => setActiveTab('normal')}
+                  className={`flex-1 py-2 px-3 rounded text-xs font-medium transition-fast touch-target ${
+                    activeTab === 'normal'
+                      ? 'bg-background text-foreground shadow-sm'
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  Normal Code
+                </button>
+                <button
+                  onClick={() => setActiveTab('enhanced')}
+                  className={`flex-1 py-2 px-3 rounded text-xs font-medium transition-fast touch-target ${
+                    activeTab === 'enhanced'
+                      ? 'bg-background text-foreground shadow-sm'
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  Enhanced Code
+                </button>
+              </div>
+              
+              <div className="space-y-3">
+                {activeTab === 'normal' ? (
+                  <div className="space-y-3">
+                    <p className="text-xs sm:text-sm text-muted-foreground">
                       Standard code with basic functionality and minimal error handling.
                     </p>
-                    <CodeBlock code={normalCode} type="normal" />
+                    <CodeBlock code={codeBlocks.normal} type="normal" />
                   </div>
-                </TabsContent>
-                
-                <TabsContent value="enhanced" className="mt-0">
-                  <div className="space-y-4">
-                    <p className="text-sm text-muted-foreground">
+                ) : (
+                  <div className="space-y-3">
+                    <p className="text-xs sm:text-sm text-muted-foreground">
                       Enhanced by Lade Stack's AI editor with better practices, error handling, and performance optimizations.
                     </p>
-                    <CodeBlock code={enhancedCode} type="enhanced" />
+                    <CodeBlock code={codeBlocks.enhanced} type="enhanced" />
                   </div>
-                </TabsContent>
-              </Tabs>
+                )}
+              </div>
             </CardContent>
           </Card>
         </div>

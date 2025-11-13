@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { lazy } from "react";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import AIEditorHighlight from "@/components/AIEditorHighlight";
@@ -7,86 +7,18 @@ import AboutSection from "@/components/AboutSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import SocialSection from "@/components/SocialSection";
 import Footer from "@/components/Footer";
+import { useEffect } from "react";
 
-const Index = () => {
+// SEO optimization - lightweight alternative to DOM manipulation
+const useSeoMeta = () => {
   useEffect(() => {
-    // SEO Meta Tags
+    // Only update title, let HTML meta tags handle SEO
     document.title = "Lade Stack - AI-Powered Development Tools & Modern Developer Hub";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Transform your dev workflow with AI-powered tools. Code, compile, and enhance HTML/CSS/JS in one smart editor. Modern developer tools by Lade Stack.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Transform your dev workflow with AI-powered tools. Code, compile, and enhance HTML/CSS/JS in one smart editor. Modern developer tools by Lade Stack.';
-      document.head.appendChild(meta);
-    }
-
-    // Open Graph Meta Tags
-    const updateMetaTag = (property: string, content: string) => {
-      let tag = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement;
-      if (!tag) {
-        tag = document.createElement('meta');
-        tag.setAttribute('property', property);
-        document.head.appendChild(tag);
-      }
-      tag.content = content;
-    };
-
-    updateMetaTag('og:title', 'Lade Stack - AI-Powered Development Tools');
-    updateMetaTag('og:description', 'Transform your dev workflow with AI-powered tools. Code, compile, and enhance HTML/CSS/JS in one smart editor.');
-    updateMetaTag('og:type', 'website');
-    updateMetaTag('og:url', window.location.origin);
-    updateMetaTag('og:image', `${window.location.origin}/og-image.png`);
-
-    // Twitter Meta Tags
-    const updateTwitterMeta = (name: string, content: string) => {
-      let tag = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
-      if (!tag) {
-        tag = document.createElement('meta');
-        tag.setAttribute('name', name);
-        document.head.appendChild(tag);
-      }
-      tag.content = content;
-    };
-
-    updateTwitterMeta('twitter:card', 'summary_large_image');
-    updateTwitterMeta('twitter:title', 'Lade Stack - AI-Powered Development Tools');
-    updateTwitterMeta('twitter:description', 'Transform your dev workflow with AI-powered tools.');
-
-    // JSON-LD Structured Data
-    const structuredData = {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Lade Stack AI Code Editor",
-      "description": "AI-powered code editor for HTML, CSS, and JavaScript development with intelligent enhancement features.",
-      "url": "https://code.ladestack.in",
-      "applicationCategory": "DevelopmentApplication",
-      "operatingSystem": "Web",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "author": {
-        "@type": "Person",
-        "name": "Girish Lade",
-        "url": "https://ladestack.in/about"
-      }
-    };
-
-    let scriptTag = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement;
-    if (!scriptTag) {
-      scriptTag = document.createElement('script') as HTMLScriptElement;
-      scriptTag.type = 'application/ld+json';
-      document.head.appendChild(scriptTag);
-    }
-    scriptTag.textContent = JSON.stringify(structuredData);
-
   }, []);
+};
 
-  // Sample code examples for the dual code section
-  const sampleNormalCode = `// Basic function with minimal error handling
+// Sample code examples for the dual code section
+const sampleNormalCode = `// Basic function with minimal error handling
 const calculateTotal = (items) => {
   let total = 0;
   for (let item of items) {
@@ -100,10 +32,9 @@ fetch('/api/cart')
   .then(response => response.json())
   .then(data => {
     console.log('Cart data:', data);
-  });
-`;
+  });`;
 
-  const sampleEnhancedCode = `// Enhanced function with TypeScript types and error handling
+const sampleEnhancedCode = `// Enhanced function with TypeScript types and error handling
 interface CartItem {
   id: string;
   price: number;
@@ -149,6 +80,9 @@ const fetchCartData = async (): Promise<CartData> => {
     throw new Error('Unable to load cart data');
   }
 };`;
+
+const Index = () => {
+  useSeoMeta();
 
   return (
     <div className="min-h-screen bg-background">
