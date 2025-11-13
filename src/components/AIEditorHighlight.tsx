@@ -3,6 +3,7 @@ import { ArrowRight, Code, Zap, Shield, Share, Bot } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { safeWindowOpen } from '@/utils/safe';
 
 const AIEditorHighlight = () => {
   // Memoize data to prevent re-renders
@@ -137,7 +138,7 @@ function optimizeCode(code) {
                       size="sm"
                       variant="outline"
                       className="flex-1 text-xs hover:bg-muted/50 transition-fast touch-target touch-manipulation"
-                      onClick={() => window.open('https://code.ladestack.in/', '_blank')}
+                      onClick={() => safeWindowOpen('https://code.ladestack.in/')}
                     >
                       <Code className="w-3 h-3 mr-1" />
                       Launch AI Editor
@@ -147,7 +148,7 @@ function optimizeCode(code) {
                       size="sm"
                       variant="ghost"
                       className="flex-1 text-xs hover:bg-muted/50 transition-fast touch-target touch-manipulation"
-                      onClick={() => window.open('https://code.ladestack.in/docs', '_blank')}
+                      onClick={() => safeWindowOpen('https://code.ladestack.in/docs')}
                     >
                       <Zap className="w-3 h-3 mr-1" />
                       Watch Demo
@@ -163,7 +164,7 @@ function optimizeCode(code) {
                 <Card
                   key={index}
                   className="border border-border p-3 hover:bg-muted/30 transition-fast cursor-pointer touch-target touch-manipulation"
-                  onClick={() => window.open('https://code.ladestack.in/', '_blank')}
+                  onClick={() => safeWindowOpen('https://code.ladestack.in/')}
                 >
                   <div className="flex items-start justify-between mb-2">
                     <demo.icon className="w-4 h-4" />

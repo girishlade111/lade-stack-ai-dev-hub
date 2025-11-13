@@ -1,5 +1,6 @@
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { safeWindowOpen, safeQuerySelector, safeScrollIntoView } from "@/utils/safe";
 
 const HeroSection = () => {
   return (
@@ -39,7 +40,7 @@ const HeroSection = () => {
               variant="outline"
               size="sm"
               className="w-full sm:w-auto relative overflow-hidden border hover:bg-muted/50 transition-fast touch-target touch-manipulation"
-              onClick={() => window.open('https://code.ladestack.in/', '_blank')}
+              onClick={() => safeWindowOpen('https://code.ladestack.in/')}
             >
               <span className="relative z-10 flex items-center justify-center gap-2 text-xs">
                 Start coding
@@ -51,13 +52,8 @@ const HeroSection = () => {
               size="sm"
               className="w-full sm:w-auto text-xs hover:bg-muted/50 transition-fast touch-target touch-manipulation"
               onClick={() => {
-                const featuresSection = document.querySelector('#features');
-                if (featuresSection) {
-                  featuresSection.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                  });
-                }
+                const featuresSection = safeQuerySelector('#features');
+                safeScrollIntoView(featuresSection);
               }}
             >
               Explore tools

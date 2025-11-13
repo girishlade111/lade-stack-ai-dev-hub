@@ -26,20 +26,38 @@ export function ThemeProvider({
   storageKey = "ui-theme",
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
+  const [theme, setThemeState] = useState<Theme>(
+    () => {
+      // Safe localStorage access with fallback
+      try {
+        return (localStorage.getItem(storageKey) as Theme) || defaultTheme
+      } catch {
+        return defaultTheme
+      }
+    }
   )
+
+  // Separate function to handle theme changes without causing re-renders
+  const setTheme = (newTheme: Theme) => {
+    try {
+      localStorage.setItem(storageKey, newTheme)
+      setThemeState(newTheme)
+    } catch (error) {
+      console.warn('Failed to save theme preference:', error)
+      setThemeState(newTheme)
+    }
+  }
 
   useEffect(() => {
     const root = window.document.documentElement
 
+    // Remove existing theme classes
     root.classList.remove("light", "dark")
 
     if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light"
+      // Check system preference
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
+      const systemTheme = mediaQuery.matches ? "dark" : "light"
 
       root.classList.add(systemTheme)
       return
@@ -50,10 +68,7 @@ export function ThemeProvider({
 
   const value = {
     theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme)
-      setTheme(theme)
-    },
+    setTheme,
   }
 
   return (

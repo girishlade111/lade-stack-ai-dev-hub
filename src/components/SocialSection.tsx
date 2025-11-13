@@ -1,8 +1,68 @@
-import { useMemo } from "react";
-import { Github, Instagram, Linkedin, Code2, ExternalLink } from "lucide-react";
+import { useMemo, useState } from "react";
+import { Github, Instagram, Linkedin, Code2, ExternalLink, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { safeWindowOpen, safeClipboard } from "@/utils/safe";
 
 const SocialSection = () => {
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [validationError, setValidationError] = useState('');
+
+  // Email validation regex
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const validateEmail = (email: string): boolean => {
+    if (!email.trim()) {
+      setValidationError('Email is required');
+      return false;
+    }
+    if (!emailRegex.test(email)) {
+      setValidationError('Please enter a valid email address');
+      return false;
+    }
+    setValidationError('');
+    return true;
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+    if (validationError) {
+      setValidationError('');
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!validateEmail(email)) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      // Simulate API call - replace with actual subscription logic
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // For demonstration, we'll just copy the email to clipboard
+      const success = await safeClipboard.writeText(`Newsletter subscription: ${email}`);
+      
+      if (success) {
+        setSubmitStatus('success');
+        setEmail('');
+      } else {
+        throw new Error('Failed to process subscription');
+      }
+    } catch (error) {
+      console.error('Subscription failed:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   // Memoize social links to prevent re-renders
   const socialLinks = useMemo(() => [
     {
@@ -63,7 +123,7 @@ const SocialSection = () => {
                 variant="outline" 
                 size="sm" 
                 className="w-full sm:w-auto text-xs hover:bg-muted/50 transition-fast touch-target touch-manipulation"
-                onClick={() => window.open('https://github.com/girishlade111', '_blank')}
+                onClick={() => safeWindowOpen('https://github.com/girishlade111')}
               >
                 View GitHub Profile
                 <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 ml-2" />
@@ -111,20 +171,49 @@ const SocialSection = () => {
             <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4 max-w-2xl mx-auto">
               Get notified about new projects, tools, and insights directly in your inbox.
             </p>
-            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-3 py-2 rounded border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring text-sm"
-              />
-              <Button 
-                variant="default" 
-                size="sm" 
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center max-w-md mx-auto">
+              <div className="flex-1">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={handleEmailChange}
+                  className={`w-full px-3 py-2 rounded border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring text-sm ${
+                    validationError ? 'border-destructive' : 'border-input'
+                  }`}
+                  autoComplete="email"
+                  inputMode="email"
+                  disabled={isSubmitting}
+                  aria-label="Email for newsletter subscription"
+                  aria-invalid={!!validationError}
+                  aria-describedby={validationError ? 'email-error' : undefined}
+                />
+                {validationError && (
+                  <p id="email-error" className="text-xs text-destructive mt-1" role="alert">
+                    {validationError}
+                  </p>
+                )}
+                {submitStatus === 'success' && (
+                  <p className="text-xs text-success mt-1" role="alert">
+                    Subscription successful! Check your email for confirmation.
+                  </p>
+                )}
+                {submitStatus === 'error' && (
+                  <p className="text-xs text-destructive mt-1" role="alert">
+                    Subscription failed. Please try again.
+                  </p>
+                )}
+              </div>
+              <Button
+                type="submit"
+                variant="default"
+                size="sm"
+                disabled={isSubmitting}
                 className="text-xs hover:bg-muted/50 transition-fast touch-target touch-manipulation"
               >
-                Subscribe
+                {isSubmitting ? 'Subscribing...' : 'Subscribe'}
               </Button>
-            </div>
+            </form>
           </div>
         </div>
       </div>

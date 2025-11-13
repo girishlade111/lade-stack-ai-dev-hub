@@ -3,6 +3,7 @@ import { Lightbulb, Users, Award, Eye, Rocket, CheckCircle } from "lucide-react"
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { safeWindowOpen } from "@/utils/safe";
 
 const AboutSection = () => {
   // Memoize expensive data to prevent re-renders
@@ -206,7 +207,7 @@ const AboutSection = () => {
                 size="sm"
                 variant="outline"
                 className="text-xs hover:bg-muted/50 transition-fast touch-target touch-manipulation"
-                onClick={() => window.open('https://ladestack.in/about', '_blank')}
+                onClick={() => safeWindowOpen('https://ladestack.in/about')}
               >
                 Learn more about our story
               </Button>

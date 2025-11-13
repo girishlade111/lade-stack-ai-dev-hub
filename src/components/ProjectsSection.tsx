@@ -3,6 +3,7 @@ import { ExternalLink, Code, Globe, FileText, Brain, Star, Clock, Users } from "
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { safeWindowOpen } from "@/utils/safe";
 
 const ProjectsSection = () => {
   // Memoize data to prevent re-renders
@@ -157,7 +158,7 @@ const ProjectsSection = () => {
                     variant="outline"
                     size="sm"
                     className="w-full text-xs hover:bg-muted/50 transition-fast touch-target touch-manipulation"
-                    onClick={() => window.open('https://code.ladestack.in', '_blank')}
+                    onClick={() => safeWindowOpen('https://code.ladestack.in')}
                   >
                     <span>Explore</span>
                     <ExternalLink className="w-3 h-3 ml-1" />
@@ -188,7 +189,7 @@ const ProjectsSection = () => {
                   size="sm"
                   variant="ghost"
                   className="text-xs hover:bg-muted/50 transition-fast touch-target touch-manipulation"
-                  onClick={() => window.open('https://ladestack.in/pricing', '_blank')}
+                  onClick={() => safeWindowOpen('https://ladestack.in/pricing')}
                 >
                   View pricing
                 </Button>

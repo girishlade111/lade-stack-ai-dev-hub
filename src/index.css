@@ -340,3 +340,49 @@
 .lazy-image.loading {
   opacity: 0;
 }
+
+/* Code Icon Animations */
+@keyframes codeIconPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+@keyframes codeIconRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes codeIconGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px hsl(var(--primary) / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 15px hsl(var(--primary) / 0.6);
+  }
+}
+
+.code-icon-container {
+  transition: var(--transition-smooth);
+}
+
+.code-icon-container:hover .code-icon {
+  animation: codeIconPulse 0.6s ease-in-out infinite;
+}
+
+.code-icon-container:hover .code-bracket {
+  animation: codeIconRotate 1s ease-in-out;
+}
+
+.code-icon-container:hover .code-bg {
+  animation: codeIconGlow 1.5s ease-in-out infinite;
+}

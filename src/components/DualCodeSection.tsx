@@ -3,6 +3,7 @@ import { Copy, Check } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { safeClipboard } from '@/utils/safe';
 
 interface CodeSectionProps {
   normalCode: string;
@@ -29,13 +30,15 @@ const DualCodeSection = ({
 
   const copyToClipboard = async (text: string, type: 'normal' | 'enhanced') => {
     try {
-      await navigator.clipboard.writeText(text);
-      if (type === 'normal') {
-        setCopiedNormal(true);
-        setTimeout(() => setCopiedNormal(false), 2000);
-      } else {
-        setCopiedEnhanced(true);
-        setTimeout(() => setCopiedEnhanced(false), 2000);
+      const success = await safeClipboard.writeText(text);
+      if (success) {
+        if (type === 'normal') {
+          setCopiedNormal(true);
+          setTimeout(() => setCopiedNormal(false), 2000);
+        } else {
+          setCopiedEnhanced(true);
+          setTimeout(() => setCopiedEnhanced(false), 2000);
+        }
       }
     } catch (err) {
       console.error('Failed to copy code:', err);

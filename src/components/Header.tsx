@@ -30,18 +30,21 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14 sm:h-16">
-          {/* Minimal Logo - Touch optimized */}
+          {/* Animated Code Icon Logo - Touch optimized */}
           <div className="flex-shrink-0">
-            <Link 
-              to="/" 
-              className="group transition-fast hover:opacity-70 touch-target touch-manipulation inline-flex"
+            <Link
+              to="/"
+              className="group logo-container transition-all duration-300 hover:scale-105 touch-target touch-manipulation inline-flex"
               aria-label="Lade Stack Home"
             >
               <div className="flex items-center gap-2">
-                <div className="w-6 h-6 bg-foreground rounded flex items-center justify-center">
-                  <span className="text-background font-semibold text-xs">L</span>
+                <div className="relative w-6 h-6 bg-foreground rounded-md flex items-center justify-center overflow-hidden group-hover:shadow-lg group-hover:shadow-foreground/25 group-hover:rotate-180 transition-all duration-300">
+                  <div className="text-background text-xs font-mono font-bold">
+                    {"</>"}
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
-                <h1 className="text-sm font-semibold text-foreground">
+                <h1 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
                   Lade Stack
                 </h1>
               </div>
