@@ -9,7 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useTheme } from "@/components/ThemeProvider";
-import AnimatedEditor from "@/components/AnimatedEditor";
+import girishImage from "@/assets/girish.jpg";
 
 const AICodeViewerAI = () => {
   const [email, setEmail] = useState('');
@@ -31,105 +31,115 @@ const AICodeViewerAI = () => {
     setTimeout(() => setIsSubmitted(false), 3000);
   };
 
-  // SEO Meta Tags Implementation
+  // SEO Meta Tags Implementation - SSR-safe
   useEffect(() => {
-    // Page Title
-    document.title = "CodeEnhance AI - AI-Powered HTML, CSS & JS Code Viewer, Compiler, Editor & Enhancer";
-
-    // Meta Description
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance. The ultimate development tool for modern web creators.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance. The ultimate development tool for modern web creators.';
-      document.head.appendChild(meta);
+    // Check if we're in the browser
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return;
     }
 
-    // Keywords
-    const metaKeywords = document.querySelector('meta[name="keywords"]');
-    if (metaKeywords) {
-      metaKeywords.setAttribute('content', 'AI code enhancer, HTML CSS JS compiler, code editor, frontend development, AI code viewer, web development tools, code optimization, AI development');
-    } else {
-      const keywordsMeta = document.createElement('meta');
-      keywordsMeta.name = 'keywords';
-      keywordsMeta.content = 'AI code enhancer, HTML CSS JS compiler, code editor, frontend development, AI code viewer, web development tools, code optimization, AI development';
-      document.head.appendChild(keywordsMeta);
+    try {
+      // Page Title
+      document.title = "CodeEnhance AI - AI-Powered HTML, CSS & JS Code Viewer, Compiler, Editor & Enhancer";
+
+      // Meta Description
+      let metaDescription = document.querySelector('meta[name="description"]');
+      if (metaDescription) {
+        metaDescription.setAttribute('content', 'Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance. The ultimate development tool for modern web creators.');
+      } else {
+        const meta = document.createElement('meta');
+        meta.name = 'description';
+        meta.content = 'Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance. The ultimate development tool for modern web creators.';
+        document.head.appendChild(meta);
+      }
+
+      // Keywords
+      const metaKeywords = document.querySelector('meta[name="keywords"]');
+      if (metaKeywords) {
+        metaKeywords.setAttribute('content', 'AI code enhancer, HTML CSS JS compiler, code editor, frontend development, AI code viewer, web development tools, code optimization, AI development');
+      } else {
+        const keywordsMeta = document.createElement('meta');
+        keywordsMeta.name = 'keywords';
+        keywordsMeta.content = 'AI code enhancer, HTML CSS JS compiler, code editor, frontend development, AI code viewer, web development tools, code optimization, AI development';
+        document.head.appendChild(keywordsMeta);
+      }
+
+      // Open Graph Meta Tags
+      const updateMetaTag = (property: string, content: string) => {
+        let tag = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement;
+        if (!tag) {
+          tag = document.createElement('meta');
+          tag.setAttribute('property', property);
+          document.head.appendChild(tag);
+        }
+        tag.content = content;
+      };
+
+      updateMetaTag('og:title', 'CodeEnhance AI - AI-Powered Frontend Development Tool');
+      updateMetaTag('og:description', 'Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance.');
+      updateMetaTag('og:type', 'website');
+      updateMetaTag('og:url', window.location.href);
+      updateMetaTag('og:image', `${window.location.origin}/ai-code-viewer-project.svg`);
+      updateMetaTag('og:site_name', 'Lade Stack');
+
+      // Twitter Meta Tags
+      const updateTwitterMeta = (name: string, content: string) => {
+        let tag = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
+        if (!tag) {
+          tag = document.createElement('meta');
+          tag.setAttribute('name', name);
+          document.head.appendChild(tag);
+        }
+        tag.content = content;
+      };
+
+      updateTwitterMeta('twitter:card', 'summary_large_image');
+      updateTwitterMeta('twitter:title', 'CodeEnhance AI - AI-Powered Frontend Development');
+      updateTwitterMeta('twitter:description', 'Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance.');
+
+      // Schema.org JSON-LD
+      const schema = {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "CodeEnhance AI",
+        "description": "AI-powered HTML, CSS & JS code viewer, compiler, editor, and enhancer for modern web development",
+        "url": window.location.href,
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "creator": {
+          "@type": "Person",
+          "name": "Girish Lade",
+          "url": "https://ladestack.in",
+          "email": "girishlade111@gmail.com"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Lade Stack",
+          "url": "https://ladestack.in"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "ratingCount": "156"
+        }
+      };
+
+      let script = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement;
+      if (!script) {
+        script = document.createElement('script');
+        script.type = 'application/ld+json';
+        document.head.appendChild(script);
+      }
+      script.textContent = JSON.stringify(schema);
+    } catch (error) {
+      // Silently fail if there's an issue with meta tags
+      console.warn('Failed to update meta tags:', error);
     }
-
-    // Open Graph Meta Tags
-    const updateMetaTag = (property: string, content: string) => {
-      let tag = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement;
-      if (!tag) {
-        tag = document.createElement('meta');
-        tag.setAttribute('property', property);
-        document.head.appendChild(tag);
-      }
-      tag.content = content;
-    };
-
-    updateMetaTag('og:title', 'CodeEnhance AI - AI-Powered Frontend Development Tool');
-    updateMetaTag('og:description', 'Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance.');
-    updateMetaTag('og:type', 'website');
-    updateMetaTag('og:url', window.location.href);
-    updateMetaTag('og:image', `${window.location.origin}/ai-code-viewer-project.svg`);
-    updateMetaTag('og:site_name', 'Lade Stack');
-
-    // Twitter Meta Tags
-    const updateTwitterMeta = (name: string, content: string) => {
-      let tag = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
-      if (!tag) {
-        tag = document.createElement('meta');
-        tag.setAttribute('name', name);
-        document.head.appendChild(tag);
-      }
-      tag.content = content;
-    };
-
-    updateTwitterMeta('twitter:card', 'summary_large_image');
-    updateTwitterMeta('twitter:title', 'CodeEnhance AI - AI-Powered Frontend Development');
-    updateTwitterMeta('twitter:description', 'Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance.');
-
-    // Schema.org JSON-LD
-    const schema = {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "CodeEnhance AI",
-      "description": "AI-powered HTML, CSS & JS code viewer, compiler, editor, and enhancer for modern web development",
-      "url": window.location.href,
-      "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "Web Browser",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "creator": {
-        "@type": "Person",
-        "name": "Girish Lade",
-        "url": "https://ladestack.in",
-        "email": "girishlade111@gmail.com"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Lade Stack",
-        "url": "https://ladestack.in"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "ratingCount": "156"
-      }
-    };
-
-    let script = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement;
-    if (!script) {
-      script = document.createElement('script');
-      script.type = 'application/ld+json';
-      document.head.appendChild(script);
-    }
-    script.textContent = JSON.stringify(schema);
   }, []);
 
   const features = [
@@ -163,8 +173,8 @@ const AICodeViewerAI = () => {
         <section className="relative py-20 lg:py-32 overflow-hidden">
           {/* Subtle animated background */}
           <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-green-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" />
-          <div className="absolute inset-0 bg-grid-gray-100 dark:bg-grid-gray-800/25 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] dark:[mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]" />
-          
+          <div className="absolute inset-0 bg-gray-100/30 dark:bg-gray-800/25 opacity-50" />
+
           {/* Floating elements */}
           <motion.div 
             className="absolute top-20 left-10 w-32 h-32 bg-blue-200 dark:bg-blue-900/30 rounded-full blur-3xl opacity-30"
@@ -634,7 +644,7 @@ const AICodeViewerAI = () => {
                   <div className="flex-shrink-0">
                     <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-green-500 rounded-full flex items-center justify-center">
                       <img
-                        src="/src/assets/girish.jpg"
+                        src={girishImage}
                         alt="Girish Lade"
                         className="w-30 h-30 rounded-full object-cover"
                         loading="lazy"
