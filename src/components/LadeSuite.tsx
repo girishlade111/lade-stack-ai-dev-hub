@@ -58,8 +58,7 @@ const LadeSuite = () => {
   const categories = useMemo(() => {
     const cats = [...new Set(apps.map(app => app.category))];
     return cats.map(category => ({
-      name: category,
-      count: apps.filter(app => app.category === category).length
+      name: category
     }));
   }, [apps]);
 
@@ -92,7 +91,7 @@ const LadeSuite = () => {
           <div className="flex flex-wrap justify-center gap-2 mb-6">
             {categories.map((category) => (
               <Badge key={category.name} variant="outline" className="text-xs">
-                {category.name} ({category.count})
+                {category.name}
               </Badge>
             ))}
           </div>
@@ -118,10 +117,6 @@ const LadeSuite = () => {
                     {/* App Icon Overlay */}
                     <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-6 h-6 bg-foreground rounded-full flex items-center justify-center shadow-sm border-2 border-background">
                       <app.icon className="w-3 h-3 text-background" />
-                    </div>
-                    {/* App Number */}
-                    <div className="absolute -top-1 -right-1 w-5 h-5 bg-foreground text-background text-xs rounded-full flex items-center justify-center font-medium shadow-sm">
-                      {index + 1}
                     </div>
                   </div>
                   
@@ -159,7 +154,7 @@ const LadeSuite = () => {
             <CardContent className="p-0">
               <div className="mb-4">
                 <h3 className="text-sm font-semibold text-foreground mb-2">
-                  Get Started with All 5 Apps
+                  Get Started with All Apps
                 </h3>
                 <p className="text-xs text-muted-foreground max-w-2xl mx-auto">
                   Join thousands of developers using Lade Suite to build faster, more efficiently. 
@@ -191,7 +186,7 @@ const LadeSuite = () => {
                   <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>5 Apps • Forever Free • No Credit Card</span>
+                  <span>Forever Free • No Credit Card</span>
                 </div>
               </div>
             </CardContent>

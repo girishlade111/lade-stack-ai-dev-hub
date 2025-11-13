@@ -171,37 +171,26 @@ const FileSharingPlatform = () => {
     { icon: Smartphone, name: "Apps", formats: "APK, IPA, EXE, DMG", progress: 87 }
   ];
 
-  const stats = [
-    { value: "1M+", label: "Active Users", icon: FileText },
-    { value: "99.9%", label: "Uptime", icon: Shield },
-    { value: "< 30sec", label: "Upload Speed", icon: Zap },
-    { value: "256-bit", label: "Encryption", icon: Lock }
-  ];
-
   const processSteps = [
     {
-      step: "01",
       title: "Upload Your File",
       description: "Drag and drop or click to select any file type up to 10GB.",
       icon: Upload,
       color: "from-blue-500 to-cyan-500"
     },
     {
-      step: "02",
       title: "Set Security Options",
       description: "Choose expiration time and add password protection if needed.",
       icon: Key,
       color: "from-purple-500 to-pink-500"
     },
     {
-      step: "03",
       title: "Generate Secure Link",
       description: "Get your encrypted, time-limited shareable link instantly.",
       icon: Shield,
       color: "from-green-500 to-emerald-500"
     },
     {
-      step: "04",
       title: "Share & Track",
       description: "Share the link and track downloads until automatic deletion.",
       icon: Download,
@@ -465,27 +454,6 @@ const FileSharingPlatform = () => {
           </div>
         </section>
 
-        {/* Optimized Stats Section */}
-        <section className="py-12 bg-muted/30">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-6xl mx-auto">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                {stats.map((stat, index) => (
-                  <div 
-                    key={index} 
-                    className="text-center p-6 rounded-xl bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm border border-white/20 hover:bg-white/70 dark:hover:bg-gray-900/70 hover:scale-105 hover:shadow-lg transition-all duration-300"
-                  >
-                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-3">
-                      <stat.icon className="w-6 h-6 text-white" />
-                    </div>
-                    <div className="text-2xl font-bold text-foreground mb-1">{stat.value}</div>
-                    <div className="text-sm text-muted-foreground">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* Optimized Features Section */}
         <section className="py-16 sm:py-20 lg:py-24">
@@ -565,9 +533,6 @@ const FileSharingPlatform = () => {
                           visibleSteps.has(index) ? 'opacity-100 scale-100 shadow-lg' : 'opacity-0 scale-75'
                         }`}>
                           <item.icon className="w-8 h-8 text-white" />
-                        </div>
-                        <div className="text-sm font-bold text-muted-foreground mb-2">
-                          {item.step}
                         </div>
                         <h3 className="text-lg font-semibold text-foreground mb-2">
                           {item.title}

@@ -60,26 +60,6 @@ const HeroSection = () => {
             </Button>
           </div>
 
-          {/* Mobile-first stats - Stack on mobile, grid on desktop */}
-          <div className="grid grid-cols-3 gap-2 sm:gap-4 max-w-2xl mx-auto lg:mx-0 animate-slide-up delay-500">
-            {[
-              { value: "1000+", label: "Developers" },
-              { value: "10x", label: "Faster" },
-              { value: "99.9%", label: "Uptime" }
-            ].map((stat, index) => (
-              <div
-                key={index}
-                className="text-center p-2 sm:p-3 border border-border rounded hover:bg-muted/30 transition-fast will-change-transform"
-              >
-                <div className="text-xs sm:text-sm font-semibold text-foreground mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>

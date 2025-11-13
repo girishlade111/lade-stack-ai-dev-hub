@@ -41,7 +41,7 @@ const ProjectShowcase = () => {
       description: "Revolutionary API testing suite with intelligent test generation and real-time monitoring.",
       fullDescription: "Transform your API development workflow with our AI-powered testing platform. Generate comprehensive test suites automatically, monitor performance in real-time, and integrate seamlessly with your CI/CD pipeline.",
       features: ["AI Test Generation", "Performance Analytics", "CI/CD Integration", "Real-time Monitoring"],
-      stats: { users: "25K+", time: "< 5min", rating: "4.9", uptime: "99.9%" },
+      stats: { users: "Many", time: "Quick", rating: "Excellent", uptime: "Reliable" },
       status: "Live",
       coverImage: "/api-testing-project.svg",
       gradient: "from-blue-500 via-cyan-500 to-teal-500",
@@ -74,7 +74,7 @@ const ProjectShowcase = () => {
       description: "Enterprise-grade website builder powered by GPT-4 with responsive design generation.",
       fullDescription: "Create stunning websites in minutes with our AI-powered builder. From concept to deployment, transform your ideas into fully functional, responsive websites with built-in SEO and e-commerce capabilities.",
       features: ["GPT-4 Generation", "SEO Optimization", "E-commerce Ready", "Responsive Design"],
-      stats: { users: "15K+", time: "< 2min", rating: "4.8", uptime: "99.8%" },
+      stats: { users: "Growing", time: "Fast", rating: "Great", uptime: "Stable" },
       status: "Live",
       coverImage: "/website-builder-project.svg",
       gradient: "from-purple-500 via-pink-500 to-rose-500",
@@ -106,7 +106,7 @@ const ProjectShowcase = () => {
       description: "Enterprise file sharing platform with global CDN, intelligent collaboration, and lifetime free access.",
       fullDescription: "Transform your file sharing experience with our advanced File Sharing Platform. Built for modern teams, this enterprise-grade solution offers lightning-fast global content delivery, intelligent file organization, and seamless collaboration features. Experience secure, scalable file management with automatic optimization, version control, and real-time synchronization across all devices. Whether you're sharing documents, media files, or project assets, our platform ensures your content is always accessible, secure, and optimized for peak performance.",
       features: ["Global CDN", "Auto Optimization", "Enterprise Security", "Team Collaboration"],
-      stats: { users: "10K+", time: "< 1min", rating: "4.9", uptime: "99.95%" },
+      stats: { users: "Active", time: "Instant", rating: "Excellent", uptime: "Excellent" },
       status: "Live",
       coverImage: "/file-management-project.svg",
       gradient: "from-green-500 via-emerald-500 to-teal-500",
@@ -141,7 +141,7 @@ const ProjectShowcase = () => {
       description: "Advanced AI that understands code context and generates comprehensive documentation.",
       fullDescription: "Revolutionary AI-powered documentation that understands your codebase. Generate comprehensive, accurate documentation that automatically updates as your code evolves.",
       features: ["Code Context AI", "IDE Integration", "Multi-language Support", "Auto Updates"],
-      stats: { users: "8K+", time: "< 3min", rating: "4.7", uptime: "99.7%" },
+      stats: { users: "Growing", time: "Quick", rating: "Good", uptime: "High" },
       status: "Beta",
       coverImage: "/documentation-ai-project.svg",
       gradient: "from-orange-500 via-red-500 to-pink-500",
@@ -176,7 +176,7 @@ const ProjectShowcase = () => {
       description: "Revolutionary AI-powered code editor with real-time compilation and intelligent enhancement.",
       fullDescription: "The ultimate front-end development tool. Write, test, and optimize your code with AI assistance. Real-time compilation, intelligent suggestions, and advanced debugging capabilities.",
       features: ["AI Code Enhancement", "Real-time Compilation", "Advanced Code Editor", "Performance Analysis"],
-      stats: { users: "12K+", time: "< 30sec", rating: "4.8", uptime: "99.9%" },
+      stats: { users: "Popular", time: "Instant", rating: "Great", uptime: "Reliable" },
       status: "Live",
       coverImage: "/ai-code-viewer-project.svg",
       gradient: "from-indigo-500 via-purple-500 to-violet-500",
@@ -250,7 +250,7 @@ const ProjectShowcase = () => {
               Interactive Project Gallery
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Explore our five AI-powered development tools through immersive showcases with real-time previews and interactive demos.
+              Explore our AI-powered development tools through immersive showcases with real-time previews and interactive demos.
             </p>
           </div>
 
@@ -402,7 +402,7 @@ const ProjectShowcase = () => {
                 Ready to Transform Your Development Workflow?
               </h3>
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                Join thousands of developers who are already saving 40+ hours per week with our AI-powered development tools.
+                Join developers who are already saving significant time with our AI-powered development tools.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Button size="lg">

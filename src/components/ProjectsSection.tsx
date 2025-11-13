@@ -15,7 +15,7 @@ const ProjectsSection = () => {
       title: "AI-Powered API Testing",
       description: "Revolutionary API testing suite with intelligent test generation and real-time monitoring.",
       features: ["AI Test Generation", "Performance Analytics", "CI/CD Integration"],
-      stats: { users: "25K+", time: "< 5min", rating: "4.9" },
+      stats: { users: "Many", time: "Quick", rating: "Excellent" },
       status: "Live",
       coverImage: "/api-testing-project.svg"
     },
@@ -25,7 +25,7 @@ const ProjectsSection = () => {
       title: "No-Code Website Builder",
       description: "Enterprise-grade website builder powered by GPT-4 with responsive design generation.",
       features: ["GPT-4 Generation", "SEO Optimization", "E-commerce Ready"],
-      stats: { users: "15K+", time: "< 2min", rating: "4.8" },
+      stats: { users: "Many", time: "Fast", rating: "Great" },
       status: "Live",
       coverImage: "/website-builder-project.svg"
     },
@@ -35,7 +35,7 @@ const ProjectsSection = () => {
       title: "File Sharing Platform",
       description: "Enterprise file sharing platform with global CDN, intelligent collaboration, and lifetime free access.",
       features: ["Global CDN", "Auto Optimization", "Enterprise Security"],
-      stats: { users: "10K+", time: "< 1min", rating: "4.9" },
+      stats: { users: "Growing", time: "Instant", rating: "Excellent" },
       status: "Live",
       coverImage: "/file-management-project.svg"
     },
@@ -45,7 +45,7 @@ const ProjectsSection = () => {
       title: "Technical Documentation AI",
       description: "Advanced AI that understands code context and generates comprehensive documentation.",
       features: ["Code Context AI", "IDE Integration", "Multi-language"],
-      stats: { users: "8K+", time: "< 3min", rating: "4.7" },
+      stats: { users: "Active", time: "Fast", rating: "Good" },
       status: "Beta",
       coverImage: "/documentation-ai-project.svg"
     },
@@ -55,17 +55,17 @@ const ProjectsSection = () => {
       title: "AI Code Viewer & Editor",
       description: "Revolutionary AI-powered code editor with real-time compilation and intelligent enhancement.",
       features: ["AI Code Enhancement", "Real-time Compilation", "Advanced Code Editor"],
-      stats: { users: "12K+", time: "< 1min", rating: "4.8" },
+      stats: { users: "Popular", time: "Instant", rating: "Great" },
       status: "Live",
       coverImage: "/ai-code-viewer-project.svg"
     }
   ], []);
 
   const metrics = useMemo(() => [
-    { label: "Active Users", value: "50,000+", icon: Users },
-    { label: "Average Rating", value: "4.9/5", icon: Star },
-    { label: "Time Saved", value: "10x", icon: Clock },
-    { label: "Uptime", value: "99.9%", icon: Globe }
+    { label: "Active Users", value: "Thousands", icon: Users },
+    { label: "Average Rating", value: "Excellent", icon: Star },
+    { label: "Time Saved", value: "Significant", icon: Clock },
+    { label: "Uptime", value: "Reliable", icon: Globe }
   ], []);
 
   return (
@@ -75,7 +75,7 @@ const ProjectsSection = () => {
           {/* Minimal Section Header */}
           <div className="text-center mb-6 sm:mb-8">
             <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground mb-3">
-              Five AI Solutions
+              AI Development Solutions
             </h2>
             <p className="text-sm text-muted-foreground max-w-3xl mx-auto">
               Comprehensive development ecosystem: API testing, website building, file management, documentation, and code editing.
@@ -199,7 +199,7 @@ const ProjectsSection = () => {
           <Card className="border border-border p-4 text-center hover:border-border/80 transition-all duration-300 bg-card dark:bg-card/80">
             <CardContent className="p-0">
               <h3 className="text-sm font-semibold text-foreground mb-2">
-                Join 50,000+ Developers
+                Join Our Developer Community
               </h3>
               <p className="text-xs text-muted-foreground mb-4 max-w-2xl mx-auto">
                 Get instant access to all AI-powered development tools. No credit card required.

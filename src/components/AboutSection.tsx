@@ -12,38 +12,38 @@ const AboutSection = () => {
       icon: Lightbulb,
       title: "AI-First Innovation",
       description: "Cutting-edge AI integrated into every tool, delivering intelligent automation.",
-      stats: { value: "50+", label: "AI Models" }
+      stats: { value: "Multiple", label: "AI Models" }
     },
     {
       icon: Users,
       title: "Developer Empowerment", 
       description: "Enterprise-grade tools accessible to individual developers and teams.",
-      stats: { value: "100K+", label: "Developers" }
+      stats: { value: "Many", label: "Developers" }
     },
     {
       icon: Award,
       title: "Production-Ready Quality",
-      description: "Battle-tested tools with 99.9% uptime and enterprise security.",
-      stats: { value: "99.9%", label: "Uptime" }
+      description: "Battle-tested tools with high uptime and enterprise security.",
+      stats: { value: "Excellent", label: "Uptime" }
     },
     {
       icon: Eye,
       title: "Open Source Transparency",
       description: "Core algorithms and integrations are open source with full API documentation.",
-      stats: { value: "100%", label: "Open Source" }
+      stats: { value: "Complete", label: "Open Source" }
     }
   ], []);
 
   const achievements = useMemo(() => [
-    { icon: Rocket, title: "500% Faster", description: "Average development speed increase" },
+    { icon: Rocket, title: "Much Faster", description: "Average development speed increase" },
     { icon: Award, title: "Enterprise Ready", description: "SOC2 & GDPR compliant" },
-    { icon: Eye, title: "Global Scale", description: "Supporting 50+ countries" },
-    { icon: CheckCircle, title: "Developer Love", description: "98% customer satisfaction" }
+    { icon: Eye, title: "Global Scale", description: "Supporting many countries" },
+    { icon: CheckCircle, title: "Developer Love", description: "High customer satisfaction" }
   ], []);
 
   const stats = useMemo(() => [
-    { value: "70%", label: "Faster", description: "Development speed increase" },
-    { value: "99.9%", label: "Quality", description: "Uptime guarantee" }
+    { value: "Much", label: "Faster", description: "Development speed increase" },
+    { value: "High", label: "Quality", description: "Uptime guarantee" }
   ], []);
 
   return (
@@ -197,11 +197,11 @@ const AboutSection = () => {
           <Card className="border border-border p-4 text-center performance-optimized">
             <CardContent className="p-0">
               <h3 className="text-sm font-semibold text-foreground mb-2">
-                Join 100,000+ Developers
+                Join Our Developer Community
               </h3>
               <p className="text-xs text-muted-foreground mb-4 max-w-2xl mx-auto">
                 Our AI-powered tools help developers ship faster, write better code,
-                and reduce development time by up to 70%.
+                and reduce development time significantly.
               </p>
               <Button
                 size="sm"

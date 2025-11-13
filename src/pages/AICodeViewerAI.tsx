@@ -11,7 +11,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { useTheme } from "@/components/ThemeProvider";
 import AnimatedEditor from "@/components/AnimatedEditor";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
-import { CounterStats } from "@/components/AnimatedCounter";
 
 const AICodeViewerAI = () => {
   const [email, setEmail] = useState('');

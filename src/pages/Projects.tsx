@@ -116,9 +116,6 @@ const Projects = () => {
                       <div className="absolute top-2 left-2 w-6 h-6 bg-foreground rounded-lg flex items-center justify-center shadow-sm">
                         <project.icon className="w-3 h-3 text-background" />
                       </div>
-                      <div className="absolute top-2 right-2 w-6 h-6 bg-foreground text-background text-xs rounded-full flex items-center justify-center font-medium shadow-sm">
-                        {index + 1}
-                      </div>
                     </div>
 
                     {/* Project Content */}
