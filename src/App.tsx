@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -24,14 +24,72 @@ const Support = lazy(() => import("./pages/Support"));
 const Documentation = lazy(() => import("./pages/Documentation"));
 const AICodeViewerAI = lazy(() => import("./pages/AICodeViewerAI"));
 
-// Lightweight loading fallback
-const PageLoader = () => (
-  <div className="flex items-center justify-center min-h-screen">
-    <div className="animate-pulse">
-      <div className="w-8 h-8 bg-foreground rounded animate-spin" />
+// Lade Stack Brand Loader Component
+const LadeStackBrandLoader = () => {
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#0a0a0a]">
+      <div className="flex flex-col items-center space-y-8">
+        {/* Main Brand Animation */}
+        <div className="relative">
+          {/* Animated Brand Text */}
+          <div className="text-center">
+            <div className="text-4xl md:text-5xl font-bold text-white tracking-wider mb-2">
+              <span className="inline-block animate-fade-in-up" style={{ animationDelay: '0.2s' }}>LADE</span>
+              <span className="inline-block animate-fade-in-up mx-3" style={{ animationDelay: '0.4s' }}>•</span>
+              <span className="inline-block animate-fade-in-up" style={{ animationDelay: '0.6s' }}>STACK</span>
+            </div>
+            
+            {/* Animated underline */}
+            <div className="relative h-0.5 w-64 mx-auto overflow-hidden">
+              <div className="absolute inset-0 bg-white transform -translate-x-full animate-slide-in-right"></div>
+              <div className="absolute inset-0 bg-white animate-slide-out-left" style={{ animationDelay: '2s' }}></div>
+            </div>
+          </div>
+          
+          {/* Subtle geometric element */}
+          <div className="absolute -top-8 -right-8 w-16 h-16 border-2 border-white/30 animate-spin-slow">
+            <div className="w-full h-full border border-white/20 animate-pulse"></div>
+          </div>
+        </div>
+        
+        {/* Loading text */}
+        <div className="text-center">
+          <p className="text-white/70 text-sm font-medium animate-pulse">Initializing Lade Stack...</p>
+          
+          {/* Progress dots */}
+          <div className="flex justify-center space-x-2 mt-3">
+            <div className="w-2 h-2 bg-white/50 rounded-full animate-bounce" style={{ animationDelay: '0s' }}></div>
+            <div className="w-2 h-2 bg-white/50 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+            <div className="w-2 h-2 bg-white/50 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-);
+  );
+};
+
+// Enhanced loading fallback with fade-out capability
+const PageLoader = () => {
+  const [isVisible, setIsVisible] = React.useState(true);
+  
+  React.useEffect(() => {
+    const handleLoad = () => {
+      setIsVisible(false);
+    };
+    
+    if (document.readyState === 'complete') {
+      handleLoad();
+    } else {
+      window.addEventListener('load', handleLoad);
+    }
+    
+    return () => window.removeEventListener('load', handleLoad);
+  }, []);
+  
+  if (!isVisible) return null;
+  
+  return <LadeStackBrandLoader />;
+};
 
 // Scroll to top component with smooth scrolling
 const ScrollToTop = () => {
