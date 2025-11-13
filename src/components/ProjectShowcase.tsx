@@ -180,7 +180,7 @@ const ProjectShowcase = () => {
       features: ["AI Code Enhancement", "Real-time Compilation", "Advanced Code Editor", "Performance Analysis"],
       stats: { users: "Popular", time: "Instant", rating: "Great", uptime: "Reliable" },
       status: "Live",
-      coverImage: "/ai-code-viewer-project.svg",
+      coverImage: "/AIcode.png",
       gradient: "from-gray-800 via-gray-700 to-gray-900",
       primaryColor: "#000000",
       secondaryColor: "#6B7280",

@@ -49,7 +49,7 @@ const LadeSuite = () => {
       icon: Monitor,
       title: 'AI Code Viewer & Compiler',
       description: 'Revolutionary AI-powered code editor with real-time compilation and enhancement',
-      coverImage: '/ai-code-viewer-project.svg',
+      coverImage: '/AIcode.png',
       category: 'Development',
       status: 'Available'
     }

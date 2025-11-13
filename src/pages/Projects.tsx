@@ -44,7 +44,7 @@ const Projects = () => {
       title: "AI-Powered HTML, CSS & JS Code Viewer, Compiler, Editor & Enhancer",
       description: "Revolutionary AI-powered code editor with real-time compilation, intelligent code enhancement, and advanced debugging capabilities. Perfect for front-end developers who want to create, test, and optimize their web applications instantly.",
       features: ["AI Code Enhancement", "Real-time Compilation", "Advanced Code Editor"],
-      coverImage: "/ai-code-viewer-project.svg",
+      coverImage: "/AIcode.png",
     },
   ];
 

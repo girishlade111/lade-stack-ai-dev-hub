@@ -57,7 +57,7 @@ const ProjectsSection = () => {
       features: ["AI Code Enhancement", "Real-time Compilation", "Advanced Code Editor"],
       stats: { users: "Popular", time: "Instant", rating: "Great" },
       status: "Live",
-      coverImage: "/ai-code-viewer-project.svg"
+      coverImage: "/AIcode.png"
     }
   ], []);
 

@@ -79,7 +79,7 @@ const AICodeViewerAI = () => {
       updateMetaTag('og:description', 'Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance.');
       updateMetaTag('og:type', 'website');
       updateMetaTag('og:url', window.location.href);
-      updateMetaTag('og:image', `${window.location.origin}/ai-code-viewer-project.svg`);
+      updateMetaTag('og:image', `${window.location.origin}/AIcode.png`);
       updateMetaTag('og:site_name', 'Lade Stack');
 
       // Twitter Meta Tags
