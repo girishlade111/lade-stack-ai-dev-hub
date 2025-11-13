@@ -62,35 +62,121 @@ const Blog = () => {
     updateTwitterMeta('twitter:title', 'Lade Stack Blog - AI Development & Software Engineering');
     updateTwitterMeta('twitter:description', 'Insights, tutorials, and industry perspectives on AI-powered development.');
 
-    // JSON-LD Structured Data for Blog
+    // Canonical URL
+    const canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    if (canonical) {
+      canonical.setAttribute('href', 'https://ladestack.in/blog');
+    } else {
+      const canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      canonicalLink.setAttribute('href', 'https://ladestack.in/blog');
+      document.head.appendChild(canonicalLink);
+    }
+
+    // Enhanced JSON-LD Structured Data with Blog and Article Schema
     const blogStructuredData = {
       "@context": "https://schema.org",
-      "@type": "Blog",
-      "name": "Lade Stack Blog",
-      "description": "Insights, tutorials, and industry perspectives on AI-powered development, software engineering best practices, and the future of technology.",
-      "url": "https://ladestack.in/blog",
-      "author": {
-        "@type": "Person",
-        "name": "Girish Lade",
-        "url": "https://ladestack.in/about"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Lade Stack",
-        "url": "https://ladestack.in",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://ladestack.in/logo.png"
-        }
-      },
-      "datePublished": "2024-03-25",
-      "dateModified": "2024-06-15",
-      "inLanguage": "en-US",
-      "potentialAction": [
+      "@graph": [
         {
-          "@type": "ReadAction",
-          "target": ["https://ladestack.in/blog"]
-        }
+          "@type": "Blog",
+          "@id": "https://ladestack.in/blog#blog",
+          "name": "Lade Stack Blog",
+          "description": "Insights, tutorials, and industry perspectives on AI-powered development, software engineering best practices, and the future of technology.",
+          "url": "https://ladestack.in/blog",
+          "author": {
+            "@type": "Person",
+            "name": "Girish Lade",
+            "url": "https://ladestack.in/about"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Lade Stack",
+            "url": "https://ladestack.in",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://ladestack.in/logo.png"
+            }
+          },
+          "datePublished": "2024-03-25",
+          "dateModified": "2024-06-15",
+          "inLanguage": "en-US",
+          "potentialAction": [
+            {
+              "@type": "ReadAction",
+              "target": ["https://ladestack.in/blog"]
+            }
+          ],
+          "blogPost": blogPosts.slice(0, 3).map(post => ({
+            "@type": "Article",
+            "@id": `https://ladestack.in/blog/${post.id}#article`,
+            "headline": post.title,
+            "description": post.excerpt,
+            "url": `https://ladestack.in/blog/${post.id}`,
+            "author": {
+              "@type": "Person",
+              "name": "Girish Lade",
+              "url": "https://ladestack.in/about"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Lade Stack",
+              "url": "https://ladestack.in"
+            },
+            "datePublished": post.date,
+            "dateModified": post.date,
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": `https://ladestack.in/blog/${post.id}`
+            },
+            "articleSection": post.category,
+            "wordCount": parseInt(post.readTime) || 0,
+            "inLanguage": "en-US",
+            "image": {
+              "@type": "ImageObject",
+              "url": `https://ladestack.in/blog-covers/${post.image}.svg`,
+              "width": 1200,
+              "height": 630
+            },
+            "potentialAction": [
+              {
+                "@type": "ReadAction",
+                "target": [`https://ladestack.in/blog/${post.id}`]
+              }
+            ]
+          }))
+        },
+        ...blogPosts.slice(0, 3).map(post => ({
+          "@type": "Article",
+          "@id": `https://ladestack.in/blog/${post.id}#article`,
+          "headline": post.title,
+          "description": post.excerpt,
+          "url": `https://ladestack.in/blog/${post.id}`,
+          "author": {
+            "@type": "Person",
+            "name": "Girish Lade",
+            "url": "https://ladestack.in/about"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Lade Stack",
+            "url": "https://ladestack.in"
+          },
+          "datePublished": post.date,
+          "dateModified": post.date,
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": `https://ladestack.in/blog/${post.id}`
+          },
+          "articleSection": post.category,
+          "wordCount": parseInt(post.readTime) || 0,
+          "inLanguage": "en-US",
+          "image": {
+            "@type": "ImageObject",
+            "url": `https://ladestack.in/blog-covers/${post.image}.svg`,
+            "width": 1200,
+            "height": 630
+          }
+        }))
       ]
     };
 
