@@ -16,7 +16,8 @@ const ProjectsSection = () => {
       description: "Revolutionary API testing suite with intelligent test generation and real-time monitoring.",
       features: ["AI Test Generation", "Performance Analytics", "CI/CD Integration"],
       stats: { users: "25K+", time: "< 5min", rating: "4.9" },
-      status: "Live"
+      status: "Live",
+      coverImage: "/api-testing-project.svg"
     },
     {
       id: "website-builder",
@@ -25,7 +26,8 @@ const ProjectsSection = () => {
       description: "Enterprise-grade website builder powered by GPT-4 with responsive design generation.",
       features: ["GPT-4 Generation", "SEO Optimization", "E-commerce Ready"],
       stats: { users: "15K+", time: "< 2min", rating: "4.8" },
-      status: "Live"
+      status: "Live",
+      coverImage: "/website-builder-project.svg"
     },
     {
       id: "file-management",
@@ -34,7 +36,8 @@ const ProjectsSection = () => {
       description: "Scalable file storage with global CDN, automatic optimization, and team collaboration.",
       features: ["Global CDN", "Auto Optimization", "Enterprise Security"],
       stats: { users: "10K+", time: "< 1min", rating: "4.9" },
-      status: "Live"
+      status: "Live",
+      coverImage: "/file-management-project.svg"
     },
     {
       id: "documentation-ai",
@@ -43,7 +46,8 @@ const ProjectsSection = () => {
       description: "Advanced AI that understands code context and generates comprehensive documentation.",
       features: ["Code Context AI", "IDE Integration", "Multi-language"],
       stats: { users: "8K+", time: "< 3min", rating: "4.7" },
-      status: "Beta"
+      status: "Beta",
+      coverImage: "/documentation-ai-project.svg"
     },
     {
       id: "ai-code-viewer",
@@ -52,7 +56,8 @@ const ProjectsSection = () => {
       description: "Revolutionary AI-powered code editor with real-time compilation and intelligent enhancement.",
       features: ["AI Code Enhancement", "Real-time Compilation", "Advanced Code Editor"],
       stats: { users: "12K+", time: "< 1min", rating: "4.8" },
-      status: "Live"
+      status: "Live",
+      coverImage: "/ai-code-viewer-project.svg"
     }
   ], []);
 
@@ -101,35 +106,42 @@ const ProjectsSection = () => {
             {projects.map((project, index) => (
               <Card
                 key={project.id}
-                className="border border-border p-4 hover:bg-muted/30 transition-fast will-change-transform"
+                className="border border-border overflow-hidden hover:bg-muted/30 transition-fast will-change-transform"
               >
-                <CardHeader className="p-3">
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex items-center gap-3">
-                      <div className="w-6 h-6 bg-foreground rounded flex items-center justify-center flex-shrink-0">
-                        <project.icon className="w-3 h-3 text-background" />
-                      </div>
-                      <div>
-                        <Badge
-                          variant="secondary"
-                          className="text-xs px-1.5 py-0.5 mb-1"
-                        >
-                          {project.status}
-                        </Badge>
-                      </div>
-                    </div>
+                {/* Cover Image */}
+                <div className="h-24 sm:h-28 lg:h-32 bg-gradient-to-br from-muted to-muted/50 flex items-center justify-center relative overflow-hidden">
+                  <img
+                    src={project.coverImage}
+                    alt={project.title}
+                    className="w-full h-full object-cover object-center opacity-90 hover:opacity-100 transition-opacity duration-300"
+                    style={{
+                      maxWidth: '100%',
+                      maxHeight: '100%',
+                      objectFit: 'cover',
+                      objectPosition: 'center'
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/20 via-transparent to-transparent" />
+                  <div className="absolute top-2 left-2 w-6 h-6 bg-foreground/90 backdrop-blur-sm rounded-lg flex items-center justify-center shadow-sm">
+                    <project.icon className="w-3 h-3 text-background" />
                   </div>
-                  
+                  <Badge
+                    variant="secondary"
+                    className="absolute top-2 right-2 text-xs px-2 py-1 bg-background/80 backdrop-blur-sm shadow-sm"
+                  >
+                    {project.status}
+                  </Badge>
+                </div>
+
+                <CardContent className="p-3">
                   <CardTitle className="text-sm font-semibold text-foreground mb-2 leading-tight">
                     {project.title}
                   </CardTitle>
                   
-                  <p className="text-xs text-muted-foreground leading-relaxed">
+                  <p className="text-xs text-muted-foreground leading-relaxed mb-3 line-clamp-2">
                     {project.description}
                   </p>
-                </CardHeader>
 
-                <CardContent className="p-3 pt-0">
                   {/* Compact Features */}
                   <div className="flex flex-wrap gap-1 mb-3">
                     {project.features.map((feature) => (

@@ -4,7 +4,7 @@ import HeroSection from "@/components/HeroSection";
 import AIEditorHighlight from "@/components/AIEditorHighlight";
 import DualCodeSection from "@/components/DualCodeSection";
 import AboutSection from "@/components/AboutSection";
-import ProjectsSection from "@/components/ProjectsSection";
+import ProjectShowcase from "@/components/ProjectShowcase";
 import SocialSection from "@/components/SocialSection";
 import Footer from "@/components/Footer";
 import { useEffect } from "react";
@@ -97,7 +97,7 @@ const Index = () => {
           enhancedCode={sampleEnhancedCode}
         />
         <AboutSection />
-        <ProjectsSection />
+        <ProjectShowcase />
         <SocialSection />
       </main>
       <Footer />

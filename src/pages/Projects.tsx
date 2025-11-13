@@ -13,6 +13,7 @@ const Projects = () => {
       description: "Revolutionary API testing suite with intelligent test generation, automated regression testing, and real-time performance monitoring. Supports REST, GraphQL, and WebSocket APIs with zero-config setup.",
       features: ["AI Test Generation", "Performance Analytics", "CI/CD Integration"],
       gradient: "from-blue-500 to-cyan-500",
+      coverImage: "/api-testing-project.svg",
     },
     {
       id: "website-builder",
@@ -21,6 +22,7 @@ const Projects = () => {
       description: "Enterprise-grade website builder powered by GPT-4. Generate responsive, SEO-optimized websites from simple prompts. Includes e-commerce, analytics, and custom domain support.",
       features: ["GPT-4 Generation", "SEO Optimization", "E-commerce Ready"],
       gradient: "from-purple-500 to-pink-500",
+      coverImage: "/website-builder-project.svg",
     },
     {
       id: "file-management",
@@ -29,6 +31,7 @@ const Projects = () => {
       description: "Scalable file storage with global CDN, automatic image optimization, and team collaboration features. SOC2 compliant with advanced encryption and access controls.",
       features: ["Global CDN", "Auto Optimization", "Enterprise Security"],
       gradient: "from-green-500 to-emerald-500",
+      coverImage: "/file-management-project.svg",
     },
     {
       id: "documentation-ai",
@@ -37,6 +40,7 @@ const Projects = () => {
       description: "Advanced AI that understands code context and generates comprehensive documentation, API specs, and technical summaries. Integrates with GitHub, GitLab, and popular IDEs.",
       features: ["Code Context AI", "IDE Integration", "Multi-language Support"],
       gradient: "from-orange-500 to-red-500",
+      coverImage: "/documentation-ai-project.svg",
     },
     {
       id: "ai-code-viewer",
@@ -45,6 +49,7 @@ const Projects = () => {
       description: "Revolutionary AI-powered code editor with real-time compilation, intelligent code enhancement, and advanced debugging capabilities. Perfect for front-end developers who want to create, test, and optimize their web applications instantly.",
       features: ["AI Code Enhancement", "Real-time Compilation", "Advanced Code Editor"],
       gradient: "from-indigo-500 to-purple-500",
+      coverImage: "/ai-code-viewer-project.svg",
     },
   ];
 
@@ -98,25 +103,37 @@ const Projects = () => {
                 {projects.map((project, index) => (
                   <div
                     key={project.id}
-                    className="border border-border rounded-lg p-4 hover:bg-muted/30 transition-colors duration-200"
+                    className="border border-border rounded-lg overflow-hidden hover:bg-muted/30 transition-colors duration-200"
                   >
-                    {/* Project Icon */}
-                    <div className="relative mb-3">
-                      <div className="w-8 h-8 bg-foreground rounded flex items-center justify-center mb-2">
-                        <project.icon className="w-4 h-4 text-background" />
+                    {/* Cover Image */}
+                    <div className="h-28 sm:h-32 lg:h-36 bg-gradient-to-br from-muted to-muted/50 flex items-center justify-center relative overflow-hidden">
+                      <img
+                        src={project.coverImage}
+                        alt={project.title}
+                        className="w-full h-full object-cover object-center opacity-90 hover:opacity-100 transition-opacity duration-300"
+                        style={{
+                          maxWidth: '100%',
+                          maxHeight: '100%',
+                          objectFit: 'cover',
+                          objectPosition: 'center'
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/20 via-transparent to-transparent" />
+                      <div className="absolute top-2 left-2 w-6 h-6 bg-foreground/90 backdrop-blur-sm rounded-lg flex items-center justify-center shadow-sm">
+                        <project.icon className="w-3 h-3 text-background" />
                       </div>
-                      <div className="absolute -top-1 -right-1 w-4 h-4 bg-foreground text-background text-xs rounded-full flex items-center justify-center font-medium">
+                      <div className="absolute top-2 right-2 w-6 h-6 bg-foreground text-background text-xs rounded-full flex items-center justify-center font-medium shadow-sm">
                         {index + 1}
                       </div>
                     </div>
 
                     {/* Project Content */}
-                    <div className="space-y-2">
-                      <h3 className="text-sm font-medium text-foreground">
+                    <div className="p-4 space-y-3">
+                      <h3 className="text-sm font-medium text-foreground leading-tight">
                         {project.title}
                       </h3>
                       
-                      <p className="text-xs text-muted-foreground leading-relaxed">
+                      <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
                         {project.description}
                       </p>
 
