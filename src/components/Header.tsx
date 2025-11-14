@@ -29,7 +29,7 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Animated Code Icon Logo - Touch optimized */}
           <div className="flex-shrink-0">
@@ -38,14 +38,14 @@ const Header = () => {
               className="group logo-container transition-all duration-300 hover:scale-105 touch-target touch-manipulation inline-flex"
               aria-label="Lade Stack Home"
             >
-              <div className="flex items-center gap-2">
-                <div className="relative w-6 h-6 bg-foreground rounded-md flex items-center justify-center overflow-hidden group-hover:shadow-lg group-hover:shadow-foreground/25 group-hover:rotate-180 transition-all duration-300">
-                  <div className="text-background text-xs font-mono font-bold">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <div className="relative w-5 h-5 sm:w-6 sm:h-6 bg-foreground rounded-md flex items-center justify-center overflow-hidden group-hover:shadow-lg group-hover:shadow-foreground/25 group-hover:rotate-180 transition-all duration-300">
+                  <div className="text-background text-[8px] sm:text-xs font-mono font-bold">
                     {"</>"}
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
-                <h1 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
+                <h1 className="text-xs sm:text-sm font-semibold text-foreground group-hover:text-primary transition-colors duration-300 truncate">
                   Lade Stack
                 </h1>
               </div>
@@ -79,15 +79,15 @@ const Header = () => {
             </Button>
           </div>
 
-          {/* Mobile Actions */}
-          <div className="flex md:hidden items-center space-x-2">
+          {/* Mobile Actions - Optimized for small screens */}
+          <div className="flex md:hidden items-center space-x-1 sm:space-x-1.5">
             <ThemeToggle />
             <BentoMenu />
             <Button
               variant="ghost"
               size="icon"
               onClick={toggleMenu}
-              className="relative transition-fast hover:bg-muted/50 touch-target touch-manipulation"
+              className="relative transition-fast hover:bg-muted/50 touch-target touch-manipulation h-9 w-9"
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMenuOpen}
             >

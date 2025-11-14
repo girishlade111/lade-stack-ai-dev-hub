@@ -283,9 +283,9 @@ const BentoMenu = () => {
     const baseClasses = "relative group flex flex-col items-center justify-center rounded-lg border border-border bg-background/80 backdrop-blur-sm hover:bg-muted/50 transition-all duration-200 hover:shadow-md hover:scale-105 touch-target touch-manipulation";
     
     const sizeClasses = {
-      small: "aspect-square h-16 p-2",
-      medium: "aspect-square h-20 p-3",
-      large: "aspect-square h-24 p-4"
+      small: "aspect-square h-14 sm:h-16 p-2",
+      medium: "aspect-square h-16 sm:h-20 p-2 sm:p-3",
+      large: "aspect-square h-18 sm:h-24 p-3 sm:p-4"
     };
 
     const colorClasses = {
@@ -335,8 +335,9 @@ const BentoMenu = () => {
           />
           
           {/* Menu */}
-          <div className="absolute right-0 top-12 z-50 w-80 sm:w-96 p-4 bg-background/95 backdrop-blur-md border border-border rounded-lg shadow-xl">
-            <div className="grid grid-cols-3 gap-4">
+          <div className="absolute right-0 top-12 z-50 w-[280px] sm:w-80 md:w-96 p-3 sm:p-4 bg-background/95 backdrop-blur-md border border-border rounded-lg shadow-xl">
+            {/* Mobile-first responsive grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-4">
               {menuItems.map((item, index) => {
                 const IconComponent = item.icon;
                 
@@ -351,7 +352,7 @@ const BentoMenu = () => {
                     >
                       <div className="flex items-center justify-center h-full">
                         <IconComponent
-                          size={item.size === "large" ? 24 : item.size === "medium" ? 20 : 16}
+                          size={item.size === "large" ? 20 : item.size === "medium" ? 18 : 16}
                           className={cn("text-current", getIconClasses(item))}
                         />
                       </div>
@@ -368,7 +369,7 @@ const BentoMenu = () => {
                   >
                     <div className="flex items-center justify-center h-full">
                       <IconComponent
-                        size={item.size === "large" ? 24 : item.size === "medium" ? 20 : 16}
+                        size={item.size === "large" ? 20 : item.size === "medium" ? 18 : 16}
                         className={cn("text-current", getIconClasses(item))}
                       />
                     </div>
