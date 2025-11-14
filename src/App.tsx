@@ -27,13 +27,13 @@ const AICodeViewerAI = lazy(() => import("./pages/AICodeViewerAI"));
 // Lade Stack Brand Loader Component
 const LadeStackBrandLoader = () => {
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#0a0a0a]">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background">
       <div className="flex flex-col items-center space-y-8">
         {/* Main Brand Animation */}
         <div className="relative">
           {/* Animated Brand Text */}
           <div className="text-center">
-            <div className="text-4xl md:text-5xl font-bold text-white tracking-wider mb-2">
+            <div className="text-4xl md:text-5xl font-bold text-foreground tracking-wider mb-2">
               <span className="inline-block animate-fade-in-up" style={{ animationDelay: '0.2s' }}>LADE</span>
               <span className="inline-block animate-fade-in-up mx-3" style={{ animationDelay: '0.4s' }}>•</span>
               <span className="inline-block animate-fade-in-up" style={{ animationDelay: '0.6s' }}>STACK</span>
@@ -41,26 +41,26 @@ const LadeStackBrandLoader = () => {
             
             {/* Animated underline */}
             <div className="relative h-0.5 w-64 mx-auto overflow-hidden">
-              <div className="absolute inset-0 bg-white transform -translate-x-full animate-slide-in-right"></div>
-              <div className="absolute inset-0 bg-white animate-slide-out-left" style={{ animationDelay: '2s' }}></div>
+              <div className="absolute inset-0 bg-foreground transform -translate-x-full animate-slide-in-right"></div>
+              <div className="absolute inset-0 bg-foreground animate-slide-out-left" style={{ animationDelay: '2s' }}></div>
             </div>
           </div>
           
           {/* Subtle geometric element */}
-          <div className="absolute -top-8 -right-8 w-16 h-16 border-2 border-white/30 animate-spin-slow">
-            <div className="w-full h-full border border-white/20 animate-pulse"></div>
+          <div className="absolute -top-8 -right-8 w-16 h-16 border-2 border-foreground/30 animate-spin-slow">
+            <div className="w-full h-full border border-foreground/20 animate-pulse"></div>
           </div>
         </div>
         
         {/* Loading text */}
         <div className="text-center">
-          <p className="text-white/70 text-sm font-medium animate-pulse">Initializing Lade Stack...</p>
+          <p className="text-muted-foreground text-sm font-medium animate-pulse">Initializing Lade Stack...</p>
           
           {/* Progress dots */}
           <div className="flex justify-center space-x-2 mt-3">
-            <div className="w-2 h-2 bg-white/50 rounded-full animate-bounce" style={{ animationDelay: '0s' }}></div>
-            <div className="w-2 h-2 bg-white/50 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-            <div className="w-2 h-2 bg-white/50 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+            <div className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: '0s' }}></div>
+            <div className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+            <div className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
           </div>
         </div>
       </div>
