@@ -70,13 +70,15 @@ const Header = () => {
           <div className="hidden md:flex items-center space-x-2">
             <ThemeToggle />
             <BentoMenu />
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-xs hover:bg-muted/50 transition-fast"
-            >
-              Get started
-            </Button>
+            <Link to="/apps">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-xs hover:bg-muted/50 transition-fast"
+              >
+                Get started
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Actions - Optimized for small screens */}
@@ -117,14 +119,15 @@ const Header = () => {
             </nav>
             
             <div className="pt-4 mt-4 border-t border-border">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="w-full text-xs hover:bg-muted/50 transition-fast touch-target touch-manipulation"
-                onClick={handleNavClick}
-              >
-                Get started
-              </Button>
+              <Link to="/apps" onClick={handleNavClick}>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="w-full text-xs hover:bg-muted/50 transition-fast touch-target touch-manipulation"
+                >
+                  Get started
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

@@ -307,23 +307,11 @@ const ProjectDetail = () => {
 
               {/* CTA Button */}
               <div className="flex justify-center mb-8">
-                <Button size="lg" className="text-lg px-8 py-6" asChild={project.id === "ai-code-viewer" || project.id === "file-management"}>
-                  {project.id === "ai-code-viewer" ? (
-                    <Link to="/ai-code-viewer-ai">
-                      Start Free Trial
-                      <ExternalLink className="w-4 h-4 ml-2" />
-                    </Link>
-                  ) : project.id === "file-management" ? (
-                    <Link to="/file-sharing-platform">
-                      Start Free Trial
-                      <ExternalLink className="w-4 h-4 ml-2" />
-                    </Link>
-                  ) : (
-                    <>
-                      Start Free Trial
-                      <ExternalLink className="w-4 h-4 ml-2" />
-                    </>
-                  )}
+                <Button size="lg" className="text-lg px-8 py-6" asChild={true}>
+                  <Link to={project.id === "ai-code-viewer" ? "/ai-code-viewer-ai" : project.id === "file-management" ? "/file-sharing-platform" : "#"}>
+                    Start Free Trial
+                    <ExternalLink className="w-4 h-4 ml-2" />
+                  </Link>
                 </Button>
               </div>
             </div>
@@ -449,29 +437,13 @@ const ProjectDetail = () => {
                     <span>24/7 AI support and updates</span>
                   </div>
                 </div>
-                <Button size="lg" className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-lg" asChild={project.id === "ai-code-viewer" || project.id === "file-management"}>
-                  {project.id === "ai-code-viewer" ? (
-                    <Link to="/ai-code-viewer-ai">
-                      Start Using AI Tool Now
-                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                      </svg>
-                    </Link>
-                  ) : project.id === "file-management" ? (
-                    <Link to="/file-sharing-platform">
-                      Start Using LadeShare Now
-                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                      </svg>
-                    </Link>
-                  ) : (
-                    <>
-                      Start Using AI Tool Now
-                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                      </svg>
-                    </>
-                  )}
+                <Button size="lg" className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-lg" asChild={true}>
+                  <Link to={project.id === "ai-code-viewer" ? "/ai-code-viewer-ai" : project.id === "file-management" ? "/file-sharing-platform" : "#"}>
+                    Start Using AI Tool Now
+                    <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </Link>
                 </Button>
                 <p className="text-xs text-muted-foreground mt-3">
                   💡 AI-enhanced development tools • Forever free • No credit card required
