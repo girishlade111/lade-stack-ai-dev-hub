@@ -40,6 +40,8 @@
 - [🤝 Contributing Guidelines](#-contributing-guidelines)
 - [📄 License & Legal](#-license--legal)
 - [👨‍💻 Author & Contact](#-author--contact)
+- [📞 Support & Community](#-support--community)
+
 ---
 
 ## 📊 Detailed Project Statistics & Performance Metrics
@@ -95,8 +97,7 @@
 ├── Production Dependencies: 45 packages
 ├── Development Dependencies: 15 packages
 ├── UI Component Library: 30+ Radix UI primitives
-├── Total Dependencies: 60 packages
-└── Bundle Analyzer Score: 95/100
+└── Total Dependencies: 60 packages
 
 📊 Code Quality Metrics:
 ├── TypeScript Coverage: 100%
@@ -218,12 +219,9 @@
 | First Load Time | 1.2s | 3.8s | **68% faster** |
 | Bundle Size | 850KB | 2.5MB | **66% smaller** |
 | Build Time | 3s | 45s | **93% faster** |
-| Accessibility Score | 100/100 | 78/100 | **28% better** |
+| Accessibility Score | 10/100 | 78/100 | **28% better** |
 | Mobile Performance | 94/100 | 65/100 | **45% better** |
-| TypeScript Coverage | 100% | 45% | **122% better** |
-
----
-- [📞 Support & Community](#-support--community)
+| TypeScript Coverage | 10% | 45% | **122% better** |
 
 ---
 
@@ -277,7 +275,7 @@ REDIS_URL=redis://localhost:6379/0
 REDIS_PASSWORD=dev_redis_password
 REDIS_DB=0
 SESSION_SECRET=dev_session_secret_key_for_express
-SESSION_MAX_AGE=86400000
+SESSION_MAX_AGE=8640000
 CACHE_TTL=300
 CACHE_MAX_SIZE=1000
 CACHE_CLEANUP_INTERVAL=3600
@@ -452,7 +450,7 @@ export default defineConfig(({ mode }) => ({
   },
 
   // Plugins configuration
-  plugins: [
+ plugins: [
     react(),
     mode === "development" && componentTagger(),
   ].filter(Boolean),
@@ -624,7 +622,7 @@ export default defineConfig(({ mode }) => ({
   // Worker configuration
   worker: {
     format: 'es',
-  },
+ },
   
   // JSON configuration
   json: {
@@ -753,7 +751,7 @@ export default defineConfig(({ mode }) => ({
     "tailwind.config.ts",
     "postcss.config.js",
     "components.json"
-  ],
+ ],
   "exclude": [
     "node_modules",
     "dist",
@@ -867,7 +865,7 @@ const config: Config = {
         500: '#3b82f6',
         600: '#2563eb',
         700: '#1d4ed8',
-        800: '#1e40af',
+        80: '#1e40af',
         900: '#1e3a8a',
         950: '#172554',
       },
@@ -880,7 +878,7 @@ const config: Config = {
         300: '#cbd5e1',
         400: '#94a3b8',
         500: '#64748b',
-        600: '#475569',
+        600: '#47569',
         700: '#334155',
         800: '#1e293b',
         900: '#0f172a',
@@ -915,7 +913,7 @@ const config: Config = {
         500: '#22c55e',
         600: '#16a34a',
         700: '#15803d',
-        800: '#166534',
+        80: '#16534',
         900: '#14532d',
         950: '#052e16',
       },
@@ -938,10 +936,10 @@ const config: Config = {
         200: '#fecaca',
         300: '#fca5a5',
         400: '#f87171',
-        500: '#ef4444',
+        500: '#ef444',
         600: '#dc2626',
-        700: '#b91c1c',
-        800: '#991b1b',
+        70: '#b91c1c',
+        800: '#91b1b',
         900: '#7f1d1d',
         950: '#450a0a',
       },
@@ -1075,7 +1073,7 @@ const config: Config = {
         '50%': { transform: 'translateY(-10px)' },
       },
       glow: {
-        '0%': { boxShadow: '0 0 5px theme(colors.primary.500)' },
+        '0%': { boxShadow: '0 5px theme(colors.primary.50)' },
         '100%': { boxShadow: '0 0 20px theme(colors.primary.500)' },
       },
     },
@@ -1089,7 +1087,7 @@ const config: Config = {
     boxShadow: {
       'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
       'glass-inset': 'inset 0 2px 4px 0 rgba(255, 255, 255, 0.1)',
-      'inner-glass': 'inset 0 1px 0 0 rgba(255, 255, 255, 0.1)',
+      'inner-glass': 'inset 0 1px 0 0 rgba(25, 255, 255, 0.1)',
     },
     
     // Screen reader utilities
@@ -1108,7 +1106,7 @@ const config: Config = {
     function({ addUtilities, theme }) {
       const newUtilities = {
         '.text-gradient': {
-          background: 'linear-gradient(90deg, theme(colors.primary.600), theme(colors.secondary.600))',
+          background: 'linear-gradient(90deg, theme(colors.primary.60), theme(colors.secondary.600))',
           '-webkit-background-clip': 'text',
           '-webkit-text-fill-color': 'transparent',
           'background-clip': 'text',
@@ -1229,7 +1227,7 @@ export default config;
 #### **♿ Comprehensive Accessibility**
 **Inclusive Design Standards:**
 - **✅ WCAG 2.1 AA Compliance**: Full accessibility support for users with disabilities
-- **⌨️ Complete Keyboard Navigation**: 100% keyboard accessibility with logical tab order
+- **⌨️ Complete Keyboard Navigation**: 10% keyboard accessibility with logical tab order
 - **🔊 Screen Reader Optimization**: Enhanced compatibility with NVDA, JAWS, and VoiceOver
 - **🔆 High Contrast Modes**: Multiple contrast options for users with visual impairments
 - **🎯 Focus Management**: Clear focus indicators and logical focus flow throughout the application
@@ -1316,7 +1314,7 @@ export default config;
 
 **Minimum Requirements:**
 - **🟢 Node.js**: `>=18.0.0` (LTS recommended)
-- **📦 Package Manager**: `npm >=8.0.0` | `yarn >=1.22.0` | `pnpm >=7.0.0`
+- **📦 Package Manager**: `npm >=8.0.0` | `yarn >=1.2.0` | `pnpm >=7.0.0`
 - **🔧 Git**: Latest version for version control
 - **💻 Operating System**: Windows 10+, macOS 12+, or Linux (Ubuntu 20.04+)
 
@@ -1475,7 +1473,7 @@ npm run dev -- --base /my-app
 npm run dev -- --debug
 
 # Silent mode (less verbose)
-npm run dev -- --silent
+npm run dev --silent
 ```
 
 **🎉 Success Indicators:**
@@ -1647,7 +1645,7 @@ npm run build:analyze
 **📊 Advanced Build Options:**
 ```bash
 # Build with custom output directory
-npm run build -- --outDir=dist-custom
+npm run build --outDir=dist-custom
 
 # Build without source maps (faster)
 npm run build -- --sourcemap=false
@@ -1849,45 +1847,120 @@ lade-stack-ai-dev-hub/
 ### **Design System Components**
 
 #### **UI Foundation (`src/components/ui/`)**
-- **Button Variants**: `default`, `outline`, `ghost`, `hero`, `success`
-- **Card System**: Enhanced with glass morphism and shadows
-- **Form Components**: Input, Select, Textarea with validation
-- **Navigation**: Tabs, Breadcrumb, Pagination
-- **Feedback**: Toast, Alert, Progress, Badge
-- **Data Display**: Table, Avatar, Calendar, Chart
+
+**Button Variants:**
+- `default`: Standard button styling
+- `outline`: Bordered button variant
+- `ghost`: Transparent button with hover effect
+- `hero`: Prominent call-to-action button
+- `success`: Green success state button
+
+**Card System:**
+- Enhanced with glass morphism effects
+- Customizable shadows and borders
+- Responsive design with auto-scaling
+
+**Form Components:**
+- Input: Text, email, password fields with validation
+- Select: Dropdown with searchable options
+- Textarea: Multi-line text input with character count
+- All components include accessibility attributes
+
+**Navigation Components:**
+- Tabs: Interactive tab navigation with smooth transitions
+- Breadcrumb: Hierarchical navigation path
+- Pagination: Page navigation with current page indicator
+
+**Feedback Components:**
+- Toast: Temporary notification messages
+- Alert: Important information display
+- Progress: Visual progress indicator
+- Badge: Status or count indicators
 
 #### **Layout Components**
-- **Header (`Header.tsx`)**: Glass morphism navigation with responsive menu
-- **Hero Section (`HeroSection.tsx`)**: Full-screen hero with animated backgrounds
-- **Footer (`Footer.tsx`)**: Multi-column footer with social links
-- **Sidebar (`components/ui/sidebar.tsx`)**: Collapsible navigation sidebar
+
+**Header (`Header.tsx`):**
+- Glass morphism navigation with transparent background
+- Responsive menu for mobile devices
+- Theme toggle functionality
+- Search functionality integration
+
+**Hero Section (`HeroSection.tsx`):**
+- Full-screen hero with animated background
+- Call-to-action buttons with multiple variants
+- Responsive text and image positioning
+- Micro-animations for enhanced user experience
+
+**Footer (`Footer.tsx`):**
+- Multi-column layout with links and information
+- Social media integration
+- Copyright and legal information
+- Back-to-top functionality
+
+**Sidebar (`components/ui/sidebar.tsx`):**
+- Collapsible navigation sidebar
+- Customizable width and positioning
+- Active state highlighting
+- Responsive behavior for mobile
 
 #### **Feature Components**
-- **Code Editor (`AIEditorHighlight.tsx`)**: Interactive code demonstration
-- **Code Comparison (`DualCodeSection.tsx`)**: Side-by-side code transformation
-- **Projects Showcase (`ProjectsSection.tsx`)**: Portfolio display
-- **Social Integration (`SocialSection.tsx`)**: Social media links and testimonials
+
+**Code Editor (`AIEditorHighlight.tsx`):**
+- Syntax highlighting for multiple languages
+- Line numbers and code folding
+- AI-powered suggestions and auto-completion
+- Real-time error detection and highlighting
+
+**Code Comparison (`DualCodeSection.tsx`):**
+- Side-by-side code transformation view
+- Interactive diff highlighting
+- Copy functionality for both versions
+- Toggle between different code examples
+
+**Projects Showcase (`ProjectsSection.tsx`):**
+- Responsive grid layout for project cards
+- Image lightbox functionality
+- Project filtering and search
+- Detailed project information display
+
+**Social Integration (`SocialSection.tsx`):**
+- Social media icon integration
+- Share functionality for content
+- Follow buttons with counts
+- Testimonial carousel
 
 ### **Component Patterns**
 
 #### **1. Compound Components**
+
+Compound components allow for flexible composition with shared state between parent and child components:
+
 ```typescript
 // Example: Card with multiple sub-components
 <Card>
   <CardHeader>
     <CardTitle>Title</CardTitle>
     <CardDescription>Description</CardDescription>
-  </CardHeader>
+ </CardHeader>
   <CardContent>
     Content goes here
   </CardContent>
-  <CardFooter>
+ <CardFooter>
     <Button>Action</Button>
   </CardFooter>
 </Card>
 ```
 
+Benefits:
+- **Consistent Styling**: Shared styling between related components
+- **Shared State**: Automatic state management between parent and children
+- **Type Safety**: TypeScript support for proper prop passing
+- **Accessibility**: Built-in accessibility attributes
+
 #### **2. Render Props Pattern**
+
+The render props pattern provides flexible rendering capabilities:
+
 ```typescript
 // Example: DualCodeSection with flexible content
 <DualCodeSection
@@ -1899,7 +1972,16 @@ lade-stack-ai-dev-hub/
 />
 ```
 
+Benefits:
+- **Flexibility**: Custom rendering based on component state
+- **Reusability**: Single component can render different content
+- **Encapsulation**: Component logic is contained within the component
+- **Customization**: Easy to customize without forking the component
+
 #### **3. Custom Hooks**
+
+Custom hooks provide reusable stateful logic across components:
+
 ```typescript
 // Example: Mobile detection hook
 const { isMobile } = useMobile();
@@ -1907,6 +1989,12 @@ const { isMobile } = useMobile();
 // Example: Toast notifications
 const { toast } = useToast();
 ```
+
+Benefits:
+- **Logic Reuse**: Share stateful logic across components
+- **Clean Components**: Keep components focused on rendering
+- **Consistent Behavior**: Same behavior across the application
+- **Easy Testing**: Hooks can be tested independently
 
 ---
 
@@ -1920,7 +2008,7 @@ const { toast } = useToast();
 npm run dev                    # Start development server (default port 5173)
 npm run dev -- --host          # Enable network access (for mobile testing)
 npm run dev -- --open          # Auto-open browser on start
-npm run dev -- --port 3000     # Custom port configuration
+npm run dev --port 3000     # Custom port configuration
 
 # Build & Production
 npm run build                  # Create optimized production build
@@ -1947,7 +2035,7 @@ npm run test:coverage        # Generate coverage reports
 npm run build -- --mode staging     # Staging environment build
 npm run build -- --outDir dist-custom  # Custom output directory
 npm run build -- --sourcemap=false    # Disable source maps for smaller bundle
-npm run build -- --minify            # Force minification
+npm run build --minify            # Force minification
 npm run build -- --logLevel info     # Verbose build logging
 ```
 
@@ -2116,7 +2204,7 @@ export const CustomComponent: React.FC<CustomComponentProps> = ({
 
 // Export commonly used variants
 export const PrimaryButton: React.FC<Omit<CustomComponentProps, 'variant'>> = (props) => (
-  <CustomComponent {...props} variant="primary" />
+ <CustomComponent {...props} variant="primary" />
 );
 
 export const SecondaryButton: React.FC<Omit<CustomComponentProps, 'variant'>> = (props) => (
@@ -2127,6 +2215,9 @@ export const SecondaryButton: React.FC<Omit<CustomComponentProps, 'variant'>> = 
 ### **🏗️ State Management Patterns**
 
 #### **1. Local Component State**
+
+For simple component-level state management, React's built-in hooks are used:
+
 ```typescript
 // Simple state with useState
 const [isLoading, setIsLoading] = useState(false);
@@ -2165,7 +2256,15 @@ const reducer = (state: State, action: Action): State => {
 const [state, dispatch] = useReducer(reducer, initialState);
 ```
 
+Benefits:
+- **Simplicity**: Easy to implement and understand
+- **Performance**: Optimized for component-level state
+- **Flexibility**: Can handle both simple and complex state
+
 #### **2. Global State with Context**
+
+For application-wide state management, React Context is used:
+
 ```typescript
 // Theme context implementation
 interface ThemeContextType {
@@ -2194,7 +2293,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const value = useMemo(() => ({ theme, setTheme }), [theme]);
+ const value = useMemo(() => ({ theme, setTheme }), [theme]);
 
   return (
     <ThemeContext.Provider value={value}>
@@ -2204,12 +2303,20 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 };
 ```
 
+Benefits:
+- **Global Access**: State available throughout the component tree
+- **Persistence**: State can be persisted across sessions
+- **Performance**: Memoized values prevent unnecessary re-renders
+
 #### **3. Server State with TanStack Query**
+
+For server state management and caching, TanStack Query (formerly React Query) is used:
+
 ```typescript
 // API query implementation
 interface User {
   id: string;
-  name: string;
+ name: string;
   email: string;
   avatar?: string;
 }
@@ -2245,6 +2352,12 @@ export const useUpdateUser = () => {
 };
 ```
 
+Benefits:
+- **Caching**: Automatic caching with configurable TTL
+- **Refetching**: Smart refetching strategies
+- **Optimistic Updates**: Improved user experience
+- **Error Handling**: Built-in error handling and retry logic
+
 ---
 
 ## 🚀 Deployment & Production Setup
@@ -2252,6 +2365,8 @@ export const useUpdateUser = () => {
 ### **☁️ Deployment Platforms**
 
 #### **1. Vercel (Recommended)**
+
+Vercel is the recommended deployment platform for Lade Stack applications due to its excellent integration with the modern JavaScript ecosystem and built-in performance optimizations.
 
 **Automated Deployment Process:**
 ```bash
@@ -2308,7 +2423,7 @@ vercel --prod --token $VERCEL_TOKEN
       "source": "/((?!api).*)",
       "destination": "/index.html"
     }
-  ],
+ ],
   "redirects": [
     {
       "source": "/blog/:slug*",
@@ -2325,6 +2440,8 @@ vercel --prod --token $VERCEL_TOKEN
 - **Development**: Use `.env.local` for local development
 
 #### **2. Netlify Deployment**
+
+Netlify provides excellent static site hosting with powerful build and deployment features.
 
 **Netlify CLI Deployment:**
 ```bash
@@ -2358,7 +2475,7 @@ netlify deploy --prod --dir=dist --site $SITE_ID --auth $NETLIFY_TOKEN
 
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/:splat"
+ to = "/.netlify/functions/:splat"
   status = 200
 
 [[redirects]]
@@ -2368,6 +2485,8 @@ netlify deploy --prod --dir=dist --site $SITE_ID --auth $NETLIFY_TOKEN
 ```
 
 #### **3. Docker Containerization**
+
+For maximum portability and consistent deployment, Docker containers are supported.
 
 **Production-Ready Dockerfile:**
 ```dockerfile
@@ -2400,7 +2519,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Add non-root user for security
-RUN addgroup -g 1001 -S nodejs
+RUN addgroup -g 101 -S nodejs
 RUN adduser -S lade -u 1001
 
 # Change ownership of nginx directories
@@ -2579,6 +2698,8 @@ networks:
 
 ### **🌐 CDN & Performance Optimization**
 
+For global content delivery and performance optimization, CDN configuration is crucial.
+
 #### **CloudFlare Configuration**
 ```javascript
 // CloudFlare Workers for custom caching
@@ -2590,7 +2711,7 @@ async function handleRequest(request) {
   const url = new URL(request.url);
   
   // API routes - no cache
-  if (url.pathname.startsWith('/api/')) {
+ if (url.pathname.startsWith('/api/')) {
     return fetch(request);
   }
   
@@ -2605,7 +2726,7 @@ async function handleRequest(request) {
     
     const response = await fetch(request);
     const cacheResponse = new Response(response.body, response);
-    cacheResponse.headers.set('Cache-Control', 'public, max-age=31536000, immutable');
+    cacheResponse.headers.set('Cache-Control', 'public, max-age=3153600, immutable');
     
     const cache = await caches.open('static-assets');
     await cache.put(cacheKey, cacheResponse.clone());
@@ -2615,7 +2736,7 @@ async function handleRequest(request) {
   
   // HTML pages - cache for 1 hour
   const cacheKey = new Request(url.toString(), request);
-  const cachedResponse = await caches.match(cacheKey);
+ const cachedResponse = await caches.match(cacheKey);
   
   if (cachedResponse) {
     return cachedResponse;
@@ -2626,7 +2747,7 @@ async function handleRequest(request) {
   cacheResponse.headers.set('Cache-Control', 'public, max-age=3600');
   
   const cache = await caches.open('html-pages');
-  await cache.put(cacheKey, cacheResponse.clone());
+ await cache.put(cacheKey, cacheResponse.clone());
   
   return cacheResponse;
 }
@@ -2639,6 +2760,8 @@ async function handleRequest(request) {
 ### **⚙️ Complete Configuration Management**
 
 #### **1. Environment Variables Configuration**
+
+Environment variables are used to manage configuration across different environments (development, staging, production).
 
 **Development Environment (.env.local):**
 ```env
@@ -2788,7 +2911,7 @@ export default defineConfig({
   preview: {
     port: 4173,
     host: true,
-  },
+ },
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom'],
   },
@@ -2969,7 +3092,7 @@ export default [
 - **💻 AI Code Editor**: [https://code.ladestack.in](https://code.ladestack.in)
   - Interactive code editing with AI assistance
   - Real-time error detection and suggestions
-  - Multi-language support and syntax highlighting
+ - Multi-language support and syntax highlighting
 
 - **🧪 API Testing Platform**: [https://api.ladestack.in](https://api.ladestack.in)
   - Comprehensive API testing and debugging
@@ -3036,7 +3159,7 @@ export default [
 #### **Community & Support**
 - **💬 Developer Discord**: [https://discord.gg/ladestack](https://discord.gg/ladestack)
   - Real-time chat with developers and support team
-  - Code review and collaboration sessions
+ - Code review and collaboration sessions
   - Weekly community challenges and hackathons
 
 - **🗣️ Community Forum**: [https://community.ladestack.in](https://community.ladestack.in)
@@ -3075,6 +3198,8 @@ export default [
 ### **🎯 Performance Optimization Strategies**
 
 #### **1. Bundle Optimization & Code Splitting**
+
+Code splitting is essential for reducing initial bundle size and improving load times.
 
 **Dynamic Import Implementation:**
 ```typescript
@@ -3156,14 +3281,16 @@ export default defineConfig({
 
 #### **2. Image & Asset Optimization**
 
+Optimizing images and assets is crucial for performance, especially on mobile networks.
+
 **Responsive Image Implementation:**
 ```typescript
 // Next-gen image formats with fallbacks
 interface OptimizedImageProps {
   src: string;
   alt: string;
-  className?: string;
-  loading?: 'lazy' | 'eager';
+ className?: string;
+ loading?: 'lazy' | 'eager';
   priority?: boolean;
 }
 
@@ -3222,6 +3349,8 @@ export const OptimizedBackground: React.FC<{
 ```
 
 #### **3. Performance Monitoring & Analytics**
+
+Continuous performance monitoring helps identify and address performance issues.
 
 **Web Vitals Integration:**
 ```typescript
@@ -3295,6 +3424,8 @@ export const usePerformanceTracking = (componentName: string) => {
 
 #### **4. Caching Strategies**
 
+Effective caching strategies improve performance and reduce server load.
+
 **Service Worker Implementation:**
 ```typescript
 // public/sw.js
@@ -3340,7 +3471,7 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   const { request } = event;
-  const url = new URL(request.url);
+ const url = new URL(request.url);
 
   // Handle API requests
   if (request.method === 'GET' && API_CACHE_PATTERNS.some(pattern => pattern.test(url.pathname))) {
@@ -3359,7 +3490,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Handle static assets
+ // Handle static assets
   if (request.destination === 'script' || 
       request.destination === 'style' || 
       request.destination === 'image') {
@@ -3376,7 +3507,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Handle navigation requests
+ // Handle navigation requests
   if (request.mode === 'navigate') {
     event.respondWith(
       fetch(request).catch(() => {
@@ -3431,268 +3562,6 @@ export const useMemoryEfficientState = <T>(initialValue: T) => {
     hasChanged: state !== initialValue,
   };
 };
-```
-
----
-
-## 🔧 Development
-
-### **Available Scripts**
-
-```bash
-# Development
-npm run dev              # Start development server
-npm run dev:open         # Open browser automatically
-npm run dev:host         # Enable network access
-
-# Building
-npm run build            # Production build
-npm run build:dev        # Development build
-npm run build:analyze    # Build with bundle analyzer
-
-# Code Quality
-npm run lint             # Run ESLint
-npm run lint:fix         # Fix ESLint errors
-npm run type-check       # TypeScript type checking
-
-# Testing
-npm run test             # Run tests
-npm run test:watch       # Watch mode testing
-npm run test:coverage    # Coverage report
-
-# Preview
-npm run preview          # Preview production build
-npm run preview:open     # Preview and open browser
-```
-
-### **Development Workflow**
-
-#### **1. Feature Development**
-```bash
-# Create feature branch
-git checkout -b feature/amazing-new-feature
-
-# Make changes and commit
-git add .
-git commit -m "feat: add amazing new feature"
-
-# Push and create PR
-git push origin feature/amazing-new-feature
-```
-
-#### **2. Code Style Guidelines**
-- **TypeScript**: Strict mode enabled
-- **ESLint**: Follow configured rules
-- **Prettier**: Code formatting (run `npm run format`)
-- **Conventional Commits**: Use semantic commit messages
-
-#### **3. Component Development**
-```typescript
-// Example: New component template
-import { cn } from "@/lib/utils";
-
-interface ComponentProps {
-  className?: string;
-  children: React.ReactNode;
-}
-
-export const Component = ({ 
-  className, 
-  children, 
-  ...props 
-}: ComponentProps) => {
-  return (
-    <div 
-      className={cn("base-styles", className)}
-      {...props}
-    >
-      {children}
-    </div>
-  );
-};
-```
-
-### **State Management**
-
-#### **Local State (useState/useReducer)**
-```typescript
-// Component-local state
-const [isLoading, setIsLoading] = useState(false);
-const [data, setData] = useState<DataType[]>([]);
-
-// Complex state with reducer
-const [state, dispatch] = useReducer(reducer, initialState);
-```
-
-#### **Global State (Context/useContext)**
-```typescript
-// Theme context
-const { theme, setTheme } = useTheme();
-
-// User authentication
-const { user, login, logout } = useAuth();
-```
-
-#### **Server State (React Query)**
-```typescript
-// Data fetching
-const { data, isLoading, error } = useQuery({
-  queryKey: ['projects'],
-  queryFn: fetchProjects,
-  staleTime: 5 * 60 * 1000, // 5 minutes
-});
-```
-
----
-
-## 🚀 Deployment
-
-### **Vercel (Recommended)**
-
-```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy to Vercel
-vercel
-
-# Deploy to production
-vercel --prod
-```
-
-**Environment Variables on Vercel:**
-- Go to Project Settings → Environment Variables
-- Add all required environment variables
-- Redeploy after adding variables
-
-### **Netlify**
-
-```bash
-# Install Netlify CLI
-npm install -g netlify-cli
-
-# Build and deploy
-npm run build
-netlify deploy --prod --dir=dist
-```
-
-### **GitHub Pages**
-
-```bash
-# Install gh-pages
-npm install -g gh-pages
-
-# Deploy to GitHub Pages
-npm run build
-gh-pages -d dist
-```
-
-### **Docker Deployment**
-
-```dockerfile
-# Dockerfile
-FROM node:18-alpine as build
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-RUN npm run build
-
-FROM nginx:alpine
-COPY --from=build /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/nginx.conf
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
-```
-
-```bash
-# Build and run Docker container
-docker build -t lade-stack .
-docker run -p 80:80 lade-stack
-```
-
----
-
-## 🎮 Live Demos
-
-### **Main Platform**
-- **🌐 Live Website**: [https://ladestack.in](https://ladestack.in)
-- **🎨 Design System**: [https://ladestack.in/design](https://ladestack.in/design)
-
-### **AI Tools**
-- **💻 AI Code Editor**: [https://code.ladestack.in](https://code.ladestack.in)
-- **🧪 API Testing**: [https://api.ladestack.in](https://api.ladestack.in)
-- **🏗️ No-Code Builder**: [https://builder.ladestack.in](https://builder.ladestack.in)
-- **📚 Documentation AI**: [https://docs.ladestack.in](https://docs.ladestack.in)
-
-### **Developer Resources**
-- **📖 API Documentation**: [https://docs.ladestack.in/api](https://docs.ladestack.in/api)
-- **🔧 SDKs & Libraries**: [https://github.com/ladestack/sdk](https://github.com/ladestack/sdk)
-- **🎯 Examples**: [https://examples.ladestack.in](https://examples.ladestack.in)
-
----
-
-## 📈 Performance
-
-### **Core Web Vitals**
-- **🚀 First Contentful Paint**: < 1.5s
-- **⚡ Largest Contentful Paint**: < 2.5s
-- **📊 Cumulative Layout Shift**: < 0.1
-- **⏱️ First Input Delay**: < 100ms
-
-### **Optimization Techniques**
-
-#### **1. Code Splitting**
-```typescript
-// Lazy load components
-const About = lazy(() => import('./pages/About'));
-const Contact = lazy(() => import('./pages/Contact'));
-
-// Route-based splitting
-<Route path="/about" element={<About />} />
-```
-
-#### **2. Image Optimization**
-```typescript
-// Responsive images
-<img
-  src={heroImage}
-  alt="Hero"
-  loading="lazy"
-  sizes="(max-width: 768px) 100vw, 50vw"
-/>
-```
-
-#### **3. Bundle Analysis**
-```bash
-# Analyze bundle size
-npm run build:analyze
-
-# Check bundle content
-npx vite-bundle-analyzer dist
-```
-
-### **Performance Monitoring**
-
-```typescript
-// Web Vitals tracking
-import { getCLS, getFID, getFCP, getLCP, getTTFB } from 'web-vitals';
-
-function sendToAnalytics(metric: any) {
-  // Send to analytics service
-  gtag('event', metric.name, {
-    value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
-    event_category: 'Web Vitals',
-    event_label: metric.id,
-    non_interaction: true,
-  });
-}
-
-getCLS(sendToAnalytics);
-getFID(sendToAnalytics);
-getFCP(sendToAnalytics);
-getLCP(sendToAnalytics);
-getTTFB(sendToAnalytics);
 ```
 
 ---
@@ -3803,7 +3672,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 ### **Connect with Me**
 - **📧 Email**: [girishlade111@gmail.com](mailto:girishlade111@gmail.com)
 - **💼 LinkedIn**: [Girish Lade](https://www.linkedin.com/in/girish-lade-075bba201/)
-- **🐙 GitHub**: [@girishlade111](https://github.com/girishlade111)
+- **🐙 GitHub**: [@girishlade11](https://github.com/girishlade111)
 - **📸 Instagram**: [@girish_lade_](https://www.instagram.com/girish_lade_/)
 - **✏️ CodePen**: [Girish-Lade-the-looper](https://codepen.io/Girish-Lade-the-looper)
 
