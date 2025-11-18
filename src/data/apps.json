@@ -14,7 +14,8 @@
     "landingUrl": "/projects/api-testing",
     "createdAt": "2025-03-01",
     "popularityScore": 92,
-    "iconAlt": "API Testing Platform icon"
+    "iconAlt": "API Testing Platform icon",
+    "comingSoon": true
   },
   {
     "id": "website-builder",
@@ -31,7 +32,8 @@
     "landingUrl": "/projects/website-builder",
     "createdAt": "2025-02-15",
     "popularityScore": 8,
-    "iconAlt": "Website Builder AI icon"
+    "iconAlt": "Website Builder AI icon",
+    "comingSoon": true
   },
   {
     "id": "file-management",
@@ -48,7 +50,8 @@
     "landingUrl": "/projects/file-management",
     "createdAt": "2025-01-20",
     "popularityScore": 76,
-    "iconAlt": "File Sharing Platform icon"
+    "iconAlt": "File Sharing Platform icon",
+    "comingSoon": true
   },
   {
     "id": "documentation-ai",
@@ -65,7 +68,8 @@
     "landingUrl": "/projects/documentation-ai",
     "createdAt": "2025-03-10",
     "popularityScore": 84,
-    "iconAlt": "Technical Documentation AI icon"
+    "iconAlt": "Technical Documentation AI icon",
+    "comingSoon": true
   },
   {
     "id": "ai-code-viewer",

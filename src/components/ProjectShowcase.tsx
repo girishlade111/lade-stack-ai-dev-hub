@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { ExternalLink, Code, Globe, FileText, Brain, Star, Users, Clock, LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import BentoImageGrid from "@/components/BentoImageGrid";
 
 interface Project {
   id: string;
@@ -43,7 +42,7 @@ const ProjectShowcase = () => {
       fullDescription: "Transform your API development workflow with our AI-powered testing platform. Generate comprehensive test suites automatically, monitor performance in real-time, and integrate seamlessly with your CI/CD pipeline.",
       features: ["AI Test Generation", "Performance Analytics", "CI/CD Integration", "Real-time Monitoring"],
       stats: { users: "Many", time: "Quick", rating: "Excellent", uptime: "Reliable" },
-      status: "Live",
+      status: "Coming Soon",
       coverImage: "/api-testing-project.svg",
       gradient: "from-gray-800 via-gray-700 to-gray-900",
       primaryColor: "#000000",
@@ -78,7 +77,7 @@ const ProjectShowcase = () => {
       fullDescription: "Create stunning websites in minutes with our AI-powered builder. From concept to deployment, transform your ideas into fully functional, responsive websites with built-in SEO and e-commerce capabilities.",
       features: ["GPT-4 Generation", "SEO Optimization", "E-commerce Ready", "Responsive Design"],
       stats: { users: "Growing", time: "Fast", rating: "Great", uptime: "Stable" },
-      status: "Live",
+      status: "Coming Soon",
       coverImage: "/website-builder-project.svg",
       gradient: "from-gray-900 via-gray-800 to-gray-700",
       primaryColor: "#000000",
@@ -110,7 +109,7 @@ const ProjectShowcase = () => {
       fullDescription: "Transform your file sharing experience with our advanced File Sharing Platform. Built for modern teams, this enterprise-grade solution offers lightning-fast global content delivery, intelligent file organization, and seamless collaboration features. Experience secure, scalable file management with automatic optimization, version control, and real-time synchronization across all devices. Whether you're sharing documents, media files, or project assets, our platform ensures your content is always accessible, secure, and optimized for peak performance.",
       features: ["Global CDN", "Auto Optimization", "Enterprise Security", "Team Collaboration"],
       stats: { users: "Active", time: "Instant", rating: "Excellent", uptime: "Excellent" },
-      status: "Live",
+      status: "Coming Soon",
       coverImage: "/file-management-project.svg",
       gradient: "from-gray-800 via-gray-700 to-gray-900",
       primaryColor: "#000000",
@@ -145,7 +144,7 @@ const ProjectShowcase = () => {
       fullDescription: "Revolutionary AI-powered documentation that understands your codebase. Generate comprehensive, accurate documentation that automatically updates as your code evolves.",
       features: ["Code Context AI", "IDE Integration", "Multi-language Support", "Auto Updates"],
       stats: { users: "Growing", time: "Quick", rating: "Good", uptime: "High" },
-      status: "Beta",
+      status: "Coming Soon",
       coverImage: "/documentation-ai-project.svg",
       gradient: "from-gray-900 via-gray-800 to-gray-700",
       primaryColor: "#000000",
@@ -361,51 +360,7 @@ const ProjectShowcase = () => {
             ))}
           </div>
 
-          {/* Bento Image Grid Section */}
-          <div className="mt-20 lg:mt-32">
-            <div className="text-center mb-12">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-foreground mb-4">
-                Visual Showcase Gallery
-              </h3>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Explore our comprehensive suite of AI-powered tools through visual examples and interface previews
-              </p>
-            </div>
-            <BentoImageGrid 
-              images={[
-                { src: "/api-testing-project.svg", alt: "API Testing Platform", size: "large" },
-                { src: "/website-builder-project.svg", alt: "Website Builder Interface", size: "medium" },
-                { src: "/file-management-project.svg", alt: "File Management System", size: "medium" },
-                { src: "/documentation-ai-project.svg", alt: "Documentation AI Tool", size: "small" },
-                { src: "/ai-code-viewer-project.svg", alt: "AI Code Viewer Interface", size: "small" },
-                { src: "/AIcode.png", alt: "Code Enhancement Features", size: "small" }
-              ]}
-            />
-          </div>
 
-          {/* Bottom CTA */}
-          <div className="mt-20 lg:mt-32">
-            <div className="max-w-3xl mx-auto text-center">
-              <div className="border border-border/50 bg-muted/20 p-12 lg:p-16">
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-foreground mb-6">
-                  Ready to get started?
-                </h3>
-                <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                  Explore our comprehensive suite of AI-powered development tools and see how they can enhance your workflow.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 px-8">
-                    Get Started
-                  </Button>
-                  <Button size="lg" variant="outline" className="border-foreground text-foreground hover:bg-foreground hover:text-background px-8" asChild>
-                    <Link to="/projects">
-                      View All Products
-                    </Link>
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

@@ -16,8 +16,9 @@ const ProjectsSection = () => {
       description: "Revolutionary API testing suite with intelligent test generation and real-time monitoring.",
       features: ["AI Test Generation", "Performance Analytics", "CI/CD Integration"],
       stats: { users: "Many", time: "Quick", rating: "Excellent" },
-      status: "Live",
-      coverImage: "/api-testing-project.svg"
+      status: "Coming Soon",
+      coverImage: "/api-testing-project.svg",
+      comingSoon: true
     },
     {
       id: "website-builder",
@@ -26,8 +27,9 @@ const ProjectsSection = () => {
       description: "Enterprise-grade website builder powered by GPT-4 with responsive design generation.",
       features: ["GPT-4 Generation", "SEO Optimization", "E-commerce Ready"],
       stats: { users: "Many", time: "Fast", rating: "Great" },
-      status: "Live",
-      coverImage: "/website-builder-project.svg"
+      status: "Coming Soon",
+      coverImage: "/website-builder-project.svg",
+      comingSoon: true
     },
     {
       id: "file-management",
@@ -36,8 +38,9 @@ const ProjectsSection = () => {
       description: "Enterprise file sharing platform with global CDN, intelligent collaboration, and lifetime free access.",
       features: ["Global CDN", "Auto Optimization", "Enterprise Security"],
       stats: { users: "Growing", time: "Instant", rating: "Excellent" },
-      status: "Live",
-      coverImage: "/file-management-project.svg"
+      status: "Coming Soon",
+      coverImage: "/file-management-project.svg",
+      comingSoon: true
     },
     {
       id: "documentation-ai",
@@ -46,8 +49,9 @@ const ProjectsSection = () => {
       description: "Advanced AI that understands code context and generates comprehensive documentation.",
       features: ["Code Context AI", "IDE Integration", "Multi-language"],
       stats: { users: "Active", time: "Fast", rating: "Good" },
-      status: "Beta",
-      coverImage: "/documentation-ai-project.svg"
+      status: "Coming Soon",
+      coverImage: "/documentation-ai-project.svg",
+      comingSoon: true
     },
     {
       id: "ai-code-viewer",
@@ -57,7 +61,8 @@ const ProjectsSection = () => {
       features: ["AI Code Enhancement", "Real-time Compilation", "Advanced Code Editor"],
       stats: { users: "Popular", time: "Instant", rating: "Great" },
       status: "Live",
-      coverImage: "/AIcode.png"
+      coverImage: "/AIcode.png",
+      comingSoon: false
     }
   ], []);
 
