@@ -308,7 +308,7 @@ const ProjectDetail = () => {
               {/* CTA Button */}
               <div className="flex justify-center mb-8">
                 <Button size="lg" className="text-lg px-8 py-6" asChild={true}>
-                  <Link to={project.id === "ai-code-viewer" ? "/ai-code-viewer-ai" : project.id === "file-management" ? "/file-sharing-platform" : "#"}>
+                  <Link to={project.id === "ai-code-viewer" ? "/ai-code-viewer-ai" : project.id === "file-management" ? "/file-sharing-platform" : project.id === "api-testing" ? "/api-testing-platform" : "#"}>
                     Start Free Trial
                     <ExternalLink className="w-4 h-4 ml-2" />
                   </Link>
@@ -438,7 +438,7 @@ const ProjectDetail = () => {
                   </div>
                 </div>
                 <Button size="lg" className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-lg" asChild={true}>
-                  <Link to={project.id === "ai-code-viewer" ? "/ai-code-viewer-ai" : project.id === "file-management" ? "/file-sharing-platform" : "#"}>
+                  <Link to={project.id === "ai-code-viewer" ? "/ai-code-viewer-ai" : project.id === "file-management" ? "/file-sharing-platform" : project.id === "api-testing" ? "/api-testing-platform" : "#"}>
                     Start Using AI Tool Now
                     <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />

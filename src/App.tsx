@@ -23,6 +23,7 @@ const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 const Support = lazy(() => import("./pages/Support"));
 const Documentation = lazy(() => import("./pages/Documentation"));
 const AICodeViewerAI = lazy(() => import("./pages/AICodeViewerAI"));
+const ApiTestingPlatform = lazy(() => import("./pages/ApiTestingPlatform"));
 const AppsGallery = lazy(() => import("./pages/AppsGallery"));
 const AppsAdmin = lazy(() => import("./pages/AppsAdmin"));
 
@@ -142,6 +143,7 @@ const App = () => (
               <Route path="/support" element={<Support />} />
               <Route path="/docs" element={<Documentation />} />
               <Route path="/ai-code-viewer-ai" element={<AICodeViewerAI />} />
+              <Route path="/api-testing-platform" element={<ApiTestingPlatform />} />
               <Route path="/apps" element={<AppsGallery />} />
               <Route path="/apps/admin" element={<AppsAdmin />} />
               <Route path="*" element={<NotFound />} />
