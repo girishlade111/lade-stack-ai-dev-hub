@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";
-import BentoMenu from "@/components/BentoMenu";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -69,7 +68,6 @@ const Header = () => {
           {/* Desktop Actions - Hidden on mobile */}
           <div className="hidden md:flex items-center space-x-2">
             <ThemeToggle />
-            <BentoMenu />
             <Link to="/apps">
               <Button
                 variant="ghost"
@@ -84,7 +82,6 @@ const Header = () => {
           {/* Mobile Actions - Optimized for small screens */}
           <div className="flex md:hidden items-center space-x-1 sm:space-x-1.5">
             <ThemeToggle />
-            <BentoMenu />
             <Button
               variant="ghost"
               size="icon"
