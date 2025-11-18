@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Search, 
-  Clock, 
-  Zap, 
-  Github, 
-  ExternalLink, 
-  Filter, 
-  X, 
-  ChevronDown, 
-  ArrowRight, 
+import {
+  Search,
+  Clock,
+  Zap,
+  Github,
+  ExternalLink,
+  Filter,
+  X,
+  ChevronDown,
+  ArrowRight,
   Star,
   Grid,
   List,
@@ -19,23 +19,26 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
 } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
-import { 
-  Dialog, 
-  DialogContent, 
-  DialogHeader, 
-  DialogTitle, 
-  DialogTrigger 
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
 } from '@/components/ui/dialog';
 import { Separator } from '@/components/ui/separator';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { ArrowLeft } from 'lucide-react';
 
 // Types
 interface AppData {
@@ -204,406 +207,432 @@ const AppsGallery: React.FC = () => {
   const hasActiveFilters = searchQuery || selectedCategories.length > 0 || isPopular || isNew;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-950 to-black text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-10 text-center"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-gray-300 to-gray-400 bg-clip-text text-transparent">
-            Apps Gallery
-          </h1>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Discover our collection of lifetime-free tools designed to enhance your development workflow.
-          </p>
-        </motion.div>
-
-        {/* Search and Filters */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mb-10"
-        >
-          <div className="flex flex-col lg:flex-row gap-6 items-center">
-            {/* Search Input */}
-            <div className="relative flex-1 w-full">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <Search className="h-5 w-5 text-gray-500" />
-              </div>
-              <Input
-                type="text"
-                placeholder="Search apps, features, or keywords..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-gray-800/70 border-gray-700 text-white placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent h-14 pl-12 text-lg rounded-xl"
-              />
-            </div>
-
-            {/* Sort and View Controls */}
-            <div className="flex items-center gap-4">
-              {/* Sort Dropdown */}
-              <Select value={sortBy} onValueChange={(value: 'relevance' | 'newest' | 'az') => setSortBy(value)}>
-                <SelectTrigger className="w-[180px] bg-gray-800/70 border-gray-700 text-white h-14 text-base rounded-xl">
-                  <SelectValue placeholder="Sort by" />
-                </SelectTrigger>
-                <SelectContent className="bg-gray-800/90 border-gray-700 text-white backdrop-blur-sm">
-                  <SelectItem value="relevance">Most Relevant</SelectItem>
-                  <SelectItem value="newest">Newest</SelectItem>
-                  <SelectItem value="az">A to Z</SelectItem>
-                </SelectContent>
-              </Select>
-
-              {/* View Toggle */}
-              <div className="flex bg-gray-800/70 rounded-xl p-1 border border-gray-700">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setViewMode('grid')}
-                  className={`rounded-lg p-3 ${viewMode === 'grid' ? 'bg-gray-700/50 text-white' : 'text-gray-400 hover:text-white'}`}
-                >
-                  <Grid className="h-5 w-5" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setViewMode('list')}
-                  className={`rounded-lg p-3 ${viewMode === 'list' ? 'bg-gray-700/50 text-white' : 'text-gray-400 hover:text-white'}`}
-                >
-                  <List className="h-5 w-5" />
-                </Button>
-              </div>
-
-              {/* Mobile Filter Button */}
-              <Dialog open={isMobileFilterOpen} onOpenChange={setIsMobileFilterOpen}>
-                <DialogTrigger asChild>
-                  <Button 
-                    variant="outline" 
-                    className="lg:hidden flex items-center gap-2 bg-gray-800/70 border-gray-700 text-white hover:bg-gray-700/50 h-14 px-4 rounded-xl"
-                  >
-                    <SlidersHorizontal className="w-5 h-5" />
-                    Filters
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-md bg-gray-900/95 backdrop-blur-xl border-gray-800">
-                  <DialogHeader>
-                    <DialogTitle className="text-white">Filters</DialogTitle>
-                  </DialogHeader>
-                  <div className="grid gap-6 py-4">
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-300 mb-3">Categories</h3>
-                      <div className="flex flex-wrap gap-2">
-                        {categories.map(category => (
-                          <div key={category} className="flex items-center space-x-2">
-                            <Checkbox
-                              id={`cat-${category}`}
-                              checked={selectedCategories.includes(category)}
-                              onCheckedChange={() => toggleCategory(category)}
-                              className="border-gray-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white"
-                            />
-                            <label 
-                              htmlFor={`cat-${category}`} 
-                              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-300"
-                            >
-                              {category}
-                            </label>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <Separator className="bg-gray-800" />
-                    
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-300 mb-3">Special Filters</h3>
-                      <div className="flex flex-col gap-3">
-                        <div className="flex items-center space-x-3">
-                          <Checkbox
-                            id="popular"
-                            checked={isPopular}
-                            onCheckedChange={(checked) => setIsPopular(!!checked)}
-                            className="border-gray-600 data-[state=checked]:bg-purple-600 data-[state=checked]:text-white"
-                          />
-                          <label 
-                            htmlFor="popular" 
-                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-300"
-                          >
-                            Popular
-                          </label>
-                        </div>
-                        <div className="flex items-center space-x-3">
-                          <Checkbox
-                            id="new"
-                            checked={isNew}
-                            onCheckedChange={(checked) => setIsNew(!!checked)}
-                            className="border-gray-600 data-[state=checked]:bg-green-600 data-[state=checked]:text-white"
-                          />
-                          <label 
-                            htmlFor="new" 
-                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-300"
-                          >
-                            New
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </DialogContent>
-              </Dialog>
-            </div>
-          </div>
-
-          {/* Category Chips - Desktop */}
-          <div className="hidden lg:flex flex-wrap gap-3 mt-6">
-            {categories.map(category => (
-              <Badge
-                key={category}
-                variant="outline"
-                className={`cursor-pointer transition-all h-9 px-4 text-sm rounded-full ${
-                  selectedCategories.includes(category)
-                    ? 'bg-blue-600 border-blue-600 text-white'
-                    : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:bg-gray-700/50'
-                }`}
-                onClick={() => toggleCategory(category)}
-              >
-                {category}
-                {selectedCategories.includes(category) && (
-                  <X className="ml-2 h-4 w-4" />
-                )}
-              </Badge>
-            ))}
-            
-            <Badge
-              variant="outline"
-              className={`cursor-pointer transition-all h-9 px-4 text-sm rounded-full ${
-                isPopular
-                  ? 'bg-purple-600 border-purple-600 text-white'
-                  : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:bg-gray-700/50'
-              }`}
-              onClick={() => setIsPopular(!isPopular)}
-            >
-              Popular
-              {isPopular && <X className="ml-2 h-4 w-4" />}
-            </Badge>
-            
-            <Badge
-              variant="outline"
-              className={`cursor-pointer transition-all h-9 px-4 text-sm rounded-full ${
-                isNew
-                  ? 'bg-green-600 border-green-600 text-white'
-                  : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:bg-gray-700/50'
-              }`}
-              onClick={() => setIsNew(!isNew)}
-            >
-              New
-              {isNew && <X className="ml-2 h-4 w-4" />}
-            </Badge>
-          </div>
-
-          {/* Active Filters */}
-          {hasActiveFilters && (
-            <div className="flex flex-wrap items-center gap-3 mt-6 p-4 bg-gray-800/30 rounded-xl border border-gray-700/50">
-              <span className="text-sm text-gray-400">Active filters:</span>
-              {searchQuery && (
-                <Badge variant="secondary" className="bg-blue-900/30 text-blue-300 h-8 px-3 rounded-full">
-                  Search: "{searchQuery}"
-                  <button 
-                    onClick={() => setSearchQuery('')} 
-                    className="ml-2 text-blue-400 hover:text-white"
-                  >
-                    <X className="h-4 w-4" />
-                  </button>
-                </Badge>
-              )}
-              {selectedCategories.map(category => (
-                <Badge key={category} variant="secondary" className="bg-blue-900/30 text-blue-300 h-8 px-3 rounded-full">
-                  {category}
-                  <button 
-                    onClick={() => toggleCategory(category)} 
-                    className="ml-2 text-blue-400 hover:text-white"
-                  >
-                    <X className="h-4 w-4" />
-                  </button>
-                </Badge>
-              ))}
-              {isPopular && (
-                <Badge variant="secondary" className="bg-purple-900/30 text-purple-300 h-8 px-3 rounded-full">
-                  Popular
-                  <button 
-                    onClick={() => setIsPopular(false)} 
-                    className="ml-2 text-purple-400 hover:text-white"
-                  >
-                    <X className="h-4 w-4" />
-                  </button>
-                </Badge>
-              )}
-              {isNew && (
-                <Badge variant="secondary" className="bg-green-900/30 text-green-300 h-8 px-3 rounded-full">
-                  New
-                  <button 
-                    onClick={() => setIsNew(false)} 
-                    className="ml-2 text-green-400 hover:text-white"
-                  >
-                    <X className="h-4 w-4" />
-                  </button>
-                </Badge>
-              )}
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={clearFilters}
-                className="text-xs text-gray-400 hover:text-white hover:bg-gray-700/50 h-8 px-3 rounded-full"
-              >
-                Clear all
-              </Button>
-            </div>
-          )}
-        </motion.div>
-
-        {/* Results Count */}
-        <div className="mb-6 flex justify-between items-center">
-          <p className="text-gray-400">
-            Showing <span className="text-white font-medium">{filteredApps.length}</span> {filteredApps.length === 1 ? 'app' : 'apps'}
-          </p>
-        </div>
-
-        {/* Apps Grid/List */}
-        {filteredApps.length > 0 ? (
-          <motion.div 
-            layout
-            className={
-              viewMode === 'grid' 
-                ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
-                : "grid grid-cols-1 gap-6"
-            }
+    <>
+      <Header />
+      <main className="min-h-screen bg-background pt-14 sm:pt-16 lg:pt-20">
+        <div className="container mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 py-8">
+          {/* Hero Section */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mb-10 text-center"
           >
-            <AnimatePresence>
-              {filteredApps.map((app, index) => (
-                <motion.div
-                  key={app.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.3, delay: index * 0.05 }}
-                  whileHover={{ y: -8 }}
-                  className="cursor-pointer"
-                >
-                  <Link to={app.landingUrl} className="block h-full">
-                    <Card 
-                      className="h-full flex flex-col bg-gradient-to-b from-gray-800/40 to-gray-900/50 border border-gray-700/50 hover:border-gray-600/70 transition-all duration-300 overflow-hidden group rounded-2xl shadow-lg hover:shadow-2xl hover:shadow-blue-500/10"
-                      role="button"
-                      tabIndex={0}
-                      aria-label={`Open ${app.title} — ${app.tagline}`}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          console.log('App opened:', { 
-                            app_id: app.id, 
-                            title: app.title, 
-                            category: app.category 
-                          });
-                        }
-                      }}
-                    >
-                      <CardContent className="p-6 flex flex-col h-full">
-                        <div className="flex items-start gap-5 mb-5">
-                          <div className="bg-gradient-to-br from-gray-700 to-gray-800 rounded-2xl p-3 flex-shrink-0 shadow-inner">
-                            <img 
-                              src={app.icon} 
-                              alt={app.iconAlt} 
-                              className="w-16 h-16 object-contain"
-                              loading="lazy"
-                            />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-3 mb-2">
-                              <h3 className="font-bold text-xl text-white truncate">{app.title}</h3>
-                              {new Date(app.createdAt) > new Date(Date.now() - 30 * 24 * 60 * 1000) && (
-                                <Badge variant="secondary" className="bg-green-900/30 text-green-400 text-xs h-6 px-2 rounded-full">
-                                  New
-                                </Badge>
-                              )}
-                            </div>
-                            <p className="text-gray-400 text-sm leading-relaxed">{app.tagline}</p>
-                          </div>
-                        </div>
-                        
-                        <p className="text-gray-300 text-base mb-5 leading-relaxed flex-grow">
-                          {app.description}
-                        </p>
-                        
-                        <div className="flex flex-wrap gap-2 mb-5">
-                          {app.lifetimeFree && (
-                            <Badge className="bg-gradient-to-r from-green-700 to-emerald-700 text-green-100 text-xs h-6 px-2 rounded-full">
-                              Lifetime Free
-                            </Badge>
-                          )}
-                          <Badge variant="secondary" className="bg-blue-900/30 text-blue-400 text-xs h-6 px-2 rounded-full">
-                            {app.category}
-                          </Badge>
-                        </div>
-                        
-                        <div className="flex items-center justify-between text-sm text-gray-500 mb-5 pb-3 border-b border-gray-800/50">
-                          <div className="flex items-center gap-2">
-                            <Clock className="w-4 h-4" />
-                            <span>{app.timeToValue}</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            {app.integrations.slice(0, 2).map((integration, idx) => (
-                              <div key={idx} className="flex items-center gap-1">
-                                {idx > 0 && <span>•</span>}
-                                <span className="text-xs">{integration}</span>
-                              </div>
-                            ))}
-                            {app.integrations.length > 2 && (
-                              <span className="text-xs">+{app.integrations.length - 2}</span>
-                            )}
-                          </div>
-                        </div>
-                        
-                        <div className="flex items-center justify-between mt-auto pt-3">
-                          <div className="flex items-center gap-2 text-gray-400">
-                            <Star className="w-4 h-4 fill-current" />
-                            <span>{app.popularityScore}</span>
-                          </div>
-                          <div className="flex items-center text-blue-400 group-hover:text-blue-300 transition-colors">
-                            <span className="text-sm mr-1">Open</span>
-                            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
-        ) : (
-          // Empty state
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-20"
-          >
-            <div className="text-gray-600 text-8xl mb-6">🔍</div>
-            <h3 className="text-2xl font-medium text-gray-300 mb-3">No apps found</h3>
-            <p className="text-gray-500 mb-8 max-w-md mx-auto">
-              We couldn't find any apps matching your search. Try adjusting your filters or search terms.
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground mb-4 leading-tight">
+              Apps Gallery
+            </h1>
+            <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Discover our collection of lifetime-free tools designed to enhance your development workflow.
             </p>
-            <Button 
-              variant="outline" 
-              onClick={clearFilters}
-              className="border-gray-700 text-gray-300 hover:bg-gray-800/50 hover:border-gray-600 text-base h-12 px-6 rounded-xl"
+          </motion.div>
+
+          {/* Back Button */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3, delay: 0.2 }}
+            className="mb-6"
+          >
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => window.history.back()}
+              className="flex items-center gap-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200 h-10 px-4 rounded-lg"
             >
-              Clear all filters
+              <ArrowLeft className="w-4 h-4" />
+              <span className="text-sm font-medium">Back</span>
             </Button>
           </motion.div>
-        )}
-      </div>
-    </div>
+
+          {/* Search and Filters */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mb-10"
+          >
+            <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 items-center">
+              {/* Search Input */}
+              <div className="relative flex-1 w-full">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Search className="h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground" />
+                </div>
+                <Input
+                  type="text"
+                  placeholder="Search apps, features, or keywords..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full h-10 sm:h-12 lg:h-14 pl-10 sm:pl-12 text-sm sm:text-base rounded-lg border-border bg-background text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                />
+              </div>
+
+              {/* Sort and View Controls */}
+              <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
+                {/* Sort Dropdown */}
+                <Select value={sortBy} onValueChange={(value: 'relevance' | 'newest' | 'az') => setSortBy(value)}>
+                  <SelectTrigger className="w-[140px] sm:w-[160px] lg:w-[180px] h-10 sm:h-12 lg:h-14 text-sm sm:text-base rounded-lg border-border bg-background text-foreground">
+                    <SelectValue placeholder="Sort by" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-background border-border">
+                    <SelectItem value="relevance">Most Relevant</SelectItem>
+                    <SelectItem value="newest">Newest</SelectItem>
+                    <SelectItem value="az">A to Z</SelectItem>
+                  </SelectContent>
+                </Select>
+
+                {/* View Toggle */}
+                <div className="flex bg-muted rounded-lg p-1 border border-border">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setViewMode('grid')}
+                    className={`h-8 sm:h-10 lg:h-12 w-8 sm:w-10 lg:w-12 rounded-md transition-fast ${
+                      viewMode === 'grid' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
+                    }`}
+                  >
+                    <Grid className="h-4 w-4 sm:h-5 sm:w-5" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setViewMode('list')}
+                    className={`h-8 sm:h-10 lg:h-12 w-8 sm:w-10 lg:w-12 rounded-md transition-fast ${
+                      viewMode === 'list' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
+                    }`}
+                  >
+                    <List className="h-4 w-4 sm:h-5 sm:w-5" />
+                  </Button>
+                </div>
+
+                {/* Mobile Filter Button */}
+                <Dialog open={isMobileFilterOpen} onOpenChange={setIsMobileFilterOpen}>
+                  <DialogTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className="lg:hidden flex items-center gap-2 h-10 sm:h-12 lg:h-14 px-3 sm:px-4 rounded-lg border-border bg-background text-foreground hover:bg-muted"
+                    >
+                      <SlidersHorizontal className="w-4 h-4 sm:w-5 sm:h-5" />
+                      <span className="text-sm sm:text-base">Filters</span>
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-md bg-background border-border">
+                    <DialogHeader>
+                      <DialogTitle className="text-foreground">Filters</DialogTitle>
+                    </DialogHeader>
+                    <div className="grid gap-6 py-4">
+                      <div>
+                        <h3 className="text-sm font-medium text-foreground mb-3">Categories</h3>
+                        <div className="flex flex-wrap gap-2">
+                          {categories.map(category => (
+                            <div key={category} className="flex items-center space-x-2">
+                              <Checkbox
+                                id={`cat-${category}`}
+                                checked={selectedCategories.includes(category)}
+                                onCheckedChange={() => toggleCategory(category)}
+                                className="border-border data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
+                              />
+                              <label
+                                htmlFor={`cat-${category}`}
+                                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-foreground"
+                              >
+                                {category}
+                              </label>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <Separator className="bg-border" />
+                      
+                      <div>
+                        <h3 className="text-sm font-medium text-foreground mb-3">Special Filters</h3>
+                        <div className="flex flex-col gap-3">
+                          <div className="flex items-center space-x-3">
+                            <Checkbox
+                              id="popular"
+                              checked={isPopular}
+                              onCheckedChange={(checked) => setIsPopular(!!checked)}
+                              className="border-border data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
+                            />
+                            <label
+                              htmlFor="popular"
+                              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-foreground"
+                            >
+                              Popular
+                            </label>
+                          </div>
+                          <div className="flex items-center space-x-3">
+                            <Checkbox
+                              id="new"
+                              checked={isNew}
+                              onCheckedChange={(checked) => setIsNew(!!checked)}
+                              className="border-border data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
+                            />
+                            <label
+                              htmlFor="new"
+                              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-foreground"
+                            >
+                              New
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+            </div>
+          </div>
+
+            {/* Category Chips - Desktop */}
+            <div className="hidden lg:flex flex-wrap gap-3 mt-6">
+              {categories.map(category => (
+                <Badge
+                  key={category}
+                  variant="outline"
+                  className={`cursor-pointer transition-all h-9 px-4 text-sm rounded-full border ${
+                    selectedCategories.includes(category)
+                      ? 'bg-primary border-primary text-primary-foreground'
+                      : 'bg-background border-border text-foreground hover:bg-muted'
+                  }`}
+                  onClick={() => toggleCategory(category)}
+                >
+                  {category}
+                  {selectedCategories.includes(category) && (
+                    <X className="ml-2 h-4 w-4" />
+                  )}
+                </Badge>
+              ))}
+              
+              <Badge
+                variant="outline"
+                className={`cursor-pointer transition-all h-9 px-4 text-sm rounded-full border ${
+                  isPopular
+                    ? 'bg-primary border-primary text-primary-foreground'
+                    : 'bg-background border-border text-foreground hover:bg-muted'
+                }`}
+                onClick={() => setIsPopular(!isPopular)}
+              >
+                Popular
+                {isPopular && <X className="ml-2 h-4 w-4" />}
+              </Badge>
+              
+              <Badge
+                variant="outline"
+                className={`cursor-pointer transition-all h-9 px-4 text-sm rounded-full border ${
+                  isNew
+                    ? 'bg-primary border-primary text-primary-foreground'
+                    : 'bg-background border-border text-foreground hover:bg-muted'
+                }`}
+                onClick={() => setIsNew(!isNew)}
+              >
+                New
+                {isNew && <X className="ml-2 h-4 w-4" />}
+              </Badge>
+            </div>
+
+            {/* Active Filters */}
+            {hasActiveFilters && (
+              <div className="flex flex-wrap items-center gap-3 mt-6 p-4 bg-muted/50 rounded-lg border border-border">
+                <span className="text-sm text-muted-foreground">Active filters:</span>
+                {searchQuery && (
+                  <Badge variant="secondary" className="bg-primary/10 text-primary h-8 px-3 rounded-full">
+                    Search: "{searchQuery}"
+                    <button
+                      onClick={() => setSearchQuery('')}
+                      className="ml-2 text-primary hover:text-primary/80"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  </Badge>
+                )}
+                {selectedCategories.map(category => (
+                  <Badge key={category} variant="secondary" className="bg-primary/10 text-primary h-8 px-3 rounded-full">
+                    {category}
+                    <button
+                      onClick={() => toggleCategory(category)}
+                      className="ml-2 text-primary hover:text-primary/80"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  </Badge>
+                ))}
+                {isPopular && (
+                  <Badge variant="secondary" className="bg-primary/10 text-primary h-8 px-3 rounded-full">
+                    Popular
+                    <button
+                      onClick={() => setIsPopular(false)}
+                      className="ml-2 text-primary hover:text-primary/80"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  </Badge>
+                )}
+                {isNew && (
+                  <Badge variant="secondary" className="bg-primary/10 text-primary h-8 px-3 rounded-full">
+                    New
+                    <button
+                      onClick={() => setIsNew(false)}
+                      className="ml-2 text-primary hover:text-primary/80"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  </Badge>
+                )}
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={clearFilters}
+                  className="text-xs text-muted-foreground hover:text-foreground hover:bg-muted h-8 px-3 rounded-full"
+                >
+                  Clear all
+                </Button>
+              </div>
+            )}
+          </motion.div>
+
+          {/* Results Count */}
+          <div className="mb-6 flex justify-between items-center">
+            <p className="text-sm sm:text-base text-muted-foreground">
+              Showing <span className="text-foreground font-medium">{filteredApps.length}</span> {filteredApps.length === 1 ? 'app' : 'apps'}
+            </p>
+          </div>
+
+          {/* Apps Grid/List */}
+          {filteredApps.length > 0 ? (
+            <motion.div
+              layout
+              className={
+                viewMode === 'grid'
+                  ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8"
+                  : "grid grid-cols-1 gap-6"
+              }
+            >
+              <AnimatePresence>
+                {filteredApps.map((app, index) => (
+                  <motion.div
+                    key={app.id}
+                    layout
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                    whileHover={{ y: -4 }}
+                    className="cursor-pointer"
+                  >
+                    <Link to={app.landingUrl} className="block h-full">
+                      <Card
+                        className="h-full flex flex-col bg-background border-border hover:border-primary/50 transition-all duration-300 overflow-hidden group rounded-lg shadow-sm hover:shadow-md"
+                        role="button"
+                        tabIndex={0}
+                        aria-label={`Open ${app.title} — ${app.tagline}`}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            console.log('App opened:', {
+                              app_id: app.id,
+                              title: app.title,
+                              category: app.category
+                            });
+                          }
+                        }}
+                      >
+                        <CardContent className="p-6 flex flex-col h-full">
+                          <div className="flex items-start gap-4 mb-4">
+                            <div className="bg-muted rounded-lg p-2.5 flex-shrink-0">
+                              <img
+                                src={app.icon}
+                                alt={app.iconAlt}
+                                className="w-12 h-12 object-contain"
+                                loading="lazy"
+                              />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2 mb-1">
+                                <h3 className="font-semibold text-lg text-foreground truncate">{app.title}</h3>
+                                {new Date(app.createdAt) > new Date(Date.now() - 30 * 24 * 60 * 1000) && (
+                                  <Badge variant="secondary" className="bg-green-100 text-green-700 text-xs h-5 px-1.5 rounded-full">
+                                    New
+                                  </Badge>
+                                )}
+                              </div>
+                              <p className="text-sm text-muted-foreground leading-relaxed">{app.tagline}</p>
+                            </div>
+                          </div>
+                          
+                          <p className="text-sm text-muted-foreground mb-4 leading-relaxed flex-grow line-clamp-3">
+                            {app.description}
+                          </p>
+                          
+                          <div className="flex flex-wrap gap-2 mb-4">
+                            {app.lifetimeFree && (
+                              <Badge className="bg-green-100 text-green-700 text-xs h-6 px-2 rounded-full">
+                                Lifetime Free
+                              </Badge>
+                            )}
+                            <Badge variant="secondary" className="bg-primary/10 text-primary text-xs h-6 px-2 rounded-full">
+                              {app.category}
+                            </Badge>
+                          </div>
+                          
+                          <div className="flex items-center justify-between text-xs text-muted-foreground mb-4 pb-3 border-b border-border">
+                            <div className="flex items-center gap-1.5">
+                              <Clock className="w-3.5 h-3.5" />
+                              <span>{app.timeToValue}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              {app.integrations.slice(0, 2).map((integration, idx) => (
+                                <div key={idx} className="flex items-center gap-1">
+                                  {idx > 0 && <span>•</span>}
+                                  <span>{integration}</span>
+                                </div>
+                              ))}
+                              {app.integrations.length > 2 && (
+                                <span>+{app.integrations.length - 2}</span>
+                              )}
+                            </div>
+                          </div>
+                          
+                          <div className="flex items-center justify-between mt-auto pt-2">
+                            <div className="flex items-center gap-1.5 text-muted-foreground">
+                              <Star className="w-4 h-4 fill-current text-yellow-400" />
+                              <span className="text-sm">{app.popularityScore}</span>
+                            </div>
+                            <div className="flex items-center text-primary group-hover:text-primary/80 transition-colors">
+                              <span className="text-sm mr-1">Open</span>
+                              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
+          ) : (
+            // Empty state
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-20"
+            >
+              <div className="text-muted-foreground text-6xl mb-6">🔍</div>
+              <h3 className="text-xl font-medium text-foreground mb-3">No apps found</h3>
+              <p className="text-muted-foreground mb-8 max-w-md mx-auto">
+                We couldn't find any apps matching your search. Try adjusting your filters or search terms.
+              </p>
+              <Button
+                variant="outline"
+                onClick={clearFilters}
+                className="border-border text-foreground hover:bg-muted h-10 px-6 rounded-lg"
+              >
+                Clear all filters
+              </Button>
+            </motion.div>
+          )}
+        </div>
+      </main>
+      <Footer />
+    </>
   );
 };
 
