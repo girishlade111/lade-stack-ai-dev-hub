@@ -571,17 +571,16 @@ const ApiTestingPlatform: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+    <div className="min-h-screen bg-background">
       <Header />
       
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-20 pb-16">
-        <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 via-indigo-500/5 to-cyan-500/10"></div>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="max-w-7xl mx-auto">
+      <section className="relative overflow-hidden pt-14 sm:pt-16 lg:pt-20">
+        <div className="container mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
+          <div className="max-w-4xl mx-auto">
             {/* Back Button */}
-            <div className="mb-8">
-              <Button variant="ghost" asChild className="text-white/70 hover:text-white">
+            <div className="mb-6 sm:mb-8">
+              <Button variant="ghost" asChild className="text-muted-foreground hover:text-foreground">
                 <Link to="/projects">
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Back to Projects
@@ -589,68 +588,67 @@ const ApiTestingPlatform: React.FC = () => {
               </Button>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              {/* Hero Content */}
-              <div className="space-y-8">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2">
-                    <Badge className="bg-teal-500/20 text-teal-300 border-teal-500/30">
-                      <Sparkles className="w-3 h-3 mr-1" />
-                      AI-Powered
-                    </Badge>
-                    <Badge className="bg-indigo-500/20 text-indigo-300 border-indigo-500/30">
-                      <Code className="w-3 h-3 mr-1" />
-                      Developer First
-                    </Badge>
-                  </div>
-                  
-                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
-                    API Testing{' '}
-                    <span className="bg-gradient-to-r from-teal-400 to-indigo-400 bg-clip-text text-transparent">
-                      Revolutionized
-                    </span>
-                  </h1>
-                  
-                  <p className="text-xl text-gray-300 leading-relaxed">
-                    Test your APIs with AI-powered intelligence. Generate test cases automatically, 
-                    detect issues before they happen, and ensure your APIs perform flawlessly with 
-                    comprehensive testing suite.
-                  </p>
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button 
-                    size="lg" 
-                    className="bg-gradient-to-r from-teal-500 to-indigo-500 hover:from-teal-600 hover:to-indigo-600 text-white shadow-lg"
-                    onClick={handleDemoClick}
-                  >
-                    <Rocket className="w-5 h-5 mr-2" />
-                    Start Free Trial
-                  </Button>
-                  <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
-                    <PlayCircle className="w-5 h-5 mr-2" />
-                    Watch Demo
-                  </Button>
-                </div>
-
-                <div className="flex items-center gap-6 text-sm text-gray-400">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-400" />
-                    <span>No credit card required</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-400" />
-                    <span>Setup in under 5 minutes</span>
-                  </div>
-                </div>
+            {/* Hero Content */}
+            <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+              {/* Minimal Badge */}
+              <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md bg-muted border border-border mb-3 sm:mb-6">
+                <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-muted-foreground flex-shrink-0" />
+                <span className="text-xs font-medium text-muted-foreground truncate">
+                  AI-Powered Testing
+                </span>
               </div>
 
-              {/* Animated API Test Runner */}
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-teal-500/20 to-indigo-500/20 rounded-3xl blur-xl"></div>
-                <div className="relative">
-                  <AnimatedApiTestRunner />
+              {/* Headline */}
+              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-foreground mb-2 sm:mb-3 lg:mb-4 leading-tight">
+                API Testing{' '}
+                <span className="text-muted-foreground">
+                  Revolutionized
+                </span>
+              </h1>
+
+              {/* Subheadline */}
+              <p className="text-xs sm:text-sm md:text-base text-muted-foreground mb-3 sm:mb-4 lg:mb-6 max-w-3xl mx-auto leading-relaxed px-2 sm:px-0">
+                Test your APIs with AI-powered intelligence. Generate test cases automatically,
+                detect issues before they happen, and ensure your APIs perform flawlessly.
+              </p>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center items-center px-4 sm:px-0 mb-4 sm:mb-6 lg:mb-8">
+                <Button
+                  size="sm"
+                  className="w-full sm:w-auto min-w-[140px] bg-foreground text-background hover:bg-foreground/90"
+                  onClick={handleDemoClick}
+                >
+                  <Rocket className="w-3 h-3 mr-2" />
+                  Start Free Trial
+                </Button>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="w-full sm:w-auto min-w-[120px] border-foreground text-foreground hover:bg-foreground hover:text-background"
+                >
+                  <PlayCircle className="w-3 h-3 mr-2" />
+                  Watch Demo
+                </Button>
+              </div>
+
+              {/* Trust indicators */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-3 h-3 text-muted-foreground" />
+                  <span>No credit card required</span>
                 </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-3 h-3 text-muted-foreground" />
+                  <span>Setup in under 5 minutes</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Animated API Test Runner */}
+            <div className="relative">
+              <div className="bg-card border border-border rounded-lg shadow-lg">
+                <AnimatedApiTestRunner />
               </div>
             </div>
           </div>
@@ -658,100 +656,96 @@ const ApiTestingPlatform: React.FC = () => {
       </section>
 
       {/* Value Propositions */}
-      <section className="py-16 bg-black/20">
+      <section className="py-8 sm:py-12 lg:py-16 bg-muted/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+          <div className="max-w-5xl mx-auto">
+            {/* Minimal Section Header */}
+            <div className="text-center mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground mb-3">
                 Why Choose Our AI-Powered API Testing Platform?
               </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              <p className="text-sm text-muted-foreground max-w-3xl mx-auto">
                 Transform your API testing workflow with intelligent automation and AI-driven insights for faster, more reliable API validation.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <Card className="bg-gray-800/50 border-gray-700 text-center group hover:bg-gray-800/70 transition-all duration-300">
-                <CardHeader>
-                  <div className="w-16 h-16 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <Brain className="w-8 h-8 text-white" />
+            {/* Values Grid - Mobile-first */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <Card className="border border-border p-3 hover:bg-muted/30 transition-fast">
+                <CardHeader className="p-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-5 h-5 bg-foreground rounded flex items-center justify-center flex-shrink-0">
+                      <Brain className="w-3 h-3 text-background" />
+                    </div>
+                    <h3 className="text-sm font-semibold text-foreground">
+                      AI Test Generation
+                    </h3>
                   </div>
-                  <CardTitle className="text-white text-xl">AI Test Generation</CardTitle>
-                  <CardDescription className="text-gray-400">
+                </CardHeader>
+                <CardContent className="p-3 pt-0">
+                  <p className="text-xs text-muted-foreground leading-relaxed mb-3">
                     Automatically generate comprehensive test cases from your API specifications using advanced AI algorithms.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="text-left space-y-2 text-gray-300 text-sm">
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-teal-400" />
-                      Smart test case generation
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-teal-400" />
-                      Boundary value testing
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-teal-400" />
-                      Edge case detection
-                    </li>
-                  </ul>
+                  </p>
+                  <div className="space-y-1">
+                    {["Smart test case generation", "Boundary value testing", "Edge case detection"].map((item, index) => (
+                      <div key={index} className="flex items-center gap-2">
+                        <CheckCircle className="w-3 h-3 text-muted-foreground flex-shrink-0" />
+                        <span className="text-xs text-muted-foreground">{item}</span>
+                      </div>
+                    ))}
+                  </div>
                 </CardContent>
               </Card>
 
-              <Card className="bg-gray-800/50 border-gray-700 text-center group hover:bg-gray-800/70 transition-all duration-300">
-                <CardHeader>
-                  <div className="w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <Zap className="w-8 h-8 text-white" />
+              <Card className="border border-border p-3 hover:bg-muted/30 transition-fast">
+                <CardHeader className="p-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-5 h-5 bg-foreground rounded flex items-center justify-center flex-shrink-0">
+                      <Zap className="w-3 h-3 text-background" />
+                    </div>
+                    <h3 className="text-sm font-semibold text-foreground">
+                      Lightning Fast
+                    </h3>
                   </div>
-                  <CardTitle className="text-white text-xl">Lightning Fast</CardTitle>
-                  <CardDescription className="text-gray-400">
+                </CardHeader>
+                <CardContent className="p-3 pt-0">
+                  <p className="text-xs text-muted-foreground leading-relaxed mb-3">
                     Execute thousands of tests in seconds with our optimized testing engine and parallel execution.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="text-left space-y-2 text-gray-300 text-sm">
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-indigo-400" />
-                      Parallel test execution
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-indigo-400" />
-                      Sub-second response times
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-indigo-400" />
-                      Optimized test suites
-                    </li>
-                  </ul>
+                  </p>
+                  <div className="space-y-1">
+                    {["Parallel test execution", "Sub-second response times", "Optimized test suites"].map((item, index) => (
+                      <div key={index} className="flex items-center gap-2">
+                        <CheckCircle className="w-3 h-3 text-muted-foreground flex-shrink-0" />
+                        <span className="text-xs text-muted-foreground">{item}</span>
+                      </div>
+                    ))}
+                  </div>
                 </CardContent>
               </Card>
 
-              <Card className="bg-gray-800/50 border-gray-700 text-center group hover:bg-gray-800/70 transition-all duration-300">
-                <CardHeader>
-                  <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <Shield className="w-8 h-8 text-white" />
+              <Card className="border border-border p-3 hover:bg-muted/30 transition-fast">
+                <CardHeader className="p-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-5 h-5 bg-foreground rounded flex items-center justify-center flex-shrink-0">
+                      <Shield className="w-3 h-3 text-background" />
+                    </div>
+                    <h3 className="text-sm font-semibold text-foreground">
+                      Enterprise Security
+                    </h3>
                   </div>
-                  <CardTitle className="text-white text-xl">Enterprise Security</CardTitle>
-                  <CardDescription className="text-gray-400">
-                    Bank-grade security with SOC2 compliance, encrypted data, and secure test execution environments.
-                  </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <ul className="text-left space-y-2 text-gray-300 text-sm">
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-green-400" />
-                      SOC2 Type II compliant
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-green-400" />
-                      End-to-end encryption
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-green-400" />
-                      Zero data retention
-                    </li>
-                  </ul>
+                <CardContent className="p-3 pt-0">
+                  <p className="text-xs text-muted-foreground leading-relaxed mb-3">
+                    Bank-grade security with SOC2 compliance, encrypted data, and secure test execution environments.
+                  </p>
+                  <div className="space-y-1">
+                    {["SOC2 Type II compliant", "End-to-end encryption", "Zero data retention"].map((item, index) => (
+                      <div key={index} className="flex items-center gap-2">
+                        <CheckCircle className="w-3 h-3 text-muted-foreground flex-shrink-0" />
+                        <span className="text-xs text-muted-foreground">{item}</span>
+                      </div>
+                    ))}
+                  </div>
                 </CardContent>
               </Card>
             </div>
@@ -760,62 +754,67 @@ const ApiTestingPlatform: React.FC = () => {
       </section>
 
       {/* How It Works */}
-      <section className="py-16">
+      <section className="py-8 sm:py-12 lg:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+          <div className="max-w-5xl mx-auto">
+            {/* Minimal Section Header */}
+            <div className="text-center mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground mb-3">
                 How It Works
               </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              <p className="text-sm text-muted-foreground max-w-3xl mx-auto">
                 Get started with AI-powered API testing in three simple steps.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="w-20 h-20 bg-gradient-to-r from-teal-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-2xl font-bold text-white">1</span>
-                </div>
-                <h3 className="text-xl font-semibold text-white mb-4">Import Your API</h3>
-                <p className="text-gray-400">
-                  Upload your OpenAPI specification, import from URL, or connect directly to your API endpoints.
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="w-20 h-20 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-2xl font-bold text-white">2</span>
-                </div>
-                <h3 className="text-xl font-semibold text-white mb-4">AI Analysis</h3>
-                <p className="text-gray-400">
-                  Our AI analyzes your API structure and automatically generates comprehensive test cases.
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-2xl font-bold text-white">3</span>
-                </div>
-                <h3 className="text-xl font-semibold text-white mb-4">Run & Monitor</h3>
-                <p className="text-gray-400">
-                  Execute tests, monitor performance, and get intelligent insights to improve your API quality.
-                </p>
-              </div>
+            {/* Steps Grid - Mobile-first */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {[
+                {
+                  number: 1,
+                  title: "Import Your API",
+                  description: "Upload your OpenAPI specification, import from URL, or connect directly to your API endpoints."
+                },
+                {
+                  number: 2,
+                  title: "AI Analysis",
+                  description: "Our AI analyzes your API structure and automatically generates comprehensive test cases."
+                },
+                {
+                  number: 3,
+                  title: "Run & Monitor",
+                  description: "Execute tests, monitor performance, and get intelligent insights to improve your API quality."
+                }
+              ].map((step, index) => (
+                <Card key={index} className="border border-border p-3 text-center hover:bg-muted/30 transition-fast">
+                  <CardContent className="p-0">
+                    <div className="w-6 h-6 bg-foreground rounded flex items-center justify-center mx-auto mb-2">
+                      <span className="text-xs font-bold text-background">{step.number}</span>
+                    </div>
+                    <h4 className="text-sm font-semibold text-foreground mb-2">
+                      {step.title}
+                    </h4>
+                    <p className="text-xs text-muted-foreground">
+                      {step.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       {/* Interactive Sandbox Demo */}
-      <section className="py-16 bg-black/20">
+      <section className="py-8 sm:py-12 lg:py-16 bg-muted/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+          <div className="max-w-5xl mx-auto">
+            {/* Minimal Section Header */}
+            <div className="text-center mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground mb-3">
                 Try It Yourself
               </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              <p className="text-sm text-muted-foreground max-w-3xl mx-auto">
                 Experience the power of AI-driven API testing with our interactive sandbox.
               </p>
             </div>
@@ -826,76 +825,84 @@ const ApiTestingPlatform: React.FC = () => {
       </section>
 
       {/* Features */}
-      <section className="py-16">
+      <section className="py-8 sm:py-12 lg:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+          <div className="max-w-5xl mx-auto">
+            {/* Minimal Section Header */}
+            <div className="text-center mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground mb-3">
                 Comprehensive Features
               </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              <p className="text-sm text-muted-foreground max-w-3xl mx-auto">
                 Everything you need to test, monitor, and optimize your APIs.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Features Grid - Mobile-first */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {[
                 {
-                  icon: <TestTube className="w-6 h-6" />,
+                  icon: TestTube,
                   title: "Smart Test Generation",
                   description: "AI-powered test case generation from API specifications"
                 },
                 {
-                  icon: <Activity className="w-6 h-6" />,
+                  icon: Activity,
                   title: "Real-time Monitoring",
                   description: "Continuous monitoring of API performance and health"
                 },
                 {
-                  icon: <BarChart3 className="w-6 h-6" />,
+                  icon: BarChart3,
                   title: "Advanced Analytics",
                   description: "Detailed insights and performance metrics"
                 },
                 {
-                  icon: <GitBranch className="w-6 h-6" />,
+                  icon: GitBranch,
                   title: "CI/CD Integration",
                   description: "Seamless integration with your development pipeline"
                 },
                 {
-                  icon: <Server className="w-6 h-6" />,
+                  icon: Server,
                   title: "Mock Server",
                   description: "Automatic mock server generation for testing"
                 },
                 {
-                  icon: <Bug className="w-6 h-6" />,
+                  icon: Bug,
                   title: "Issue Detection",
                   description: "Intelligent detection of potential issues"
                 },
                 {
-                  icon: <ShieldCheck className="w-6 h-6" />,
+                  icon: ShieldCheck,
                   title: "Security Testing",
                   description: "Automated security vulnerability scanning"
                 },
                 {
-                  icon: <Globe className="w-6 h-6" />,
+                  icon: Globe,
                   title: "Multi-Protocol",
                   description: "Support for REST, GraphQL, WebSocket, and gRPC"
                 },
                 {
-                  icon: <Users className="w-6 h-6" />,
+                  icon: Users,
                   title: "Team Collaboration",
                   description: "Share tests and collaborate with your team"
                 }
               ].map((feature, index) => (
-                <Card key={index} className="bg-gray-800/50 border-gray-700 hover:bg-gray-800/70 transition-colors">
-                  <CardHeader>
-                    <div className="w-12 h-12 bg-gradient-to-r from-teal-500 to-indigo-500 rounded-lg flex items-center justify-center text-white mb-4">
-                      {feature.icon}
+                <Card key={index} className="border border-border p-3 hover:bg-muted/30 transition-fast">
+                  <CardHeader className="p-3">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-5 h-5 bg-foreground rounded flex items-center justify-center flex-shrink-0">
+                        <feature.icon className="w-3 h-3 text-background" />
+                      </div>
+                      <h3 className="text-sm font-semibold text-foreground">
+                        {feature.title}
+                      </h3>
                     </div>
-                    <CardTitle className="text-white">{feature.title}</CardTitle>
-                    <CardDescription className="text-gray-400">
-                      {feature.description}
-                    </CardDescription>
                   </CardHeader>
+                  <CardContent className="p-3 pt-0">
+                    <p className="text-xs text-muted-foreground">
+                      {feature.description}
+                    </p>
+                  </CardContent>
                 </Card>
               ))}
             </div>
@@ -904,47 +911,47 @@ const ApiTestingPlatform: React.FC = () => {
       </section>
 
       {/* Pricing */}
-      <section className="py-16 bg-black/20">
+      <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
                 Simple, Transparent Pricing
               </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                 Choose the plan that fits your needs. Start free, scale as you grow.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Free Plan */}
-              <Card className="bg-gray-800/50 border-gray-700 relative">
+              <Card className="bg-card border-border relative">
                 <CardHeader className="text-center">
-                  <CardTitle className="text-white text-xl">Free</CardTitle>
-                  <div className="text-4xl font-bold text-white my-4">$0</div>
-                  <CardDescription className="text-gray-400">Perfect for getting started</CardDescription>
+                  <CardTitle className="text-foreground text-xl">Free</CardTitle>
+                  <div className="text-4xl font-bold text-foreground my-4">$0</div>
+                  <CardDescription className="text-muted-foreground">Perfect for getting started</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <ul className="space-y-3">
-                    <li className="flex items-center gap-2 text-gray-300">
-                      <CheckCircle className="w-5 h-5 text-green-400" />
+                    <li className="flex items-center gap-2 text-muted-foreground">
+                      <CheckCircle className="w-5 h-5 text-green-500" />
                       Up to 100 API tests/month
                     </li>
-                    <li className="flex items-center gap-2 text-gray-300">
-                      <CheckCircle className="w-5 h-5 text-green-400" />
+                    <li className="flex items-center gap-2 text-muted-foreground">
+                      <CheckCircle className="w-5 h-5 text-green-500" />
                       Basic AI test generation
                     </li>
-                    <li className="flex items-center gap-2 text-gray-300">
-                      <CheckCircle className="w-5 h-5 text-green-400" />
+                    <li className="flex items-center gap-2 text-muted-foreground">
+                      <CheckCircle className="w-5 h-5 text-green-500" />
                       1 project
                     </li>
-                    <li className="flex items-center gap-2 text-gray-300">
-                      <CheckCircle className="w-5 h-5 text-green-400" />
+                    <li className="flex items-center gap-2 text-muted-foreground">
+                      <CheckCircle className="w-5 h-5 text-green-500" />
                       Community support
                     </li>
                   </ul>
-                  <Button 
-                    className="w-full bg-teal-500 hover:bg-teal-600" 
+                  <Button
+                    className="w-full bg-primary hover:bg-primary/90"
                     onClick={() => handleSignupClick('free')}
                   >
                     Start Free
@@ -953,40 +960,40 @@ const ApiTestingPlatform: React.FC = () => {
               </Card>
 
               {/* Pro Plan */}
-              <Card className="bg-gradient-to-b from-indigo-500/20 to-purple-500/20 border-indigo-500/50 relative transform scale-105">
+              <Card className="bg-card border-primary/50 relative transform scale-105 ring-1 ring-primary/20">
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <Badge className="bg-indigo-500 text-white">Most Popular</Badge>
+                  <Badge className="bg-primary text-primary-foreground">Most Popular</Badge>
                 </div>
                 <CardHeader className="text-center">
-                  <CardTitle className="text-white text-xl">Pro</CardTitle>
-                  <div className="text-4xl font-bold text-white my-4">$29</div>
-                  <CardDescription className="text-gray-400">For growing teams</CardDescription>
+                  <CardTitle className="text-foreground text-xl">Pro</CardTitle>
+                  <div className="text-4xl font-bold text-foreground my-4">$29</div>
+                  <CardDescription className="text-muted-foreground">For growing teams</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <ul className="space-y-3">
-                    <li className="flex items-center gap-2 text-gray-300">
-                      <CheckCircle className="w-5 h-5 text-green-400" />
+                    <li className="flex items-center gap-2 text-muted-foreground">
+                      <CheckCircle className="w-5 h-5 text-green-500" />
                       Unlimited API tests
                     </li>
-                    <li className="flex items-center gap-2 text-gray-300">
-                      <CheckCircle className="w-5 h-5 text-green-400" />
+                    <li className="flex items-center gap-2 text-muted-foreground">
+                      <CheckCircle className="w-5 h-5 text-green-500" />
                       Advanced AI features
                     </li>
-                    <li className="flex items-center gap-2 text-gray-300">
-                      <CheckCircle className="w-5 h-5 text-green-400" />
+                    <li className="flex items-center gap-2 text-muted-foreground">
+                      <CheckCircle className="w-5 h-5 text-green-500" />
                       Unlimited projects
                     </li>
-                    <li className="flex items-center gap-2 text-gray-300">
-                      <CheckCircle className="w-5 h-5 text-green-400" />
+                    <li className="flex items-center gap-2 text-muted-foreground">
+                      <CheckCircle className="w-5 h-5 text-green-500" />
                       CI/CD integration
                     </li>
-                    <li className="flex items-center gap-2 text-gray-300">
-                      <CheckCircle className="w-5 h-5 text-green-400" />
+                    <li className="flex items-center gap-2 text-muted-foreground">
+                      <CheckCircle className="w-5 h-5 text-green-500" />
                       Priority support
                     </li>
                   </ul>
-                  <Button 
-                    className="w-full bg-indigo-500 hover:bg-indigo-600" 
+                  <Button
+                    className="w-full bg-primary hover:bg-primary/90"
                     onClick={() => handleSignupClick('pro')}
                   >
                     Get Pro
@@ -995,37 +1002,37 @@ const ApiTestingPlatform: React.FC = () => {
               </Card>
 
               {/* Team Plan */}
-              <Card className="bg-gray-800/50 border-gray-700 relative">
+              <Card className="bg-card border-border relative">
                 <CardHeader className="text-center">
-                  <CardTitle className="text-white text-xl">Team</CardTitle>
-                  <div className="text-4xl font-bold text-white my-4">$99</div>
-                  <CardDescription className="text-gray-400">For large organizations</CardDescription>
+                  <CardTitle className="text-foreground text-xl">Team</CardTitle>
+                  <div className="text-4xl font-bold text-foreground my-4">$99</div>
+                  <CardDescription className="text-muted-foreground">For large organizations</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <ul className="space-y-3">
-                    <li className="flex items-center gap-2 text-gray-300">
-                      <CheckCircle className="w-5 h-5 text-green-400" />
+                    <li className="flex items-center gap-2 text-muted-foreground">
+                      <CheckCircle className="w-5 h-5 text-green-500" />
                       Everything in Pro
                     </li>
-                    <li className="flex items-center gap-2 text-gray-300">
-                      <CheckCircle className="w-5 h-5 text-green-400" />
+                    <li className="flex items-center gap-2 text-muted-foreground">
+                      <CheckCircle className="w-5 h-5 text-green-500" />
                       Team collaboration
                     </li>
-                    <li className="flex items-center gap-2 text-gray-300">
-                      <CheckCircle className="w-5 h-5 text-green-400" />
+                    <li className="flex items-center gap-2 text-muted-foreground">
+                      <CheckCircle className="w-5 h-5 text-green-500" />
                       Advanced analytics
                     </li>
-                    <li className="flex items-center gap-2 text-gray-300">
-                      <CheckCircle className="w-5 h-5 text-green-400" />
+                    <li className="flex items-center gap-2 text-muted-foreground">
+                      <CheckCircle className="w-5 h-5 text-green-500" />
                       SSO integration
                     </li>
-                    <li className="flex items-center gap-2 text-gray-300">
-                      <CheckCircle className="w-5 h-5 text-green-400" />
+                    <li className="flex items-center gap-2 text-muted-foreground">
+                      <CheckCircle className="w-5 h-5 text-green-500" />
                       Dedicated support
                     </li>
                   </ul>
-                  <Button 
-                    className="w-full bg-purple-500 hover:bg-purple-600" 
+                  <Button
+                    className="w-full bg-secondary hover:bg-secondary/90"
                     onClick={() => handleSignupClick('team')}
                   >
                     Contact Sales
@@ -1042,10 +1049,10 @@ const ApiTestingPlatform: React.FC = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
                 What Our Users Say
               </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                 Join thousands of developers who have transformed their API testing workflow.
               </p>
             </div>
@@ -1074,17 +1081,17 @@ const ApiTestingPlatform: React.FC = () => {
                   rating: 5
                 }
               ].map((testimonial, index) => (
-                <Card key={index} className="bg-gray-800/50 border-gray-700">
+                <Card key={index} className="bg-card border-border">
                   <CardContent className="p-6">
                     <div className="flex items-center gap-1 mb-4">
                       {[...Array(testimonial.rating)].map((_, i) => (
                         <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                       ))}
                     </div>
-                    <p className="text-gray-300 mb-4 italic">"{testimonial.content}"</p>
+                    <p className="text-muted-foreground mb-4 italic">"{testimonial.content}"</p>
                     <div>
-                      <div className="font-semibold text-white">{testimonial.name}</div>
-                      <div className="text-sm text-gray-400">{testimonial.role} at {testimonial.company}</div>
+                      <div className="font-semibold text-foreground">{testimonial.name}</div>
+                      <div className="text-sm text-muted-foreground">{testimonial.role} at {testimonial.company}</div>
                     </div>
                   </CardContent>
                 </Card>

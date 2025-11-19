@@ -1,65 +1,24 @@
 User-agent: *
 Allow: /
 
+# Explicitly allow AI bots and others
+User-agent: GPTBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Sitemap
 Sitemap: https://ladestack.in/sitemap.xml
-
-# Google AdsBot
-User-agent: AdsBot-Google
-Allow: /
-
-# Google AdSense
-User-agent: Mediapartners-Google
-Allow: /
-
-# Google Image Crawler
-User-agent: Googlebot-Image
-Allow: /
-
-# Bing Bot
-User-agent: Bingbot
-Allow: /
-
-# Yahoo Bot
-User-agent: Slurp
-Allow: /
-
-# DuckDuckGo Bot
-User-agent: DuckDuckBot
-Allow: /
-
-# Yandex Bot
-User-agent: Yandex
-Allow: /
-
-# Baidu Bot
-User-agent: Baiduspider
-Allow: /
-
-# Sogou Bot
-User-agent: Sogou web spider
-Allow: /
-
-# 360 Spider
-User-agent: 360Spider
-Allow: /
-
-#Disallow crawling of common sensitive files
-Disallow: /admin/
-Disallow: /api/
-Disallow: /cgi-bin/
-Disallow: /includes/
-Disallow: /logs/
-Disallow: /private/
-Disallow: /tmp/
-Disallow: /backup/
-
-# Crawl delay for search engines
-Crawl-delay: 10
-
-# Host
-Host: https://ladestack.in
-
-# Sitemaps for different content types
-Sitemap: https://ladestack.in/sitemap.xml
-Sitemap: https://ladestack.in/sitemap-pages.xml
-Sitemap: https://ladestack.in/sitemap-blog.xml
