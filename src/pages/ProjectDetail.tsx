@@ -17,7 +17,7 @@ const projects = [
     coverImage: "/api-testing-project.svg",
     features: ["AI Test Generation", "Real-time Monitoring", "Performance Analytics"],
     status: "Live",
-    stats: { users: "10k+", time: "5m", rating: "4.9" },
+    stats: { users: "10k+", time: "5m", rating: "4.9", uptime: "99.9%" },
     useCases: ["Enterprise API Testing", "CI/CD Integration"],
     integrations: ["GitHub", "GitLab", "Jenkins"]
   },
@@ -31,7 +31,7 @@ const projects = [
     coverImage: "/website-builder-project.svg",
     features: ["AI Layout Generation", "Smart Content Writing", "Responsive Design"],
     status: "Beta",
-    stats: { users: "5k+", time: "10m", rating: "4.8" },
+    stats: { users: "5k+", time: "10m", rating: "4.8", uptime: "99.5%" },
     useCases: ["Portfolio Creation", "Landing Pages"],
     integrations: ["Stripe", "Mailchimp"]
   },
@@ -45,7 +45,7 @@ const projects = [
     coverImage: "/file-management-project.svg",
     features: ["Auto-tagging", "Smart Search", "Secure Sharing"],
     status: "Live",
-    stats: { users: "8k+", time: "2m", rating: "4.7" },
+    stats: { users: "8k+", time: "2m", rating: "4.7", uptime: "99.8%" },
     useCases: ["Enterprise Document Management", "Team Collaboration"],
     integrations: ["Google Drive", "Dropbox"]
   },
@@ -59,7 +59,7 @@ const projects = [
     coverImage: "/documentation-ai-project.svg",
     features: ["Code Analysis", "Auto-updates", "Multi-language Support"],
     status: "Live",
-    stats: { users: "12k+", time: "5m", rating: "4.9" },
+    stats: { users: "12k+", time: "5m", rating: "4.9", uptime: "99.9%" },
     useCases: ["Library Documentation", "Internal Wikis"],
     integrations: ["GitHub", "VS Code"]
   },
@@ -73,7 +73,7 @@ const projects = [
     coverImage: "/ai-code-viewer-project.svg",
     features: ["Visual Flowcharts", "Logic Explanation", "Dependency Mapping"],
     status: "Beta",
-    stats: { users: "3k+", time: "1m", rating: "4.6" },
+    stats: { users: "3k+", time: "1m", rating: "4.6", uptime: "99.7%" },
     useCases: ["Code Onboarding", "Legacy Code Analysis"],
     integrations: ["VS Code", "IntelliJ"]
   }
@@ -81,6 +81,7 @@ const projects = [
 
 const ProjectDetail = () => {
   const { projectId } = useParams();
+  const project = projects.find(p => p.id === projectId);
 
   if (!project) {
     return (
@@ -238,16 +239,14 @@ const ProjectDetail = () => {
         </section>
 
         {/* Bento Image Grid - Project Specific */}
-        <section className="py-8 sm:py-12 border-t border-border">
+        {/* Temporarily disabled - BentoImageGrid component not found */}
+        {/* <section className="py-8 sm:py-12 border-t border-border">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-lg font-semibold text-foreground mb-6">Visual Interface Showcase</h2>
-              <BentoImageGrid
-                images={getProjectImages(projectId || "api-testing")}
-              />
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Use Cases */}
         <section className="py-8 sm:py-12 border-t border-border">

@@ -16,7 +16,15 @@ const AICodeViewerAI = () => {
   const [email, setEmail] = useState('');
   const [betaEmail, setBetaEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const { theme } = useTheme();
+  
+  // Safely get theme with error handling
+  let theme = 'dark';
+  try {
+    const themeContext = useTheme();
+    theme = themeContext.theme;
+  } catch (error) {
+    console.error('Theme context error:', error);
+  }
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,6 +63,9 @@ const AICodeViewerAI = () => {
     }
   ];
 
+  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://ladestack.in';
+  const currentUrl = typeof window !== 'undefined' ? window.location.href : 'https://ladestack.in/ai-code-viewer-ai';
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       <SEO
@@ -64,7 +75,7 @@ const AICodeViewerAI = () => {
         ogTitle="CodeEnhance AI - AI-Powered Frontend Development Tool"
         ogDescription="Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance."
         ogType="website"
-        ogImage={`${window.location.origin}/AIcode.png`}
+        ogImage={`${origin}/AIcode.png`}
         twitterCard="summary_large_image"
         twitterTitle="CodeEnhance AI - AI-Powered Frontend Development"
         twitterDescription="Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance."
@@ -73,7 +84,7 @@ const AICodeViewerAI = () => {
           "@type": "SoftwareApplication",
           "name": "CodeEnhance AI",
           "description": "AI-powered HTML, CSS & JS code viewer, compiler, editor, and enhancer for modern web development",
-          "url": window.location.href,
+          "url": currentUrl,
           "applicationCategory": "DeveloperApplication",
           "operatingSystem": "Web Browser",
           "offers": {
@@ -575,15 +586,17 @@ const AICodeViewerAI = () => {
               >
                 <div className="flex flex-col md:flex-row items-center gap-8">
                   <div className="flex-shrink-0">
-                    <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-green-500 rounded-full flex items-center justify-center">
+                    <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-green-500 rounded-full flex items-center justify-center overflow-hidden">
                       <img
                         src={girishImage}
                         alt="Girish Lade"
-                        className="w-30 h-30 rounded-full object-cover"
+                        className="w-full h-full object-cover"
                         loading="lazy"
                         onError={(e) => {
-                          e.currentTarget.style.display = 'none';
-                          e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                          const target = e.currentTarget as HTMLImageElement;
+                          target.style.display = 'none';
+                          const fallback = target.nextElementSibling as HTMLElement;
+                          if (fallback) fallback.classList.remove('hidden');
                         }}
                       />
                       <span className="text-3xl font-bold text-white hidden">GL</span>

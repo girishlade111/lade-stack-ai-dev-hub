@@ -61,6 +61,9 @@ const SEO = ({
       element.setAttribute('href', href);
     };
 
+    // Get current URL safely
+    const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+
     // Basic Meta Tags
     updateMeta('description', description || '');
     updateMeta('keywords', keywords || '');
@@ -69,7 +72,7 @@ const SEO = ({
     updateMeta('og:title', ogTitle || title, 'property');
     updateMeta('og:description', ogDescription || description || '', 'property');
     updateMeta('og:image', ogImage || '', 'property');
-    updateMeta('og:url', ogUrl || window.location.href, 'property');
+    updateMeta('og:url', ogUrl || currentUrl, 'property');
     updateMeta('og:type', ogType, 'property');
     updateMeta('og:site_name', 'Lade Stack', 'property');
 
@@ -80,7 +83,7 @@ const SEO = ({
     updateMeta('twitter:image', twitterImage || ogImage || '');
 
     // Canonical
-    updateLink('canonical', canonicalUrl || window.location.href);
+    updateLink('canonical', canonicalUrl || currentUrl);
 
     // Structured Data (JSON-LD)
     const existingScripts = document.querySelectorAll('script[type="application/ld+json"][data-generated="true"]');
