@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import SEO from "@/components/SEO";
 import {
   Search,
   Clock,
@@ -65,7 +66,7 @@ import appsData from '@/data/apps.json';
 const AppsGallery: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  
+
   // State
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -87,35 +88,35 @@ const AppsGallery: React.FC = () => {
     const search = params.get('search') || '';
     const category = params.get('category');
     const sort = params.get('sort') as 'relevance' | 'newest' | 'az' || 'relevance';
-    
+
     setSearchQuery(search);
-    
+
     if (category) {
       setSelectedCategories([category]);
     }
-    
+
     setSortBy(sort);
   }, [location.search]);
 
   // Update URL params when filters change
   useEffect(() => {
     const params = new URLSearchParams();
-    
+
     if (searchQuery) params.set('search', searchQuery);
     if (selectedCategories.length > 0) params.set('category', selectedCategories[0]);
     if (sortBy !== 'relevance') params.set('sort', sortBy);
-    
+
     navigate(`/apps?${params.toString()}`, { replace: true });
   }, [searchQuery, selectedCategories, sortBy, navigate]);
 
   // Filter and sort apps
   const filteredApps = useMemo(() => {
     let result = [...appsData];
-    
+
     // Apply search filter
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      result = result.filter(app => 
+      result = result.filter(app =>
         app.title.toLowerCase().includes(query) ||
         app.tagline.toLowerCase().includes(query) ||
         app.description.toLowerCase().includes(query) ||
@@ -123,24 +124,24 @@ const AppsGallery: React.FC = () => {
         app.integrations.some(integration => integration.toLowerCase().includes(query))
       );
     }
-    
+
     // Apply category filter
     if (selectedCategories.length > 0) {
       result = result.filter(app => selectedCategories.includes(app.category));
     }
-    
+
     // Apply popular filter
     if (isPopular) {
       result = result.filter(app => app.popularityScore > 80);
     }
-    
+
     // Apply new filter
     if (isNew) {
       const thirtyDaysAgo = new Date();
       thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
       result = result.filter(app => new Date(app.createdAt) > thirtyDaysAgo);
     }
-    
+
     // Apply sorting
     switch (sortBy) {
       case 'newest':
@@ -160,20 +161,20 @@ const AppsGallery: React.FC = () => {
               a.description,
               ...a.features,
               ...a.integrations
-            ].filter(item => 
+            ].filter(item =>
               item.toLowerCase().includes(searchQuery.toLowerCase())
             ).length;
-            
+
             const bMatches = [
               b.title,
               b.tagline,
               b.description,
               ...b.features,
               ...b.integrations
-            ].filter(item => 
+            ].filter(item =>
               item.toLowerCase().includes(searchQuery.toLowerCase())
             ).length;
-            
+
             return bMatches - aMatches || b.popularityScore - a.popularityScore;
           });
         } else {
@@ -181,7 +182,7 @@ const AppsGallery: React.FC = () => {
         }
         break;
     }
-    
+
     return result;
   }, [searchQuery, selectedCategories, sortBy, isPopular, isNew]);
 
@@ -208,9 +209,14 @@ const AppsGallery: React.FC = () => {
 
   return (
     <>
+      <SEO
+        title="Apps Gallery - Lade Stack"
+        description="Discover our collection of lifetime-free tools designed to enhance your development workflow."
+        keywords="apps gallery, developer tools, free tools, web development, Lade Stack apps"
+      />
       <Header />
       <main className="min-h-screen bg-background pt-14 sm:pt-16 lg:pt-20">
-        <div className="container mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 py-8">
+        <div className="container mx-auto px-5 sm:px-6 lg:px-8 py-8">
           {/* Hero Section */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -286,9 +292,8 @@ const AppsGallery: React.FC = () => {
                     variant="ghost"
                     size="sm"
                     onClick={() => setViewMode('grid')}
-                    className={`h-8 sm:h-10 lg:h-12 w-8 sm:w-10 lg:w-12 rounded-md transition-fast ${
-                      viewMode === 'grid' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
-                    }`}
+                    className={`h-8 sm:h-10 lg:h-12 w-8 sm:w-10 lg:w-12 rounded-md transition-fast ${viewMode === 'grid' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
+                      }`}
                   >
                     <Grid className="h-4 w-4 sm:h-5 sm:w-5" />
                   </Button>
@@ -296,9 +301,8 @@ const AppsGallery: React.FC = () => {
                     variant="ghost"
                     size="sm"
                     onClick={() => setViewMode('list')}
-                    className={`h-8 sm:h-10 lg:h-12 w-8 sm:w-10 lg:w-12 rounded-md transition-fast ${
-                      viewMode === 'list' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
-                    }`}
+                    className={`h-8 sm:h-10 lg:h-12 w-8 sm:w-10 lg:w-12 rounded-md transition-fast ${viewMode === 'list' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
+                      }`}
                   >
                     <List className="h-4 w-4 sm:h-5 sm:w-5" />
                   </Button>
@@ -341,9 +345,9 @@ const AppsGallery: React.FC = () => {
                           ))}
                         </div>
                       </div>
-                      
+
                       <Separator className="bg-border" />
-                      
+
                       <div>
                         <h3 className="text-sm font-medium text-foreground mb-3">Special Filters</h3>
                         <div className="flex flex-col gap-3">
@@ -380,8 +384,8 @@ const AppsGallery: React.FC = () => {
                     </div>
                   </DialogContent>
                 </Dialog>
+              </div>
             </div>
-          </div>
 
             {/* Category Chips - Desktop */}
             <div className="hidden lg:flex flex-wrap gap-3 mt-6">
@@ -389,11 +393,10 @@ const AppsGallery: React.FC = () => {
                 <Badge
                   key={category}
                   variant="outline"
-                  className={`cursor-pointer transition-all h-9 px-4 text-sm rounded-full border ${
-                    selectedCategories.includes(category)
-                      ? 'bg-primary border-primary text-primary-foreground'
-                      : 'bg-background border-border text-foreground hover:bg-muted'
-                  }`}
+                  className={`cursor-pointer transition-all h-9 px-4 text-sm rounded-full border ${selectedCategories.includes(category)
+                    ? 'bg-primary border-primary text-primary-foreground'
+                    : 'bg-background border-border text-foreground hover:bg-muted'
+                    }`}
                   onClick={() => toggleCategory(category)}
                 >
                   {category}
@@ -402,27 +405,25 @@ const AppsGallery: React.FC = () => {
                   )}
                 </Badge>
               ))}
-              
+
               <Badge
                 variant="outline"
-                className={`cursor-pointer transition-all h-9 px-4 text-sm rounded-full border ${
-                  isPopular
-                    ? 'bg-primary border-primary text-primary-foreground'
-                    : 'bg-background border-border text-foreground hover:bg-muted'
-                }`}
+                className={`cursor-pointer transition-all h-9 px-4 text-sm rounded-full border ${isPopular
+                  ? 'bg-primary border-primary text-primary-foreground'
+                  : 'bg-background border-border text-foreground hover:bg-muted'
+                  }`}
                 onClick={() => setIsPopular(!isPopular)}
               >
                 Popular
                 {isPopular && <X className="ml-2 h-4 w-4" />}
               </Badge>
-              
+
               <Badge
                 variant="outline"
-                className={`cursor-pointer transition-all h-9 px-4 text-sm rounded-full border ${
-                  isNew
-                    ? 'bg-primary border-primary text-primary-foreground'
-                    : 'bg-background border-border text-foreground hover:bg-muted'
-                }`}
+                className={`cursor-pointer transition-all h-9 px-4 text-sm rounded-full border ${isNew
+                  ? 'bg-primary border-primary text-primary-foreground'
+                  : 'bg-background border-border text-foreground hover:bg-muted'
+                  }`}
                 onClick={() => setIsNew(!isNew)}
               >
                 New
@@ -557,11 +558,11 @@ const AppsGallery: React.FC = () => {
                               <p className="text-sm text-muted-foreground leading-relaxed">{app.tagline}</p>
                             </div>
                           </div>
-                          
+
                           <p className="text-sm text-muted-foreground mb-4 leading-relaxed flex-grow line-clamp-3">
                             {app.description}
                           </p>
-                          
+
                           <div className="flex flex-wrap gap-2 mb-4">
                             {app.lifetimeFree && (
                               <Badge className="bg-green-100 text-green-700 text-xs h-6 px-2 rounded-full">
@@ -572,7 +573,7 @@ const AppsGallery: React.FC = () => {
                               {app.category}
                             </Badge>
                           </div>
-                          
+
                           <div className="flex items-center justify-between text-xs text-muted-foreground mb-4 pb-3 border-b border-border">
                             <div className="flex items-center gap-1.5">
                               <Clock className="w-3.5 h-3.5" />
@@ -590,7 +591,7 @@ const AppsGallery: React.FC = () => {
                               )}
                             </div>
                           </div>
-                          
+
                           <div className="flex items-center justify-between mt-auto pt-2">
                             <div className="flex items-center gap-1.5 text-muted-foreground">
                               <Star className="w-4 h-4 fill-current text-yellow-400" />

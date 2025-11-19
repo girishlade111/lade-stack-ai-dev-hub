@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import SEO from "@/components/SEO";
 import { Mail, MessageCircle, BookOpen, Clock, User, Zap, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
@@ -79,18 +80,23 @@ const Support = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Support Center - Lade Stack"
+        description="Get help with Lade Stack's platform, troubleshoot issues, and find answers to common questions."
+        keywords="support, help center, customer service, troubleshooting, FAQ, Lade Stack support"
+      />
       <Header />
       <main className="pt-24 pb-16">
         {/* Hero Section */}
         <section className="py-12 sm:py-16 lg:py-20 bg-gradient-subtle">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
                 Support <span className="bg-gradient-primary bg-clip-text text-transparent">Center</span>
               </h1>
               <div className="w-16 sm:w-20 h-1 bg-gradient-primary mx-auto mb-6 rounded-full" />
               <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto">
-                Get help with our platform, troubleshoot issues, and find answers to common questions. 
+                Get help with our platform, troubleshoot issues, and find answers to common questions.
                 Our support team is here to assist you every step of the way.
               </p>
             </div>
@@ -99,7 +105,7 @@ const Support = () => {
 
         {/* Support Options */}
         <section className="py-12 sm:py-16">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-12">
                 <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
@@ -112,8 +118,8 @@ const Support = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
                 {supportOptions.map((option, index) => (
-                  <div 
-                    key={index} 
+                  <div
+                    key={index}
                     className="bg-card rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-medium border border-border hover:shadow-large transition-smooth"
                   >
                     <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center mb-6">
@@ -141,7 +147,7 @@ const Support = () => {
 
         {/* FAQ Section */}
         <section className="py-12 sm:py-16 bg-gradient-subtle">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-12">
                 <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
@@ -155,8 +161,8 @@ const Support = () => {
 
               <div className="space-y-4 sm:space-y-6">
                 {faqs.map((faq, index) => (
-                  <div 
-                    key={index} 
+                  <div
+                    key={index}
                     className="bg-card rounded-lg sm:rounded-xl p-5 sm:p-6 shadow-subtle border border-border"
                   >
                     <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">
@@ -170,8 +176,8 @@ const Support = () => {
               </div>
 
               <div className="text-center mt-10">
-                <Link 
-                  to="/contact" 
+                <Link
+                  to="/contact"
                   className="inline-flex items-center px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
                 >
                   Contact Support Team
@@ -183,7 +189,7 @@ const Support = () => {
 
         {/* Help Topics */}
         <section className="py-12 sm:py-16">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-12">
                 <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
@@ -196,8 +202,8 @@ const Support = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
                 {helpTopics.map((topic, index) => (
-                  <div 
-                    key={index} 
+                  <div
+                    key={index}
                     className="bg-card rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-medium border border-border hover:shadow-large transition-smooth"
                   >
                     <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center mb-6">
@@ -221,14 +227,14 @@ const Support = () => {
 
         {/* Community Support */}
         <section className="py-12 sm:py-16 bg-gradient-subtle">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
               <div className="bg-card rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-medium border border-border text-center">
                 <h3 className="text-2xl font-bold text-foreground mb-4">
                   Community Support
                 </h3>
                 <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                  Join our developer community to connect with other users, share knowledge, 
+                  Join our developer community to connect with other users, share knowledge,
                   and get help from our community experts.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">

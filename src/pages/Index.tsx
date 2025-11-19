@@ -4,21 +4,16 @@ import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import ProjectShowcase from "@/components/ProjectShowcase";
 import Footer from "@/components/Footer";
-import { useEffect } from "react";
-
-// SEO optimization - lightweight alternative to DOM manipulation
-const useSeoMeta = () => {
-  useEffect(() => {
-    // Only update title, let HTML meta tags handle SEO
-    document.title = "Lade Stack - AI-Powered Development Tools & Modern Developer Hub";
-  }, []);
-};
+import SEO from "@/components/SEO";
 
 const Index = () => {
-  useSeoMeta();
-
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Lade Stack - AI-Powered Development Tools & Modern Developer Hub"
+        description="The complete AI-powered development platform with intelligent tools for coding, API testing, website building, and more. Built for modern developers."
+        keywords="AI development tools, developer hub, API testing, website builder, code viewer, Lade Stack, Girish Lade"
+      />
       <Header />
       <main>
         <HeroSection />

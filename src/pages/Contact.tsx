@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import SEO from "@/components/SEO";
 import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,106 +8,40 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const Contact = () => {
-  useEffect(() => {
-    // SEO Meta Tags
-    document.title = "Contact Lade Stack - Get in Touch for AI Development Support";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Get in touch with Lade Stack for AI development support, technical assistance, and enterprise solutions. Our team responds within 24 hours.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Get in touch with Lade Stack for AI development support, technical assistance, and enterprise solutions. Our team responds within 24 hours.';
-      document.head.appendChild(meta);
-    }
-
-    // Keywords
-    const metaKeywords = document.querySelector('meta[name="keywords"]');
-    if (metaKeywords) {
-      metaKeywords.setAttribute('content', 'Lade Stack contact, AI development support, technical assistance, enterprise solutions, customer support, software development help');
-    } else {
-      const keywordsMeta = document.createElement('meta');
-      keywordsMeta.name = 'keywords';
-      keywordsMeta.content = 'Lade Stack contact, AI development support, technical assistance, enterprise solutions, customer support, software development help';
-      document.head.appendChild(keywordsMeta);
-    }
-
-    // Open Graph Meta Tags
-    const updateMetaTag = (property: string, content: string) => {
-      let tag = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement;
-      if (!tag) {
-        tag = document.createElement('meta');
-        tag.setAttribute('property', property);
-        document.head.appendChild(tag);
-      }
-      tag.content = content;
-    };
-
-    updateMetaTag('og:title', 'Contact Lade Stack - Get in Touch for AI Development Support');
-    updateMetaTag('og:description', 'Get in touch with Lade Stack for AI development support, technical assistance, and enterprise solutions.');
-    updateMetaTag('og:type', 'website');
-    updateMetaTag('og:url', window.location.href);
-    updateMetaTag('og:image', `${window.location.origin}/og-contact.png`);
-
-    // Twitter Meta Tags
-    const updateTwitterMeta = (name: string, content: string) => {
-      let tag = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
-      if (!tag) {
-        tag = document.createElement('meta');
-        tag.setAttribute('name', name);
-        document.head.appendChild(tag);
-      }
-      tag.content = content;
-    };
-
-    updateTwitterMeta('twitter:card', 'summary_large_image');
-    updateTwitterMeta('twitter:title', 'Contact Lade Stack - AI Development Support');
-    updateTwitterMeta('twitter:description', 'Get in touch for AI development support and technical assistance.');
-
-    // JSON-LD Structured Data
-    const contactStructuredData = {
-      "@context": "https://schema.org",
-      "@type": "ContactPage",
-      "name": "Contact Lade Stack",
-      "description": "Get in touch with Lade Stack for AI development support, technical assistance, and enterprise solutions.",
-      "url": "https://ladestack.in/contact",
-      "mainEntity": {
-        "@type": "Organization",
-        "name": "Lade Stack",
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "email": "girishlade111@gmail.com",
-          "contactType": "customer support",
-          "availableLanguage": "English",
-          "hoursAvailable": {
-            "@type": "OpeningHours",
-            "dayOfWeek": [
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday"
-            ],
-            "opens": "09:00",
-            "closes": "18:00"
-          }
+  const contactStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact Lade Stack",
+    "description": "Get in touch with Lade Stack for AI development support, technical assistance, and enterprise solutions.",
+    "url": "https://ladestack.in/contact",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "Lade Stack",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "girishlade111@gmail.com",
+        "contactType": "customer support",
+        "availableLanguage": "English",
+        "hoursAvailable": {
+          "@type": "OpeningHours",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "09:00",
+          "closes": "18:00"
         }
-      },
-      "potentialAction": {
-        "@type": "ContactAction",
-        "target": "https://ladestack.in/contact"
       }
-    };
-
-    let scriptTag = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement;
-    if (!scriptTag) {
-      scriptTag = document.createElement('script') as HTMLScriptElement;
-      scriptTag.type = 'application/ld+json';
-      document.head.appendChild(scriptTag);
+    },
+    "potentialAction": {
+      "@type": "ContactAction",
+      "target": "https://ladestack.in/contact"
     }
-    scriptTag.textContent = JSON.stringify(contactStructuredData);
+  };
 
-  }, []);
   const contactInfo = [
     {
       icon: Mail,
@@ -156,6 +90,20 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Contact Lade Stack - Get in Touch for AI Development Support"
+        description="Get in touch with Lade Stack for AI development support, technical assistance, and enterprise solutions. Our team responds within 24 hours."
+        keywords="Lade Stack contact, AI development support, technical assistance, enterprise solutions, customer support, software development help"
+        ogTitle="Contact Lade Stack - Get in Touch for AI Development Support"
+        ogDescription="Get in touch with Lade Stack for AI development support, technical assistance, and enterprise solutions."
+        ogType="website"
+        ogUrl={window.location.href}
+        ogImage={`${window.location.origin}/og-contact.png`}
+        twitterCard="summary_large_image"
+        twitterTitle="Contact Lade Stack - AI Development Support"
+        twitterDescription="Get in touch for AI development support and technical assistance."
+        structuredData={contactStructuredData}
+      />
       <Header />
       <main className="pt-16">
         {/* Hero Section */}
@@ -182,7 +130,7 @@ const Contact = () => {
                   <h2 className="text-lg font-semibold text-foreground mb-4">
                     Contact Information
                   </h2>
-                  
+
                   <div className="space-y-4">
                     {contactInfo.map((info, index) => (
                       <div key={index} className="flex items-start gap-3">
@@ -228,7 +176,7 @@ const Contact = () => {
                   <h2 className="text-lg font-semibold text-foreground mb-4">
                     Send us a Message
                   </h2>
-                  
+
                   <div className="border border-border rounded-lg p-4">
                     <form className="space-y-3">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -253,7 +201,7 @@ const Contact = () => {
                           />
                         </div>
                       </div>
-                      
+
                       <div>
                         <label htmlFor="email" className="block text-xs font-medium text-foreground mb-1">
                           Email Address
@@ -265,7 +213,7 @@ const Contact = () => {
                           className="text-xs"
                         />
                       </div>
-                      
+
                       <div>
                         <label htmlFor="subject" className="block text-xs font-medium text-foreground mb-1">
                           Subject
@@ -276,7 +224,7 @@ const Contact = () => {
                           className="text-xs"
                         />
                       </div>
-                      
+
                       <div>
                         <label htmlFor="message" className="block text-xs font-medium text-foreground mb-1">
                           Message
@@ -288,13 +236,13 @@ const Contact = () => {
                           className="text-xs"
                         />
                       </div>
-                      
+
                       <Button size="sm" className="w-full text-xs">
                         Send Message
                         <Send className="w-3 h-3 ml-1" />
                       </Button>
                     </form>
-                    
+
                     <div className="mt-3 text-center">
                       <Link to="/projects" className="text-xs text-muted-foreground hover:underline">
                         Learn more about our projects
@@ -358,7 +306,7 @@ const Contact = () => {
                     Live Chat
                   </Button>
                 </div>
-                
+
                 <div className="mt-3">
                   <Link to="/about" className="text-xs text-muted-foreground hover:underline">
                     Learn more about our company

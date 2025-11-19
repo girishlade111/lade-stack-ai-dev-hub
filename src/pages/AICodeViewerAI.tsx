@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
+import SEO from "@/components/SEO";
 import { ArrowLeft, ExternalLink, Play, Sparkles, Zap, Brain, Code2, Monitor, Eye, Mail, Github, Linkedin, X, Users, Gift, Star, TrendingUp, Clock, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -31,117 +32,6 @@ const AICodeViewerAI = () => {
     setTimeout(() => setIsSubmitted(false), 3000);
   };
 
-  // SEO Meta Tags Implementation - SSR-safe
-  useEffect(() => {
-    // Check if we're in the browser
-    if (typeof window === 'undefined' || typeof document === 'undefined') {
-      return;
-    }
-
-    try {
-      // Page Title
-      document.title = "CodeEnhance AI - AI-Powered HTML, CSS & JS Code Viewer, Compiler, Editor & Enhancer";
-
-      // Meta Description
-      const metaDescription = document.querySelector('meta[name="description"]');
-      if (metaDescription) {
-        metaDescription.setAttribute('content', 'Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance. The ultimate development tool for modern web creators.');
-      } else {
-        const meta = document.createElement('meta');
-        meta.name = 'description';
-        meta.content = 'Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance. The ultimate development tool for modern web creators.';
-        document.head.appendChild(meta);
-      }
-
-      // Keywords
-      const metaKeywords = document.querySelector('meta[name="keywords"]');
-      if (metaKeywords) {
-        metaKeywords.setAttribute('content', 'AI code enhancer, HTML CSS JS compiler, code editor, frontend development, AI code viewer, web development tools, code optimization, AI development');
-      } else {
-        const keywordsMeta = document.createElement('meta');
-        keywordsMeta.name = 'keywords';
-        keywordsMeta.content = 'AI code enhancer, HTML CSS JS compiler, code editor, frontend development, AI code viewer, web development tools, code optimization, AI development';
-        document.head.appendChild(keywordsMeta);
-      }
-
-      // Open Graph Meta Tags
-      const updateMetaTag = (property: string, content: string) => {
-        let tag = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement;
-        if (!tag) {
-          tag = document.createElement('meta');
-          tag.setAttribute('property', property);
-          document.head.appendChild(tag);
-        }
-        tag.content = content;
-      };
-
-      updateMetaTag('og:title', 'CodeEnhance AI - AI-Powered Frontend Development Tool');
-      updateMetaTag('og:description', 'Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance.');
-      updateMetaTag('og:type', 'website');
-      updateMetaTag('og:url', window.location.href);
-      updateMetaTag('og:image', `${window.location.origin}/AIcode.png`);
-      updateMetaTag('og:site_name', 'Lade Stack');
-
-      // Twitter Meta Tags
-      const updateTwitterMeta = (name: string, content: string) => {
-        let tag = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
-        if (!tag) {
-          tag = document.createElement('meta');
-          tag.setAttribute('name', name);
-          document.head.appendChild(tag);
-        }
-        tag.content = content;
-      };
-
-      updateTwitterMeta('twitter:card', 'summary_large_image');
-      updateTwitterMeta('twitter:title', 'CodeEnhance AI - AI-Powered Frontend Development');
-      updateTwitterMeta('twitter:description', 'Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance.');
-
-      // Schema.org JSON-LD
-      const schema = {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "CodeEnhance AI",
-        "description": "AI-powered HTML, CSS & JS code viewer, compiler, editor, and enhancer for modern web development",
-        "url": window.location.href,
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Web Browser",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        },
-        "creator": {
-          "@type": "Person",
-          "name": "Girish Lade",
-          "url": "https://ladestack.in",
-          "email": "girishlade111@gmail.com"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "Lade Stack",
-          "url": "https://ladestack.in"
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.8",
-          "ratingCount": "156"
-        }
-      };
-
-      let script = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement;
-      if (!script) {
-        script = document.createElement('script');
-        script.type = 'application/ld+json';
-        document.head.appendChild(script);
-      }
-      script.textContent = JSON.stringify(schema);
-    } catch (error) {
-      // Silently fail if there's an issue with meta tags
-      console.warn('Failed to update meta tags:', error);
-    }
-  }, []);
-
   const features = [
     {
       icon: Brain,
@@ -150,7 +40,7 @@ const AICodeViewerAI = () => {
     },
     {
       icon: Zap,
-      title: "Real-Time Compiler", 
+      title: "Real-Time Compiler",
       description: "Instant preview and error detection for HTML, CSS, and JavaScript with immediate feedback.",
     },
     {
@@ -167,6 +57,48 @@ const AICodeViewerAI = () => {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
+      <SEO
+        title="CodeEnhance AI - AI-Powered HTML, CSS & JS Code Viewer, Compiler, Editor & Enhancer"
+        description="Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance. The ultimate development tool for modern web creators."
+        keywords="AI code enhancer, HTML CSS JS compiler, code editor, frontend development, AI code viewer, web development tools, code optimization, AI development"
+        ogTitle="CodeEnhance AI - AI-Powered Frontend Development Tool"
+        ogDescription="Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance."
+        ogType="website"
+        ogImage={`${window.location.origin}/AIcode.png`}
+        twitterCard="summary_large_image"
+        twitterTitle="CodeEnhance AI - AI-Powered Frontend Development"
+        twitterDescription="Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance."
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "CodeEnhance AI",
+          "description": "AI-powered HTML, CSS & JS code viewer, compiler, editor, and enhancer for modern web development",
+          "url": window.location.href,
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Web Browser",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "creator": {
+            "@type": "Person",
+            "name": "Girish Lade",
+            "url": "https://ladestack.in",
+            "email": "girishlade111@gmail.com"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Lade Stack",
+            "url": "https://ladestack.in"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "156"
+          }
+        }}
+      />
       <Header />
       <main className="pt-16">
         {/* Hero Section */}
@@ -176,36 +108,36 @@ const AICodeViewerAI = () => {
           <div className="absolute inset-0 bg-gray-100/30 dark:bg-gray-800/25 opacity-50" />
 
           {/* Floating elements */}
-          <motion.div 
+          <motion.div
             className="absolute top-20 left-10 w-32 h-32 bg-blue-200 dark:bg-blue-900/30 rounded-full blur-3xl opacity-30"
-            animate={{ 
+            animate={{
               y: [0, -20, 0],
               x: [0, 10, 0]
             }}
-            transition={{ 
+            transition={{
               duration: 6,
               repeat: Infinity,
               ease: "easeInOut"
             }}
           />
-          <motion.div 
+          <motion.div
             className="absolute top-40 right-20 w-24 h-24 bg-green-200 dark:bg-green-900/30 rounded-full blur-2xl opacity-40"
-            animate={{ 
+            animate={{
               y: [0, 15, 0],
               x: [0, -15, 0]
             }}
-            transition={{ 
+            transition={{
               duration: 8,
               repeat: Infinity,
               ease: "easeInOut",
               delay: 1
             }}
           />
-          
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+
+          <div className="container mx-auto px-5 sm:px-6 lg:px-8 relative">
             <div className="max-w-4xl mx-auto text-center">
               {/* Back Button */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5 }}
@@ -236,7 +168,7 @@ const AICodeViewerAI = () => {
                     <Sparkles className="w-4 h-4" />
                     CodeEnhance AI
                   </motion.div>
-                  
+
                   <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
                     Transform Your{' '}
                     <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-green-600 bg-clip-text text-transparent">
@@ -245,9 +177,9 @@ const AICodeViewerAI = () => {
                     <br />
                     with AI Intelligence
                   </h1>
-                  
+
                   <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                    Edit, compile, and enhance your HTML, CSS & JS with AI assistance in real time. 
+                    Edit, compile, and enhance your HTML, CSS & JS with AI assistance in real time.
                     The ultimate development tool for modern web creators.
                   </p>
                 </div>
@@ -273,7 +205,7 @@ const AICodeViewerAI = () => {
 
         {/* Features Grid */}
         <section className="py-20 bg-gray-50 dark:bg-gray-800/50">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -298,7 +230,7 @@ const AICodeViewerAI = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     viewport={{ once: true }}
-                    whileHover={{ 
+                    whileHover={{
                       y: -8,
                       transition: { duration: 0.2 }
                     }}
@@ -322,7 +254,7 @@ const AICodeViewerAI = () => {
 
         {/* Interactive Editor Preview */}
         <section className="py-20">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -367,7 +299,7 @@ const AICodeViewerAI = () => {
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* Editor Content */}
                   <div className="p-8">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -376,7 +308,7 @@ const AICodeViewerAI = () => {
                           HTML
                         </div>
                         <pre className="text-sm font-mono text-gray-800 dark:text-gray-200 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto">
-{`<!DOCTYPE html>
+                          {`<!DOCTYPE html>
 <html>
 <head>
   <title>AI Enhanced</title>
@@ -389,13 +321,13 @@ const AICodeViewerAI = () => {
 </html>`}
                         </pre>
                       </div>
-                      
+
                       <div>
                         <div className="text-sm text-blue-500 dark:text-blue-400 mb-3 font-medium">
                           AI Enhanced Version
                         </div>
                         <pre className="text-sm font-mono text-gray-800 dark:text-gray-200 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto">
-{`<!DOCTYPE html>
+                          {`<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -429,7 +361,7 @@ const AICodeViewerAI = () => {
 
         {/* AI Demo Modal Section */}
         <section className="py-20 bg-gray-50 dark:bg-gray-800/50">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -444,7 +376,7 @@ const AICodeViewerAI = () => {
                 <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
                   See how AI can transform your code with intelligent improvements and optimizations
                 </p>
-                
+
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button size="lg" className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 text-lg font-medium">
@@ -459,7 +391,7 @@ const AICodeViewerAI = () => {
                         AI Code Enhancement Demo
                       </DialogTitle>
                     </DialogHeader>
-                    
+
                     <div className="space-y-6">
                       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         <div>
@@ -474,13 +406,13 @@ const AICodeViewerAI = () => {
 }`}
                           />
                         </div>
-                        
+
                         <div>
                           <label className="text-sm font-medium text-blue-600 dark:text-blue-400 mb-2 block">
                             AI Enhanced Version
                           </label>
                           <pre className="text-sm font-mono text-gray-800 dark:text-gray-200 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg h-48 overflow-x-auto">
-{`function createButton() {
+                            {`function createButton() {
   const button = document.createElement('button');
   button.textContent = 'Click me';
   button.className = 'btn-primary';
@@ -492,17 +424,18 @@ const AICodeViewerAI = () => {
   });
   
   return button;
-}`}</pre>
+}`}
+                          </pre>
                         </div>
                       </div>
-                      
+
                       <div className="flex items-center justify-center">
                         <Button className="bg-blue-600 hover:bg-blue-700">
                           <Sparkles className="w-4 h-4 mr-2" />
                           Enhance This Code
                         </Button>
                       </div>
-                      
+
                       <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
                         <h4 className="font-medium text-blue-900 dark:text-blue-100 mb-2">AI Improvements Made:</h4>
                         <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-1">
@@ -523,7 +456,7 @@ const AICodeViewerAI = () => {
 
         {/* AI Magic in Action */}
         <section className="py-20 bg-gray-900 text-white">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -565,7 +498,7 @@ const AICodeViewerAI = () => {
                       Run Demo
                     </Button>
                   </div>
-                  
+
                   <div className="p-8">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                       {/* Before AI */}
@@ -578,12 +511,12 @@ const AICodeViewerAI = () => {
                           <div className="text-gray-400">❌ No error handling</div>
                         </div>
                         <pre className="text-sm font-mono text-gray-300 bg-gray-900 p-4 rounded-lg overflow-x-auto">
-{`function createButton() {
+                          {`function createButton() {
   return '<button onclick="alert()">Click</button>';
 }`}
                         </pre>
                       </div>
-                      
+
                       {/* After AI */}
                       <div className="space-y-4">
                         <div className="text-green-400 font-medium">After AI Enhancement</div>
@@ -594,7 +527,7 @@ const AICodeViewerAI = () => {
                           <div className="text-green-400">✅ Enhanced security</div>
                         </div>
                         <pre className="text-sm font-mono text-gray-300 bg-gray-900 p-4 rounded-lg overflow-x-auto">
-{`function createButton() {
+                          {`function createButton() {
   const button = document.createElement('button');
   button.textContent = 'Click me';
   button.className = 'btn-primary';
@@ -619,7 +552,7 @@ const AICodeViewerAI = () => {
 
         {/* About Creator */}
         <section className="py-20 bg-white dark:bg-gray-900">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -656,7 +589,7 @@ const AICodeViewerAI = () => {
                       <span className="text-3xl font-bold text-white hidden">GL</span>
                     </div>
                   </div>
-                  
+
                   <div className="text-center md:text-left">
                     <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
                       Girish Lade
@@ -668,7 +601,7 @@ const AICodeViewerAI = () => {
                       "Empowering Developers through AI-Integrated Tools"
                     </p>
                     <p className="text-gray-700 dark:text-gray-300 leading-relaxed max-w-2xl">
-                      At Lade Stack, we build powerful AI-integrated developer tools to simplify coding and creativity. 
+                      At Lade Stack, we build powerful AI-integrated developer tools to simplify coding and creativity.
                       Our mission is to make advanced development tools accessible to everyone, from beginners to professionals.
                     </p>
                   </div>
@@ -680,7 +613,7 @@ const AICodeViewerAI = () => {
 
         {/* Newsletter/Beta Access Section */}
         <section className="py-20 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -774,7 +707,7 @@ const AICodeViewerAI = () => {
 
         {/* CTA Section */}
         <section className="py-20 bg-gradient-to-r from-blue-600 to-green-600 text-white">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -807,10 +740,10 @@ const AICodeViewerAI = () => {
           </div>
         </section>
       </main>
-      
+
       {/* Enhanced Footer */}
       <footer className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="container mx-auto px-5 sm:px-6 lg:px-8 py-12">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               {/* Brand */}
@@ -861,39 +794,39 @@ const AICodeViewerAI = () => {
                   Connect
                 </h4>
                 <div className="flex flex-col space-y-3">
-                  <a 
-                    href="https://www.instagram.com/girish_lade_/" 
-                    target="_blank" 
+                  <a
+                    href="https://www.instagram.com/girish_lade_/"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-600 dark:text-gray-300 hover:text-pink-500 transition-colors flex items-center gap-2"
                   >
                     <span className="text-sm">Instagram</span>
                   </a>
-                  <a 
-                    href="https://www.linkedin.com/in/girish-lade-075bba201/" 
-                    target="_blank" 
+                  <a
+                    href="https://www.linkedin.com/in/girish-lade-075bba201/"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-600 dark:text-gray-300 hover:text-blue-600 transition-colors flex items-center gap-2"
                   >
                     <span className="text-sm">LinkedIn</span>
                   </a>
-                  <a 
-                    href="https://github.com/girishlade111" 
-                    target="_blank" 
+                  <a
+                    href="https://github.com/girishlade111"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors flex items-center gap-2"
                   >
                     <span className="text-sm">GitHub</span>
                   </a>
-                  <a 
-                    href="https://codepen.io/Girish-Lade-the-looper" 
-                    target="_blank" 
+                  <a
+                    href="https://codepen.io/Girish-Lade-the-looper"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-600 dark:text-gray-300 hover:text-black transition-colors flex items-center gap-2"
                   >
                     <span className="text-sm">CodePen</span>
                   </a>
-                  <a 
+                  <a
                     href="mailto:girishlade111@gmail.com"
                     className="text-gray-600 dark:text-gray-300 hover:text-green-500 transition-colors flex items-center gap-2"
                   >
@@ -909,18 +842,18 @@ const AICodeViewerAI = () => {
                   © 2025 Lade Stack. All rights reserved.
                 </p>
                 <div className="flex items-center gap-6">
-                  <a 
-                    href="https://ladestack.in" 
-                    target="_blank" 
+                  <a
+                    href="https://ladestack.in"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors relative group"
                   >
                     Built with ❤️ by LadeStack.in
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
                   </a>
-                  <a 
-                    href="https://code.ladestack.in/" 
-                    target="_blank" 
+                  <a
+                    href="https://code.ladestack.in/"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
                   >

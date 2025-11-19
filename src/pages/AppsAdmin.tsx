@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SEO from "@/components/SEO";
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -55,7 +56,7 @@ const AppsAdmin: React.FC = () => {
     }
   };
 
- // Remove a feature
+  // Remove a feature
   const removeFeature = (index: number) => {
     setCurrentApp(prev => ({
       ...prev,
@@ -63,7 +64,7 @@ const AppsAdmin: React.FC = () => {
     }));
   };
 
- // Add a new integration
+  // Add a new integration
   const addIntegration = () => {
     if (newIntegration.trim() && !currentApp.integrations.includes(newIntegration.trim())) {
       setCurrentApp(prev => ({
@@ -72,7 +73,7 @@ const AppsAdmin: React.FC = () => {
       }));
       setNewIntegration('');
     }
- };
+  };
 
   // Remove an integration
   const removeIntegration = (index: number) => {
@@ -97,7 +98,7 @@ const AppsAdmin: React.FC = () => {
 
     setApps(prev => [...prev, newApp]);
     setMessage('App added successfully');
-    
+
     // Reset form
     setCurrentApp({
       id: '',
@@ -123,13 +124,13 @@ const AppsAdmin: React.FC = () => {
     // In a real implementation, this would save to a backend API
     // For now, we'll just show a message
     setMessage('Apps saved successfully! (In a real app, this would save to a database)');
-    
+
     // Create a downloadable JSON file
     const dataStr = JSON.stringify(apps, null, 2);
-    const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-    
+    const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+
     const exportFileDefaultName = 'apps.json';
-    
+
     const linkElement = document.createElement('a');
     linkElement.setAttribute('href', dataUri);
     linkElement.setAttribute('download', exportFileDefaultName);
@@ -144,9 +145,10 @@ const AppsAdmin: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-950 to-black text-white p-6">
+      <SEO title="Apps Admin Dashboard - Lade Stack" />
       <div className="max-w-6xl mx-auto">
         <h1 className="text-3xl font-bold mb-8 text-center">Apps Admin Dashboard</h1>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Add App Form */}
           <Card className="bg-gray-800/50 border-gray-700">
@@ -165,7 +167,7 @@ const AppsAdmin: React.FC = () => {
                   className="bg-gray-700 border-gray-600 text-white"
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="slug">App Slug *</Label>
                 <Input
@@ -177,7 +179,7 @@ const AppsAdmin: React.FC = () => {
                   className="bg-gray-700 border-gray-600 text-white"
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="tagline">Tagline</Label>
                 <Input
@@ -189,7 +191,7 @@ const AppsAdmin: React.FC = () => {
                   className="bg-gray-700 border-gray-600 text-white"
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="description">Description</Label>
                 <Textarea
@@ -201,7 +203,7 @@ const AppsAdmin: React.FC = () => {
                   className="bg-gray-700 border-gray-600 text-white min-h-[100px]"
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="icon">Icon Path</Label>
                 <Input
@@ -213,7 +215,7 @@ const AppsAdmin: React.FC = () => {
                   className="bg-gray-700 border-gray-600 text-white"
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="category">Category</Label>
                 <Input
@@ -225,7 +227,7 @@ const AppsAdmin: React.FC = () => {
                   className="bg-gray-700 border-gray-600 text-white"
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="timeToValue">Time to Value</Label>
                 <Input
@@ -237,7 +239,7 @@ const AppsAdmin: React.FC = () => {
                   className="bg-gray-700 border-gray-600 text-white"
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="landingUrl">Landing URL</Label>
                 <Input
@@ -249,7 +251,7 @@ const AppsAdmin: React.FC = () => {
                   className="bg-gray-700 border-gray-600 text-white"
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="popularityScore">Popularity Score (0-100)</Label>
                 <Input
@@ -263,7 +265,7 @@ const AppsAdmin: React.FC = () => {
                   className="bg-gray-700 border-gray-600 text-white"
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="iconAlt">Icon Alt Text</Label>
                 <Input
@@ -275,7 +277,7 @@ const AppsAdmin: React.FC = () => {
                   className="bg-gray-700 border-gray-600 text-white"
                 />
               </div>
-              
+
               <div className="flex items-center space-x-2">
                 <input
                   type="checkbox"
@@ -287,7 +289,7 @@ const AppsAdmin: React.FC = () => {
                 />
                 <Label htmlFor="lifetimeFree">Lifetime Free</Label>
               </div>
-              
+
               {/* Features */}
               <div className="space-y-2">
                 <Label>Features</Label>
@@ -306,8 +308,8 @@ const AppsAdmin: React.FC = () => {
                   {currentApp.features.map((feature, index) => (
                     <Badge key={index} variant="secondary" className="bg-blue-900/30 text-blue-400">
                       {feature}
-                      <button 
-                        type="button" 
+                      <button
+                        type="button"
                         onClick={() => removeFeature(index)}
                         className="ml-2 text-blue-400 hover:text-white"
                       >
@@ -317,7 +319,7 @@ const AppsAdmin: React.FC = () => {
                   ))}
                 </div>
               </div>
-              
+
               {/* Integrations */}
               <div className="space-y-2">
                 <Label>Integrations</Label>
@@ -336,8 +338,8 @@ const AppsAdmin: React.FC = () => {
                   {currentApp.integrations.map((integration, index) => (
                     <Badge key={index} variant="secondary" className="bg-purple-900/30 text-purple-400">
                       {integration}
-                      <button 
-                        type="button" 
+                      <button
+                        type="button"
                         onClick={() => removeIntegration(index)}
                         className="ml-2 text-purple-400 hover:text-white"
                       >
@@ -347,14 +349,14 @@ const AppsAdmin: React.FC = () => {
                   ))}
                 </div>
               </div>
-              
+
               <Button onClick={addApp} className="w-full bg-green-600 hover:bg-green-700">
                 <Plus className="w-4 h-4 mr-2" />
                 Add App
               </Button>
             </CardContent>
           </Card>
-          
+
           {/* Apps List */}
           <Card className="bg-gray-800/50 border-gray-700">
             <CardHeader>
@@ -372,7 +374,7 @@ const AppsAdmin: React.FC = () => {
                   {message}
                 </div>
               )}
-              
+
               <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
                 {apps.map((app, index) => (
                   <Card key={index} className="bg-gray-700/50 border-gray-600">
@@ -382,7 +384,7 @@ const AppsAdmin: React.FC = () => {
                           <h3 className="font-bold text-lg truncate">{app.title}</h3>
                           <p className="text-sm text-gray-400 truncate">{app.tagline}</p>
                           <p className="text-sm text-gray-300 mt-1 line-clamp-2">{app.description}</p>
-                          
+
                           <div className="flex flex-wrap gap-1 mt-2">
                             <Badge variant="secondary" className="bg-green-900/30 text-green-400 text-xs">
                               {app.category}
@@ -393,7 +395,7 @@ const AppsAdmin: React.FC = () => {
                               </Badge>
                             )}
                           </div>
-                          
+
                           <div className="flex flex-wrap gap-1 mt-2">
                             {app.features.slice(0, 2).map((feature, idx) => (
                               <Badge key={idx} variant="outline" className="text-xs">
@@ -407,7 +409,7 @@ const AppsAdmin: React.FC = () => {
                             )}
                           </div>
                         </div>
-                        
+
                         <Button
                           variant="destructive"
                           size="sm"

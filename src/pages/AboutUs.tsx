@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Lightbulb, Users, Award, Eye, ExternalLink, Sparkles } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import girishImage from "@/assets/girish.jpg";
 
 const AboutUs = () => {
@@ -10,99 +11,6 @@ const AboutUs = () => {
 
   useEffect(() => {
     setIsVisible(true);
-    
-    // SEO Meta Tags
-    document.title = "About Lade Stack - Empowering Developers Through AI Innovation & Visionary Leadership";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Discover Lade Stack\'s inspiring journey from a developer\'s vision to an AI-powered development ecosystem. Founded by Girish Lade, we democratize advanced development tools for creators worldwide.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Discover Lade Stack\'s inspiring journey from a developer\'s vision to an AI-powered development ecosystem. Founded by Girish Lade, we democratize advanced development tools for creators worldwide.';
-      document.head.appendChild(meta);
-    }
-
-    // Keywords
-    const metaKeywords = document.querySelector('meta[name="keywords"]');
-    if (metaKeywords) {
-      metaKeywords.setAttribute('content', 'Lade Stack about, AI development revolution, Girish Lade founder story, developer empowerment, AI-first innovation, full-stack development, SaaS product innovation');
-    } else {
-      const keywordsMeta = document.createElement('meta');
-      keywordsMeta.name = 'keywords';
-      keywordsMeta.content = 'Lade Stack about, AI development revolution, Girish Lade founder story, developer empowerment, AI-first innovation, full-stack development, SaaS product innovation';
-      document.head.appendChild(keywordsMeta);
-    }
-
-    // Open Graph Meta Tags
-    const updateMetaTag = (property: string, content: string) => {
-      let tag = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement;
-      if (!tag) {
-        tag = document.createElement('meta');
-        tag.setAttribute('property', property);
-        document.head.appendChild(tag);
-      }
-      tag.content = content;
-    };
-
-    updateMetaTag('og:title', 'About Lade Stack - Visionary AI Development Tools & Founder Story');
-    updateMetaTag('og:description', 'Learn how Girish Lade transformed from a passionate developer to founding Lade Stack - an AI-powered ecosystem revolutionizing how creators build, test, and deploy modern applications.');
-    updateMetaTag('og:type', 'website');
-    updateMetaTag('og:url', window.location.href);
-    updateMetaTag('og:image', `${window.location.origin}/og-about.png`);
-
-    // Twitter Meta Tags
-    const updateTwitterMeta = (name: string, content: string) => {
-      let tag = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
-      if (!tag) {
-        tag = document.createElement('meta');
-        tag.setAttribute('name', name);
-        document.head.appendChild(tag);
-      }
-      tag.content = content;
-    };
-
-    updateTwitterMeta('twitter:card', 'summary_large_image');
-    updateTwitterMeta('twitter:title', 'About Lade Stack - AI Development Revolution & Founder Story');
-    updateTwitterMeta('twitter:description', 'Discover how Girish Lade\'s vision became Lade Stack - transforming developer workflows through AI-powered tools and innovation.');
-
-    // JSON-LD Structured Data
-    const structuredData = {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Lade Stack",
-      "description": "AI-powered development tools ecosystem founded by Girish Lade, democratizing advanced development tools for creators and startups worldwide.",
-      "url": "https://ladestack.in",
-      "logo": "https://ladestack.in/logo.png",
-      "foundingDate": "2020",
-      "founder": {
-        "@type": "Person",
-        "name": "Girish Lade",
-        "jobTitle": "Founder & Lead Developer",
-        "url": "https://ladestack.in/about",
-        "description": "Multi-disciplinary engineer and designer with expertise in AI systems, web development, and user experience"
-      },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "email": "girishlade111@gmail.com",
-        "contactType": "customer support"
-      },
-      "sameAs": [
-        "https://www.instagram.com/girish_lade_/",
-        "https://www.linkedin.com/in/girish-lade-075bba201/",
-        "https://github.com/girishlade111",
-        "https://codepen.io/Girish-Lade-the-looper"
-      ]
-    };
-
-    let scriptTag = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement;
-    if (!scriptTag) {
-      scriptTag = document.createElement('script') as HTMLScriptElement;
-      scriptTag.type = 'application/ld+json';
-      document.head.appendChild(scriptTag);
-    }
-    scriptTag.textContent = JSON.stringify(structuredData);
-
   }, []);
 
   const values = [
@@ -130,6 +38,43 @@ const AboutUs = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="About Lade Stack - Empowering Developers Through AI Innovation & Visionary Leadership"
+        description="Discover Lade Stack's inspiring journey from a developer's vision to an AI-powered development ecosystem. Founded by Girish Lade, we democratize advanced development tools for creators worldwide."
+        keywords="Lade Stack about, AI development revolution, Girish Lade founder story, developer empowerment, AI-first innovation, full-stack development, SaaS product innovation"
+        ogTitle="About Lade Stack - Visionary AI Development Tools & Founder Story"
+        ogDescription="Learn how Girish Lade transformed from a passionate developer to founding Lade Stack - an AI-powered ecosystem revolutionizing how creators build, test, and deploy modern applications."
+        ogImage={`${window.location.origin}/og-about.png`}
+        twitterTitle="About Lade Stack - AI Development Revolution & Founder Story"
+        twitterDescription="Discover how Girish Lade's vision became Lade Stack - transforming developer workflows through AI-powered tools and innovation."
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Lade Stack",
+          "description": "AI-powered development tools ecosystem founded by Girish Lade, democratizing advanced development tools for creators and startups worldwide.",
+          "url": "https://ladestack.in",
+          "logo": "https://ladestack.in/logo.png",
+          "foundingDate": "2020",
+          "founder": {
+            "@type": "Person",
+            "name": "Girish Lade",
+            "jobTitle": "Founder & Lead Developer",
+            "url": "https://ladestack.in/about",
+            "description": "Multi-disciplinary engineer and designer with expertise in AI systems, web development, and user experience"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "girishlade111@gmail.com",
+            "contactType": "customer support"
+          },
+          "sameAs": [
+            "https://www.instagram.com/girish_lade_/",
+            "https://www.linkedin.com/in/girish-lade-075bba201/",
+            "https://github.com/girishlade111",
+            "https://codepen.io/Girish-Lade-the-looper"
+          ]
+        }}
+      />
       <Header />
       <main className="pt-16">
         {/* Hero Section */}
@@ -162,23 +107,23 @@ const AboutUs = () => {
                     Our Story
                   </h2>
                 </div>
-                
+
                 <div className="space-y-6 text-muted-foreground">
                   <p className="text-base sm:text-lg leading-relaxed">
                     In 2020, Girish Lade — an engineer, developer, and designer — began building something extraordinary. What started as a personal mission to streamline his own development process quickly evolved into a vision that would transform how creators and startups approach software development.
                   </p>
-                  
+
                   <p className="text-base sm:text-lg leading-relaxed">
                     Born from years of working on multi-LLM projects and AI automation tools, Girish witnessed firsthand the power of intelligent systems. His journey from building personal productivity tools to full-fledged e-commerce platforms revealed a critical gap in the market: most developers lacked access to enterprise-grade AI capabilities that could democratize advanced development practices.
                   </p>
-                  
+
                   <div className="bg-muted/20 rounded-xl p-6 border border-border">
                     <h3 className="text-lg font-semibold text-foreground mb-3">The Pivot Point</h3>
                     <p className="text-sm sm:text-base leading-relaxed">
                       What began as Girish's early work in AI integrations, UX/UI design, and backend systems became the foundation for something bigger. The transition from personal productivity tools to an entire suite of intelligent development utilities wasn't just business growth — it was a response to a calling. A calling to empower developers worldwide, regardless of their scale or resources.
                     </p>
                   </div>
-                  
+
                   <p className="text-base sm:text-lg leading-relaxed">
                     Today, Lade Stack stands as a testament to what passionate innovation can achieve. We're not just building tools; we're building the future of development — one where AI and human creativity work in perfect harmony.
                   </p>
@@ -201,16 +146,16 @@ const AboutUs = () => {
                     Our Mission
                   </h2>
                 </div>
-                
+
                 <div className="space-y-6 text-muted-foreground">
                   <p className="text-base sm:text-lg leading-relaxed">
                     Lade Stack's mission is to bridge the gap between complex AI systems and everyday developers. We believe innovation should be inclusive, transparent, and human-centered — enabling developers to build smarter, faster, and better.
                   </p>
-                  
+
                   <p className="text-base sm:text-lg leading-relaxed">
                     Our focus is making enterprise-grade capabilities accessible — like automation, smart APIs, and multi-agent collaboration systems. We're transforming the development landscape by ensuring that cutting-edge AI tools aren't just for tech giants, but for every passionate creator with a vision.
                   </p>
-                  
+
                   <div className="bg-foreground/5 rounded-xl p-6 border border-border">
                     <h3 className="text-lg font-semibold text-foreground mb-3">Our Philosophy</h3>
                     <p className="text-sm sm:text-base leading-relaxed">
@@ -302,7 +247,7 @@ const AboutUs = () => {
                     <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6">
                       His mission is to empower developers through creativity, intelligence, and collaboration — creating tools that don't just solve problems, but inspire innovation.
                     </p>
-                    
+
                     <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
                       <Link
                         to="/contact"
@@ -344,7 +289,7 @@ const AboutUs = () => {
                     At Lade Stack, we believe technology should amplify human potential — not replace it. Our journey continues as we push boundaries in AI-driven development, open innovation, and community-led engineering.
                   </p>
                 </div>
-                
+
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link
                     to="/"

@@ -1,80 +1,131 @@
 import { Link } from "react-router-dom";
-import { ExternalLink, Code, Globe, FileText, Brain } from "lucide-react";
+import { ExternalLink, Globe, FileText, Brain, Star, Users, Clock, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import BentoImageGrid from "@/components/BentoImageGrid";
 
+const projects = [
+  {
+    id: "api-testing",
+    title: "API Testing Platform",
+    description: "Automated API testing with AI-powered validation and performance monitoring.",
+    shortDescription: "AI-powered API testing and validation.",
+    fullDescription: "A comprehensive platform for automated API testing, featuring AI-driven test generation, real-time monitoring, and detailed performance analytics.",
+    icon: Globe,
+    coverImage: "/api-testing-project.svg",
+    features: ["AI Test Generation", "Real-time Monitoring", "Performance Analytics"],
+    status: "Live",
+    stats: { users: "10k+", time: "5m", rating: "4.9" },
+    useCases: ["Enterprise API Testing", "CI/CD Integration"],
+    integrations: ["GitHub", "GitLab", "Jenkins"]
+  },
+  {
+    id: "website-builder",
+    title: "AI Website Builder",
+    description: "Create stunning, responsive websites in minutes with our AI-powered builder.",
+    shortDescription: "Build websites instantly with AI.",
+    fullDescription: "Generate professional websites with AI. Just describe your vision, and our builder creates the layout, content, and styling automatically.",
+    icon: FileText,
+    coverImage: "/website-builder-project.svg",
+    features: ["AI Layout Generation", "Smart Content Writing", "Responsive Design"],
+    status: "Beta",
+    stats: { users: "5k+", time: "10m", rating: "4.8" },
+    useCases: ["Portfolio Creation", "Landing Pages"],
+    integrations: ["Stripe", "Mailchimp"]
+  },
+  {
+    id: "file-management",
+    title: "Intelligent File Management",
+    description: "Secure, AI-enhanced file storage and organization for teams.",
+    shortDescription: "Smart file organization and security.",
+    fullDescription: "Next-generation file management system that uses AI to organize, tag, and secure your documents automatically.",
+    icon: FileText,
+    coverImage: "/file-management-project.svg",
+    features: ["Auto-tagging", "Smart Search", "Secure Sharing"],
+    status: "Live",
+    stats: { users: "8k+", time: "2m", rating: "4.7" },
+    useCases: ["Enterprise Document Management", "Team Collaboration"],
+    integrations: ["Google Drive", "Dropbox"]
+  },
+  {
+    id: "documentation-ai",
+    title: "Documentation AI",
+    description: "Transform your code into comprehensive, human-readable documentation automatically.",
+    shortDescription: "Automated code documentation.",
+    fullDescription: "Keep your documentation always up-to-date. Our AI analyzes your codebase and generates detailed documentation, API references, and usage guides.",
+    icon: FileText,
+    coverImage: "/documentation-ai-project.svg",
+    features: ["Code Analysis", "Auto-updates", "Multi-language Support"],
+    status: "Live",
+    stats: { users: "12k+", time: "5m", rating: "4.9" },
+    useCases: ["Library Documentation", "Internal Wikis"],
+    integrations: ["GitHub", "VS Code"]
+  },
+  {
+    id: "ai-code-viewer",
+    title: "AI Code Viewer",
+    description: "Visualize and understand complex codebases with interactive AI explanations.",
+    shortDescription: "Interactive code visualization and explanation.",
+    fullDescription: "Navigate complex codebases with ease. AI Code Viewer provides interactive diagrams, flowcharts, and plain-English explanations of code logic.",
+    icon: Brain,
+    coverImage: "/ai-code-viewer-project.svg",
+    features: ["Visual Flowcharts", "Logic Explanation", "Dependency Mapping"],
+    status: "Beta",
+    stats: { users: "3k+", time: "1m", rating: "4.6" },
+    useCases: ["Code Onboarding", "Legacy Code Analysis"],
+    integrations: ["VS Code", "IntelliJ"]
+  }
+];
+
+const caseStudies = [
+  {
+    id: 1,
+    title: "FinTech Enterprise Transformation",
+    description: "How a major financial institution reduced API testing time by 70% using our platform.",
+    image: "/case-study-1.jpg",
+    tags: ["FinTech", "API Testing", "Enterprise"],
+    company: "FinCorp",
+    industry: "Finance",
+    logo: "FC",
+    challenge: "Manual API testing was slow and error-prone.",
+    result: "70% reduction in testing time and zero critical bugs in production."
+  },
+  {
+    id: 2,
+    title: "E-commerce Scaling Success",
+    description: "Scaling documentation for a global e-commerce giant handling millions of requests.",
+    image: "/case-study-2.jpg",
+    tags: ["E-commerce", "Documentation", "Scaling"],
+    company: "ShopGlobal",
+    industry: "E-commerce",
+    logo: "SG",
+    challenge: "Documentation was outdated and hard to maintain.",
+    result: "Automated documentation updates saved 20 hours/week per developer."
+  },
+  {
+    id: 3,
+    title: "Startup Rapid Prototyping",
+    description: "Building a production-ready SaaS product in 2 weeks with our Website Builder.",
+    image: "/case-study-3.jpg",
+    tags: ["Startup", "No-Code", "Speed"],
+    company: "LaunchPad",
+    industry: "Technology",
+    logo: "LP",
+    challenge: "Needed to launch MVP in 2 weeks with limited resources.",
+    result: "Launched on time with a fully responsive, SEO-optimized website."
+  }
+];
+
 const Projects = () => {
-  const projects = [
-    {
-      id: "api-testing",
-      icon: Code,
-      title: "AI-Powered API Testing Platform",
-      description: "Revolutionary API testing suite with intelligent test generation, automated regression testing, and real-time performance monitoring. Supports REST, GraphQL, and WebSocket APIs with zero-config setup.",
-      features: ["AI Test Generation", "Performance Analytics", "CI/CD Integration"],
-      coverImage: "/api-testing-project.svg",
-    },
-    {
-      id: "website-builder",
-      icon: Globe,
-      title: "No-Code Website Builder with AI",
-      description: "Enterprise-grade website builder powered by GPT-4. Generate responsive, SEO-optimized websites from simple prompts. Includes e-commerce, analytics, and custom domain support.",
-      features: ["GPT-4 Generation", "SEO Optimization", "E-commerce Ready"],
-      coverImage: "/website-builder-project.svg",
-    },
-    {
-      id: "file-management",
-      icon: FileText,
-      title: "File Sharing Platform",
-      description: "Enterprise file sharing platform with global CDN, intelligent collaboration, and lifetime free access. Transform how your team shares and manages files with advanced security and optimization.",
-      features: ["Global CDN", "Auto Optimization", "Enterprise Security"],
-      coverImage: "/file-management-project.svg",
-    },
-    {
-      id: "documentation-ai",
-      icon: Brain,
-      title: "Technical Documentation AI",
-      description: "Advanced AI that understands code context and generates comprehensive documentation, API specs, and technical summaries. Integrates with GitHub, GitLab, and popular IDEs.",
-      features: ["Code Context AI", "IDE Integration", "Multi-language Support"],
-      coverImage: "/documentation-ai-project.svg",
-    },
-    {
-      id: "ai-code-viewer",
-      icon: Brain,
-      title: "AI-Powered HTML, CSS & JS Code Viewer, Compiler, Editor & Enhancer",
-      description: "Revolutionary AI-powered code editor with real-time compilation, intelligent code enhancement, and advanced debugging capabilities. Perfect for front-end developers who want to create, test, and optimize their web applications instantly.",
-      features: ["AI Code Enhancement", "Real-time Compilation", "Advanced Code Editor"],
-      coverImage: "/AIcode.png",
-    },
-  ];
-
-  const caseStudies = [
-    {
-      company: "TechCorp",
-      industry: "Financial Services",
-      challenge: "Reduced API testing time from hours to minutes with our AI-powered platform",
-      result: "Saved 40+ hours per sprint, improved test coverage by 85%",
-      logo: "TC",
-    },
-    {
-      company: "StartupX",
-      industry: "E-commerce",
-      challenge: "Launched MVP 3 weeks ahead of schedule using our no-code builder",
-      result: "Non-technical team members can now make website updates independently",
-      logo: "SX",
-    },
-    {
-      company: "DevStudio",
-      industry: "Software Development",
-      challenge: "Streamlined documentation process for 50+ microservices",
-      result: "Reduced documentation time by 70%, improved onboarding speed by 50%",
-      logo: "DS",
-    },
-  ];
-
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Our Projects - Lade Stack"
+        description="Explore our suite of AI-powered developer tools designed to boost productivity and streamline your workflow."
+        keywords="AI tools, developer tools, API testing, website builder, file management, documentation AI"
+      />
       <Header />
       <main className="pt-16">
         {/* Hero Section */}
@@ -85,8 +136,8 @@ const Projects = () => {
                 Our Projects
               </h1>
               <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-              Five powerful SaaS tools that cover your entire development lifecycle. Each tool saves 10+ hours per week and integrates seamlessly with your existing workflow.
-            </p>
+                Five powerful SaaS tools that cover your entire development lifecycle. Each tool saves 10+ hours per week and integrates seamlessly with your existing workflow.
+              </p>
             </div>
           </div>
         </section>
@@ -96,7 +147,7 @@ const Projects = () => {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-5xl mx-auto">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                {projects.map((project, index) => (
+                {projects.map((project) => (
                   <div
                     key={project.id}
                     className="border border-border rounded-lg overflow-hidden hover:border-border/80 transition-all duration-300 hover:shadow-lg bg-card dark:bg-card/80"
@@ -124,7 +175,7 @@ const Projects = () => {
                       <h3 className="text-sm font-medium text-foreground leading-tight">
                         {project.title}
                       </h3>
-                      
+
                       <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
                         {project.description}
                       </p>
@@ -163,7 +214,7 @@ const Projects = () => {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-lg font-semibold text-foreground mb-6 text-center">Project Visual Showcase</h2>
-              <BentoImageGrid 
+              <BentoImageGrid
                 images={[
                   { src: "/api-testing-project.svg", alt: "API Testing Platform", size: "large" },
                   { src: "/website-builder-project.svg", alt: "Website Builder", size: "medium" },
@@ -193,7 +244,7 @@ const Projects = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                 {caseStudies.map((study) => (
                   <div
-                    key={study.company}
+                    key={study.id}
                     className="border border-border rounded-lg p-4 hover:border-border/80 transition-all duration-300 hover:shadow-md bg-card dark:bg-card/80"
                   >
                     <div className="flex items-center mb-3">
@@ -205,12 +256,12 @@ const Projects = () => {
                         <p className="text-xs text-muted-foreground">{study.industry}</p>
                       </div>
                     </div>
-                    
+
                     <div className="mb-3">
                       <h4 className="text-xs font-medium text-foreground mb-1">Challenge:</h4>
                       <p className="text-xs text-muted-foreground">{study.challenge}</p>
                     </div>
-                    
+
                     <div>
                       <h4 className="text-xs font-medium text-foreground mb-1">Result:</h4>
                       <p className="text-xs text-muted-foreground">{study.result}</p>
@@ -242,7 +293,7 @@ const Projects = () => {
                     ✨ All Tools Lifetime Free
                   </Button>
                 </div>
-                
+
                 <div className="mt-3">
                   <div className="flex items-center justify-center gap-2 text-xs text-foreground font-medium">
                     <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">

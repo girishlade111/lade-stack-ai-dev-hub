@@ -7,9 +7,9 @@ const HeroSection = () => {
     <section id="home" className="relative min-h-screen flex items-center pt-14 sm:pt-16 lg:pt-20 overflow-hidden">
       {/* Optimized background with hardware acceleration */}
       <div className="absolute inset-0 z-0 bg-background will-change-transform" />
-      
+
       {/* Content - Mobile-first layout with better spacing */}
-      <div className="relative z-10 container mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
+      <div className="relative z-10 container mx-auto px-5 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center lg:text-left">
           {/* Minimal Badge - Mobile optimized */}
           <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md bg-muted border border-border mb-3 sm:mb-6 animate-slide-up touch-target">

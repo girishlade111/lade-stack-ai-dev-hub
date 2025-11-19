@@ -16,7 +16,7 @@ const AboutSection = () => {
     },
     {
       icon: Users,
-      title: "Developer Empowerment", 
+      title: "Developer Empowerment",
       description: "Enterprise-grade tools accessible to individual developers and teams.",
       stats: { value: "Many", label: "Developers" }
     },
@@ -48,7 +48,7 @@ const AboutSection = () => {
 
   return (
     <section id="about" className="py-8 sm:py-12 lg:py-16 relative overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-5 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           {/* Minimal Section Header - Mobile optimized */}
           <div className="text-center mb-6 sm:mb-8">
@@ -108,7 +108,7 @@ const AboutSection = () => {
                 <div className="space-y-1">
                   {[
                     "AI development assistance",
-                    "Code optimization", 
+                    "Code optimization",
                     "Error prevention",
                     "Real-time collaboration"
                   ].map((item, index) => (

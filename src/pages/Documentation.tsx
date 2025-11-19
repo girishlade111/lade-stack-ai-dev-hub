@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import SEO from "@/components/SEO";
 import { BookOpen, Code, Zap, FileText, Shield, Users, Database, Cloud } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
@@ -114,11 +115,16 @@ const Documentation = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Documentation - Lade Stack"
+        description="Comprehensive guides, API references, and tutorials to help you make the most of Lade Stack's powerful development tools."
+        keywords="documentation, API reference, tutorials, developer guides, Lade Stack docs, software development tools"
+      />
       <Header />
       <main className="pt-24 pb-16">
         {/* Hero Section */}
         <section className="py-12 sm:py-16 lg:py-20 bg-gradient-subtle">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
                 <span className="bg-gradient-primary bg-clip-text text-transparent">Documentation</span>
@@ -127,7 +133,7 @@ const Documentation = () => {
               <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto">
                 Comprehensive guides, API references, and tutorials to help you make the most of Lade Stack's powerful development tools.
               </p>
-              
+
               <div className="mt-8 max-w-2xl mx-auto">
                 <div className="relative">
                   <input
@@ -148,7 +154,7 @@ const Documentation = () => {
 
         {/* Documentation Categories */}
         <section className="py-12 sm:py-16">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-12">
                 <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
@@ -161,8 +167,8 @@ const Documentation = () => {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {documentationCategories.map((category, index) => (
-                  <div 
-                    key={index} 
+                  <div
+                    key={index}
                     className="bg-card rounded-lg sm:rounded-xl p-5 sm:p-6 shadow-subtle border border-border hover:shadow-medium transition-smooth group"
                   >
                     <div className="w-10 h-10 rounded-lg bg-gradient-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -186,7 +192,7 @@ const Documentation = () => {
 
         {/* Popular Articles */}
         <section className="py-12 sm:py-16 bg-gradient-subtle">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-12">
                 <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
@@ -199,8 +205,8 @@ const Documentation = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {popularArticles.map((article, index) => (
-                  <div 
-                    key={index} 
+                  <div
+                    key={index}
                     className="bg-card rounded-lg sm:rounded-xl p-5 sm:p-6 shadow-subtle border border-border hover:shadow-medium transition-smooth"
                   >
                     <div className="flex justify-between items-start mb-3">
@@ -226,7 +232,7 @@ const Documentation = () => {
 
         {/* Changelog */}
         <section className="py-12 sm:py-16">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-12">
                 <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
@@ -275,14 +281,14 @@ const Documentation = () => {
 
         {/* API Documentation CTA */}
         <section className="py-12 sm:py-16 bg-gradient-subtle">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
               <div className="bg-card rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-medium border border-border text-center">
                 <h3 className="text-2xl font-bold text-foreground mb-4">
                   Developer API Reference
                 </h3>
                 <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                  Access our complete API documentation with interactive examples, 
+                  Access our complete API documentation with interactive examples,
                   code samples, and detailed endpoint descriptions.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">

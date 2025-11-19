@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  ArrowLeft, 
-  CheckCircle, 
-  Code, 
-  Zap, 
-  Shield, 
-  Users, 
-  Star, 
-  Play, 
+import {
+  ArrowLeft,
+  CheckCircle,
+  Code,
+  Zap,
+  Shield,
+  Users,
+  Star,
+  Play,
   Download,
   Github,
   Mail,
@@ -73,6 +73,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 
 // Animated Mock API Test Runner Component
 const AnimatedApiTestRunner: React.FC = () => {
@@ -124,7 +125,7 @@ const AnimatedApiTestRunner: React.FC = () => {
           Run Demo
         </Button>
       </div>
-      
+
       <div className="space-y-2 text-green-400">
         {steps.map((step, index) => (
           <div key={index} className="flex items-center gap-2">
@@ -133,8 +134,8 @@ const AnimatedApiTestRunner: React.FC = () => {
             {isRunning && index === currentStep && (
               <div className="ml-2 flex">
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce"></div>
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
               </div>
             )}
             {!isRunning && index < currentStep && (
@@ -142,14 +143,14 @@ const AnimatedApiTestRunner: React.FC = () => {
             )}
           </div>
         ))}
-        
+
         {currentStep >= steps.length && (
           <div className="mt-4 p-3 bg-green-900/30 border border-green-700 rounded">
             <div className="text-green-400 font-semibold">Test Results:</div>
             <div className="text-green-300 mt-1">
-              ✓ 127 tests passed<br/>
-              ✓ 3 warnings detected<br/>
-              ✓ Execution time: 2.3s<br/>
+              ✓ 127 tests passed<br />
+              ✓ 3 warnings detected<br />
+              ✓ Execution time: 2.3s<br />
               ✓ Coverage: 94.7%
             </div>
           </div>
@@ -215,7 +216,7 @@ components:
   const runTest = async () => {
     setIsRunning(true);
     setTestResults([]);
-    
+
     const tests = [
       'Parsing OpenAPI specification...',
       'Validating schema structure...',
@@ -230,8 +231,8 @@ components:
       setTestResults(prev => [...prev, tests[i]]);
       await new Promise(resolve => setTimeout(resolve, 600));
     }
-    
-    setTestResults(prev => [...prev, 
+
+    setTestResults(prev => [...prev,
       '✓ All tests completed successfully',
       '✓ 127 assertions passed',
       '⚠ 2 warnings found',
@@ -285,12 +286,11 @@ components:
             ) : (
               <div className="space-y-1">
                 {testResults.map((result, index) => (
-                  <div key={index} className={`flex items-center gap-2 ${
-                    result.includes('✓') ? 'text-green-400' :
-                    result.includes('⚠') ? 'text-yellow-400' :
-                    result.includes('✗') ? 'text-red-400' :
-                    'text-gray-300'
-                  }`}>
+                  <div key={index} className={`flex items-center gap-2 ${result.includes('✓') ? 'text-green-400' :
+                      result.includes('⚠') ? 'text-yellow-400' :
+                        result.includes('✗') ? 'text-red-400' :
+                          'text-gray-300'
+                    }`}>
                     <span className="text-gray-500">$</span>
                     {result}
                   </div>
@@ -314,202 +314,6 @@ const ApiTestingPlatform: React.FC = () => {
   const [expandedFaq, setExpandedFaq] = useState<string | null>(null);
 
   useEffect(() => {
-    // Enhanced SEO Meta Tags
-    const updateMetaTag = (name: string, content: string, property?: boolean) => {
-      const attribute = property ? 'property' : 'name';
-      let meta = document.querySelector(`meta[${attribute}="${name}"]`) as HTMLMetaElement;
-      if (!meta) {
-        meta = document.createElement('meta');
-        meta.setAttribute(attribute, name);
-        document.head.appendChild(meta);
-      }
-      meta.content = content;
-    };
-
-    // Basic SEO Meta Tags
-    document.title = 'AI-Powered API Testing Platform | Automated API Testing & Validation Tool';
-    updateMetaTag('description', 'Professional API testing platform with AI-powered test generation, automated validation, and real-time monitoring. Supports REST, GraphQL, WebSocket & gRPC. Free trial available.');
-    updateMetaTag('keywords', 'API testing, automated API testing, AI API testing, REST API testing, GraphQL testing, WebSocket testing, API validation, API automation, test automation, API quality assurance, developer tools, software testing, API monitoring, CI/CD integration, OpenAPI testing, API security testing');
-    updateMetaTag('author', 'Lade Stack');
-    updateMetaTag('robots', 'index, follow');
-    updateMetaTag('googlebot', 'index, follow');
-    
-    // Open Graph Tags
-    updateMetaTag('og:title', 'AI-Powered API Testing Platform | Automated Testing & Validation', true);
-    updateMetaTag('og:description', 'Revolutionary AI-powered API testing platform with intelligent test generation, real-time monitoring, and automated validation. Start your free trial today.', true);
-    updateMetaTag('og:type', 'website', true);
-    updateMetaTag('og:url', window.location.href, true);
-    updateMetaTag('og:site_name', 'Lade Stack', true);
-    updateMetaTag('og:locale', 'en_US', true);
-    
-    // Twitter Card Tags
-    updateMetaTag('twitter:card', 'summary_large_image');
-    updateMetaTag('twitter:title', 'AI-Powered API Testing Platform');
-    updateMetaTag('twitter:description', 'Automated API testing with AI. Generate tests, validate responses, monitor performance. Free trial available.');
-    updateMetaTag('twitter:creator', '@ladestack');
-    
-    // Additional SEO Tags
-    updateMetaTag('theme-color', '#0f172a');
-    updateMetaTag('msapplication-TileColor', '#0f172a');
-    updateMetaTag('application-name', 'Lade Stack API Testing');
-    
-    // Canonical URL
-    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.rel = 'canonical';
-      document.head.appendChild(canonical);
-    }
-    canonical.href = window.location.href;
-    
-    // Enhanced structured data (JSON-LD)
-    const structuredData = {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "AI-Powered API Testing Platform",
-      "alternateName": ["API Testing Tool", "Automated API Testing", "REST API Tester", "GraphQL Testing Platform"],
-      "description": "Professional API testing platform with AI-powered test generation, automated validation, real-time monitoring, and comprehensive reporting. Supports REST, GraphQL, WebSocket, and gRPC protocols.",
-      "url": window.location.href,
-      "applicationCategory": "DeveloperApplication",
-      "applicationSubCategory": "API Testing & Validation",
-      "operatingSystem": "Web",
-      "softwareVersion": "1.0",
-      "datePublished": "2025-01-01",
-      "dateModified": "2025-01-15",
-      "author": {
-        "@type": "Organization",
-        "name": "Lade Stack",
-        "url": "https://ladestack.ai"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Lade Stack",
-        "url": "https://ladestack.ai"
-      },
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD",
-        "description": "Free tier with 100 API tests per month",
-        "availability": "https://schema.org/InStock"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "ratingCount": "247",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
-      "featureList": [
-        "AI-powered test case generation",
-        "Automated API validation",
-        "Real-time monitoring and alerts",
-        "CI/CD pipeline integration",
-        "Multi-protocol support (REST, GraphQL, WebSocket, gRPC)",
-        "Performance analytics and reporting",
-        "Security vulnerability scanning",
-        "Mock server generation",
-        "Team collaboration features",
-        "Custom dashboard and insights"
-      ],
-      "screenshot": `${window.location.origin}/api-testing-project.svg`,
-      "downloadUrl": `${window.location.origin}/api-testing-platform`,
-      "installationUrl": `${window.location.origin}/api-testing-platform`,
-      "softwareHelp": {
-        "@type": "CreativeWork",
-        "text": "Comprehensive API testing documentation and tutorials"
-      }
-    };
-
-    // FAQ Schema
-    const faqSchema = {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "How does AI-powered API testing work?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Our AI analyzes your OpenAPI specification and automatically generates comprehensive test cases, including edge cases, boundary values, and business logic validation. This reduces manual testing effort by up to 80%."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What API protocols are supported?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "We support REST APIs, GraphQL, WebSocket, gRPC, and more. The platform automatically detects API types from your specifications and generates appropriate test cases."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I integrate with my CI/CD pipeline?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes! We provide native integrations with GitHub Actions, Jenkins, GitLab CI, CircleCI, and support for any CI/CD platform via our REST API or CLI tools."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is my API data secure?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Absolutely. We use bank-grade encryption, are SOC2 Type II compliant, and never store your API keys or sensitive data longer than necessary for test execution."
-          }
-        }
-      ]
-    };
-
-    // Software Application Schema
-    const productSchema = {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "name": "AI-Powered API Testing Platform",
-      "description": "Comprehensive API testing platform with AI-powered test generation, automated validation, and real-time monitoring capabilities.",
-      "brand": {
-        "@type": "Brand",
-        "name": "Lade Stack"
-      },
-      "category": "Software > Developer Tools > Testing & QA",
-      "offers": {
-        "@type": "AggregateOffer",
-        "lowPrice": "0",
-        "highPrice": "99",
-        "priceCurrency": "USD",
-        "offerCount": "3",
-        "offers": [
-          {
-            "@type": "Offer",
-            "name": "Free Plan",
-            "price": "0",
-            "description": "Perfect for getting started with API testing"
-          },
-          {
-            "@type": "Offer",
-            "name": "Pro Plan",
-            "price": "29",
-            "description": "For growing teams and professional use"
-          },
-          {
-            "@type": "Offer",
-            "name": "Team Plan",
-            "price": "99",
-            "description": "For large organizations and enterprises"
-          }
-        ]
-      }
-    };
-
-    // Add all schema scripts
-    const schemas = [structuredData, faqSchema, productSchema];
-    schemas.forEach(schema => {
-      const script = document.createElement('script');
-      script.type = 'application/ld+json';
-      script.text = JSON.stringify(schema);
-      document.head.appendChild(script);
-    });
-
     // Performance tracking for Core Web Vitals
     if (typeof window !== 'undefined' && 'performance' in window) {
       window.addEventListener('load', () => {
@@ -517,14 +321,14 @@ const ApiTestingPlatform: React.FC = () => {
           const perfData = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
           const loadTime = perfData.loadEventEnd - perfData.loadEventStart;
           console.log(`Page load time: ${loadTime}ms`);
-          
+
           // Track LCP (Largest Contentful Paint)
           new PerformanceObserver((entryList) => {
             const entries = entryList.getEntries();
             const lastEntry = entries[entries.length - 1];
             console.log(`LCP: ${lastEntry.startTime}ms`);
           }).observe({ entryTypes: ['largest-contentful-paint'] });
-          
+
           // Track CLS (Cumulative Layout Shift)
           new PerformanceObserver((entryList) => {
             let clsValue = 0;
@@ -538,12 +342,6 @@ const ApiTestingPlatform: React.FC = () => {
         }, 0);
       });
     }
-
-    return () => {
-      // Cleanup: remove added meta tags and scripts
-      const addedElements = document.querySelectorAll('[data-seo-added="true"]');
-      addedElements.forEach(el => el.remove());
-    };
   }, []);
 
   // Track analytics events
@@ -572,8 +370,156 @@ const ApiTestingPlatform: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="AI-Powered API Testing Platform | Automated API Testing & Validation Tool"
+        description="Professional API testing platform with AI-powered test generation, automated validation, and real-time monitoring. Supports REST, GraphQL, WebSocket & gRPC. Free trial available."
+        keywords="API testing, automated API testing, AI API testing, REST API testing, GraphQL testing, WebSocket testing, API validation, API automation, test automation, API quality assurance, developer tools, software testing, API monitoring, CI/CD integration, OpenAPI testing, API security testing"
+        ogTitle="AI-Powered API Testing Platform | Automated Testing & Validation"
+        ogDescription="Revolutionary AI-powered API testing platform with intelligent test generation, real-time monitoring, and automated validation. Start your free trial today."
+        ogType="website"
+        ogUrl={window.location.href}
+        ogImage={`${window.location.origin}/api-testing-project.svg`}
+        twitterTitle="AI-Powered API Testing Platform"
+        twitterDescription="Automated API testing with AI. Generate tests, validate responses, monitor performance. Free trial available."
+        twitterCard="summary_large_image"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "AI-Powered API Testing Platform",
+            "alternateName": ["API Testing Tool", "Automated API Testing", "REST API Tester", "GraphQL Testing Platform"],
+            "description": "Professional API testing platform with AI-powered test generation, automated validation, real-time monitoring, and comprehensive reporting. Supports REST, GraphQL, WebSocket, and gRPC protocols.",
+            "url": window.location.href,
+            "applicationCategory": "DeveloperApplication",
+            "applicationSubCategory": "API Testing & Validation",
+            "operatingSystem": "Web",
+            "softwareVersion": "1.0",
+            "datePublished": "2025-01-01",
+            "dateModified": "2025-01-15",
+            "author": {
+              "@type": "Organization",
+              "name": "Lade Stack",
+              "url": "https://ladestack.ai"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Lade Stack",
+              "url": "https://ladestack.ai"
+            },
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD",
+              "description": "Free tier with 100 API tests per month",
+              "availability": "https://schema.org/InStock"
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.9",
+              "ratingCount": "247",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "featureList": [
+              "AI-powered test case generation",
+              "Automated API validation",
+              "Real-time monitoring and alerts",
+              "CI/CD pipeline integration",
+              "Multi-protocol support (REST, GraphQL, WebSocket, gRPC)",
+              "Performance analytics and reporting",
+              "Security vulnerability scanning",
+              "Mock server generation",
+              "Team collaboration features",
+              "Custom dashboard and insights"
+            ],
+            "screenshot": `${window.location.origin}/api-testing-project.svg`,
+            "downloadUrl": `${window.location.origin}/api-testing-platform`,
+            "installationUrl": `${window.location.origin}/api-testing-platform`,
+            "softwareHelp": {
+              "@type": "CreativeWork",
+              "text": "Comprehensive API testing documentation and tutorials"
+            }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How does AI-powered API testing work?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Our AI analyzes your OpenAPI specification and automatically generates comprehensive test cases, including edge cases, boundary values, and business logic validation. This reduces manual testing effort by up to 80%."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What API protocols are supported?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "We support REST APIs, GraphQL, WebSocket, gRPC, and more. The platform automatically detects API types from your specifications and generates appropriate test cases."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I integrate with my CI/CD pipeline?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes! We provide native integrations with GitHub Actions, Jenkins, GitLab CI, CircleCI, and support for any CI/CD platform via our REST API or CLI tools."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is my API data secure?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Absolutely. We use bank-grade encryption, are SOC2 Type II compliant, and never store your API keys or sensitive data longer than necessary for test execution."
+                }
+              }
+            ]
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": "AI-Powered API Testing Platform",
+            "description": "Comprehensive API testing platform with AI-powered test generation, automated validation, and real-time monitoring capabilities.",
+            "brand": {
+              "@type": "Brand",
+              "name": "Lade Stack"
+            },
+            "category": "Software > Developer Tools > Testing & QA",
+            "offers": {
+              "@type": "AggregateOffer",
+              "lowPrice": "0",
+              "highPrice": "99",
+              "priceCurrency": "USD",
+              "offerCount": "3",
+              "offers": [
+                {
+                  "@type": "Offer",
+                  "name": "Free Plan",
+                  "price": "0",
+                  "description": "Perfect for getting started with API testing"
+                },
+                {
+                  "@type": "Offer",
+                  "name": "Pro Plan",
+                  "price": "29",
+                  "description": "For growing teams and professional use"
+                },
+                {
+                  "@type": "Offer",
+                  "name": "Team Plan",
+                  "price": "99",
+                  "description": "For large organizations and enterprises"
+                }
+              ]
+            }
+          }
+        ]}
+      />
       <Header />
-      
+
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-14 sm:pt-16 lg:pt-20">
         <div className="container mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
@@ -1163,8 +1109,8 @@ const ApiTestingPlatform: React.FC = () => {
                 Join thousands of developers who have revolutionized their testing workflow with AI.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   className="bg-gradient-to-r from-teal-500 to-indigo-500 hover:from-teal-600 hover:to-indigo-600"
                   onClick={() => handleSignupClick('final-cta')}
                 >
