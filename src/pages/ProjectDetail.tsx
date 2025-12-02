@@ -37,7 +37,7 @@ const projects = [
   },
   {
     id: "file-management",
-    title: "Intelligent File Management",
+    title: "Lade Share: Online file sharing platform",
     description: "Secure, AI-enhanced file storage and organization for teams.",
     shortDescription: "Smart file organization and security.",
     fullDescription: "Next-generation file management system that uses AI to organize, tag, and secure your documents automatically.",

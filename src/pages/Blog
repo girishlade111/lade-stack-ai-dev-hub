@@ -23,7 +23,8 @@ const BlogPost = () => {
       author: "Girish Lade",
       readTimeEstimate: "18-22 minutes",
       wordCount: "4,800 words",
-      targetAudience: "Software developers, tech leads, CTOs, innovation managers",
+      targetAudience: "Software developers, tech leads, CTOs, innovation mana
+      848gers",
       readingLevel: "Intermediate to advanced"
     },
     {
