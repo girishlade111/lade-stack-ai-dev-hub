@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { Github, Linkedin, Instagram, Code, Mail, ArrowRight, ExternalLink } from "lucide-react";
-import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/motion";
+import { ScrollReveal, StaggerContainer, StaggerItem, viewportConfig } from "@/components/motion";
 
 const productLinks = [
   { name: "AI Code Editor", href: "/projects/ai-code-viewer" },
@@ -59,15 +59,13 @@ export default function Footer() {
   return (
     <footer className="relative border-t border-border overflow-hidden">
       {/* Animated gradient line at top */}
-      <div className="absolute top-0 left-0 right-0 h-px">
-        <motion.div
-          className="h-full bg-gradient-to-r from-transparent via-primary/50 to-transparent"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1 }}
-        />
-      </div>
+      <motion.div
+        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"
+        initial={{ opacity: 0, scaleX: 0 }}
+        whileInView={{ opacity: 1, scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, ease: "easeOut" }}
+      />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
@@ -75,9 +73,13 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <ScrollReveal>
               <Link to="/" className="inline-flex items-center gap-2.5 mb-4 group">
-                <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
+                <motion.div
+                  className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center"
+                  whileHover={{ rotate: 8, scale: 1.1 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                >
                   <span className="text-xs font-mono font-bold text-primary">{"</>"}</span>
-                </div>
+                </motion.div>
                 <span className="text-base font-semibold text-foreground">
                   Lade <span className="text-primary">Stack</span>
                 </span>
@@ -100,8 +102,9 @@ export default function Footer() {
                   </div>
                   <motion.button
                     className="px-3 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    whileHover={{ scale: 1.04 }}
+                    whileTap={{ scale: 0.96 }}
+                    transition={{ duration: 0.2 }}
                   >
                     <ArrowRight className="w-4 h-4" />
                   </motion.button>
@@ -154,7 +157,20 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-16 pt-8 border-t border-border">
+        <motion.div
+          className="mt-16 pt-8 border-t border-border"
+          initial="initial"
+          whileInView="animate"
+          viewport={viewportConfig}
+          variants={{
+            initial: { opacity: 0, y: 20 },
+            animate: {
+              opacity: 1,
+              y: 0,
+              transition: { duration: 0.6, ease: "easeOut" },
+            },
+          }}
+        >
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             {/* Social icons */}
             <div className="flex items-center gap-4">
@@ -164,9 +180,16 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-lg bg-muted/50 border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] transition-all duration-300"
-                  whileHover={{ scale: 1.1, y: -2 }}
+                  className="w-9 h-9 rounded-lg bg-muted/50 border border-border flex items-center justify-center text-muted-foreground"
+                  whileHover={{
+                    scale: 1.1,
+                    y: -2,
+                    borderColor: "rgba(6,182,212,0.3)",
+                    boxShadow: "0 0 15px rgba(6,182,212,0.15)",
+                    color: "hsl(var(--primary))",
+                  }}
                   whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
                   aria-label={social.label}
                 >
                   <social.icon className="w-4 h-4" />
@@ -181,7 +204,7 @@ export default function Footer() {
               <span>Built with precision by Girish Lade</span>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );

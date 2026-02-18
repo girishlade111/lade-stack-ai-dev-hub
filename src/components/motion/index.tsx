@@ -1,39 +1,114 @@
-import { motion, useInView, useScroll, useTransform, type Variants } from "framer-motion";
+import {
+  motion,
+  useInView,
+  useScroll,
+  useTransform,
+  type Variants,
+  type MotionProps,
+} from "framer-motion";
 import { useRef, useEffect, useState, type ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 
-// Scroll-triggered reveal wrapper
+// ═══════════════════════════════════════════════════════════════
+// GLOBAL MOTION VARIANTS
+// ═══════════════════════════════════════════════════════════════
+
+export const fadeInUp: Variants = {
+  initial: { opacity: 0, y: 40 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
+export const fadeIn: Variants = {
+  initial: { opacity: 0 },
+  animate: {
+    opacity: 1,
+    transition: { duration: 0.5 },
+  },
+};
+
+export const staggerContainer: Variants = {
+  initial: {},
+  animate: {
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+export const scaleIn: Variants = {
+  initial: { opacity: 0, scale: 0.9 },
+  animate: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
+export const slideInLeft: Variants = {
+  initial: { opacity: 0, x: -40 },
+  animate: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
+export const slideInRight: Variants = {
+  initial: { opacity: 0, x: 40 },
+  animate: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
+// Standard viewport config
+export const viewportConfig = { once: true, amount: 0.3 } as const;
+
+// ═══════════════════════════════════════════════════════════════
+// SCROLL REVEAL — wraps children with viewport-triggered fade
+// ═══════════════════════════════════════════════════════════════
+
 export function ScrollReveal({
   children,
   className = "",
   delay = 0,
   direction = "up",
-  duration = 0.6,
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
   direction?: "up" | "down" | "left" | "right";
-  duration?: number;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-
-  const directionMap = {
-    up: { y: 40, x: 0 },
-    down: { y: -40, x: 0 },
-    left: { x: 40, y: 0 },
-    right: { x: -40, y: 0 },
+  const directionVariants: Record<string, Variants> = {
+    up: {
+      initial: { opacity: 0, y: 40 },
+      animate: { opacity: 1, y: 0, transition: { duration: 0.6, delay, ease: "easeOut" } },
+    },
+    down: {
+      initial: { opacity: 0, y: -40 },
+      animate: { opacity: 1, y: 0, transition: { duration: 0.6, delay, ease: "easeOut" } },
+    },
+    left: {
+      initial: { opacity: 0, x: -40 },
+      animate: { opacity: 1, x: 0, transition: { duration: 0.6, delay, ease: "easeOut" } },
+    },
+    right: {
+      initial: { opacity: 0, x: 40 },
+      animate: { opacity: 1, x: 0, transition: { duration: 0.6, delay, ease: "easeOut" } },
+    },
   };
-
-  const { x, y } = directionMap[direction];
 
   return (
     <motion.div
-      ref={ref}
-      initial={{ opacity: 0, x, y }}
-      animate={isInView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, x, y }}
-      transition={{ duration, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+      variants={directionVariants[direction]}
+      initial="initial"
+      whileInView="animate"
+      viewport={viewportConfig}
       className={className}
     >
       {children}
@@ -41,11 +116,14 @@ export function ScrollReveal({
   );
 }
 
-// Staggered children container
+// ═══════════════════════════════════════════════════════════════
+// STAGGER CONTAINER & ITEM
+// ═══════════════════════════════════════════════════════════════
+
 export function StaggerContainer({
   children,
   className = "",
-  staggerDelay = 0.1,
+  staggerDelay = 0.12,
   delay = 0,
 }: {
   children: ReactNode;
@@ -53,21 +131,15 @@ export function StaggerContainer({
   staggerDelay?: number;
   delay?: number;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-60px" });
-
   return (
     <motion.div
-      ref={ref}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      initial="initial"
+      whileInView="animate"
+      viewport={viewportConfig}
       variants={{
-        hidden: {},
-        visible: {
-          transition: {
-            staggerChildren: staggerDelay,
-            delayChildren: delay,
-          },
+        initial: {},
+        animate: {
+          transition: { staggerChildren: staggerDelay, delayChildren: delay },
         },
       }}
       className={className}
@@ -77,16 +149,6 @@ export function StaggerContainer({
   );
 }
 
-// Individual stagger child item
-export const staggerItem: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
-  },
-};
-
 export function StaggerItem({
   children,
   className = "",
@@ -95,30 +157,16 @@ export function StaggerItem({
   className?: string;
 }) {
   return (
-    <motion.div variants={staggerItem} className={className}>
+    <motion.div variants={fadeInUp} className={className}>
       {children}
     </motion.div>
   );
 }
 
-// Animated gradient text
-export function GradientText({
-  children,
-  className = "",
-  as: Component = "span",
-}: {
-  children: ReactNode;
-  className?: string;
-  as?: "span" | "h1" | "h2" | "h3" | "p";
-}) {
-  return (
-    <Component className={`text-gradient ${className}`}>
-      {children}
-    </Component>
-  );
-}
+// ═══════════════════════════════════════════════════════════════
+// PARALLAX SECTION
+// ═══════════════════════════════════════════════════════════════
 
-// Parallax section
 export function ParallaxSection({
   children,
   className = "",
@@ -142,7 +190,9 @@ export function ParallaxSection({
   );
 }
 
-// ============ PRODUCTION-GRADE GLOBAL BUTTON SYSTEM ============
+// ═══════════════════════════════════════════════════════════════
+// GLOW BUTTON — unified h-14, animated arrow, gradient shift
+// ═══════════════════════════════════════════════════════════════
 
 export function GlowButton({
   children,
@@ -151,7 +201,6 @@ export function GlowButton({
   variant = "primary",
   size = "default",
   showArrow = false,
-  asChild = false,
 }: {
   children: ReactNode;
   className?: string;
@@ -159,42 +208,48 @@ export function GlowButton({
   variant?: "primary" | "secondary";
   size?: "default" | "lg" | "sm";
   showArrow?: boolean;
-  asChild?: boolean;
 }) {
-  const sizeStyles = {
-    sm: "h-10 px-5 text-sm rounded-xl gap-2",
-    default: "h-12 px-7 text-sm rounded-xl gap-2",
-    lg: "h-14 px-9 text-base rounded-2xl gap-2.5",
+  const sizeMap = {
+    sm: "h-11 px-5 text-sm rounded-xl",
+    default: "h-14 px-8 text-sm rounded-2xl",
+    lg: "h-14 px-9 text-base rounded-2xl",
   };
 
-  const baseStyles =
-    variant === "primary"
-      ? "bg-primary text-primary-foreground hover:shadow-[0_0_30px_rgba(6,182,212,0.4),0_0_60px_rgba(6,182,212,0.15)] border border-primary/50 hover:border-primary"
-      : "bg-transparent border border-border text-foreground hover:border-primary/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.12)] hover:bg-primary/5";
+  const isPrimary = variant === "primary";
 
   return (
     <motion.button
       onClick={onClick}
-      className={`relative overflow-hidden inline-flex items-center justify-center font-medium transition-all duration-300 ${sizeStyles[size]} ${baseStyles} ${className}`}
-      whileHover={{ scale: 1.03 }}
-      whileTap={{ scale: 0.97 }}
+      className={`group relative inline-flex items-center justify-center gap-2.5 font-medium overflow-hidden ${sizeMap[size]} ${
+        isPrimary
+          ? "bg-primary text-primary-foreground border border-primary/50"
+          : "bg-transparent border border-border text-foreground hover:border-primary/40"
+      } ${className}`}
+      whileHover={{
+        scale: 1.04,
+        boxShadow: isPrimary
+          ? "0 0 30px rgba(6,182,212,0.4), 0 0 60px rgba(6,182,212,0.15)"
+          : "0 0 20px rgba(6,182,212,0.12)",
+      }}
+      whileTap={{ scale: 0.96 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
     >
-      {/* Gradient shift overlay */}
-      <motion.div
-        className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500"
-        style={{
-          background: variant === "primary"
-            ? "linear-gradient(135deg, rgba(6,182,212,0.15) 0%, rgba(59,130,246,0.15) 50%, rgba(139,92,246,0.15) 100%)"
-            : "linear-gradient(135deg, rgba(6,182,212,0.05) 0%, rgba(59,130,246,0.05) 50%, rgba(139,92,246,0.05) 100%)",
-        }}
-      />
-      <span className="relative z-10 flex items-center gap-2">
+      {/* Animated gradient sweep on hover */}
+      {isPrimary && (
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+          initial={{ x: "-100%" }}
+          whileHover={{ x: "100%" }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
+        />
+      )}
+      <span className="relative z-10 flex items-center gap-2.5">
         {children}
         {showArrow && (
           <motion.span
             className="inline-flex"
             initial={{ x: 0 }}
-            whileHover={{ x: 4 }}
+            whileHover={{ x: 6 }}
             transition={{ type: "spring", stiffness: 400, damping: 15 }}
           >
             <ArrowRight className="w-4 h-4" />
@@ -205,7 +260,10 @@ export function GlowButton({
   );
 }
 
-// Glass card with hover effect
+// ═══════════════════════════════════════════════════════════════
+// GLASS CARD — with hover glow border
+// ═══════════════════════════════════════════════════════════════
+
 export function GlassCard({
   children,
   className = "",
@@ -217,36 +275,39 @@ export function GlassCard({
 }) {
   return (
     <motion.div
-      className={`glass-card rounded-xl p-6 ${className}`}
+      className={`glass-card rounded-2xl p-6 ${className}`}
       whileHover={
         hover
           ? {
-              y: -4,
-              boxShadow: "0 0 30px -5px rgba(6, 182, 212, 0.15)",
-              borderColor: "rgba(6, 182, 212, 0.2)",
+              y: -6,
+              scale: 1.02,
+              boxShadow: "0 0 0 1px rgba(6,182,212,0.2), 0 0 30px -5px rgba(6,182,212,0.15)",
             }
           : undefined
       }
-      transition={{ duration: 0.3, ease: "easeOut" }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
     >
       {children}
     </motion.div>
   );
 }
 
-// Animated counter - fixed implementation
+// ═══════════════════════════════════════════════════════════════
+// ANIMATED COUNTER — count-up on scroll into view
+// ═══════════════════════════════════════════════════════════════
+
 export function AnimatedCounter({
   target,
   suffix = "",
   prefix = "",
-  duration = 2,
   className = "",
+  duration = 2000,
 }: {
   target: number;
   suffix?: string;
   prefix?: string;
-  duration?: number;
   className?: string;
+  duration?: number;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true });
@@ -255,12 +316,11 @@ export function AnimatedCounter({
   useEffect(() => {
     if (!isInView) return;
     let startTime: number;
-    const durationMs = duration * 1000;
 
     function animate(currentTime: number) {
       if (!startTime) startTime = currentTime;
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / durationMs, 1);
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      // Cubic ease-out
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.round(eased * target));
       if (progress < 1) requestAnimationFrame(animate);
@@ -270,98 +330,75 @@ export function AnimatedCounter({
   }, [isInView, target, duration]);
 
   return (
-    <span ref={ref} className={className}>
-      {prefix}{count.toLocaleString()}{suffix}
-    </span>
-  );
-}
-
-// Floating element animation
-export function FloatingElement({
-  children,
-  className = "",
-  delay = 0,
-  amplitude = 10,
-}: {
-  children: ReactNode;
-  className?: string;
-  delay?: number;
-  amplitude?: number;
-}) {
-  return (
-    <motion.div
-      className={className}
-      animate={{
-        y: [-amplitude, amplitude, -amplitude],
-      }}
-      transition={{
-        duration: 6,
-        repeat: Infinity,
-        ease: "easeInOut",
-        delay,
-      }}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-// Section divider with animated gradient line
-export function SectionDivider({ className = "" }: { className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true });
-
-  return (
-    <motion.div
+    <motion.span
       ref={ref}
+      className={className}
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+    >
+      {prefix}{count.toLocaleString()}{suffix}
+    </motion.span>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SECTION DIVIDER — animated expanding line
+// ═══════════════════════════════════════════════════════════════
+
+export function SectionDivider({ className = "" }: { className?: string }) {
+  return (
+    <motion.div
       className={`w-full flex justify-center py-8 ${className}`}
-      initial={{ opacity: 0 }}
-      animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+      initial="initial"
+      whileInView="animate"
+      viewport={viewportConfig}
     >
       <motion.div
-        className="h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent"
-        initial={{ width: 0 }}
-        animate={isInView ? { width: "80%" } : { width: 0 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
+        className="h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"
+        variants={{
+          initial: { width: 0, opacity: 0 },
+          animate: {
+            width: "80%",
+            opacity: 1,
+            transition: { duration: 0.8, ease: "easeOut" },
+          },
+        }}
       />
     </motion.div>
   );
 }
 
-// Tilt card wrapper for interactive 3D tilt effect
-export function TiltCard({
-  children,
+// ═══════════════════════════════════════════════════════════════
+// GRADIENT SPOTLIGHT — radial glow behind key text
+// ═══════════════════════════════════════════════════════════════
+
+export function GradientSpotlight({
   className = "",
-  intensity = 10,
+  color = "cyan",
 }: {
-  children: ReactNode;
   className?: string;
-  intensity?: number;
+  color?: "cyan" | "blue" | "purple";
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    ref.current.style.transform = `perspective(800px) rotateY(${x * intensity}deg) rotateX(${-y * intensity}deg) scale3d(1.02, 1.02, 1.02)`;
-  };
-
-  const handleMouseLeave = () => {
-    if (!ref.current) return;
-    ref.current.style.transform = "perspective(800px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)";
+  const colorMap = {
+    cyan: "from-cyan-500/8 via-cyan-500/3 to-transparent",
+    blue: "from-blue-500/8 via-blue-500/3 to-transparent",
+    purple: "from-purple-500/8 via-purple-500/3 to-transparent",
   };
 
   return (
-    <div
-      ref={ref}
-      className={`transition-transform duration-300 ease-out ${className}`}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ transformStyle: "preserve-3d" }}
+    <motion.div
+      className={`absolute pointer-events-none bg-radial-gradient ${className}`}
+      style={{
+        background: `radial-gradient(ellipse at center, var(--tw-gradient-stops))`,
+      }}
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 1.2, ease: "easeOut" }}
     >
-      {children}
-    </div>
+      <div className={`w-full h-full bg-gradient-radial ${colorMap[color]}`} />
+    </motion.div>
   );
 }
