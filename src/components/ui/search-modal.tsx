@@ -114,6 +114,18 @@ interface SearchModalProps {
 export function SearchModal({ open, onOpenChange }: SearchModalProps) {
   const navigate = useNavigate();
 
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   const handleSelect = useCallback(
     (href: string) => {
       onOpenChange(false);
@@ -125,49 +137,54 @@ export function SearchModal({ open, onOpenChange }: SearchModalProps) {
   return (
     <CommandDialog open={open} onOpenChange={onOpenChange}>
       <CommandInput placeholder="Search products, pages, articles..." />
-      <CommandList>
-        <CommandEmpty>No results found.</CommandEmpty>
+      <div
+        className="max-h-[380px] overflow-y-auto overscroll-contain"
+        onWheel={(e) => e.stopPropagation()}
+      >
+        <CommandList className="max-h-none scroll-smooth">
+          <CommandEmpty>No results found.</CommandEmpty>
 
-        <CommandGroup heading="Products">
-          {products.map((item) => (
-            <CommandItem
-              key={item.id}
-              value={item.title}
-              onSelect={() => handleSelect(item.href)}
-              className="cursor-pointer"
-            >
-              <span className="mr-2 text-muted-foreground">{item.icon}</span>
-              <div>
-                <p className="text-sm font-medium">{item.title}</p>
-                <p className="text-xs text-muted-foreground">
-                  {item.description}
-                </p>
-              </div>
-            </CommandItem>
-          ))}
-        </CommandGroup>
+          <CommandGroup heading="Products">
+            {products.map((item) => (
+              <CommandItem
+                key={item.id}
+                value={item.title}
+                onSelect={() => handleSelect(item.href)}
+                className="cursor-pointer"
+              >
+                <span className="mr-2 text-muted-foreground">{item.icon}</span>
+                <div>
+                  <p className="text-sm font-medium">{item.title}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {item.description}
+                  </p>
+                </div>
+              </CommandItem>
+            ))}
+          </CommandGroup>
 
-        <CommandSeparator />
+          <CommandSeparator />
 
-        <CommandGroup heading="Pages">
-          {pages.map((item) => (
-            <CommandItem
-              key={item.id}
-              value={item.title}
-              onSelect={() => handleSelect(item.href)}
-              className="cursor-pointer"
-            >
-              <span className="mr-2 text-muted-foreground">{item.icon}</span>
-              <div>
-                <p className="text-sm font-medium">{item.title}</p>
-                <p className="text-xs text-muted-foreground">
-                  {item.description}
-                </p>
-              </div>
-            </CommandItem>
-          ))}
-        </CommandGroup>
-      </CommandList>
+          <CommandGroup heading="Pages">
+            {pages.map((item) => (
+              <CommandItem
+                key={item.id}
+                value={item.title}
+                onSelect={() => handleSelect(item.href)}
+                className="cursor-pointer"
+              >
+                <span className="mr-2 text-muted-foreground">{item.icon}</span>
+                <div>
+                  <p className="text-sm font-medium">{item.title}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {item.description}
+                  </p>
+                </div>
+              </CommandItem>
+            ))}
+          </CommandGroup>
+        </CommandList>
+      </div>
     </CommandDialog>
   );
 }
