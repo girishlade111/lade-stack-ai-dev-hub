@@ -1,26 +1,29 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
-import { Menu, X, Home, User, Layers, FileText, Mail } from "lucide-react";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { Menu, Search, Home, User, Layers, FileText, Mail } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
-import { ExpandableTabs } from "@/components/ui/expandable-tabs";
+import { SearchModal } from "@/components/ui/search-modal";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
-const navItems = [
-  { name: "Home", href: "/", icon: Home },
-  { name: "About", href: "/about", icon: User },
-  { name: "Products", href: "/apps", icon: Layers },
-  { name: "Blog", href: "/blog", icon: FileText },
-  { name: "Contact", href: "/contact", icon: Mail },
+const navLinks = [
+  { label: "Home", href: "/", icon: Home },
+  { label: "About", href: "/about", icon: User },
+  { label: "Products", href: "/apps", icon: Layers },
+  { label: "Blog", href: "/blog", icon: FileText },
+  { label: "Contact", href: "/contact", icon: Mail },
 ];
 
-const tabs = navItems.map((item) => ({
-  title: item.name,
-  icon: item.icon,
-}));
-
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [sheetOpen, setSheetOpen] = useState(false);
   const { scrollY } = useScroll();
   const navigate = useNavigate();
 
@@ -28,112 +31,151 @@ export default function Header() {
     setScrolled(latest > 20);
   });
 
-  useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [isOpen]);
+  // Cmd+K / Ctrl+K shortcut
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        setSearchOpen((prev) => !prev);
+      }
+    },
+    []
+  );
 
-  const handleTabChange = (index: number | null) => {
-    if (index !== null && navItems[index]) {
-      navigate(navItems[index].href);
-    }
-  };
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [handleKeyDown]);
 
   return (
-    <motion.header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "py-2 bg-[#F5F3EB]/70 dark:bg-[#1e1c18]/60 backdrop-blur-md border-b border-[#E6E6E6] dark:border-white/10"
-          : "py-4 bg-[#F5F3EB] dark:bg-[#1e1c18]"
-      }`}
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-    >
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6">
-        {/* LEFT — Logo */}
-        <Link to="/" className="flex items-center gap-2.5" onClick={() => setIsOpen(false)}>
-          <div className="w-8 h-8 rounded-lg bg-[#6E8F6A] flex items-center justify-center">
-            <span className="text-xs font-mono font-bold text-white">{"</>"}</span>
-          </div>
-          <span className="text-base font-semibold text-[#1C1C1C] dark:text-[#E8E4DA] tracking-tight">
-            Lade Stack
-          </span>
-        </Link>
-
-        {/* CENTER — ExpandableTabs (desktop only) */}
-        <div className="hidden md:flex">
-          <ExpandableTabs
-            tabs={tabs}
-            activeColor="text-[#6E8F6A] dark:text-[#8BAF87]"
-            className="bg-white/60 dark:bg-white/[0.04] border border-[#E6E6E6] dark:border-white/10 shadow-sm"
-            onChange={handleTabChange}
-          />
-        </div>
-
-        {/* RIGHT — Actions (desktop) */}
-        <div className="hidden md:flex items-center gap-3">
-          <ThemeToggle />
-          <Link to="/apps">
-            <motion.button
-              className="h-10 px-6 text-sm font-medium bg-[#6E8F6A] text-white rounded-full shadow-sm hover:bg-[#5F7F63] transition-colors duration-200"
-              whileHover={{ y: -1 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Get Started
-            </motion.button>
+    <>
+      <motion.header
+        className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+          scrolled
+            ? "border-b border-[#E6E6E6] dark:border-white/10 bg-[#F5F3EB]/70 dark:bg-[#1e1c18]/60 backdrop-blur-xl"
+            : "bg-[#F5F3EB] dark:bg-[#1e1c18]"
+        }`}
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+      >
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 h-16">
+          {/* ── LEFT: Logo ─────────────────────────────────── */}
+          <Link to="/" className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-[#6E8F6A] flex items-center justify-center">
+              <span className="text-xs font-mono font-bold text-white">
+                {"</>"}
+              </span>
+            </div>
+            <span className="text-base font-semibold text-[#1C1C1C] dark:text-[#E8E4DA] tracking-tight">
+              Lade Stack
+            </span>
           </Link>
-        </div>
 
-        {/* RIGHT — Actions (mobile) */}
-        <div className="flex md:hidden items-center gap-2">
-          <ThemeToggle />
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="p-2 text-[#1C1C1C] dark:text-[#E8E4DA]"
-            aria-label={isOpen ? "Close menu" : "Open menu"}
-          >
-            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
-        </div>
-      </div>
+          {/* ── CENTER: Nav Links (desktop) ────────────────── */}
+          <nav className="hidden md:flex items-center gap-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.label}
+                to={link.href}
+                className="px-4 py-2 text-sm font-medium text-[#555] dark:text-[#999] hover:text-[#1C1C1C] dark:hover:text-[#E8E4DA] transition-colors duration-200 rounded-lg hover:bg-black/[0.03] dark:hover:bg-white/[0.04]"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            className="md:hidden absolute top-full left-0 right-0 bg-[#F5F3EB] dark:bg-[#1e1c18] border-b border-[#E6E6E6] dark:border-white/10"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-          >
-            <nav className="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-1">
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className="flex items-center gap-3 px-4 py-3 text-base font-medium text-[#1C1C1C] dark:text-[#E8E4DA] hover:text-[#6E8F6A] hover:bg-[#E7EDD8]/50 dark:hover:bg-[#6E8F6A]/10 rounded-lg transition-colors"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <Icon className="w-4 h-4" />
-                    {item.name}
+          {/* ── RIGHT: Actions ─────────────────────────────── */}
+          <div className="flex items-center gap-2">
+            {/* Search button */}
+            <button
+              onClick={() => setSearchOpen(true)}
+              className="hidden sm:inline-flex items-center gap-2 h-9 px-3 text-sm text-[#777] dark:text-[#999] bg-white/60 dark:bg-white/[0.04] border border-[#E6E6E6] dark:border-white/10 rounded-lg hover:bg-white/80 dark:hover:bg-white/[0.06] transition-colors"
+            >
+              <Search className="w-4 h-4" />
+              <span className="hidden lg:inline">Search...</span>
+              <kbd className="hidden lg:inline-flex items-center gap-0.5 ml-2 px-1.5 py-0.5 text-[10px] font-mono text-[#999] dark:text-[#666] bg-[#F0F0F0] dark:bg-white/[0.06] rounded border border-[#E0E0E0] dark:border-white/10">
+                ⌘K
+              </kbd>
+            </button>
+
+            {/* Search icon (mobile only) */}
+            <button
+              onClick={() => setSearchOpen(true)}
+              className="sm:hidden p-2 text-[#555] dark:text-[#999]"
+              aria-label="Search"
+            >
+              <Search className="w-5 h-5" />
+            </button>
+
+            {/* Theme toggle */}
+            <ThemeToggle />
+
+            {/* CTA (desktop) */}
+            <Link to="/apps" className="hidden md:block">
+              <motion.button
+                className="h-9 px-5 text-sm font-medium bg-[#6E8F6A] text-white rounded-lg hover:bg-[#5F7F63] transition-colors duration-200"
+                whileHover={{ y: -1 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Get Started
+              </motion.button>
+            </Link>
+
+            {/* Mobile hamburger */}
+            <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
+              <SheetTrigger asChild>
+                <button
+                  className="md:hidden p-2 text-[#1C1C1C] dark:text-[#E8E4DA]"
+                  aria-label="Open menu"
+                >
+                  <Menu className="w-5 h-5" />
+                </button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-[280px] bg-[#F5F3EB] dark:bg-[#1e1c18] border-[#E6E6E6] dark:border-white/10">
+                <SheetHeader>
+                  <SheetTitle className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-lg bg-[#6E8F6A] flex items-center justify-center">
+                      <span className="text-[10px] font-mono font-bold text-white">
+                        {"</>"}
+                      </span>
+                    </div>
+                    <span className="text-base font-semibold text-[#1C1C1C] dark:text-[#E8E4DA]">
+                      Lade Stack
+                    </span>
+                  </SheetTitle>
+                </SheetHeader>
+                <nav className="flex flex-col gap-1 mt-6">
+                  {navLinks.map((link) => {
+                    const Icon = link.icon;
+                    return (
+                      <Link
+                        key={link.label}
+                        to={link.href}
+                        onClick={() => setSheetOpen(false)}
+                        className="flex items-center gap-3 px-3 py-3 text-sm font-medium text-[#1C1C1C] dark:text-[#E8E4DA] hover:text-[#6E8F6A] hover:bg-[#E7EDD8]/50 dark:hover:bg-[#6E8F6A]/10 rounded-lg transition-colors"
+                      >
+                        <Icon className="w-4 h-4" />
+                        {link.label}
+                      </Link>
+                    );
+                  })}
+                </nav>
+                <div className="mt-6 pt-6 border-t border-[#E6E6E6] dark:border-white/10 flex flex-col gap-3">
+                  <Link to="/apps" onClick={() => setSheetOpen(false)}>
+                    <button className="w-full h-10 text-sm font-medium bg-[#6E8F6A] text-white rounded-lg hover:bg-[#5F7F63] transition-colors">
+                      Get Started
+                    </button>
                   </Link>
-                );
-              })}
-              <div className="mt-3 pt-3 border-t border-[#E6E6E6] dark:border-white/10">
-                <Link to="/apps" onClick={() => setIsOpen(false)}>
-                  <button className="w-full h-10 text-sm font-medium bg-[#6E8F6A] text-white rounded-full">
-                    Get Started
-                  </button>
-                </Link>
-              </div>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.header>
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
+        </div>
+      </motion.header>
+
+      {/* Search Modal */}
+      <SearchModal open={searchOpen} onOpenChange={setSearchOpen} />
+    </>
   );
 }
