@@ -199,6 +199,23 @@
     border-color: hsl(30 10% 22%);
   }
 
+  /* ── Radial fade overlay for hero readability ────────────── */
+  .bg-radial-fade {
+    background: radial-gradient(
+      ellipse 80% 60% at 50% 50%,
+      rgba(245, 243, 235, 0.7) 0%,
+      transparent 70%
+    );
+  }
+
+  .dark .bg-radial-fade {
+    background: radial-gradient(
+      ellipse 80% 60% at 50% 50%,
+      rgba(30, 28, 24, 0.7) 0%,
+      transparent 70%
+    );
+  }
+
   /* ── Subtle dot pattern ──────────────────────────────────── */
   .dot-pattern {
     background-image: radial-gradient(circle, rgba(110, 143, 106, 0.08) 1px, transparent 1px);
