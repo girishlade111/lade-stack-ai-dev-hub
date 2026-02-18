@@ -1,222 +1,155 @@
-import { useMemo } from "react";
-import { Lightbulb, Users, Award, Eye, Rocket, CheckCircle } from "lucide-react";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { safeWindowOpen } from "@/utils/safe";
+import { motion } from "framer-motion";
+import { Rocket, Eye, CheckCircle, ArrowRight, Zap, Shield, Globe, Code } from "lucide-react";
+import { ScrollReveal, StaggerContainer, StaggerItem, GlassCard, SectionDivider } from "@/components/motion";
 
-const AboutSection = () => {
-  // Memoize expensive data to prevent re-renders
-  const values = useMemo(() => [
-    {
-      icon: Lightbulb,
-      title: "AI-First Innovation",
-      description: "Cutting-edge AI integrated into every tool, delivering intelligent automation.",
-      stats: { value: "Multiple", label: "AI Models" }
-    },
-    {
-      icon: Users,
-      title: "Developer Empowerment",
-      description: "Enterprise-grade tools accessible to individual developers and teams.",
-      stats: { value: "Many", label: "Developers" }
-    },
-    {
-      icon: Award,
-      title: "Production-Ready Quality",
-      description: "Battle-tested tools with high uptime and enterprise security.",
-      stats: { value: "Excellent", label: "Uptime" }
-    },
-    {
-      icon: Eye,
-      title: "Open Source Transparency",
-      description: "Core algorithms and integrations are open source with full API documentation.",
-      stats: { value: "Complete", label: "Open Source" }
-    }
-  ], []);
+const timelineItems = [
+  { year: "2024", title: "Foundation", description: "Lade Stack was born from a vision to democratize AI development tools." },
+  { year: "2025", title: "Platform Launch", description: "Launched the AI Code Editor and core platform infrastructure." },
+  { year: "2026", title: "Ecosystem Growth", description: "Expanding to 5 AI-powered products serving developers worldwide." },
+];
 
-  const achievements = useMemo(() => [
-    { icon: Rocket, title: "Much Faster", description: "Average development speed increase" },
-    { icon: Award, title: "Enterprise Ready", description: "SOC2 & GDPR compliant" },
-    { icon: Eye, title: "Global Scale", description: "Supporting many countries" },
-    { icon: CheckCircle, title: "Developer Love", description: "High customer satisfaction" }
-  ], []);
+const visionItems = [
+  { icon: Code, text: "AI-powered development assistance" },
+  { icon: Zap, text: "Intelligent code optimization" },
+  { icon: Shield, text: "Enterprise-grade security" },
+  { icon: Globe, text: "Global developer collaboration" },
+];
 
-  const stats = useMemo(() => [
-    { value: "Much", label: "Faster", description: "Development speed increase" },
-    { value: "High", label: "Quality", description: "Uptime guarantee" }
-  ], []);
-
+export default function AboutSection() {
   return (
-    <section id="about" className="py-8 sm:py-12 lg:py-16 relative overflow-hidden">
-      <div className="container mx-auto px-5 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto">
-          {/* Minimal Section Header - Mobile optimized */}
-          <div className="text-center mb-6 sm:mb-8">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground mb-3">
+    <section className="relative py-24 md:py-32 overflow-hidden">
+      {/* Background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <ScrollReveal>
+          <div className="text-center mb-16 md:mb-20">
+            <motion.div
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border bg-muted/50 text-sm text-muted-foreground mb-6"
+              whileHover={{ scale: 1.02 }}
+            >
+              <Rocket className="w-3.5 h-3.5 text-primary" />
               About Lade Stack
+            </motion.div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4 tracking-tight">
+              Building the future of{" "}
+              <span className="text-gradient">AI development</span>
             </h2>
-            <p className="text-sm text-muted-foreground max-w-3xl mx-auto">
-              The complete AI-powered development platform trusted by modern developers worldwide.
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              An AI-powered SaaS ecosystem designed to give every developer
+              enterprise-grade tools at startup velocity.
             </p>
           </div>
+        </ScrollReveal>
 
-          {/* Mission & Vision - Mobile-first grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 sm:mb-8">
-            <Card className="border border-border p-4 performance-optimized">
-              <CardHeader className="p-3">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-5 h-5 bg-foreground rounded flex items-center justify-center flex-shrink-0">
-                    <Rocket className="w-3 h-3 text-background" />
-                  </div>
-                  <h3 className="text-sm font-semibold text-foreground">
-                    Our Mission
-                  </h3>
+        {/* Split layout: Mission + Vision */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-20">
+          <ScrollReveal direction="left">
+            <GlassCard className="h-full">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <Rocket className="w-5 h-5 text-primary" />
                 </div>
-              </CardHeader>
-              <CardContent className="p-3 pt-0">
-                <p className="text-xs text-muted-foreground leading-relaxed mb-3">
-                  Democratizing advanced development tools by providing enterprise-grade AI
-                  solutions that reduce development time while maintaining quality.
-                </p>
-                <div className="grid grid-cols-2 gap-2">
-                  {stats.map((stat, index) => (
-                    <div key={index} className="text-center p-2 border border-border rounded">
-                      <div className="text-sm font-semibold text-foreground">{stat.value}</div>
-                      <div className="text-xs text-muted-foreground">{stat.label}</div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="border border-border p-4 performance-optimized">
-              <CardHeader className="p-3">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-5 h-5 bg-foreground rounded flex items-center justify-center flex-shrink-0">
-                    <Eye className="w-3 h-3 text-background" />
-                  </div>
-                  <h3 className="text-sm font-semibold text-foreground">
-                    Our Vision
-                  </h3>
-                </div>
-              </CardHeader>
-              <CardContent className="p-3 pt-0">
-                <p className="text-xs text-muted-foreground leading-relaxed mb-3">
-                  Building the future where anyone can create enterprise-grade applications
-                  with AI handling complexity while developers focus on creativity.
-                </p>
-                <div className="space-y-1">
-                  {[
-                    "AI development assistance",
-                    "Code optimization",
-                    "Error prevention",
-                    "Real-time collaboration"
-                  ].map((item, index) => (
-                    <div key={index} className="flex items-center gap-2">
-                      <CheckCircle className="w-3 h-3 text-muted-foreground flex-shrink-0" />
-                      <span className="text-xs text-muted-foreground">{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Values Grid - Optimized for mobile */}
-          <div className="mb-6 sm:mb-8">
-            <h3 className="text-lg font-semibold text-foreground mb-4 text-center">
-              Core Values
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {values.map((value, index) => (
-                <Card
-                  key={index}
-                  className="border border-border p-3 hover:bg-muted/30 transition-fast will-change-transform"
-                >
-                  <CardContent className="p-0">
-                    <div className="flex items-start gap-3">
-                      <div className="relative flex-shrink-0">
-                        <div className="w-6 h-6 bg-foreground rounded flex items-center justify-center">
-                          <value.icon className="w-3 h-3 text-background" />
-                        </div>
-                        <div className="absolute -top-1 -right-1 w-4 h-4 bg-foreground text-background text-xs rounded-full flex items-center justify-center font-medium">
-                          {index + 1}
-                        </div>
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between mb-1">
-                          <h4 className="text-sm font-medium text-foreground truncate">
-                            {value.title}
-                          </h4>
-                          <Badge variant="secondary" className="text-xs px-1.5 py-0.5 flex-shrink-0">
-                            {value.stats.value}
-                          </Badge>
-                        </div>
-                        <p className="text-xs text-muted-foreground leading-relaxed mb-2">
-                          {value.description}
-                        </p>
-                        <div className="text-xs text-muted-foreground font-medium">
-                          {value.stats.label}
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-
-          {/* Achievements - Optimized grid */}
-          <div className="mb-6 sm:mb-8">
-            <h3 className="text-lg font-semibold text-foreground mb-4 text-center">
-              Impact & Results
-            </h3>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-              {achievements.map((achievement, index) => (
-                <Card
-                  key={index}
-                  className="border border-border p-3 text-center hover:bg-muted/30 transition-fast will-change-transform"
-                >
-                  <CardContent className="p-0">
-                    <div className="w-6 h-6 bg-foreground rounded flex items-center justify-center mx-auto mb-2">
-                      <achievement.icon className="w-3 h-3 text-background" />
-                    </div>
-                    <h4 className="text-sm font-semibold text-foreground mb-1">
-                      {achievement.title}
-                    </h4>
-                    <p className="text-xs text-muted-foreground">
-                      {achievement.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-
-          {/* Social Proof - Simplified */}
-          <Card className="border border-border p-4 text-center performance-optimized">
-            <CardContent className="p-0">
-              <h3 className="text-sm font-semibold text-foreground mb-2">
-                Join Our Developer Community
-              </h3>
-              <p className="text-xs text-muted-foreground mb-4 max-w-2xl mx-auto">
-                Our AI-powered tools help developers ship faster, write better code,
-                and reduce development time significantly.
+                <h3 className="text-xl font-semibold text-foreground">Our Mission</h3>
+              </div>
+              <p className="text-muted-foreground leading-relaxed mb-8">
+                Democratizing advanced development tools by providing{" "}
+                <span className="text-foreground font-medium">enterprise-grade AI solutions</span>{" "}
+                that dramatically reduce development time while maintaining the highest quality standards.
+                We believe every developer deserves access to{" "}
+                <span className="text-foreground font-medium">cutting-edge AI tooling</span>.
               </p>
-              <Button
-                size="sm"
-                variant="outline"
-                className="text-xs hover:bg-muted/50 transition-fast touch-target touch-manipulation"
-                onClick={() => safeWindowOpen('https://ladestack.in/about')}
-              >
-                Learn more about our story
-              </Button>
-            </CardContent>
-          </Card>
+
+              {/* Timeline */}
+              <div className="space-y-6">
+                {timelineItems.map((item, index) => (
+                  <motion.div
+                    key={item.year}
+                    className="flex gap-4"
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.15, duration: 0.5 }}
+                  >
+                    <div className="flex flex-col items-center">
+                      <div className="w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-xs font-mono text-primary">
+                        {item.year.slice(2)}
+                      </div>
+                      {index < timelineItems.length - 1 && (
+                        <div className="w-px h-full bg-border mt-2" />
+                      )}
+                    </div>
+                    <div className="pb-6">
+                      <p className="text-sm font-semibold text-foreground">{item.title}</p>
+                      <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </GlassCard>
+          </ScrollReveal>
+
+          <ScrollReveal direction="right">
+            <GlassCard className="h-full">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <Eye className="w-5 h-5 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold text-foreground">Our Vision</h3>
+              </div>
+              <p className="text-muted-foreground leading-relaxed mb-8">
+                Building a future where{" "}
+                <span className="text-foreground font-medium">anyone can create enterprise-grade applications</span>{" "}
+                with AI handling complexity while developers focus on creativity and innovation.
+              </p>
+
+              <div className="space-y-4 mb-8">
+                {visionItems.map((item, index) => (
+                  <motion.div
+                    key={item.text}
+                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors"
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1, duration: 0.4 }}
+                  >
+                    <div className="w-8 h-8 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <item.icon className="w-4 h-4 text-primary" />
+                    </div>
+                    <span className="text-sm text-foreground">{item.text}</span>
+                    <CheckCircle className="w-4 h-4 text-primary/50 ml-auto flex-shrink-0" />
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Abstract floating graphic */}
+              <div className="relative h-32 rounded-lg bg-gradient-to-br from-primary/5 to-transparent border border-border overflow-hidden">
+                <motion.div
+                  className="absolute top-4 right-4 w-16 h-16 rounded-full bg-primary/10 blur-xl"
+                  animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.6, 0.3] }}
+                  transition={{ duration: 4, repeat: Infinity }}
+                />
+                <motion.div
+                  className="absolute bottom-4 left-8 w-12 h-12 rounded-full bg-blue-500/10 blur-lg"
+                  animate={{ scale: [1.2, 1, 1.2], opacity: [0.4, 0.2, 0.4] }}
+                  transition={{ duration: 3, repeat: Infinity, delay: 1 }}
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <motion.div
+                    className="text-sm font-mono text-primary/40"
+                    animate={{ opacity: [0.3, 0.7, 0.3] }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                  >
+                    {"<AI /> → Production"}
+                  </motion.div>
+                </div>
+              </div>
+            </GlassCard>
+          </ScrollReveal>
         </div>
+
+        <SectionDivider />
       </div>
     </section>
   );
-};
-
-export default AboutSection;
+}

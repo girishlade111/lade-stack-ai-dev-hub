@@ -1,12 +1,14 @@
-import { lazy } from "react";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
-import ProjectShowcase from "@/components/ProjectShowcase";
+import ValuesSection from "@/components/ValuesSection";
+import ImpactSection from "@/components/ImpactSection";
+import CommunitySection from "@/components/CommunitySection";
+import ProductsSection from "@/components/ProductsSection";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 
-const Index = () => {
+export default function Index() {
   return (
     <div className="min-h-screen bg-background">
       <SEO
@@ -18,11 +20,14 @@ const Index = () => {
       <main>
         <HeroSection />
         <AboutSection />
-        <ProjectShowcase />
+        <ValuesSection />
+        <ImpactSection />
+        <div id="products">
+          <ProductsSection />
+        </div>
+        <CommunitySection />
       </main>
       <Footer />
     </div>
   );
-};
-
-export default Index;
+}

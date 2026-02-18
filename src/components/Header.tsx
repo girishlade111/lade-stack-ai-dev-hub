@@ -1,136 +1,168 @@
-import { useState, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
+import { Menu, X, ArrowRight } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 
-const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const navItems = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Products", href: "/apps" },
+  { name: "Blog", href: "/blog" },
+  { name: "Contact", href: "/contact" },
+];
 
-  // Memoized navigation items to prevent re-renders
-  const navigationItems = [
-    { name: "Home", href: "/" },
-    { name: "About Us", href: "/about" },
-    { name: "Projects", href: "/projects" },
-    { name: "Blog", href: "/blog" },
-    { name: "Contact Us", href: "/contact" },
-  ];
+export default function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { scrollY } = useScroll();
 
-  // Optimize menu toggle with useCallback
-  const toggleMenu = useCallback(() => {
-    setIsMenuOpen(prev => !prev);
-  }, []);
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setScrolled(latest > 20);
+  });
 
-  // Close menu when clicking links
-  const handleNavClick = useCallback(() => {
-    setIsMenuOpen(false);
-  }, []);
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [isOpen]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
-        <div className="flex items-center justify-between h-14 sm:h-16">
-          {/* Animated Code Icon Logo - Touch optimized */}
-          <div className="flex-shrink-0">
-            <Link
-              to="/"
-              className="group logo-container transition-all duration-300 hover:scale-105 touch-target touch-manipulation inline-flex"
-              aria-label="Lade Stack Home"
+    <motion.header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "py-2 bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-[0_1px_20px_rgba(0,0,0,0.1)]"
+          : "py-4 bg-transparent"
+      }`}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+    >
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <Link to="/" className="group flex items-center gap-2.5" onClick={() => setIsOpen(false)}>
+            <motion.div
+              className="relative w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center overflow-hidden"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 400 }}
             >
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <div className="relative w-5 h-5 sm:w-6 sm:h-6 bg-foreground rounded-md flex items-center justify-center overflow-hidden group-hover:shadow-lg group-hover:shadow-foreground/25 group-hover:rotate-180 transition-all duration-300">
-                  <div className="text-background text-[8px] sm:text-xs font-mono font-bold">
-                    {"</>"}
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
-                <h1 className="text-xs sm:text-sm font-semibold text-foreground group-hover:text-primary transition-colors duration-300 truncate">
-                  Lade Stack
-                </h1>
-              </div>
-            </Link>
-          </div>
+              <span className="text-xs font-mono font-bold text-primary">{"</>"}</span>
+              <motion.div
+                className="absolute inset-0 bg-primary/10"
+                animate={{ opacity: [0, 0.3, 0] }}
+                transition={{ duration: 3, repeat: Infinity }}
+              />
+            </motion.div>
+            <span className="text-base font-semibold text-foreground tracking-tight">
+              Lade <span className="text-primary">Stack</span>
+            </span>
+          </Link>
 
-          {/* Desktop Navigation - Hidden on mobile */}
-          <nav className="hidden lg:flex items-center space-x-6">
-            {navigationItems.map((item) => (
+          {/* Desktop Nav */}
+          <nav className="hidden lg:flex items-center gap-1">
+            {navItems.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className="text-xs text-muted-foreground hover:text-foreground transition-fast font-medium relative group"
+                className="relative px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 group"
               >
-                <span className="relative z-10">{item.name}</span>
-                <div className="absolute bottom-0 left-0 w-0 h-px bg-foreground transition-smooth group-hover:w-full" />
+                {item.name}
+                <motion.span
+                  className="absolute bottom-0 left-1/2 -translate-x-1/2 h-px bg-primary"
+                  initial={{ width: 0 }}
+                  whileHover={{ width: "60%" }}
+                  transition={{ duration: 0.2 }}
+                />
               </Link>
             ))}
           </nav>
 
-          {/* Desktop Actions - Hidden on mobile */}
-          <div className="hidden md:flex items-center space-x-2">
+          {/* Desktop Actions */}
+          <div className="hidden lg:flex items-center gap-3">
             <ThemeToggle />
             <Link to="/apps">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-xs hover:bg-muted/50 transition-fast"
+              <motion.button
+                className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium bg-primary text-primary-foreground rounded-lg hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-shadow duration-300"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
-                Get started
-              </Button>
+                Get Started <ArrowRight className="w-3.5 h-3.5" />
+              </motion.button>
             </Link>
           </div>
 
-          {/* Mobile Actions - Optimized for small screens */}
-          <div className="flex md:hidden items-center space-x-1 sm:space-x-1.5">
+          {/* Mobile Actions */}
+          <div className="flex lg:hidden items-center gap-2">
             <ThemeToggle />
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleMenu}
-              className="relative transition-fast hover:bg-muted/50 touch-target touch-manipulation h-9 w-9"
-              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={isMenuOpen}
+            <motion.button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2 text-foreground"
+              whileTap={{ scale: 0.9 }}
+              aria-label={isOpen ? "Close menu" : "Open menu"}
             >
-              <div className="transition-transform duration-200 will-change-transform">
-                {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-              </div>
-            </Button>
-          </div>
-        </div>
-
-        {/* Mobile Navigation - Optimized for performance */}
-        <div className={`md:hidden transition-smooth overflow-hidden ${
-          isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        }`}>
-          <div className="py-4 space-y-1">
-            <nav className="flex flex-col space-y-1">
-              {navigationItems.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className="text-foreground hover:text-muted-foreground transition-fast font-medium py-2.5 px-3 rounded hover:bg-muted/30 text-sm touch-target touch-manipulation"
-                  onClick={handleNavClick}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </nav>
-            
-            <div className="pt-4 mt-4 border-t border-border">
-              <Link to="/apps" onClick={handleNavClick}>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="w-full text-xs hover:bg-muted/50 transition-fast touch-target touch-manipulation"
-                >
-                  Get started
-                </Button>
-              </Link>
-            </div>
+              <AnimatePresence mode="wait">
+                {isOpen ? (
+                  <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                    <X className="w-5 h-5" />
+                  </motion.div>
+                ) : (
+                  <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                    <Menu className="w-5 h-5" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.button>
           </div>
         </div>
       </div>
-    </header>
-  );
-};
 
-export default Header;
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="lg:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            <nav className="container mx-auto px-4 py-6 flex flex-col gap-1">
+              {navItems.map((item, index) => (
+                <motion.div
+                  key={item.name}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.05, duration: 0.3 }}
+                >
+                  <Link
+                    to={item.href}
+                    className="block px-4 py-3 text-base font-medium text-foreground hover:text-primary hover:bg-muted/50 rounded-lg transition-colors"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                </motion.div>
+              ))}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navItems.length * 0.05, duration: 0.3 }}
+                className="mt-4 pt-4 border-t border-border"
+              >
+                <Link to="/apps" onClick={() => setIsOpen(false)}>
+                  <button className="w-full px-4 py-3 text-sm font-medium bg-primary text-primary-foreground rounded-lg">
+                    Get Started
+                  </button>
+                </Link>
+              </motion.div>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
+  );
+}

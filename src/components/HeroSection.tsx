@@ -1,69 +1,178 @@
-import { ArrowRight, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { safeWindowOpen, safeQuerySelector, safeScrollIntoView } from "@/utils/safe";
+import { motion } from "framer-motion";
+import { ArrowRight, ChevronDown, Sparkles, Zap, Users, Shield, Code } from "lucide-react";
+import { useRef, useEffect, useState } from "react";
+import { GlowButton, FloatingElement } from "@/components/motion";
+import { safeWindowOpen } from "@/utils/safe";
 
-const HeroSection = () => {
+const stats = [
+  { icon: Zap, value: "10x", label: "Faster Dev" },
+  { icon: Users, value: "50K+", label: "Developers" },
+  { icon: Shield, value: "99.9%", label: "Uptime" },
+  { icon: Code, value: "5", label: "AI Tools" },
+];
+
+function GridBackground() {
   return (
-    <section id="home" className="relative min-h-screen flex items-center pt-14 sm:pt-16 lg:pt-20 overflow-hidden">
-      {/* Optimized background with hardware acceleration */}
-      <div className="absolute inset-0 z-0 bg-background will-change-transform" />
+    <div className="absolute inset-0 overflow-hidden">
+      {/* Grid pattern */}
+      <div className="absolute inset-0 grid-pattern opacity-60" />
 
-      {/* Content - Mobile-first layout with better spacing */}
-      <div className="relative z-10 container mx-auto px-5 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center lg:text-left">
-          {/* Minimal Badge - Mobile optimized */}
-          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md bg-muted border border-border mb-3 sm:mb-6 animate-slide-up touch-target">
-            <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-muted-foreground flex-shrink-0" />
-            <span className="text-xs font-medium text-muted-foreground truncate">
-              AI Development Suite
-            </span>
-          </div>
+      {/* Radial gradient overlay */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(6,182,212,0.08)_0%,transparent_70%)]" />
 
-          {/* Mobile-first headline with responsive font sizes */}
-          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-foreground mb-2 sm:mb-3 lg:mb-4 leading-tight animate-slide-up delay-200 performance-optimized">
-            <span className="block sm:inline">Build faster with</span>{" "}
-            <span className="text-muted-foreground">
-              intelligent tools
-            </span>
-            <span className="block sm:inline"> & AI assistance</span>
-          </h1>
+      {/* Animated glow spots */}
+      <motion.div
+        className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px]"
+        animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-blue-500/5 rounded-full blur-[80px]"
+        animate={{ scale: [1.2, 1, 1.2], opacity: [0.2, 0.4, 0.2] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+      />
+      <motion.div
+        className="absolute top-1/2 right-1/3 w-[200px] h-[200px] bg-violet-500/5 rounded-full blur-[60px]"
+        animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.3, 0.2] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 4 }}
+      />
 
-          {/* Mobile-first subheadline with better line height */}
-          <p className="text-xs sm:text-sm md:text-base text-muted-foreground mb-3 sm:mb-4 lg:mb-6 max-w-3xl mx-auto lg:mx-0 leading-relaxed animate-slide-up delay-300 px-2 sm:px-0">
-            The complete development platform with AI-powered editor, API testing,
-            website builder, and file management.
-          </p>
+      {/* Floating particles */}
+      {Array.from({ length: 20 }).map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-1 h-1 bg-primary/20 rounded-full"
+          style={{
+            left: `${10 + Math.random() * 80}%`,
+            top: `${10 + Math.random() * 80}%`,
+          }}
+          animate={{
+            y: [0, -30, 0],
+            opacity: [0, 0.6, 0],
+          }}
+          transition={{
+            duration: 4 + Math.random() * 4,
+            repeat: Infinity,
+            delay: Math.random() * 5,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </div>
+  );
+}
 
-          {/* Mobile-first CTA buttons with better spacing */}
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center lg:justify-start items-center px-4 sm:px-0 mb-4 sm:mb-6 lg:mb-8 animate-slide-up delay-400">
-            <Button
-              variant="outline"
-              size="sm"
-              className="w-full sm:w-auto min-w-[140px] relative overflow-hidden border hover:bg-muted/50 transition-fast touch-target touch-manipulation text-xs sm:text-sm"
-              onClick={() => safeWindowOpen('https://code.ladestack.in/')}
+export default function HeroSection() {
+  return (
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      <GridBackground />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-4xl mx-auto text-center">
+          {/* Badge */}
+          <motion.div
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border bg-muted/50 text-sm text-muted-foreground mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            whileHover={{ scale: 1.02, borderColor: "rgba(6, 182, 212, 0.3)" }}
+          >
+            <Sparkles className="w-3.5 h-3.5 text-primary" />
+            AI-Powered Development Platform
+          </motion.div>
+
+          {/* Headline */}
+          <motion.h1
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <span className="text-foreground">Build faster with</span>
+            <br />
+            <span className="text-gradient">intelligent AI tools</span>
+          </motion.h1>
+
+          {/* Subheadline */}
+          <motion.p
+            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
+            The complete AI-powered development ecosystem. Code editor, API testing,
+            website builder, and documentation — all powered by cutting-edge AI.
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+          >
+            <GlowButton
+              variant="primary"
+              className="inline-flex items-center gap-2 text-base px-8 py-3.5"
+              onClick={() => safeWindowOpen("https://code.ladestack.in/")}
             >
-              <span className="relative z-10 flex items-center justify-center gap-1.5 sm:gap-2">
-                Start coding
-                <ArrowRight className="w-3 h-3 flex-shrink-0" />
-              </span>
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="w-full sm:w-auto min-w-[120px] text-xs sm:text-sm hover:bg-muted/50 transition-fast touch-target touch-manipulation"
+              Start Building <ArrowRight className="w-4 h-4" />
+            </GlowButton>
+            <GlowButton
+              variant="secondary"
+              className="inline-flex items-center gap-2 text-base px-8 py-3.5"
               onClick={() => {
-                const featuresSection = safeQuerySelector('#features');
-                safeScrollIntoView(featuresSection);
+                document.getElementById("products")?.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              Explore tools
-            </Button>
-          </div>
+              Explore Platform
+            </GlowButton>
+          </motion.div>
 
+          {/* Stats */}
+          <motion.div
+            className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.9 }}
+          >
+            {stats.map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                className="text-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1 + index * 0.1, duration: 0.4 }}
+              >
+                <div className="flex justify-center mb-2">
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <stat.icon className="w-4 h-4 text-primary" />
+                  </div>
+                </div>
+                <p className="text-xl md:text-2xl font-bold text-foreground">{stat.value}</p>
+                <p className="text-xs text-muted-foreground mt-0.5">{stat.label}</p>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
+      >
+        <motion.div
+          className="flex flex-col items-center gap-2 text-muted-foreground"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <span className="text-[10px] uppercase tracking-widest">Scroll</span>
+          <ChevronDown className="w-4 h-4" />
+        </motion.div>
+      </motion.div>
     </section>
   );
-};
-
-export default HeroSection;
+}

@@ -7,8 +7,10 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import LoadingScreen from "@/components/LoadingScreen";
+import ScrollProgress from "@/components/ScrollProgress";
+import SmoothScroll from "@/components/SmoothScroll";
 
-// Lazy load pages for better performance
 const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const AboutUs = lazy(() => import("./pages/AboutUs"));
@@ -27,86 +29,30 @@ const ApiTestingPlatform = lazy(() => import("./pages/ApiTestingPlatform"));
 const AppsGallery = lazy(() => import("./pages/AppsGallery"));
 const AppsAdmin = lazy(() => import("./pages/AppsAdmin"));
 
-// Lade Stack Brand Loader Component
-const LadeStackBrandLoader = () => {
-  return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background">
-      <div className="flex flex-col items-center space-y-8">
-        {/* Main Brand Animation */}
-        <div className="relative">
-          {/* Animated Brand Text */}
-          <div className="text-center">
-            <div className="text-4xl md:text-5xl font-bold text-foreground tracking-wider mb-2">
-              <span className="inline-block animate-fade-in-up" style={{ animationDelay: '0.2s' }}>LADE</span>
-              <span className="inline-block animate-fade-in-up mx-3" style={{ animationDelay: '0.4s' }}>•</span>
-              <span className="inline-block animate-fade-in-up" style={{ animationDelay: '0.6s' }}>STACK</span>
-            </div>
-            
-            {/* Animated underline */}
-            <div className="relative h-0.5 w-64 mx-auto overflow-hidden">
-              <div className="absolute inset-0 bg-foreground transform -translate-x-full animate-slide-in-right"></div>
-              <div className="absolute inset-0 bg-foreground animate-slide-out-left" style={{ animationDelay: '2s' }}></div>
-            </div>
-          </div>
-          
-          {/* Subtle geometric element */}
-          <div className="absolute -top-8 -right-8 w-16 h-16 border-2 border-foreground/30 animate-spin-slow">
-            <div className="w-full h-full border border-foreground/20 animate-pulse"></div>
-          </div>
-        </div>
-        
-        {/* Loading text */}
-        <div className="text-center">
-          <p className="text-muted-foreground text-sm font-medium animate-pulse">Initializing Lade Stack...</p>
-          
-          {/* Progress dots */}
-          <div className="flex justify-center space-x-2 mt-3">
-            <div className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: '0s' }}></div>
-            <div className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-            <div className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
-          </div>
-        </div>
+const PageLoader = () => (
+  <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background">
+    <div className="flex flex-col items-center gap-4">
+      <div className="text-2xl font-bold text-foreground">
+        Lade <span className="text-gradient">Stack</span>
+      </div>
+      <div className="flex gap-1">
+        {[0, 1, 2].map((i) => (
+          <div
+            key={i}
+            className="w-1.5 h-1.5 rounded-full bg-primary animate-bounce"
+            style={{ animationDelay: `${i * 0.15}s` }}
+          />
+        ))}
       </div>
     </div>
-  );
-};
+  </div>
+);
 
-// Enhanced loading fallback with fade-out capability
-const PageLoader = () => {
-  const [isVisible, setIsVisible] = React.useState(true);
-  
-  React.useEffect(() => {
-    const handleLoad = () => {
-      setIsVisible(false);
-    };
-    
-    if (document.readyState === 'complete') {
-      handleLoad();
-    } else {
-      window.addEventListener('load', handleLoad);
-    }
-    
-    return () => window.removeEventListener('load', handleLoad);
-  }, []);
-  
-  if (!isVisible) return null;
-  
-  return <LadeStackBrandLoader />;
-};
-
-// Scroll to top component with smooth scrolling
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // Use requestAnimationFrame for smoother scrolling
-    requestAnimationFrame(() => {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth'
-      });
-    });
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
   }, [pathname]);
 
   return null;
@@ -115,7 +61,7 @@ const ScrollToTop = () => {
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 5 * 60 * 1000, // 5 minutes
+      staleTime: 5 * 60 * 1000,
       retry: 1,
       refetchOnWindowFocus: false,
     },
@@ -127,30 +73,34 @@ const App = () => (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme="dark" storageKey="ladestack-theme">
         <BrowserRouter>
-          <ScrollToTop />
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/about" element={<AboutUs />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/projects/:projectId" element={<ProjectDetail />} />
-              <Route path="/file-sharing-platform" element={<FileSharingPlatform />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:id" element={<BlogPost />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/privacy" element={<PrivacyPolicy />} />
-              <Route path="/terms" element={<TermsOfService />} />
-              <Route path="/support" element={<Support />} />
-              <Route path="/docs" element={<Documentation />} />
-              <Route path="/ai-code-viewer-ai" element={<AICodeViewerAI />} />
-              <Route path="/api-testing-platform" element={<ApiTestingPlatform />} />
-              <Route path="/apps" element={<AppsGallery />} />
-              <Route path="/apps/admin" element={<AppsAdmin />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-          <Toaster />
-          <Sonner />
+          <SmoothScroll>
+            <LoadingScreen />
+            <ScrollProgress />
+            <ScrollToTop />
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/about" element={<AboutUs />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/projects/:projectId" element={<ProjectDetail />} />
+                <Route path="/file-sharing-platform" element={<FileSharingPlatform />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:id" element={<BlogPost />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/privacy" element={<PrivacyPolicy />} />
+                <Route path="/terms" element={<TermsOfService />} />
+                <Route path="/support" element={<Support />} />
+                <Route path="/docs" element={<Documentation />} />
+                <Route path="/ai-code-viewer-ai" element={<AICodeViewerAI />} />
+                <Route path="/api-testing-platform" element={<ApiTestingPlatform />} />
+                <Route path="/apps" element={<AppsGallery />} />
+                <Route path="/apps/admin" element={<AppsAdmin />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+            <Toaster />
+            <Sonner />
+          </SmoothScroll>
         </BrowserRouter>
       </ThemeProvider>
     </QueryClientProvider>
