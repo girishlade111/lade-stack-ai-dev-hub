@@ -82,7 +82,15 @@ function ValueCard({ value, index }: { value: typeof values[0]; index: number })
 export default function ValuesSection() {
   return (
     <section className="relative py-24 md:py-32 bg-sage dark:bg-black">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Dark theme gradient overlays */}
+      <div className="absolute inset-0 hidden dark:block pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0a0a] to-black opacity-95" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_20%_0%,_rgba(110,143,106,0.10),_transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_90%_80%,_rgba(139,175,135,0.07),_transparent_50%)]" />
+        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#6E8F6A]/[0.05] to-transparent" />
+      </div>
+      
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <ScrollReveal>
           <div className="text-center mb-16">
             <div className="tag-pill inline-flex items-center gap-2 mb-6">

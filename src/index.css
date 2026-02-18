@@ -82,6 +82,13 @@
     font-feature-settings: "kern", "liga", "calt";
   }
 
+  .dark body {
+    background-image:
+      radial-gradient(ellipse 100% 40% at 50% 0%, rgba(110,143,106,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 30% at 0% 50%, rgba(110,143,106,0.03) 0%, transparent 50%),
+      radial-gradient(ellipse 80% 30% at 100% 70%, rgba(139,175,135,0.03) 0%, transparent 50%);
+  }
+
   img {
     display: block;
     max-width: 100%;

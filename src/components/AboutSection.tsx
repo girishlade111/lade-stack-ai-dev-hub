@@ -128,7 +128,15 @@ function VisionItem({ item, index }: { item: typeof visionItems[0]; index: numbe
 export default function AboutSection() {
   return (
     <section className="relative py-24 md:py-32 bg-white dark:bg-black">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Dark theme gradient overlays */}
+      <div className="absolute inset-0 hidden dark:block pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0a0a] to-black opacity-95" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,_rgba(110,143,106,0.12),_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_80%_50%,_rgba(110,143,106,0.06),_transparent_50%)]" />
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#6E8F6A]/[0.04] to-transparent" />
+      </div>
+      
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <ScrollReveal>
           <div className="text-center mb-16 md:mb-20">
             <div className="tag-pill inline-flex items-center gap-2 mb-6">

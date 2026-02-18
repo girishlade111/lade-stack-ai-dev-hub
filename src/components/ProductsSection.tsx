@@ -175,7 +175,15 @@ export default function ProductsSection() {
 
   return (
     <section className="relative py-24 md:py-32 bg-white dark:bg-black">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Dark theme gradient overlays */}
+      <div className="absolute inset-0 hidden dark:block pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0a0a] to-black opacity-95" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_30%_-5%,_rgba(110,143,106,0.12),_transparent_55%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_100%_60%,_rgba(139,175,135,0.06),_transparent_45%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,_rgba(110,143,106,0.05),_transparent_40%)]" />
+      </div>
+      
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <ScrollReveal>
           <div className="text-center mb-12">
             <div className="tag-pill inline-flex items-center gap-2 mb-6">

@@ -50,7 +50,12 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-footer border-t border-border">
+    <footer className="relative bg-footer border-t border-border overflow-hidden">
+      {/* Dark theme gradient overlays */}
+      <div className="absolute inset-0 hidden dark:block pointer-events-none">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,_rgba(110,143,106,0.08),_transparent_55%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_40%_at_80%_80%,_rgba(139,175,135,0.05),_transparent_45%)]" />
+      </div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
           {/* Brand */}
