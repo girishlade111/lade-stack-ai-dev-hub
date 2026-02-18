@@ -1,10 +1,8 @@
-import { motion, useScroll, useTransform, type Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { ChevronDown, Sparkles, Zap, Users, Shield, Code } from "lucide-react";
-import { useRef, useMemo } from "react";
-import { GlowButton, AnimatedCounter, staggerContainer, fadeInUp, viewportConfig } from "@/components/motion";
+import { SoftButton, AnimatedCounter, staggerContainer, fadeInUp } from "@/components/motion";
 import { safeWindowOpen } from "@/utils/safe";
 
-// ── Stats data ──────────────────────────────────────────────
 const stats = [
   { icon: Zap, value: 10, suffix: "x", label: "Faster Dev" },
   { icon: Users, value: 50, suffix: "K+", label: "Developers" },
@@ -12,215 +10,175 @@ const stats = [
   { icon: Code, value: 5, suffix: "", label: "AI Tools" },
 ];
 
-// ── Floating code symbols for background ────────────────────
-const codeSymbols = [
-  { text: "</>", x: "8%", y: "15%", size: "text-lg", duration: 25, delay: 0, rotation: 12 },
-  { text: "{}", x: "85%", y: "20%", size: "text-xl", duration: 30, delay: 2, rotation: -8 },
-  { text: "$ _", x: "15%", y: "70%", size: "text-base", duration: 28, delay: 4, rotation: 5 },
-  { text: "=>", x: "78%", y: "65%", size: "text-lg", duration: 22, delay: 1, rotation: -15 },
-  { text: "fn()", x: "45%", y: "85%", size: "text-sm", duration: 35, delay: 3, rotation: 10 },
-  { text: "[ ]", x: "92%", y: "45%", size: "text-base", duration: 27, delay: 5, rotation: -6 },
-  { text: "//", x: "5%", y: "42%", size: "text-lg", duration: 32, delay: 2.5, rotation: 8 },
-  { text: "&&", x: "55%", y: "12%", size: "text-sm", duration: 24, delay: 1.5, rotation: -10 },
-  { text: ":::", x: "70%", y: "80%", size: "text-xs", duration: 29, delay: 4.5, rotation: 14 },
-  { text: "import", x: "25%", y: "30%", size: "text-xs", duration: 33, delay: 0.5, rotation: -4 },
-  { text: "async", x: "65%", y: "35%", size: "text-xs", duration: 26, delay: 3.5, rotation: 7 },
-  { text: "const", x: "35%", y: "55%", size: "text-xs", duration: 31, delay: 2, rotation: -12 },
-];
-
-// ── Animated floating code background ───────────────────────
-function DeveloperBackground() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-  const bgY = useTransform(scrollYProgress, [0, 1], [0, 80]);
-
-  return (
-    <div ref={ref} className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Layer 1: Dark gradient base */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-background" />
-
-      {/* Layer 2: Floating code symbols — Framer Motion animated */}
-      <motion.div className="absolute inset-0" style={{ y: bgY }}>
-        {codeSymbols.map((symbol, i) => (
-          <motion.span
-            key={i}
-            className={`absolute font-mono ${symbol.size} text-foreground select-none`}
-            style={{ left: symbol.x, top: symbol.y }}
-            initial={{
-              opacity: 0,
-              rotate: symbol.rotation,
-            }}
-            animate={{
-              opacity: [0.04, 0.08, 0.04],
-              y: [0, -20, 0],
-              x: [0, 10, 0],
-              rotate: [symbol.rotation, symbol.rotation + 5, symbol.rotation],
-            }}
-            transition={{
-              duration: symbol.duration,
-              repeat: Infinity,
-              delay: symbol.delay,
-              ease: "easeInOut",
-            }}
-          >
-            {symbol.text}
-          </motion.span>
-        ))}
-      </motion.div>
-
-      {/* Layer 3: Radial spotlight behind headline */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <motion.div
-          className="w-[800px] h-[600px] rounded-full"
-          style={{
-            background: "radial-gradient(ellipse at center, rgba(6,182,212,0.06) 0%, rgba(6,182,212,0.02) 40%, transparent 70%)",
-          }}
-          animate={{
-            scale: [1, 1.05, 1],
-            opacity: [0.8, 1, 0.8],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      </div>
-
-      {/* Vignette fade to dark edges */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,hsl(var(--background))_100%)]" />
-    </div>
-  );
-}
-
-// ── Stat card with count-up + hover ─────────────────────────
 const statCardVariants: Variants = {
-  initial: { opacity: 0, y: 30 },
+  initial: { opacity: 0, y: 20 },
   animate: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: "easeOut" },
+    transition: { duration: 0.4, ease: "easeOut" },
   },
 };
 
-function StatCard({ stat, index }: { stat: typeof stats[0]; index: number }) {
+function StatCard({ stat }: { stat: typeof stats[0] }) {
   return (
-    <motion.div
-      className="text-center group"
-      variants={statCardVariants}
-    >
-      <motion.div
-        className="p-4 rounded-xl border border-border/50 bg-background/40 backdrop-blur-sm"
-        whileHover={{
-          y: -4,
-          borderColor: "rgba(6,182,212,0.3)",
-          boxShadow: "0 0 0 1px rgba(6,182,212,0.15), 0 0 25px -5px rgba(6,182,212,0.2)",
-        }}
-        transition={{ duration: 0.3, ease: "easeOut" }}
-      >
+    <motion.div className="text-center" variants={statCardVariants}>
+      <div className="p-4">
         <div className="flex justify-center mb-2">
-          <motion.div
-            className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center"
-            whileHover={{ scale: 1.15, rotate: 8 }}
-            transition={{ type: "spring", stiffness: 350, damping: 15 }}
-          >
-            <stat.icon className="w-4 h-4 text-primary" />
-          </motion.div>
+          <div className="w-9 h-9 rounded-lg bg-[#6E8F6A]/10 flex items-center justify-center">
+            <stat.icon className="w-4 h-4 text-[#6E8F6A]" />
+          </div>
         </div>
-        <p className="text-xl md:text-2xl font-bold text-foreground">
+        <p className="text-xl md:text-2xl font-bold text-[#6E8F6A]">
           <AnimatedCounter target={stat.value} suffix={stat.suffix} />
         </p>
-        <p className="text-xs text-muted-foreground mt-0.5">{stat.label}</p>
-      </motion.div>
+        <p className="text-xs text-[#777] mt-0.5">{stat.label}</p>
+      </div>
     </motion.div>
   );
 }
 
-// ── Hero Section ────────────────────────────────────────────
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      <DeveloperBackground />
+    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+      {/* Subtle dot pattern background */}
+      <div className="absolute inset-0 dot-pattern opacity-60" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Badge */}
+        {/* Split layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-16">
+          {/* Left side — Content on sage background */}
           <motion.div
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border bg-muted/50 text-sm text-muted-foreground mb-8"
-            variants={fadeInUp}
-            initial="initial"
-            animate="animate"
-            transition={{ duration: 0.6, delay: 0.2 }}
+            className="bg-sage rounded-[20px] p-8 md:p-12"
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <Sparkles className="w-3.5 h-3.5 text-primary" />
-            AI-Powered Development Platform
+            {/* Badge */}
+            <motion.div
+              className="tag-pill inline-flex items-center gap-2 mb-6"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              AI-Powered Development Platform
+            </motion.div>
+
+            {/* 3D Headline */}
+            <motion.h1
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold tracking-tight mb-6 text-3d leading-tight"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              Build faster with
+              <br />
+              intelligent AI tools
+            </motion.h1>
+
+            {/* Subheadline */}
+            <motion.p
+              className="text-base md:text-lg text-[#555] dark:text-[#999] max-w-lg mb-8 leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+            >
+              The complete AI-powered development ecosystem. Code editor, API testing,
+              website builder, and documentation — all powered by cutting-edge AI.
+            </motion.p>
+
+            {/* CTA buttons */}
+            <motion.div
+              className="flex flex-col sm:flex-row gap-3"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+            >
+              <SoftButton
+                variant="primary"
+                size="lg"
+                showArrow
+                onClick={() => safeWindowOpen("https://code.ladestack.in/")}
+              >
+                Start Building
+              </SoftButton>
+              <SoftButton
+                variant="secondary"
+                size="lg"
+                onClick={() => {
+                  document.getElementById("products")?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                Explore Platform
+              </SoftButton>
+            </motion.div>
           </motion.div>
 
-          {/* Headline — fadeInUp */}
-          <motion.h1
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-          >
-            <span className="text-foreground">Build faster with</span>
-            <br />
-            <span className="text-gradient glow-text">intelligent AI tools</span>
-          </motion.h1>
-
-          {/* Subheadline — fadeInUp with delay */}
-          <motion.p
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
-          >
-            The complete AI-powered development ecosystem. Code editor, API testing,
-            website builder, and documentation — all powered by cutting-edge AI.
-          </motion.p>
-
-          {/* CTA buttons — staggered fadeInUp */}
+          {/* Right side — Image container on peach background */}
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
+            className="bg-peach rounded-[20px] p-8 md:p-12 flex items-center justify-center min-h-[300px] lg:min-h-[450px]"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           >
-            <GlowButton
-              variant="primary"
-              size="lg"
-              showArrow
-              onClick={() => safeWindowOpen("https://code.ladestack.in/")}
-            >
-              Start Building
-            </GlowButton>
-            <GlowButton
-              variant="secondary"
-              size="lg"
-              onClick={() => {
-                document.getElementById("products")?.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              Explore Platform
-            </GlowButton>
-          </motion.div>
-
-          {/* Stats — staggered entrance */}
-          <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-2xl mx-auto"
-            variants={staggerContainer}
-            initial="initial"
-            animate="animate"
-            transition={{ delayChildren: 0.9 }}
-          >
-            {stats.map((stat, index) => (
-              <StatCard key={stat.label} stat={stat} index={index} />
-            ))}
+            <div className="text-center">
+              {/* Abstract representation */}
+              <motion.div
+                className="w-full max-w-sm mx-auto"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+              >
+                {/* Code editor mockup */}
+                <div className="bg-white dark:bg-[#2a2622] rounded-2xl shadow-sm overflow-hidden">
+                  {/* Title bar */}
+                  <div className="flex items-center gap-1.5 px-4 py-3 bg-[#F5F3EB] dark:bg-[#1e1c18] border-b border-[#E6E6E6] dark:border-[#333]">
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#D8C1B3]" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#E7EDD8]" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#6E8F6A]/30" />
+                    <span className="ml-2 text-[10px] text-[#999] font-mono">editor.tsx</span>
+                  </div>
+                  {/* Code lines */}
+                  <div className="p-4 space-y-2.5 font-mono text-xs">
+                    <div className="flex gap-3">
+                      <span className="text-[#999] select-none">1</span>
+                      <span><span className="text-[#6E8F6A]">import</span> <span className="text-[#8a8078]">&#123; AI &#125;</span> <span className="text-[#6E8F6A]">from</span> <span className="text-[#c4a898]">'lade-stack'</span></span>
+                    </div>
+                    <div className="flex gap-3">
+                      <span className="text-[#999] select-none">2</span>
+                      <span className="text-[#999]">// AI-powered code generation</span>
+                    </div>
+                    <div className="flex gap-3">
+                      <span className="text-[#999] select-none">3</span>
+                      <span><span className="text-[#6E8F6A]">const</span> <span className="text-[#555]">result</span> = <span className="text-[#6E8F6A]">await</span> <span className="text-[#8a8078]">AI</span>.<span className="text-[#555]">generate</span>()</span>
+                    </div>
+                    <div className="flex gap-3">
+                      <span className="text-[#999] select-none">4</span>
+                      <motion.span
+                        className="inline-block w-1.5 h-4 bg-[#6E8F6A]"
+                        animate={{ opacity: [1, 0] }}
+                        transition={{ duration: 0.8, repeat: Infinity }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
+
+        {/* Stats */}
+        <motion.div
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto"
+          variants={staggerContainer}
+          initial="initial"
+          animate="animate"
+          transition={{ delayChildren: 0.9 }}
+        >
+          {stats.map((stat) => (
+            <StatCard key={stat.label} stat={stat} />
+          ))}
+        </motion.div>
       </div>
 
       {/* Scroll indicator */}
@@ -231,8 +189,8 @@ export default function HeroSection() {
         transition={{ delay: 1.5, duration: 0.6 }}
       >
         <motion.div
-          className="flex flex-col items-center gap-2 text-muted-foreground"
-          animate={{ y: [0, 8, 0] }}
+          className="flex flex-col items-center gap-2 text-[#777]"
+          animate={{ y: [0, 6, 0] }}
           transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
         >
           <span className="text-[10px] uppercase tracking-widest">Scroll</span>

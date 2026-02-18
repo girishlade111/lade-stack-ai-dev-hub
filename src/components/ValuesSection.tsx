@@ -1,6 +1,6 @@
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { Lightbulb, Users, Award, Eye, Sparkles } from "lucide-react";
-import { ScrollReveal, StaggerContainer, StaggerItem, SectionDivider, fadeInUp, viewportConfig } from "@/components/motion";
+import { ScrollReveal, StaggerContainer, StaggerItem, SectionDivider } from "@/components/motion";
 import { useState } from "react";
 
 const values = [
@@ -36,67 +36,42 @@ function ValueCard({ value, index }: { value: typeof values[0]; index: number })
   return (
     <StaggerItem>
       <motion.div
-        className="glass-card rounded-2xl p-6 h-full group relative overflow-hidden"
-        whileHover={{
-          y: -6,
-          scale: 1.02,
-          borderColor: "rgba(6,182,212,0.25)",
-          boxShadow: "0 0 0 1px rgba(6,182,212,0.15), 0 0 30px -5px rgba(6,182,212,0.18)",
-        }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
+        className="soft-card p-6 h-full relative overflow-hidden group"
+        whileHover={{ y: -4 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
       >
-        {/* Subtle radial background glow */}
-        <motion.div
-          className="absolute -top-10 -right-10 w-32 h-32 rounded-full pointer-events-none"
-          style={{
-            background: "radial-gradient(circle, rgba(6,182,212,0.06) 0%, transparent 70%)",
-          }}
-          initial={{ opacity: 0 }}
-          whileHover={{ opacity: 1, scale: 1.2 }}
-          transition={{ duration: 0.5 }}
-        />
+        <div className="w-12 h-12 rounded-xl bg-[#6E8F6A]/10 flex items-center justify-center mb-5">
+          <value.icon className="w-5 h-5 text-[#6E8F6A]" />
+        </div>
 
-        {/* Icon — rotates 10deg on hover */}
-        <motion.div
-          className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 relative z-10"
-          whileHover={{ rotate: 10, scale: 1.15 }}
-          transition={{ type: "spring", stiffness: 300, damping: 15 }}
-        >
-          <value.icon className="w-5 h-5 text-primary" />
-        </motion.div>
-
-        <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-300 relative z-10">
+        <h3 className="text-lg font-semibold text-[#1C1C1C] dark:text-[#E8E4DA] mb-2 group-hover:text-[#6E8F6A] transition-colors duration-200">
           {value.title}
         </h3>
-        <p className="text-sm text-muted-foreground leading-relaxed mb-3 relative z-10">
+        <p className="text-sm text-[#555] dark:text-[#999] leading-relaxed mb-3">
           {value.description}
         </p>
 
-        {/* Expandable detail */}
-        <motion.button
+        <button
           onClick={() => setShowDetail(!showDetail)}
-          className="text-xs text-primary/60 hover:text-primary transition-colors duration-200 relative z-10"
-          whileHover={{ x: 2 }}
-          whileTap={{ scale: 0.97 }}
+          className="text-xs text-[#6E8F6A] hover:text-[#5F7F63] transition-colors duration-200"
         >
           {showDetail ? "Show less" : "Learn more"}
-        </motion.button>
+        </button>
         <motion.div
           initial={false}
           animate={{
             height: showDetail ? "auto" : 0,
             opacity: showDetail ? 1 : 0,
           }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-          className="overflow-hidden relative z-10"
+          transition={{ duration: 0.3 }}
+          className="overflow-hidden"
         >
-          <p className="text-xs text-muted-foreground/70 mt-2 leading-relaxed">
+          <p className="text-xs text-[#777] mt-2 leading-relaxed">
             {value.detail}
           </p>
         </motion.div>
 
-        {/* Number badge */}
-        <div className="absolute top-4 right-4 text-xs font-mono text-muted-foreground/20">
+        <div className="absolute top-4 right-4 text-xs font-mono text-[#ccc] dark:text-[#444]">
           0{index + 1}
         </div>
       </motion.div>
@@ -106,23 +81,18 @@ function ValueCard({ value, index }: { value: typeof values[0]; index: number })
 
 export default function ValuesSection() {
   return (
-    <section className="relative py-24 md:py-32">
+    <section className="relative py-24 md:py-32 bg-sage">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="text-center mb-16">
-            <motion.div
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border bg-muted/50 text-sm text-muted-foreground mb-6"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.2 }}
-            >
-              <Sparkles className="w-3.5 h-3.5 text-primary" />
+            <div className="tag-pill inline-flex items-center gap-2 mb-6">
+              <Sparkles className="w-3.5 h-3.5" />
               Core Values
-            </motion.div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4 tracking-tight">
-              What drives{" "}
-              <span className="text-gradient">everything we build</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-metallic mb-4 tracking-tight">
+              What drives everything we build
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-[#555] dark:text-[#999] text-lg max-w-2xl mx-auto">
               Our values shape every decision, every line of code, and every product we ship.
             </p>
           </div>

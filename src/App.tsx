@@ -32,8 +32,8 @@ const AppsAdmin = lazy(() => import("./pages/AppsAdmin"));
 const PageLoader = () => (
   <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background">
     <div className="flex flex-col items-center gap-4">
-      <div className="text-2xl font-bold text-foreground">
-        Lade <span className="text-gradient">Stack</span>
+      <div className="text-2xl font-bold text-[#1C1C1C]">
+        Lade <span className="text-[#6E8F6A]">Stack</span>
       </div>
       <div className="flex gap-1">
         {[0, 1, 2].map((i) => (
@@ -71,7 +71,7 @@ const queryClient = new QueryClient({
 const App = () => (
   <ErrorBoundary>
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="dark" storageKey="ladestack-theme">
+      <ThemeProvider defaultTheme="light" storageKey="ladestack-theme">
         <BrowserRouter>
           <SmoothScroll>
             <LoadingScreen />

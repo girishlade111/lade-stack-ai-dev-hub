@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import {
   Code, Globe, FileText, Brain, Cpu, ExternalLink, Layers, ArrowRight,
 } from "lucide-react";
-import { ScrollReveal, GlowButton, SectionDivider, fadeInUp, viewportConfig } from "@/components/motion";
+import { ScrollReveal, SoftButton, SectionDivider, fadeInUp } from "@/components/motion";
 import { safeWindowOpen } from "@/utils/safe";
 
 const categories = ["All", "AI Tools", "Productivity", "Developer"];
@@ -73,17 +73,17 @@ const products = [
 ];
 
 const cardVariants: Variants = {
-  initial: { opacity: 0, y: 30, scale: 0.97 },
+  initial: { opacity: 0, y: 20, scale: 0.98 },
   animate: {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.5, ease: "easeOut" },
+    transition: { duration: 0.4, ease: "easeOut" },
   },
   exit: {
     opacity: 0,
-    scale: 0.95,
-    transition: { duration: 0.3 },
+    scale: 0.96,
+    transition: { duration: 0.2 },
   },
 };
 
@@ -95,97 +95,69 @@ function ProductCard({ product, index }: { product: typeof products[0]; index: n
       initial="initial"
       animate="animate"
       exit="exit"
-      transition={{ delay: index * 0.06 }}
+      transition={{ delay: index * 0.05 }}
     >
       <motion.div
-        className="glass-card rounded-2xl p-6 h-full flex flex-col group relative overflow-hidden"
-        whileHover={{
-          y: -6,
-          scale: 1.02,
-          borderColor: "rgba(6,182,212,0.25)",
-          boxShadow: "0 0 0 1px rgba(6,182,212,0.15), 0 0 30px -5px rgba(6,182,212,0.18)",
-        }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
+        className="soft-card p-6 h-full flex flex-col group"
+        whileHover={{ y: -4 }}
+        transition={{ duration: 0.3 }}
       >
-        {/* Animated border shimmer on hover */}
-        <motion.div
-          className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 pointer-events-none"
-          style={{
-            background: "linear-gradient(135deg, rgba(6,182,212,0.1) 0%, transparent 50%, rgba(6,182,212,0.05) 100%)",
-          }}
-          transition={{ duration: 0.4 }}
-        />
-
         {/* Header */}
-        <div className="flex items-start justify-between mb-4 relative z-10">
-          <motion.div
-            className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center"
-            whileHover={{ rotate: 10, scale: 1.15 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <product.icon className="w-5 h-5 text-primary" />
-          </motion.div>
-          <motion.span
+        <div className="flex items-start justify-between mb-4">
+          <div className="w-12 h-12 rounded-xl bg-[#6E8F6A]/10 flex items-center justify-center">
+            <product.icon className="w-5 h-5 text-[#6E8F6A]" />
+          </div>
+          <span
             className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${
               product.status === "Live"
-                ? "bg-emerald-500/10 text-emerald-500 border border-emerald-500/20"
-                : "bg-muted text-muted-foreground border border-border"
+                ? "bg-[#E7EDD8] text-[#4a6347]"
+                : "bg-[#F5F3EB] dark:bg-[#2a2622] text-[#777] border border-border"
             }`}
-            whileHover={{ scale: 1.05 }}
           >
             {product.status}
-          </motion.span>
+          </span>
         </div>
 
         {/* Content */}
-        <div className="relative z-10">
-          <h3 className="text-lg font-semibold text-foreground mb-1 group-hover:text-primary transition-colors duration-300">
+        <div>
+          <h3 className="text-lg font-semibold text-[#1C1C1C] dark:text-[#E8E4DA] mb-1 group-hover:text-[#6E8F6A] transition-colors duration-200">
             {product.title}
           </h3>
-          <p className="text-xs text-primary/70 font-medium mb-3">{product.tagline}</p>
-          <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+          <p className="text-xs text-[#6E8F6A] font-medium mb-3">{product.tagline}</p>
+          <p className="text-sm text-[#555] dark:text-[#999] leading-relaxed mb-4">
             {product.description}
           </p>
         </div>
 
         {/* Features */}
-        <div className="flex flex-wrap gap-1.5 mb-6 relative z-10">
+        <div className="flex flex-wrap gap-1.5 mb-6">
           {product.features.map((feature) => (
-            <motion.span
+            <span
               key={feature}
-              className="text-[10px] px-2 py-1 rounded-md bg-muted/80 text-muted-foreground border border-border/50"
-              whileHover={{ scale: 1.05, borderColor: "rgba(6,182,212,0.2)" }}
-              transition={{ duration: 0.2 }}
+              className="text-[10px] px-2 py-1 rounded-md bg-[#F5F3EB] dark:bg-[#2a2622] text-[#777] border border-border/50"
             >
               {feature}
-            </motion.span>
+            </span>
           ))}
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between mt-auto pt-4 border-t border-border/50 relative z-10">
-          <span className="text-xs text-muted-foreground">
+        <div className="flex items-center justify-between mt-auto pt-4 border-t border-border/50">
+          <span className="text-xs text-[#777]">
             Setup: {product.timeToValue}
           </span>
           {product.status === "Live" ? (
-            <motion.button
+            <button
               onClick={() => safeWindowOpen(product.url)}
-              className="inline-flex items-center gap-1.5 text-xs font-medium text-primary"
-              whileHover={{ x: 4 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ duration: 0.2 }}
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-[#6E8F6A] hover:text-[#5F7F63] transition-colors"
             >
               Try Now <ExternalLink className="w-3 h-3" />
-            </motion.button>
+            </button>
           ) : (
             <Link to={product.url}>
-              <motion.span
-                className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
-                whileHover={{ x: 4 }}
-                transition={{ duration: 0.2 }}
-              >
+              <span className="inline-flex items-center gap-1.5 text-xs font-medium text-[#777] hover:text-[#1C1C1C] dark:hover:text-[#E8E4DA] transition-colors">
                 Learn More <ArrowRight className="w-3 h-3" />
-              </motion.span>
+              </span>
             </Link>
           )}
         </div>
@@ -206,19 +178,14 @@ export default function ProductsSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="text-center mb-12">
-            <motion.div
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border bg-muted/50 text-sm text-muted-foreground mb-6"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.2 }}
-            >
-              <Layers className="w-3.5 h-3.5 text-primary" />
+            <div className="tag-pill inline-flex items-center gap-2 mb-6">
+              <Layers className="w-3.5 h-3.5" />
               Our Products
-            </motion.div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4 tracking-tight">
-              The complete{" "}
-              <span className="text-gradient">AI development suite</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-metallic mb-4 tracking-tight">
+              The complete AI development suite
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-[#555] dark:text-[#999] text-lg max-w-2xl mx-auto">
               Five powerful AI-powered tools designed to supercharge every phase of your development workflow.
             </p>
           </div>
@@ -228,25 +195,22 @@ export default function ProductsSection() {
         <ScrollReveal>
           <div className="flex flex-wrap justify-center gap-2 mb-12">
             {categories.map((category) => (
-              <motion.button
+              <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm font-medium ${
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
                   activeCategory === category
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted"
+                    ? "bg-[#6E8F6A] text-white"
+                    : "bg-white dark:bg-[#2a2622] text-[#777] hover:text-[#1C1C1C] dark:hover:text-[#E8E4DA] border border-border"
                 }`}
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.96 }}
-                transition={{ duration: 0.2 }}
               >
                 {category}
-              </motion.button>
+              </button>
             ))}
           </div>
         </ScrollReveal>
 
-        {/* Product grid with layout animations */}
+        {/* Product grid */}
         <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <AnimatePresence mode="popLayout">
             {filteredProducts.map((product, index) => (
@@ -258,11 +222,11 @@ export default function ProductsSection() {
         {/* Bottom CTA */}
         <ScrollReveal>
           <div className="text-center mt-16">
-            <p className="text-muted-foreground mb-4 text-sm">All tools are free for developers</p>
+            <p className="text-[#777] mb-4 text-sm">All tools are free for developers</p>
             <Link to="/apps">
-              <GlowButton variant="primary" size="lg" showArrow>
+              <SoftButton variant="primary" size="lg" showArrow>
                 Explore All Products
-              </GlowButton>
+              </SoftButton>
             </Link>
           </div>
         </ScrollReveal>

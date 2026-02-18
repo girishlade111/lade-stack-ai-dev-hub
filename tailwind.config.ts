@@ -61,9 +61,23 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        cyan: {
-          400: "#22d3ee",
-          500: "#06b6d4",
+        sage: {
+          50: "#f2f5ec",
+          100: "#E7EDD8",
+          200: "#DDE7D8",
+          300: "#b8ccb5",
+          400: "#8fa88c",
+          500: "#6E8F6A",
+          600: "#5F7F63",
+          700: "#4a6347",
+        },
+        warm: {
+          50: "#F5F3EB",
+          100: "#F2EFE6",
+          200: "#EFEAE0",
+          300: "#EDE3D8",
+          400: "#D8C1B3",
+          500: "#c4a898",
         },
       },
       borderRadius: {
@@ -80,34 +94,15 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "glow-pulse": {
-          "0%, 100%": { opacity: "0.4" },
-          "50%": { opacity: "0.8" },
-        },
         "float": {
           "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-10px)" },
-        },
-        "grid-flow": {
-          "0%": { transform: "translateY(0)" },
-          "100%": { transform: "translateY(-50%)" },
-        },
-        "shimmer": {
-          "0%": { backgroundPosition: "-200% 0" },
-          "100%": { backgroundPosition: "200% 0" },
-        },
-        "border-spin": {
-          "0%": { "--angle": "0deg" },
-          "100%": { "--angle": "360deg" },
+          "50%": { transform: "translateY(-8px)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "glow-pulse": "glow-pulse 3s ease-in-out infinite",
         "float": "float 6s ease-in-out infinite",
-        "grid-flow": "grid-flow 20s linear infinite",
-        "shimmer": "shimmer 3s ease-in-out infinite",
       },
     },
   },

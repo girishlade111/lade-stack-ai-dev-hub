@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { motion, type Variants } from "framer-motion";
-import { Github, Linkedin, Instagram, Code, Mail, ArrowRight, ExternalLink } from "lucide-react";
-import { ScrollReveal, StaggerContainer, StaggerItem, viewportConfig } from "@/components/motion";
+import { motion } from "framer-motion";
+import { Github, Linkedin, Instagram, Code, Mail, ArrowRight } from "lucide-react";
+import { ScrollReveal, viewportConfig } from "@/components/motion";
 
 const productLinks = [
   { name: "AI Code Editor", href: "/projects/ai-code-viewer" },
@@ -33,75 +33,53 @@ const socialLinks = [
 ];
 
 function FooterLink({ to, children, external = false }: { to: string; children: React.ReactNode; external?: boolean }) {
-  const className = "relative text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 group inline-block";
-
-  const inner = (
-    <>
-      {children}
-      <span className="absolute bottom-0 left-0 w-0 h-px bg-primary group-hover:w-full transition-all duration-300" />
-    </>
-  );
+  const className = "text-sm text-[#555] hover:text-[#6E8F6A] transition-colors duration-200";
 
   if (external) {
     return (
       <a href={to} target="_blank" rel="noopener noreferrer" className={className}>
-        {inner}
+        {children}
       </a>
     );
   }
 
-  return <Link to={to} className={className}>{inner}</Link>;
+  return <Link to={to} className={className}>{children}</Link>;
 }
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative border-t border-border overflow-hidden">
-      {/* Animated gradient line at top */}
-      <motion.div
-        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"
-        initial={{ opacity: 0, scaleX: 0 }}
-        whileInView={{ opacity: 1, scaleX: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1, ease: "easeOut" }}
-      />
-
+    <footer className="relative bg-footer border-t border-border">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
           {/* Brand */}
           <div className="lg:col-span-2">
             <ScrollReveal>
               <Link to="/" className="inline-flex items-center gap-2.5 mb-4 group">
-                <motion.div
-                  className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center"
-                  whileHover={{ rotate: 8, scale: 1.1 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                >
-                  <span className="text-xs font-mono font-bold text-primary">{"</>"}</span>
-                </motion.div>
-                <span className="text-base font-semibold text-foreground">
-                  Lade <span className="text-primary">Stack</span>
+                <div className="w-8 h-8 rounded-lg bg-[#6E8F6A] flex items-center justify-center">
+                  <span className="text-xs font-mono font-bold text-white">{"</>"}</span>
+                </div>
+                <span className="text-base font-semibold text-[#1C1C1C]">
+                  Lade <span className="text-[#6E8F6A]">Stack</span>
                 </span>
               </Link>
-              <p className="text-sm text-muted-foreground leading-relaxed max-w-sm mb-6">
+              <p className="text-sm text-[#555] leading-relaxed max-w-sm mb-6">
                 The AI-powered development ecosystem. Enterprise-grade tools designed
                 for modern developers who build at the speed of thought.
               </p>
 
               {/* Newsletter */}
               <div className="max-w-sm">
-                <p className="text-xs font-medium text-foreground mb-2">Stay updated</p>
+                <p className="text-xs font-medium text-[#1C1C1C] mb-2">Stay updated</p>
                 <div className="flex gap-2">
-                  <div className="relative flex-1">
-                    <input
-                      type="email"
-                      placeholder="your@email.com"
-                      className="w-full px-3 py-2 text-sm bg-muted/50 border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:shadow-[0_0_15px_rgba(6,182,212,0.1)] transition-all duration-300"
-                    />
-                  </div>
+                  <input
+                    type="email"
+                    placeholder="your@email.com"
+                    className="flex-1 px-3 py-2 text-sm bg-white border border-border rounded-lg text-[#1C1C1C] placeholder:text-[#999] focus:outline-none focus:border-[#6E8F6A]/50 transition-colors duration-200"
+                  />
                   <motion.button
-                    className="px-3 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium"
+                    className="px-3 py-2 bg-[#6E8F6A] text-white rounded-lg text-sm font-medium"
                     whileHover={{ scale: 1.04 }}
                     whileTap={{ scale: 0.96 }}
                     transition={{ duration: 0.2 }}
@@ -116,7 +94,7 @@ export default function Footer() {
           {/* Products */}
           <div>
             <ScrollReveal delay={0.1}>
-              <h4 className="text-sm font-semibold text-foreground mb-4">Products</h4>
+              <h4 className="text-sm font-semibold text-[#1C1C1C] mb-4">Products</h4>
               <ul className="space-y-3">
                 {productLinks.map((link) => (
                   <li key={link.name}>
@@ -130,7 +108,7 @@ export default function Footer() {
           {/* Company */}
           <div>
             <ScrollReveal delay={0.2}>
-              <h4 className="text-sm font-semibold text-foreground mb-4">Company</h4>
+              <h4 className="text-sm font-semibold text-[#1C1C1C] mb-4">Company</h4>
               <ul className="space-y-3">
                 {companyLinks.map((link) => (
                   <li key={link.name}>
@@ -144,7 +122,7 @@ export default function Footer() {
           {/* Legal */}
           <div>
             <ScrollReveal delay={0.3}>
-              <h4 className="text-sm font-semibold text-foreground mb-4">Legal</h4>
+              <h4 className="text-sm font-semibold text-[#1C1C1C] mb-4">Legal</h4>
               <ul className="space-y-3">
                 {legalLinks.map((link) => (
                   <li key={link.name}>
@@ -173,32 +151,23 @@ export default function Footer() {
         >
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             {/* Social icons */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               {socialLinks.map((social) => (
-                <motion.a
+                <a
                   key={social.label}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-lg bg-muted/50 border border-border flex items-center justify-center text-muted-foreground"
-                  whileHover={{
-                    scale: 1.1,
-                    y: -2,
-                    borderColor: "rgba(6,182,212,0.3)",
-                    boxShadow: "0 0 15px rgba(6,182,212,0.15)",
-                    color: "hsl(var(--primary))",
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  className="w-9 h-9 rounded-lg bg-white border border-border flex items-center justify-center text-[#777] hover:text-[#6E8F6A] hover:border-[#6E8F6A]/30 transition-colors duration-200"
                   aria-label={social.label}
                 >
                   <social.icon className="w-4 h-4" />
-                </motion.a>
+                </a>
               ))}
             </div>
 
             {/* Copyright */}
-            <div className="flex flex-col sm:flex-row items-center gap-2 text-xs text-muted-foreground">
+            <div className="flex flex-col sm:flex-row items-center gap-2 text-xs text-[#777]">
               <span>&copy; {currentYear} Lade Stack. All rights reserved.</span>
               <span className="hidden sm:inline">&middot;</span>
               <span>Built with precision by Girish Lade</span>

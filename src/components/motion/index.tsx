@@ -4,7 +4,6 @@ import {
   useScroll,
   useTransform,
   type Variants,
-  type MotionProps,
 } from "framer-motion";
 import { useRef, useEffect, useState, type ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
@@ -14,11 +13,11 @@ import { ArrowRight } from "lucide-react";
 // ═══════════════════════════════════════════════════════════════
 
 export const fadeInUp: Variants = {
-  initial: { opacity: 0, y: 40 },
+  initial: { opacity: 0, y: 30 },
   animate: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: { duration: 0.5, ease: "easeOut" },
   },
 };
 
@@ -26,7 +25,7 @@ export const fadeIn: Variants = {
   initial: { opacity: 0 },
   animate: {
     opacity: 1,
-    transition: { duration: 0.5 },
+    transition: { duration: 0.4 },
   },
 };
 
@@ -34,43 +33,42 @@ export const staggerContainer: Variants = {
   initial: {},
   animate: {
     transition: {
-      staggerChildren: 0.12,
+      staggerChildren: 0.1,
     },
   },
 };
 
 export const scaleIn: Variants = {
-  initial: { opacity: 0, scale: 0.9 },
+  initial: { opacity: 0, scale: 0.95 },
   animate: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.5, ease: "easeOut" },
+    transition: { duration: 0.4, ease: "easeOut" },
   },
 };
 
 export const slideInLeft: Variants = {
-  initial: { opacity: 0, x: -40 },
+  initial: { opacity: 0, x: -30 },
   animate: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: { duration: 0.5, ease: "easeOut" },
   },
 };
 
 export const slideInRight: Variants = {
-  initial: { opacity: 0, x: 40 },
+  initial: { opacity: 0, x: 30 },
   animate: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: { duration: 0.5, ease: "easeOut" },
   },
 };
 
-// Standard viewport config
 export const viewportConfig = { once: true, amount: 0.3 } as const;
 
 // ═══════════════════════════════════════════════════════════════
-// SCROLL REVEAL — wraps children with viewport-triggered fade
+// SCROLL REVEAL
 // ═══════════════════════════════════════════════════════════════
 
 export function ScrollReveal({
@@ -86,20 +84,20 @@ export function ScrollReveal({
 }) {
   const directionVariants: Record<string, Variants> = {
     up: {
-      initial: { opacity: 0, y: 40 },
-      animate: { opacity: 1, y: 0, transition: { duration: 0.6, delay, ease: "easeOut" } },
+      initial: { opacity: 0, y: 30 },
+      animate: { opacity: 1, y: 0, transition: { duration: 0.5, delay, ease: "easeOut" } },
     },
     down: {
-      initial: { opacity: 0, y: -40 },
-      animate: { opacity: 1, y: 0, transition: { duration: 0.6, delay, ease: "easeOut" } },
+      initial: { opacity: 0, y: -30 },
+      animate: { opacity: 1, y: 0, transition: { duration: 0.5, delay, ease: "easeOut" } },
     },
     left: {
-      initial: { opacity: 0, x: -40 },
-      animate: { opacity: 1, x: 0, transition: { duration: 0.6, delay, ease: "easeOut" } },
+      initial: { opacity: 0, x: -30 },
+      animate: { opacity: 1, x: 0, transition: { duration: 0.5, delay, ease: "easeOut" } },
     },
     right: {
-      initial: { opacity: 0, x: 40 },
-      animate: { opacity: 1, x: 0, transition: { duration: 0.6, delay, ease: "easeOut" } },
+      initial: { opacity: 0, x: 30 },
+      animate: { opacity: 1, x: 0, transition: { duration: 0.5, delay, ease: "easeOut" } },
     },
   };
 
@@ -123,7 +121,7 @@ export function ScrollReveal({
 export function StaggerContainer({
   children,
   className = "",
-  staggerDelay = 0.12,
+  staggerDelay = 0.1,
   delay = 0,
 }: {
   children: ReactNode;
@@ -170,7 +168,7 @@ export function StaggerItem({
 export function ParallaxSection({
   children,
   className = "",
-  speed = 0.5,
+  speed = 0.3,
 }: {
   children: ReactNode;
   className?: string;
@@ -191,10 +189,10 @@ export function ParallaxSection({
 }
 
 // ═══════════════════════════════════════════════════════════════
-// GLOW BUTTON — unified h-14, animated arrow, gradient shift
+// SOFT BUTTON — clean SaaS style, no glow
 // ═══════════════════════════════════════════════════════════════
 
-export function GlowButton({
+export function SoftButton({
   children,
   className = "",
   onClick,
@@ -205,66 +203,44 @@ export function GlowButton({
   children: ReactNode;
   className?: string;
   onClick?: () => void;
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "dark";
   size?: "default" | "lg" | "sm";
   showArrow?: boolean;
 }) {
   const sizeMap = {
-    sm: "h-11 px-5 text-sm rounded-xl",
-    default: "h-14 px-8 text-sm rounded-2xl",
-    lg: "h-14 px-9 text-base rounded-2xl",
+    sm: "h-10 px-5 text-sm rounded-[10px]",
+    default: "h-12 px-7 text-sm rounded-[10px]",
+    lg: "h-12 px-8 text-base rounded-[10px]",
   };
 
-  const isPrimary = variant === "primary";
+  const variantMap = {
+    primary: "bg-[#6E8F6A] text-white hover:bg-[#5F7F63] shadow-sm",
+    secondary: "bg-transparent border border-[#6E8F6A] text-[#6E8F6A] hover:bg-[#6E8F6A]/5",
+    dark: "bg-[#1C1C1C] text-white hover:bg-[#333] shadow-sm",
+  };
 
   return (
     <motion.button
       onClick={onClick}
-      className={`group relative inline-flex items-center justify-center gap-2.5 font-medium overflow-hidden ${sizeMap[size]} ${
-        isPrimary
-          ? "bg-primary text-primary-foreground border border-primary/50"
-          : "bg-transparent border border-border text-foreground hover:border-primary/40"
-      } ${className}`}
-      whileHover={{
-        scale: 1.04,
-        boxShadow: isPrimary
-          ? "0 0 30px rgba(6,182,212,0.4), 0 0 60px rgba(6,182,212,0.15)"
-          : "0 0 20px rgba(6,182,212,0.12)",
-      }}
-      whileTap={{ scale: 0.96 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
+      className={`inline-flex items-center justify-center gap-2 font-medium transition-colors duration-200 ${sizeMap[size]} ${variantMap[variant]} ${className}`}
+      whileHover={{ y: -1 }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
     >
-      {/* Animated gradient sweep on hover */}
-      {isPrimary && (
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
-          initial={{ x: "-100%" }}
-          whileHover={{ x: "100%" }}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
-        />
-      )}
-      <span className="relative z-10 flex items-center gap-2.5">
-        {children}
-        {showArrow && (
-          <motion.span
-            className="inline-flex"
-            initial={{ x: 0 }}
-            whileHover={{ x: 6 }}
-            transition={{ type: "spring", stiffness: 400, damping: 15 }}
-          >
-            <ArrowRight className="w-4 h-4" />
-          </motion.span>
-        )}
-      </span>
+      {children}
+      {showArrow && <ArrowRight className="w-4 h-4" />}
     </motion.button>
   );
 }
 
+// Keep GlowButton as alias for backward compat
+export const GlowButton = SoftButton;
+
 // ═══════════════════════════════════════════════════════════════
-// GLASS CARD — with hover glow border
+// SOFT CARD — white card with minimal shadow
 // ═══════════════════════════════════════════════════════════════
 
-export function GlassCard({
+export function SoftCard({
   children,
   className = "",
   hover = true,
@@ -275,25 +251,20 @@ export function GlassCard({
 }) {
   return (
     <motion.div
-      className={`glass-card rounded-2xl p-6 ${className}`}
-      whileHover={
-        hover
-          ? {
-              y: -6,
-              scale: 1.02,
-              boxShadow: "0 0 0 1px rgba(6,182,212,0.2), 0 0 30px -5px rgba(6,182,212,0.15)",
-            }
-          : undefined
-      }
-      transition={{ duration: 0.4, ease: "easeOut" }}
+      className={`soft-card p-6 ${className}`}
+      whileHover={hover ? { y: -4 } : undefined}
+      transition={{ duration: 0.3, ease: "easeOut" }}
     >
       {children}
     </motion.div>
   );
 }
 
+// Keep GlassCard as alias for backward compat
+export const GlassCard = SoftCard;
+
 // ═══════════════════════════════════════════════════════════════
-// ANIMATED COUNTER — count-up on scroll into view
+// ANIMATED COUNTER
 // ═══════════════════════════════════════════════════════════════
 
 export function AnimatedCounter({
@@ -320,7 +291,6 @@ export function AnimatedCounter({
     function animate(currentTime: number) {
       if (!startTime) startTime = currentTime;
       const progress = Math.min((currentTime - startTime) / duration, 1);
-      // Cubic ease-out
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.round(eased * target));
       if (progress < 1) requestAnimationFrame(animate);
@@ -333,8 +303,8 @@ export function AnimatedCounter({
     <motion.span
       ref={ref}
       className={className}
-      initial={{ opacity: 0, scale: 0.8 }}
-      whileInView={{ opacity: 1, scale: 1 }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4, ease: "easeOut" }}
     >
@@ -344,7 +314,7 @@ export function AnimatedCounter({
 }
 
 // ═══════════════════════════════════════════════════════════════
-// SECTION DIVIDER — animated expanding line
+// SECTION DIVIDER — subtle warm line
 // ═══════════════════════════════════════════════════════════════
 
 export function SectionDivider({ className = "" }: { className?: string }) {
@@ -356,49 +326,16 @@ export function SectionDivider({ className = "" }: { className?: string }) {
       viewport={viewportConfig}
     >
       <motion.div
-        className="h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"
+        className="h-px bg-gradient-to-r from-transparent via-border to-transparent"
         variants={{
           initial: { width: 0, opacity: 0 },
           animate: {
-            width: "80%",
+            width: "60%",
             opacity: 1,
-            transition: { duration: 0.8, ease: "easeOut" },
+            transition: { duration: 0.6, ease: "easeOut" },
           },
         }}
       />
-    </motion.div>
-  );
-}
-
-// ═══════════════════════════════════════════════════════════════
-// GRADIENT SPOTLIGHT — radial glow behind key text
-// ═══════════════════════════════════════════════════════════════
-
-export function GradientSpotlight({
-  className = "",
-  color = "cyan",
-}: {
-  className?: string;
-  color?: "cyan" | "blue" | "purple";
-}) {
-  const colorMap = {
-    cyan: "from-cyan-500/8 via-cyan-500/3 to-transparent",
-    blue: "from-blue-500/8 via-blue-500/3 to-transparent",
-    purple: "from-purple-500/8 via-purple-500/3 to-transparent",
-  };
-
-  return (
-    <motion.div
-      className={`absolute pointer-events-none bg-radial-gradient ${className}`}
-      style={{
-        background: `radial-gradient(ellipse at center, var(--tw-gradient-stops))`,
-      }}
-      initial={{ opacity: 0, scale: 0.8 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 1.2, ease: "easeOut" }}
-    >
-      <div className={`w-full h-full bg-gradient-radial ${colorMap[color]}`} />
     </motion.div>
   );
 }

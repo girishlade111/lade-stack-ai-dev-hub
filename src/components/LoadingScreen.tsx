@@ -13,13 +13,12 @@ export default function LoadingScreen() {
     <AnimatePresence>
       {isLoading && (
         <motion.div
-          className="fixed inset-0 z-[200] flex items-center justify-center bg-background"
+          className="fixed inset-0 z-[200] flex items-center justify-center bg-[#F5F3EB]"
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
         >
           <div className="flex flex-col items-center gap-8">
             <motion.div
-              className="relative"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
@@ -30,15 +29,9 @@ export default function LoadingScreen() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
               >
-                <span className="text-foreground">Lade</span>
-                <span className="text-gradient ml-2">Stack</span>
+                <span className="text-[#1C1C1C]">Lade</span>
+                <span className="text-[#6E8F6A] ml-2">Stack</span>
               </motion.div>
-
-              <motion.div
-                className="absolute -inset-4 rounded-lg bg-primary/5 blur-xl"
-                animate={{ opacity: [0.3, 0.6, 0.3] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
             </motion.div>
 
             <motion.div
@@ -50,7 +43,7 @@ export default function LoadingScreen() {
               {[0, 1, 2].map((i) => (
                 <motion.div
                   key={i}
-                  className="w-1.5 h-1.5 rounded-full bg-primary"
+                  className="w-1.5 h-1.5 rounded-full bg-[#6E8F6A]"
                   animate={{ opacity: [0.3, 1, 0.3], scale: [0.8, 1.2, 0.8] }}
                   transition={{
                     duration: 1,
