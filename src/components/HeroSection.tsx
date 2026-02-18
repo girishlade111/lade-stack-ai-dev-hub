@@ -42,7 +42,7 @@ function HeroContent({ isDark }: { isDark: boolean }) {
       {/* 2. Main Heading */}
       <motion.h1
         className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] tracking-[-0.01em] max-w-[900px] ${
-          isDark ? "text-white" : "text-[#1C1C1C]"
+          isDark ? "hero-metallic" : "text-[#1C1C1C]"
         }`}
         style={{ fontFamily: "'DM Serif Display', serif" }}
         initial={{ opacity: 0, y: 24 }}
@@ -51,7 +51,7 @@ function HeroContent({ isDark }: { isDark: boolean }) {
       >
         Build smarter products
         <br />
-        <span className="text-[#6E8F6A]">with intelligent AI tools</span>
+        <span className={isDark ? "bg-clip-text [-webkit-text-fill-color:transparent] bg-gradient-to-r from-[#6E8F6A] to-[#8BAF87]" : "text-[#6E8F6A]"}>with intelligent AI tools</span>
       </motion.h1>
 
       {/* 3. Subheading */}
