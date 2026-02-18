@@ -88,7 +88,7 @@ function TestimonialCard({ testimonial, index }: {
       >
         <AnimatedStars count={testimonial.rating} />
 
-        <p className="text-sm text-[#555] dark:text-[#999] leading-relaxed my-5">
+        <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed my-5">
           "{testimonial.content}"
         </p>
 
@@ -97,8 +97,8 @@ function TestimonialCard({ testimonial, index }: {
             {testimonial.avatar}
           </div>
           <div>
-            <p className="text-sm font-medium text-[#1C1C1C] dark:text-[#E8E4DA]">{testimonial.name}</p>
-            <p className="text-xs text-[#777]">{testimonial.role} at {testimonial.company}</p>
+            <p className="text-sm font-medium text-neutral-900 dark:text-white">{testimonial.name}</p>
+            <p className="text-xs text-neutral-500 dark:text-neutral-500">{testimonial.role} at {testimonial.company}</p>
           </div>
         </div>
       </motion.div>
@@ -143,7 +143,7 @@ function TestimonialCarousel() {
       <div className="hidden md:flex absolute -left-4 top-1/2 -translate-y-1/2 z-10">
         <button
           onClick={prev}
-          className="w-9 h-9 rounded-full bg-white dark:bg-[#2a2622] border border-border flex items-center justify-center text-[#777] hover:text-[#1C1C1C] dark:hover:text-[#E8E4DA] shadow-sm transition-colors"
+          className="w-9 h-9 rounded-full bg-white dark:bg-[#2a2622] border border-border flex items-center justify-center text-neutral-500 hover:text-neutral-900 dark:hover:text-white shadow-sm transition-colors"
         >
           <ChevronLeft className="w-4 h-4" />
         </button>
@@ -151,7 +151,7 @@ function TestimonialCarousel() {
       <div className="hidden md:flex absolute -right-4 top-1/2 -translate-y-1/2 z-10">
         <button
           onClick={next}
-          className="w-9 h-9 rounded-full bg-white dark:bg-[#2a2622] border border-border flex items-center justify-center text-[#777] hover:text-[#1C1C1C] dark:hover:text-[#E8E4DA] shadow-sm transition-colors"
+          className="w-9 h-9 rounded-full bg-white dark:bg-[#2a2622] border border-border flex items-center justify-center text-neutral-500 hover:text-neutral-900 dark:hover:text-white shadow-sm transition-colors"
         >
           <ChevronRight className="w-4 h-4" />
         </button>
@@ -188,7 +188,7 @@ function TestimonialCarousel() {
 
 export default function CommunitySection() {
   return (
-    <section className="relative py-24 md:py-32 bg-beige">
+    <section className="relative py-24 md:py-32 bg-beige dark:bg-black">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="text-center mb-16">
@@ -196,10 +196,10 @@ export default function CommunitySection() {
               <Users className="w-3.5 h-3.5" />
               Developer Community
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-metallic mb-4 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight text-neutral-900 dark:text-white">
               Loved by developers worldwide
             </h2>
-            <p className="text-[#555] dark:text-[#999] text-lg max-w-2xl mx-auto">
+            <p className="text-neutral-600 dark:text-neutral-400 text-lg max-w-2xl mx-auto">
               Join a growing community of developers who are building faster with AI-powered tools.
             </p>
           </div>
@@ -209,8 +209,8 @@ export default function CommunitySection() {
           {communityStats.map((stat) => (
             <StaggerItem key={stat.label}>
               <div className="text-center p-4">
-                <p className="text-2xl md:text-3xl font-bold text-[#1C1C1C] dark:text-[#E8E4DA]">{stat.value}</p>
-                <p className="text-xs text-[#777] mt-1">{stat.label}</p>
+                <p className="text-2xl md:text-3xl font-bold text-neutral-900 dark:text-white">{stat.value}</p>
+                <p className="text-xs text-neutral-500 dark:text-neutral-500 mt-1">{stat.label}</p>
               </div>
             </StaggerItem>
           ))}
@@ -222,7 +222,7 @@ export default function CommunitySection() {
 
         <ScrollReveal>
           <div className="text-center">
-            <p className="text-[#555] dark:text-[#999] mb-6">Ready to join the community?</p>
+            <p className="text-neutral-600 dark:text-neutral-400 mb-6">Ready to join the community?</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <SoftButton
                 variant="primary"

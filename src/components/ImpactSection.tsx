@@ -25,8 +25,8 @@ function InteractiveGraph() {
     <SoftCard className="max-w-3xl mx-auto" hover={false}>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <p className="text-sm font-semibold text-[#1C1C1C] dark:text-[#E8E4DA]">Platform Growth</p>
-          <p className="text-xs text-[#777]">Developer adoption over 12 months</p>
+          <p className="text-sm font-semibold text-neutral-900 dark:text-white">Platform Growth</p>
+          <p className="text-xs text-neutral-500 dark:text-neutral-500">Developer adoption over 12 months</p>
         </div>
         <div className="flex bg-[#F5F3EB] dark:bg-[#2a2622] rounded-lg p-0.5 border border-border">
           {(["monthly", "yearly"] as const).map((p) => (
@@ -36,7 +36,7 @@ function InteractiveGraph() {
               className={`px-3 py-1 text-xs font-medium rounded-md capitalize transition-colors duration-200 ${
                 period === p
                   ? "bg-[#6E8F6A] text-white shadow-sm"
-                  : "text-[#777] hover:text-[#1C1C1C] dark:hover:text-[#E8E4DA]"
+                  : "text-neutral-500 hover:text-neutral-900 dark:hover:text-white"
               }`}
             >
               {p}
@@ -89,7 +89,7 @@ function InteractiveGraph() {
         </div>
       </div>
 
-      <div className="flex justify-between mt-2 text-[10px] text-[#777] px-1">
+      <div className="flex justify-between mt-2 text-[10px] text-neutral-500 px-1">
         {months.map((m, i) => (
           <span
             key={m}
@@ -111,16 +111,16 @@ function InteractiveGraph() {
             transition={{ duration: 0.3 }}
           >
             <div className="text-center">
-              <p className="text-lg font-bold text-[#1C1C1C] dark:text-[#E8E4DA]">{graphData[activeBar]}%</p>
-              <p className="text-[10px] text-[#777]">Growth Rate</p>
+              <p className="text-lg font-bold text-neutral-900 dark:text-white">{graphData[activeBar]}%</p>
+              <p className="text-[10px] text-neutral-500 dark:text-neutral-500">Growth Rate</p>
             </div>
             <div className="text-center">
-              <p className="text-lg font-bold text-[#1C1C1C] dark:text-[#E8E4DA]">{Math.round(graphData[activeBar] * 520).toLocaleString()}</p>
-              <p className="text-[10px] text-[#777]">New Users</p>
+              <p className="text-lg font-bold text-neutral-900 dark:text-white">{Math.round(graphData[activeBar] * 520).toLocaleString()}</p>
+              <p className="text-[10px] text-neutral-500 dark:text-neutral-500">New Users</p>
             </div>
             <div className="text-center">
-              <p className="text-lg font-bold text-[#1C1C1C] dark:text-[#E8E4DA]">{Math.round(graphData[activeBar] * 0.85)}%</p>
-              <p className="text-[10px] text-[#777]">Retention</p>
+              <p className="text-lg font-bold text-neutral-900 dark:text-white">{Math.round(graphData[activeBar] * 0.85)}%</p>
+              <p className="text-[10px] text-neutral-500 dark:text-neutral-500">Retention</p>
             </div>
           </motion.div>
         )}
@@ -131,7 +131,7 @@ function InteractiveGraph() {
 
 export default function ImpactSection() {
   return (
-    <section className="relative py-24 md:py-32">
+    <section className="relative py-24 md:py-32 bg-white dark:bg-black">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="text-center mb-16">
@@ -139,10 +139,10 @@ export default function ImpactSection() {
               <BarChart3 className="w-3.5 h-3.5" />
               Impact & Results
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-metallic mb-4 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight text-neutral-900 dark:text-white">
               Numbers that speak for themselves
             </h2>
-            <p className="text-[#555] dark:text-[#999] text-lg max-w-2xl mx-auto">
+            <p className="text-neutral-600 dark:text-neutral-400 text-lg max-w-2xl mx-auto">
               Real impact, measurable results, and growing every day.
             </p>
           </div>
@@ -158,8 +158,8 @@ export default function ImpactSection() {
                 <div className="text-3xl md:text-4xl font-bold text-[#6E8F6A] mb-1">
                   <AnimatedCounter target={stat.value} suffix={stat.suffix} />
                 </div>
-                <p className="text-sm font-medium text-[#1C1C1C] dark:text-[#E8E4DA] mb-1">{stat.label}</p>
-                <p className="text-xs text-[#777]">{stat.description}</p>
+                <p className="text-sm font-medium text-neutral-900 dark:text-white mb-1">{stat.label}</p>
+                <p className="text-xs text-neutral-500 dark:text-neutral-500">{stat.description}</p>
               </SoftCard>
             </StaggerItem>
           ))}

@@ -67,17 +67,17 @@ function AnimatedTimeline() {
               className="w-full text-left group"
             >
               <div className="flex items-center gap-2">
-                <p className="text-sm font-semibold text-[#1C1C1C] dark:text-[#E8E4DA] group-hover:text-[#6E8F6A] transition-colors duration-200">
+                <p className="text-sm font-semibold text-neutral-900 dark:text-white group-hover:text-[#6E8F6A] transition-colors duration-200">
                   {item.title}
                 </p>
                 <motion.div
                   animate={{ rotate: expanded === index ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <ChevronDown className="w-3 h-3 text-[#777]" />
+                  <ChevronDown className="w-3 h-3 text-neutral-500" />
                 </motion.div>
               </div>
-              <p className="text-sm text-[#555] dark:text-[#999] mt-1">{item.description}</p>
+              <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">{item.description}</p>
             </button>
 
             <AnimatePresence>
@@ -89,7 +89,7 @@ function AnimatedTimeline() {
                   transition={{ duration: 0.3 }}
                   className="overflow-hidden"
                 >
-                  <p className="text-xs text-[#777] mt-2 pl-3 border-l-2 border-[#6E8F6A]/20">
+                  <p className="text-xs text-neutral-500 dark:text-neutral-500 mt-2 pl-3 border-l-2 border-[#6E8F6A]/20">
                     {item.details}
                   </p>
                 </motion.div>
@@ -111,7 +111,7 @@ function VisionItem({ item, index }: { item: typeof visionItems[0]; index: numbe
       <div className="w-8 h-8 rounded-md bg-[#6E8F6A]/10 flex items-center justify-center flex-shrink-0">
         <item.icon className="w-4 h-4 text-[#6E8F6A]" />
       </div>
-      <span className="text-sm text-[#1C1C1C] dark:text-[#E8E4DA]">{item.text}</span>
+      <span className="text-sm text-neutral-900 dark:text-white">{item.text}</span>
       <motion.div
         className="ml-auto flex-shrink-0"
         initial={{ scale: 0, opacity: 0 }}
@@ -127,7 +127,7 @@ function VisionItem({ item, index }: { item: typeof visionItems[0]; index: numbe
 
 export default function AboutSection() {
   return (
-    <section className="relative py-24 md:py-32">
+    <section className="relative py-24 md:py-32 bg-white dark:bg-black">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="text-center mb-16 md:mb-20">
@@ -135,10 +135,10 @@ export default function AboutSection() {
               <Rocket className="w-3.5 h-3.5" />
               About Lade Stack
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-metallic mb-4 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight text-neutral-900 dark:text-white">
               Building the future of AI development
             </h2>
-            <p className="text-[#555] dark:text-[#999] text-lg max-w-2xl mx-auto">
+            <p className="text-neutral-600 dark:text-neutral-400 text-lg max-w-2xl mx-auto">
               An AI-powered SaaS ecosystem designed to give every developer
               enterprise-grade tools at startup velocity.
             </p>
@@ -152,11 +152,11 @@ export default function AboutSection() {
                 <div className="w-10 h-10 rounded-lg bg-[#6E8F6A]/10 flex items-center justify-center">
                   <Rocket className="w-5 h-5 text-[#6E8F6A]" />
                 </div>
-                <h3 className="text-xl font-semibold text-[#1C1C1C] dark:text-[#E8E4DA]">Our Mission</h3>
+                <h3 className="text-xl font-semibold text-neutral-900 dark:text-white">Our Mission</h3>
               </div>
-              <p className="text-[#555] dark:text-[#999] leading-relaxed mb-8">
+              <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed mb-8">
                 Democratizing advanced development tools by providing{" "}
-                <span className="text-[#1C1C1C] dark:text-[#E8E4DA] font-medium">enterprise-grade AI solutions</span>{" "}
+                <span className="text-neutral-900 dark:text-white font-medium">enterprise-grade AI solutions</span>{" "}
                 that dramatically reduce development time while maintaining the highest quality standards.
               </p>
               <AnimatedTimeline />
@@ -169,11 +169,11 @@ export default function AboutSection() {
                 <div className="w-10 h-10 rounded-lg bg-[#6E8F6A]/10 flex items-center justify-center">
                   <Eye className="w-5 h-5 text-[#6E8F6A]" />
                 </div>
-                <h3 className="text-xl font-semibold text-[#1C1C1C] dark:text-[#E8E4DA]">Our Vision</h3>
+                <h3 className="text-xl font-semibold text-neutral-900 dark:text-white">Our Vision</h3>
               </div>
-              <p className="text-[#555] dark:text-[#999] leading-relaxed mb-8">
+              <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed mb-8">
                 Building a future where{" "}
-                <span className="text-[#1C1C1C] dark:text-[#E8E4DA] font-medium">anyone can create enterprise-grade applications</span>{" "}
+                <span className="text-neutral-900 dark:text-white font-medium">anyone can create enterprise-grade applications</span>{" "}
                 with AI handling complexity while developers focus on creativity and innovation.
               </p>
               <motion.div

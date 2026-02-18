@@ -44,10 +44,10 @@ function ValueCard({ value, index }: { value: typeof values[0]; index: number })
           <value.icon className="w-5 h-5 text-[#6E8F6A]" />
         </div>
 
-        <h3 className="text-lg font-semibold text-[#1C1C1C] dark:text-[#E8E4DA] mb-2 group-hover:text-[#6E8F6A] transition-colors duration-200">
+        <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2 group-hover:text-[#6E8F6A] transition-colors duration-200">
           {value.title}
         </h3>
-        <p className="text-sm text-[#555] dark:text-[#999] leading-relaxed mb-3">
+        <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-3">
           {value.description}
         </p>
 
@@ -66,12 +66,12 @@ function ValueCard({ value, index }: { value: typeof values[0]; index: number })
           transition={{ duration: 0.3 }}
           className="overflow-hidden"
         >
-          <p className="text-xs text-[#777] mt-2 leading-relaxed">
+          <p className="text-xs text-neutral-500 dark:text-neutral-500 mt-2 leading-relaxed">
             {value.detail}
           </p>
         </motion.div>
 
-        <div className="absolute top-4 right-4 text-xs font-mono text-[#ccc] dark:text-[#444]">
+        <div className="absolute top-4 right-4 text-xs font-mono text-neutral-400 dark:text-neutral-600">
           0{index + 1}
         </div>
       </motion.div>
@@ -81,7 +81,7 @@ function ValueCard({ value, index }: { value: typeof values[0]; index: number })
 
 export default function ValuesSection() {
   return (
-    <section className="relative py-24 md:py-32 bg-sage">
+    <section className="relative py-24 md:py-32 bg-sage dark:bg-black">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="text-center mb-16">
@@ -89,10 +89,10 @@ export default function ValuesSection() {
               <Sparkles className="w-3.5 h-3.5" />
               Core Values
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-metallic mb-4 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight text-neutral-900 dark:text-white">
               What drives everything we build
             </h2>
-            <p className="text-[#555] dark:text-[#999] text-lg max-w-2xl mx-auto">
+            <p className="text-neutral-600 dark:text-neutral-400 text-lg max-w-2xl mx-auto">
               Our values shape every decision, every line of code, and every product we ship.
             </p>
           </div>

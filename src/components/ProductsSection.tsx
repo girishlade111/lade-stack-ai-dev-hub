@@ -120,11 +120,11 @@ function ProductCard({ product, index }: { product: typeof products[0]; index: n
 
         {/* Content */}
         <div>
-          <h3 className="text-lg font-semibold text-[#1C1C1C] dark:text-[#E8E4DA] mb-1 group-hover:text-[#6E8F6A] transition-colors duration-200">
+          <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-1 group-hover:text-[#6E8F6A] transition-colors duration-200">
             {product.title}
           </h3>
           <p className="text-xs text-[#6E8F6A] font-medium mb-3">{product.tagline}</p>
-          <p className="text-sm text-[#555] dark:text-[#999] leading-relaxed mb-4">
+          <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
             {product.description}
           </p>
         </div>
@@ -155,7 +155,7 @@ function ProductCard({ product, index }: { product: typeof products[0]; index: n
             </button>
           ) : (
             <Link to={product.url}>
-              <span className="inline-flex items-center gap-1.5 text-xs font-medium text-[#777] hover:text-[#1C1C1C] dark:hover:text-[#E8E4DA] transition-colors">
+              <span className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors">
                 Learn More <ArrowRight className="w-3 h-3" />
               </span>
             </Link>
@@ -174,7 +174,7 @@ export default function ProductsSection() {
     : products.filter((p) => p.category === activeCategory);
 
   return (
-    <section className="relative py-24 md:py-32">
+    <section className="relative py-24 md:py-32 bg-white dark:bg-black">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="text-center mb-12">
@@ -182,10 +182,10 @@ export default function ProductsSection() {
               <Layers className="w-3.5 h-3.5" />
               Our Products
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-metallic mb-4 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight text-neutral-900 dark:text-white">
               The complete AI development suite
             </h2>
-            <p className="text-[#555] dark:text-[#999] text-lg max-w-2xl mx-auto">
+            <p className="text-neutral-600 dark:text-neutral-400 text-lg max-w-2xl mx-auto">
               Five powerful AI-powered tools designed to supercharge every phase of your development workflow.
             </p>
           </div>
@@ -201,7 +201,7 @@ export default function ProductsSection() {
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
                   activeCategory === category
                     ? "bg-[#6E8F6A] text-white"
-                    : "bg-white dark:bg-[#2a2622] text-[#777] hover:text-[#1C1C1C] dark:hover:text-[#E8E4DA] border border-border"
+                    : "bg-white dark:bg-[#2a2622] text-neutral-500 hover:text-neutral-900 dark:hover:text-white border border-border"
                 }`}
               >
                 {category}
@@ -222,7 +222,7 @@ export default function ProductsSection() {
         {/* Bottom CTA */}
         <ScrollReveal>
           <div className="text-center mt-16">
-            <p className="text-[#777] mb-4 text-sm">All tools are free for developers</p>
+            <p className="text-neutral-500 mb-4 text-sm">All tools are free for developers</p>
             <Link to="/apps">
               <SoftButton variant="primary" size="lg" showArrow>
                 Explore All Products
