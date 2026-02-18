@@ -228,7 +228,13 @@ const FileSharingPlatform = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 relative overflow-hidden">
+      {/* Dark theme gradient overlays */}
+      <div className="absolute inset-0 hidden dark:block pointer-events-none">
+        <div className="absolute top-0 right-[10%] w-[700px] h-[500px] bg-[radial-gradient(ellipse_at_center,_rgba(110,143,106,0.11),_transparent_60%)]" />
+        <div className="absolute top-[40%] left-0 w-[500px] h-[400px] bg-[radial-gradient(ellipse_at_center,_rgba(139,175,135,0.07),_transparent_55%)]" />
+        <div className="absolute bottom-0 right-[20%] w-[500px] h-[350px] bg-[radial-gradient(ellipse_at_center,_rgba(110,143,106,0.05),_transparent_55%)]" />
+      </div>
       <Header />
       <main className="pt-16">
         {/* Optimized Hero Section */}

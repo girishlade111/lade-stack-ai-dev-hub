@@ -144,9 +144,14 @@ const AppsAdmin: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-950 to-black text-white p-6">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-950 to-black text-white p-6 relative overflow-hidden">
+      {/* Gradient overlays */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-[20%] w-[600px] h-[450px] bg-[radial-gradient(ellipse_at_center,_rgba(110,143,106,0.10),_transparent_60%)]" />
+        <div className="absolute top-[50%] right-0 w-[500px] h-[400px] bg-[radial-gradient(ellipse_at_center,_rgba(139,175,135,0.06),_transparent_55%)]" />
+      </div>
       <SEO title="Apps Admin Dashboard - Lade Stack" />
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto relative z-10">
         <h1 className="text-3xl font-bold mb-8 text-center">Apps Admin Dashboard</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

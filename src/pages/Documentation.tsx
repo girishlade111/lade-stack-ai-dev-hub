@@ -247,7 +247,13 @@ const Documentation = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Dark theme gradient overlays */}
+      <div className="absolute inset-0 hidden dark:block pointer-events-none">
+        <div className="absolute top-0 left-[15%] w-[650px] h-[450px] bg-[radial-gradient(ellipse_at_center,_rgba(110,143,106,0.11),_transparent_60%)]" />
+        <div className="absolute top-[40%] right-0 w-[500px] h-[400px] bg-[radial-gradient(ellipse_at_center,_rgba(139,175,135,0.06),_transparent_55%)]" />
+        <div className="absolute bottom-0 left-[40%] w-[500px] h-[300px] bg-[radial-gradient(ellipse_at_center,_rgba(110,143,106,0.05),_transparent_50%)]" />
+      </div>
       <SEO
         title="Documentation - Lade Stack"
         description="Comprehensive guides, API references, and tutorials to help you make the most of Lade Stack's powerful development tools."

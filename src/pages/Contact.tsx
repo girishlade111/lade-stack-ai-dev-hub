@@ -89,7 +89,12 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Dark theme gradient overlays */}
+      <div className="absolute inset-0 hidden dark:block pointer-events-none">
+        <div className="absolute top-0 right-0 w-[600px] h-[500px] bg-[radial-gradient(ellipse_at_center,_rgba(110,143,106,0.10),_transparent_60%)]" />
+        <div className="absolute bottom-[20%] left-0 w-[500px] h-[400px] bg-[radial-gradient(ellipse_at_center,_rgba(139,175,135,0.07),_transparent_55%)]" />
+      </div>
       <SEO
         title="Contact Lade Stack - Get in Touch for AI Development Support"
         description="Get in touch with Lade Stack for AI development support, technical assistance, and enterprise solutions. Our team responds within 24 hours."

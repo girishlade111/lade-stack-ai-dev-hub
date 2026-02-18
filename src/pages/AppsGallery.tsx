@@ -215,8 +215,14 @@ const AppsGallery: React.FC = () => {
         keywords="apps gallery, developer tools, free tools, web development, Lade Stack apps"
       />
       <Header />
-      <main className="min-h-screen bg-background pt-14 sm:pt-16 lg:pt-20">
-        <div className="container mx-auto px-5 sm:px-6 lg:px-8 py-8">
+      <main className="min-h-screen bg-background pt-14 sm:pt-16 lg:pt-20 relative overflow-hidden">
+        {/* Dark theme gradient overlays */}
+        <div className="absolute inset-0 hidden dark:block pointer-events-none">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[radial-gradient(ellipse_at_center,_rgba(110,143,106,0.11),_transparent_60%)]" />
+          <div className="absolute top-[45%] right-0 w-[500px] h-[400px] bg-[radial-gradient(ellipse_at_center,_rgba(139,175,135,0.06),_transparent_55%)]" />
+          <div className="absolute bottom-0 left-[10%] w-[500px] h-[350px] bg-[radial-gradient(ellipse_at_center,_rgba(110,143,106,0.05),_transparent_50%)]" />
+        </div>
+        <div className="container mx-auto px-5 sm:px-6 lg:px-8 py-8 relative z-10">
           {/* Hero Section */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}

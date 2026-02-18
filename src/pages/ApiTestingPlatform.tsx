@@ -369,7 +369,13 @@ const ApiTestingPlatform: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Dark theme gradient overlays */}
+      <div className="absolute inset-0 hidden dark:block pointer-events-none">
+        <div className="absolute top-0 left-[15%] w-[700px] h-[500px] bg-[radial-gradient(ellipse_at_center,_rgba(110,143,106,0.11),_transparent_60%)]" />
+        <div className="absolute top-[35%] right-0 w-[500px] h-[400px] bg-[radial-gradient(ellipse_at_center,_rgba(139,175,135,0.07),_transparent_55%)]" />
+        <div className="absolute bottom-[10%] left-[40%] w-[500px] h-[350px] bg-[radial-gradient(ellipse_at_center,_rgba(110,143,106,0.05),_transparent_50%)]" />
+      </div>
       <SEO
         title="AI-Powered API Testing Platform | Automated API Testing & Validation Tool"
         description="Professional API testing platform with AI-powered test generation, automated validation, and real-time monitoring. Supports REST, GraphQL, WebSocket & gRPC. Free trial available."
