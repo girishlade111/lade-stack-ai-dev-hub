@@ -33,7 +33,7 @@ const socialLinks = [
 ];
 
 function FooterLink({ to, children, external = false }: { to: string; children: React.ReactNode; external?: boolean }) {
-  const className = "text-sm text-[#555] hover:text-[#6E8F6A] transition-colors duration-200";
+  const className = "text-sm text-[#555] dark:text-white/80 hover:text-[#6E8F6A] dark:hover:text-white transition-colors duration-200";
 
   if (external) {
     return (
@@ -60,23 +60,23 @@ export default function Footer() {
                 <div className="w-8 h-8 rounded-lg bg-[#6E8F6A] flex items-center justify-center">
                   <span className="text-xs font-mono font-bold text-white">{"</>"}</span>
                 </div>
-                <span className="text-base font-semibold text-[#1C1C1C]">
+                <span className="text-base font-semibold text-[#1C1C1C] dark:text-white">
                   Lade <span className="text-[#6E8F6A]">Stack</span>
                 </span>
               </Link>
-              <p className="text-sm text-[#555] leading-relaxed max-w-sm mb-6">
+              <p className="text-sm text-[#555] dark:text-white/80 leading-relaxed max-w-sm mb-6">
                 The AI-powered development ecosystem. Enterprise-grade tools designed
                 for modern developers who build at the speed of thought.
               </p>
 
               {/* Newsletter */}
               <div className="max-w-sm">
-                <p className="text-xs font-medium text-[#1C1C1C] mb-2">Stay updated</p>
+                <p className="text-xs font-medium text-[#1C1C1C] dark:text-white/90 mb-2">Stay updated</p>
                 <div className="flex gap-2">
                   <input
                     type="email"
                     placeholder="your@email.com"
-                    className="flex-1 px-3 py-2 text-sm bg-white border border-border rounded-lg text-[#1C1C1C] placeholder:text-[#999] focus:outline-none focus:border-[#6E8F6A]/50 transition-colors duration-200"
+                    className="flex-1 px-3 py-2 text-sm bg-white dark:bg-white/[0.06] border border-border rounded-lg text-[#1C1C1C] dark:text-white/90 placeholder:text-[#999] dark:placeholder:text-white/40 focus:outline-none focus:border-[#6E8F6A]/50 transition-colors duration-200"
                   />
                   <motion.button
                     className="px-3 py-2 bg-[#6E8F6A] text-white rounded-lg text-sm font-medium"
@@ -94,7 +94,7 @@ export default function Footer() {
           {/* Products */}
           <div>
             <ScrollReveal delay={0.1}>
-              <h4 className="text-sm font-semibold text-[#1C1C1C] mb-4">Products</h4>
+              <h4 className="text-sm font-semibold text-[#1C1C1C] dark:text-white/90 mb-4">Products</h4>
               <ul className="space-y-3">
                 {productLinks.map((link) => (
                   <li key={link.name}>
@@ -108,7 +108,7 @@ export default function Footer() {
           {/* Company */}
           <div>
             <ScrollReveal delay={0.2}>
-              <h4 className="text-sm font-semibold text-[#1C1C1C] mb-4">Company</h4>
+              <h4 className="text-sm font-semibold text-[#1C1C1C] dark:text-white/90 mb-4">Company</h4>
               <ul className="space-y-3">
                 {companyLinks.map((link) => (
                   <li key={link.name}>
@@ -122,7 +122,7 @@ export default function Footer() {
           {/* Legal */}
           <div>
             <ScrollReveal delay={0.3}>
-              <h4 className="text-sm font-semibold text-[#1C1C1C] mb-4">Legal</h4>
+              <h4 className="text-sm font-semibold text-[#1C1C1C] dark:text-white/90 mb-4">Legal</h4>
               <ul className="space-y-3">
                 {legalLinks.map((link) => (
                   <li key={link.name}>
@@ -158,7 +158,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-lg bg-white border border-border flex items-center justify-center text-[#777] hover:text-[#6E8F6A] hover:border-[#6E8F6A]/30 transition-colors duration-200"
+                  className="w-9 h-9 rounded-lg bg-white dark:bg-white/[0.06] border border-border flex items-center justify-center text-[#777] dark:text-white/70 hover:text-[#6E8F6A] dark:hover:text-white hover:border-[#6E8F6A]/30 transition-colors duration-200"
                   aria-label={social.label}
                 >
                   <social.icon className="w-4 h-4" />
@@ -167,7 +167,7 @@ export default function Footer() {
             </div>
 
             {/* Copyright */}
-            <div className="flex flex-col sm:flex-row items-center gap-2 text-xs text-[#777]">
+            <div className="flex flex-col sm:flex-row items-center gap-2 text-xs text-[#777] dark:text-white/70">
               <span>&copy; {currentYear} Lade Stack. All rights reserved.</span>
               <span className="hidden sm:inline">&middot;</span>
               <span>Built with precision by Girish Lade</span>
