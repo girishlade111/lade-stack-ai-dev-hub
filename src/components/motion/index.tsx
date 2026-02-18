@@ -1,5 +1,6 @@
 import { motion, useInView, useScroll, useTransform, type Variants } from "framer-motion";
-import { useRef, type ReactNode } from "react";
+import { useRef, useEffect, useState, type ReactNode } from "react";
+import { ArrowRight } from "lucide-react";
 
 // Scroll-triggered reveal wrapper
 export function ScrollReveal({
@@ -141,31 +142,65 @@ export function ParallaxSection({
   );
 }
 
-// Glow button with ripple effect
+// ============ PRODUCTION-GRADE GLOBAL BUTTON SYSTEM ============
+
 export function GlowButton({
   children,
   className = "",
   onClick,
   variant = "primary",
+  size = "default",
+  showArrow = false,
+  asChild = false,
 }: {
   children: ReactNode;
   className?: string;
   onClick?: () => void;
   variant?: "primary" | "secondary";
+  size?: "default" | "lg" | "sm";
+  showArrow?: boolean;
+  asChild?: boolean;
 }) {
+  const sizeStyles = {
+    sm: "h-10 px-5 text-sm rounded-xl gap-2",
+    default: "h-12 px-7 text-sm rounded-xl gap-2",
+    lg: "h-14 px-9 text-base rounded-2xl gap-2.5",
+  };
+
   const baseStyles =
     variant === "primary"
-      ? "bg-primary text-primary-foreground hover:shadow-[0_0_30px_rgba(6,182,212,0.4)]"
-      : "bg-transparent border border-border text-foreground hover:border-primary/50 hover:shadow-[0_0_20px_rgba(6,182,212,0.15)]";
+      ? "bg-primary text-primary-foreground hover:shadow-[0_0_30px_rgba(6,182,212,0.4),0_0_60px_rgba(6,182,212,0.15)] border border-primary/50 hover:border-primary"
+      : "bg-transparent border border-border text-foreground hover:border-primary/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.12)] hover:bg-primary/5";
 
   return (
     <motion.button
       onClick={onClick}
-      className={`relative overflow-hidden px-6 py-3 rounded-lg font-medium text-sm transition-all duration-300 ${baseStyles} ${className}`}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+      className={`relative overflow-hidden inline-flex items-center justify-center font-medium transition-all duration-300 ${sizeStyles[size]} ${baseStyles} ${className}`}
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.97 }}
     >
-      <span className="relative z-10">{children}</span>
+      {/* Gradient shift overlay */}
+      <motion.div
+        className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500"
+        style={{
+          background: variant === "primary"
+            ? "linear-gradient(135deg, rgba(6,182,212,0.15) 0%, rgba(59,130,246,0.15) 50%, rgba(139,92,246,0.15) 100%)"
+            : "linear-gradient(135deg, rgba(6,182,212,0.05) 0%, rgba(59,130,246,0.05) 50%, rgba(139,92,246,0.05) 100%)",
+        }}
+      />
+      <span className="relative z-10 flex items-center gap-2">
+        {children}
+        {showArrow && (
+          <motion.span
+            className="inline-flex"
+            initial={{ x: 0 }}
+            whileHover={{ x: 4 }}
+            transition={{ type: "spring", stiffness: 400, damping: 15 }}
+          >
+            <ArrowRight className="w-4 h-4" />
+          </motion.span>
+        )}
+      </span>
     </motion.button>
   );
 }
@@ -199,7 +234,7 @@ export function GlassCard({
   );
 }
 
-// Animated counter
+// Animated counter - fixed implementation
 export function AnimatedCounter({
   target,
   suffix = "",
@@ -215,47 +250,29 @@ export function AnimatedCounter({
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true });
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+    let startTime: number;
+    const durationMs = duration * 1000;
+
+    function animate(currentTime: number) {
+      if (!startTime) startTime = currentTime;
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / durationMs, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(eased * target));
+      if (progress < 1) requestAnimationFrame(animate);
+    }
+
+    requestAnimationFrame(animate);
+  }, [isInView, target, duration]);
 
   return (
     <span ref={ref} className={className}>
-      {prefix}
-      <motion.span
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-      >
-        {isInView ? (
-          <CountUp target={target} duration={duration} />
-        ) : (
-          "0"
-        )}
-      </motion.span>
-      {suffix}
+      {prefix}{count.toLocaleString()}{suffix}
     </span>
-  );
-}
-
-function CountUp({ target, duration }: { target: number; duration: number }) {
-  const nodeRef = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(nodeRef, { once: true });
-
-  return (
-    <motion.span
-      ref={nodeRef}
-      initial={{ opacity: 1 }}
-      animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-    >
-      <motion.span
-        initial={0}
-        animate={isInView ? target : 0}
-        transition={{ duration, ease: "easeOut" }}
-        onUpdate={(latest) => {
-          if (nodeRef.current) {
-            nodeRef.current.textContent = Math.round(latest as number).toLocaleString();
-          }
-        }}
-        ref={nodeRef}
-      />
-    </motion.span>
   );
 }
 
@@ -308,5 +325,43 @@ export function SectionDivider({ className = "" }: { className?: string }) {
         transition={{ duration: 1.2, ease: "easeOut" }}
       />
     </motion.div>
+  );
+}
+
+// Tilt card wrapper for interactive 3D tilt effect
+export function TiltCard({
+  children,
+  className = "",
+  intensity = 10,
+}: {
+  children: ReactNode;
+  className?: string;
+  intensity?: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    ref.current.style.transform = `perspective(800px) rotateY(${x * intensity}deg) rotateX(${-y * intensity}deg) scale3d(1.02, 1.02, 1.02)`;
+  };
+
+  const handleMouseLeave = () => {
+    if (!ref.current) return;
+    ref.current.style.transform = "perspective(800px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)";
+  };
+
+  return (
+    <div
+      ref={ref}
+      className={`transition-transform duration-300 ease-out ${className}`}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ transformStyle: "preserve-3d" }}
+    >
+      {children}
+    </div>
   );
 }

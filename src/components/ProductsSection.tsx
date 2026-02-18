@@ -2,9 +2,9 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
-  Code, Globe, FileText, Brain, Cpu, ArrowRight, ExternalLink, Sparkles, Layers,
+  Code, Globe, FileText, Brain, Cpu, ExternalLink, Sparkles, Layers, ArrowRight,
 } from "lucide-react";
-import { ScrollReveal, StaggerContainer, StaggerItem, GlassCard, GlowButton, SectionDivider } from "@/components/motion";
+import { ScrollReveal, StaggerContainer, StaggerItem, GlowButton, SectionDivider, TiltCard } from "@/components/motion";
 import { safeWindowOpen } from "@/utils/safe";
 
 const categories = ["All", "AI Tools", "Productivity", "Developer"];
@@ -18,10 +18,12 @@ const products = [
     description: "Revolutionary AI-powered code editor with real-time compilation, intelligent enhancement, and advanced debugging.",
     features: ["AI Code Enhancement", "Real-time Compilation", "Performance Analysis", "Multi-language Support"],
     category: "AI Tools",
-    status: "Live",
+    status: "Live" as const,
     url: "https://code.ladestack.in/",
     gradient: "from-cyan-500/20 to-blue-500/20",
+    glowColor: "rgba(6,182,212,0.25)",
     timeToValue: "30 sec",
+    mockupLines: ["const ai = enhance(code);", "// AI-optimized output", "export default result;"],
   },
   {
     id: "api-testing",
@@ -31,10 +33,12 @@ const products = [
     description: "AI-powered testing suite with auto-generated test cases, performance analytics, and CI/CD integration.",
     features: ["AI Test Generation", "Performance Analytics", "CI/CD Integration", "Real-time Monitoring"],
     category: "Developer",
-    status: "Coming Soon",
+    status: "Coming Soon" as const,
     url: "/projects/api-testing",
     gradient: "from-blue-500/20 to-violet-500/20",
+    glowColor: "rgba(59,130,246,0.25)",
     timeToValue: "5 min",
+    mockupLines: ["GET /api/users → 200", "Tests: 24/24 passed", "Latency: 42ms avg"],
   },
   {
     id: "website-builder",
@@ -44,10 +48,12 @@ const products = [
     description: "Generate responsive, SEO-optimized websites from simple prompts with e-commerce and analytics built in.",
     features: ["GPT-4 Generation", "SEO Optimization", "E-commerce Ready", "Responsive Design"],
     category: "AI Tools",
-    status: "Coming Soon",
+    status: "Coming Soon" as const,
     url: "/projects/website-builder",
     gradient: "from-violet-500/20 to-pink-500/20",
+    glowColor: "rgba(139,92,246,0.25)",
     timeToValue: "2 min",
+    mockupLines: ["<Landing page='modern'>", "  <Hero gradient />", "</Landing>"],
   },
   {
     id: "file-management",
@@ -57,10 +63,12 @@ const products = [
     description: "Global CDN, intelligent collaboration, automatic optimization, and enterprise-grade security.",
     features: ["Global CDN", "Auto Optimization", "Enterprise Security", "Team Collaboration"],
     category: "Productivity",
-    status: "Coming Soon",
+    status: "Coming Soon" as const,
     url: "/projects/file-management",
     gradient: "from-pink-500/20 to-orange-500/20",
+    glowColor: "rgba(236,72,153,0.25)",
     timeToValue: "1 min",
+    mockupLines: ["upload: design.fig 2.4MB", "CDN: 12 edge nodes", "share → team-link"],
   },
   {
     id: "documentation-ai",
@@ -70,12 +78,161 @@ const products = [
     description: "AI that understands code context to generate comprehensive docs, API specs, and technical summaries.",
     features: ["Code Context AI", "IDE Integration", "Multi-language", "Auto Updates"],
     category: "AI Tools",
-    status: "Coming Soon",
+    status: "Coming Soon" as const,
     url: "/projects/documentation-ai",
     gradient: "from-orange-500/20 to-cyan-500/20",
+    glowColor: "rgba(249,115,22,0.25)",
     timeToValue: "3 min",
+    mockupLines: ["/// @auto-documented", "function processData()", "→ 12 pages generated"],
   },
 ];
+
+function ProductCard({ product, index }: { product: typeof products[0]; index: number }) {
+  const [showMockup, setShowMockup] = useState(false);
+
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 20, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: -20, scale: 0.95 }}
+      transition={{ duration: 0.4, delay: index * 0.08 }}
+    >
+      <TiltCard intensity={6}>
+        <motion.div
+          className="glass-card rounded-xl p-6 h-full flex flex-col group relative overflow-hidden"
+          onMouseEnter={() => setShowMockup(true)}
+          onMouseLeave={() => setShowMockup(false)}
+          whileHover={{
+            y: -8,
+            boxShadow: `0 0 45px -8px ${product.glowColor}`,
+          }}
+          transition={{ duration: 0.3 }}
+        >
+          {/* Background gradient */}
+          <div className={`absolute inset-0 bg-gradient-to-br ${product.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl`} />
+
+          {/* Animated border glow */}
+          <motion.div
+            className="absolute inset-0 rounded-xl pointer-events-none"
+            style={{
+              background: `linear-gradient(135deg, transparent 30%, ${product.glowColor} 50%, transparent 70%)`,
+              backgroundSize: "300% 300%",
+              padding: "1px",
+              mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+              maskComposite: "exclude",
+              WebkitMaskComposite: "xor",
+            }}
+            animate={{
+              backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
+            }}
+            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+          />
+
+          <div className="relative z-10">
+            {/* Header */}
+            <div className="flex items-start justify-between mb-4">
+              <motion.div
+                className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center"
+                whileHover={{ rotate: 10, scale: 1.15 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <product.icon className="w-5 h-5 text-primary" />
+              </motion.div>
+              <div className="flex items-center gap-2">
+                <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${
+                  product.status === "Live"
+                    ? "bg-emerald-500/10 text-emerald-500 border border-emerald-500/20"
+                    : "bg-muted text-muted-foreground border border-border"
+                }`}>
+                  {product.status === "Live" && (
+                    <motion.span
+                      className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5"
+                      animate={{ opacity: [1, 0.4, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    />
+                  )}
+                  {product.status}
+                </span>
+              </div>
+            </div>
+
+            {/* Content */}
+            <h3 className="text-lg font-semibold text-foreground mb-1 group-hover:text-primary transition-colors duration-300">
+              {product.title}
+            </h3>
+            <p className="text-xs text-primary/70 font-medium mb-3">{product.tagline}</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+              {product.description}
+            </p>
+
+            {/* Animated preview mockup on hover */}
+            <AnimatePresence>
+              {showMockup && (
+                <motion.div
+                  className="mb-4 p-3 rounded-lg bg-background/60 border border-border/50 font-mono text-[10px]"
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {product.mockupLines.map((line, i) => (
+                    <motion.div
+                      key={i}
+                      className="text-muted-foreground"
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.1, duration: 0.2 }}
+                    >
+                      <span className="text-primary/40 mr-2">{i + 1}</span>
+                      {line}
+                    </motion.div>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Features */}
+            <div className="flex flex-wrap gap-1.5 mb-6">
+              {product.features.map((feature) => (
+                <span
+                  key={feature}
+                  className="text-[10px] px-2 py-1 rounded-md bg-muted/80 text-muted-foreground border border-border/50"
+                >
+                  {feature}
+                </span>
+              ))}
+            </div>
+
+            {/* Footer */}
+            <div className="flex items-center justify-between mt-auto pt-4 border-t border-border/50">
+              <span className="text-xs text-muted-foreground">
+                Setup: {product.timeToValue}
+              </span>
+              <motion.div whileHover={{ x: 4 }} transition={{ duration: 0.2 }}>
+                {product.status === "Live" ? (
+                  <button
+                    onClick={() => safeWindowOpen(product.url)}
+                    className="inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:text-primary/80 transition-colors"
+                  >
+                    Try Now <ExternalLink className="w-3 h-3" />
+                  </button>
+                ) : (
+                  <Link
+                    to={product.url}
+                    className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    Learn More <ArrowRight className="w-3 h-3" />
+                  </Link>
+                )}
+              </motion.div>
+            </div>
+          </div>
+        </motion.div>
+      </TiltCard>
+    </motion.div>
+  );
+}
 
 export default function ProductsSection() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -133,104 +290,18 @@ export default function ProductsSection() {
         <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <AnimatePresence mode="popLayout">
             {filteredProducts.map((product, index) => (
-              <motion.div
-                key={product.id}
-                layout
-                initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -20, scale: 0.95 }}
-                transition={{ duration: 0.4, delay: index * 0.08 }}
-              >
-                <motion.div
-                  className="glass-card rounded-xl p-6 h-full flex flex-col group relative overflow-hidden"
-                  whileHover={{
-                    y: -8,
-                    boxShadow: "0 0 40px -8px rgba(6, 182, 212, 0.2)",
-                  }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {/* Background gradient */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${product.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl`} />
-
-                  <div className="relative z-10">
-                    {/* Header */}
-                    <div className="flex items-start justify-between mb-4">
-                      <motion.div
-                        className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center"
-                        whileHover={{ rotate: 10, scale: 1.1 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                      >
-                        <product.icon className="w-5 h-5 text-primary" />
-                      </motion.div>
-                      <div className="flex items-center gap-2">
-                        <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${
-                          product.status === "Live"
-                            ? "bg-emerald-500/10 text-emerald-500 border border-emerald-500/20"
-                            : "bg-muted text-muted-foreground border border-border"
-                        }`}>
-                          {product.status}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Content */}
-                    <h3 className="text-lg font-semibold text-foreground mb-1 group-hover:text-primary transition-colors duration-300">
-                      {product.title}
-                    </h3>
-                    <p className="text-xs text-primary/70 font-medium mb-3">{product.tagline}</p>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                      {product.description}
-                    </p>
-
-                    {/* Features */}
-                    <div className="flex flex-wrap gap-1.5 mb-6">
-                      {product.features.map((feature) => (
-                        <span
-                          key={feature}
-                          className="text-[10px] px-2 py-1 rounded-md bg-muted/80 text-muted-foreground border border-border/50"
-                        >
-                          {feature}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Footer */}
-                    <div className="flex items-center justify-between mt-auto pt-4 border-t border-border/50">
-                      <span className="text-xs text-muted-foreground">
-                        Setup: {product.timeToValue}
-                      </span>
-                      <motion.div whileHover={{ x: 4 }} transition={{ duration: 0.2 }}>
-                        {product.status === "Live" ? (
-                          <button
-                            onClick={() => safeWindowOpen(product.url)}
-                            className="inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:text-primary/80 transition-colors"
-                          >
-                            Try Now <ExternalLink className="w-3 h-3" />
-                          </button>
-                        ) : (
-                          <Link
-                            to={product.url}
-                            className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
-                          >
-                            Learn More <ArrowRight className="w-3 h-3" />
-                          </Link>
-                        )}
-                      </motion.div>
-                    </div>
-                  </div>
-                </motion.div>
-              </motion.div>
+              <ProductCard key={product.id} product={product} index={index} />
             ))}
           </AnimatePresence>
         </motion.div>
 
-        {/* Bottom CTA */}
+        {/* Bottom CTA - uses global button system */}
         <ScrollReveal>
           <div className="text-center mt-16">
             <p className="text-muted-foreground mb-4 text-sm">All tools are free for developers</p>
             <Link to="/apps">
-              <GlowButton variant="primary" className="inline-flex items-center gap-2">
-                Explore All Products <ArrowRight className="w-4 h-4" />
+              <GlowButton variant="primary" size="lg" showArrow>
+                Explore All Products
               </GlowButton>
             </Link>
           </div>

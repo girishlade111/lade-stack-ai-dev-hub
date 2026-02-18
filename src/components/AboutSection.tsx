@@ -1,11 +1,27 @@
-import { motion } from "framer-motion";
-import { Rocket, Eye, CheckCircle, ArrowRight, Zap, Shield, Globe, Code } from "lucide-react";
-import { ScrollReveal, StaggerContainer, StaggerItem, GlassCard, SectionDivider } from "@/components/motion";
+import { motion, useInView } from "framer-motion";
+import { Rocket, Eye, CheckCircle, Zap, Shield, Globe, Code, ChevronDown } from "lucide-react";
+import { ScrollReveal, GlassCard, SectionDivider } from "@/components/motion";
+import { useRef, useState } from "react";
 
 const timelineItems = [
-  { year: "2024", title: "Foundation", description: "Lade Stack was born from a vision to democratize AI development tools." },
-  { year: "2025", title: "Platform Launch", description: "Launched the AI Code Editor and core platform infrastructure." },
-  { year: "2026", title: "Ecosystem Growth", description: "Expanding to 5 AI-powered products serving developers worldwide." },
+  {
+    year: "2024",
+    title: "Foundation",
+    description: "Lade Stack was born from a vision to democratize AI development tools.",
+    details: "Started with a single AI code editor prototype, gathering feedback from early adopters to shape the platform's direction.",
+  },
+  {
+    year: "2025",
+    title: "Platform Launch",
+    description: "Launched the AI Code Editor and core platform infrastructure.",
+    details: "Released the full AI Code Editor with real-time compilation, intelligent suggestions, and multi-language support to 10K+ developers.",
+  },
+  {
+    year: "2026",
+    title: "Ecosystem Growth",
+    description: "Expanding to 5 AI-powered products serving developers worldwide.",
+    details: "API Testing, Website Builder, File Sharing, and Documentation AI join the ecosystem, creating a complete development suite.",
+  },
 ];
 
 const visionItems = [
@@ -14,6 +30,126 @@ const visionItems = [
   { icon: Shield, text: "Enterprise-grade security" },
   { icon: Globe, text: "Global developer collaboration" },
 ];
+
+function AnimatedTimeline() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const [expanded, setExpanded] = useState<number | null>(null);
+
+  return (
+    <div ref={ref} className="space-y-0 relative">
+      {/* Animated vertical progress line */}
+      <div className="absolute left-[15px] top-4 bottom-4 w-px bg-border">
+        <motion.div
+          className="w-full bg-gradient-to-b from-primary via-primary/60 to-transparent"
+          initial={{ height: "0%" }}
+          animate={isInView ? { height: "100%" } : { height: "0%" }}
+          transition={{ duration: 1.5, delay: 0.3, ease: "easeOut" }}
+        />
+      </div>
+
+      {timelineItems.map((item, index) => (
+        <motion.div
+          key={item.year}
+          className="flex gap-4 relative"
+          initial={{ opacity: 0, x: -20 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{ delay: 0.3 + index * 0.2, duration: 0.5 }}
+        >
+          <div className="flex flex-col items-center z-10">
+            <motion.div
+              className="w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-xs font-mono text-primary relative"
+              whileHover={{ scale: 1.2, borderColor: "rgba(6,182,212,0.5)" }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              {/* Pulse ring */}
+              <motion.div
+                className="absolute inset-0 rounded-full border border-primary/30"
+                animate={isInView ? { scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] } : {}}
+                transition={{ duration: 2, repeat: Infinity, delay: index * 0.4 }}
+              />
+              {item.year.slice(2)}
+            </motion.div>
+          </div>
+
+          <div className="pb-8 flex-1">
+            <button
+              onClick={() => setExpanded(expanded === index ? null : index)}
+              className="w-full text-left group"
+            >
+              <div className="flex items-center gap-2">
+                <p className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
+                  {item.title}
+                </p>
+                <motion.div
+                  animate={{ rotate: expanded === index ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="w-3 h-3 text-muted-foreground" />
+                </motion.div>
+              </div>
+              <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
+            </button>
+
+            {/* Expandable accordion detail */}
+            <motion.div
+              initial={false}
+              animate={{
+                height: expanded === index ? "auto" : 0,
+                opacity: expanded === index ? 1 : 0,
+              }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="overflow-hidden"
+            >
+              <p className="text-xs text-muted-foreground/80 mt-2 pl-3 border-l-2 border-primary/20">
+                {item.details}
+              </p>
+            </motion.div>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
+function AnimatedVisionItem({ item, index }: { item: typeof visionItems[0]; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true });
+
+  return (
+    <motion.div
+      ref={ref}
+      className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors group"
+      initial={{ opacity: 0, x: 20 }}
+      animate={isInView ? { opacity: 1, x: 0 } : {}}
+      transition={{ delay: index * 0.12, duration: 0.4 }}
+    >
+      <motion.div
+        className="w-8 h-8 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0 relative overflow-hidden"
+        whileHover={{ scale: 1.1 }}
+        transition={{ type: "spring", stiffness: 300 }}
+      >
+        {/* Icon stroke draw effect simulation */}
+        <motion.div
+          className="absolute inset-0 bg-primary/10 rounded-md"
+          initial={{ scale: 0 }}
+          animate={isInView ? { scale: 1 } : {}}
+          transition={{ delay: index * 0.12, duration: 0.3, ease: "easeOut" }}
+        />
+        <item.icon className="w-4 h-4 text-primary relative z-10" />
+      </motion.div>
+      <span className="text-sm text-foreground group-hover:text-primary transition-colors">{item.text}</span>
+      <motion.div
+        initial={{ scale: 0 }}
+        animate={isInView ? { scale: 1 } : {}}
+        transition={{ delay: 0.3 + index * 0.12, type: "spring", stiffness: 400 }}
+        className="ml-auto flex-shrink-0"
+      >
+        <CheckCircle className="w-4 h-4 text-primary/50" />
+      </motion.div>
+    </motion.div>
+  );
+}
 
 export default function AboutSection() {
   return (
@@ -47,9 +183,13 @@ export default function AboutSection() {
           <ScrollReveal direction="left">
             <GlassCard className="h-full">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                <motion.div
+                  className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center"
+                  whileHover={{ rotate: 10, scale: 1.1 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   <Rocket className="w-5 h-5 text-primary" />
-                </div>
+                </motion.div>
                 <h3 className="text-xl font-semibold text-foreground">Our Mission</h3>
               </div>
               <p className="text-muted-foreground leading-relaxed mb-8">
@@ -60,41 +200,21 @@ export default function AboutSection() {
                 <span className="text-foreground font-medium">cutting-edge AI tooling</span>.
               </p>
 
-              {/* Timeline */}
-              <div className="space-y-6">
-                {timelineItems.map((item, index) => (
-                  <motion.div
-                    key={item.year}
-                    className="flex gap-4"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.15, duration: 0.5 }}
-                  >
-                    <div className="flex flex-col items-center">
-                      <div className="w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-xs font-mono text-primary">
-                        {item.year.slice(2)}
-                      </div>
-                      {index < timelineItems.length - 1 && (
-                        <div className="w-px h-full bg-border mt-2" />
-                      )}
-                    </div>
-                    <div className="pb-6">
-                      <p className="text-sm font-semibold text-foreground">{item.title}</p>
-                      <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+              {/* Interactive timeline with accordions */}
+              <AnimatedTimeline />
             </GlassCard>
           </ScrollReveal>
 
           <ScrollReveal direction="right">
             <GlassCard className="h-full">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                <motion.div
+                  className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center"
+                  whileHover={{ rotate: -10, scale: 1.1 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   <Eye className="w-5 h-5 text-primary" />
-                </div>
+                </motion.div>
                 <h3 className="text-xl font-semibold text-foreground">Our Vision</h3>
               </div>
               <p className="text-muted-foreground leading-relaxed mb-8">
@@ -103,22 +223,9 @@ export default function AboutSection() {
                 with AI handling complexity while developers focus on creativity and innovation.
               </p>
 
-              <div className="space-y-4 mb-8">
+              <div className="space-y-2 mb-8">
                 {visionItems.map((item, index) => (
-                  <motion.div
-                    key={item.text}
-                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors"
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1, duration: 0.4 }}
-                  >
-                    <div className="w-8 h-8 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <item.icon className="w-4 h-4 text-primary" />
-                    </div>
-                    <span className="text-sm text-foreground">{item.text}</span>
-                    <CheckCircle className="w-4 h-4 text-primary/50 ml-auto flex-shrink-0" />
-                  </motion.div>
+                  <AnimatedVisionItem key={item.text} item={item} index={index} />
                 ))}
               </div>
 
