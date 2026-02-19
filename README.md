@@ -3073,6 +3073,116 @@ export default [
 
 ---
 
+## 🚀 Deployment & Production Setup
+
+### **🌍 Vercel Deployment (Recommended)**
+
+Vercel is the optimal platform for this stack, offering zero-configuration deployment.
+
+**Deployment Steps:**
+
+1.  **Push to GitHub**: Ensure your project is pushed to a public or private GitHub repository.
+2.  **Import Project**:
+    *   Go to [Vercel Dashboard](https://vercel.com/dashboard)
+    *   Click **"Add New..."** -> **"Project"**
+    *   Select your GitHub repository
+3.  **Configure Project**:
+    *   **Framework Preset**: Select `Vite`
+    *   **Root Directory**: `./` (default)
+    *   **Build Command**: `npm run build` (default)
+    *   **Output Directory**: `dist` (default)
+    *   **Install Command**: `npm install` (default)
+4.  **Environment Variables**:
+    *   Copy contents from `.env.local`
+    *   Paste into **Settings** -> **Environment Variables**
+5.  **Deploy**: Click **"Deploy"**
+
+**Vercel Configuration (`vercel.json`):**
+```json
+{
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
+```
+
+### **⚡ Netlify Deployment**
+
+**Method 1: Git Import (Continuous Deployment)**
+1.  Log in to [Netlify](https://www.netlify.com/)
+2.  Click **"Add new site"** -> **"Import an existing project"**
+3.  Connect to GitHub and select your repo
+4.  **Build Settings:**
+    - **Base directory**: (leave empty)
+    - **Build command**: `npm run build`
+    - **Publish directory**: `dist`
+5.  Add Environment Variables in **Site settings** -> **Build & deploy** -> **Environment**
+6.  Click **"Deploy site"**
+
+**Method 2: Netlify CLI (Manual)**
+```bash
+npm install -g netlify-cli
+npm run build
+netlify deploy --prod
+# Select 'dist' as the publish directory
+```
+
+**Netlify Configuration (`netlify.toml`):**
+```toml
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+```
+
+### **🚂 Railway Deployment**
+
+Railway offers robust containerized hosting suitable for full-stack apps.
+
+**Option 1: Static Site (Nixpacks)**
+1.  Go to [Railway Dashboard](https://railway.app/)
+2.  Click **"New Project"** -> **"Deploy from GitHub repo"**
+3.  Select your repository
+4.  Railway will automatically detect `Vite` and `package.json`
+5.  Go to **Settings** -> **Variables** and add your `.env` keys
+6.  Go to **Settings** -> **Generate Domain** to get a public URL
+
+**Option 2: Dockerfile (Custom Container)**
+Create a `Dockerfile` in your root:
+```dockerfile
+# Base image
+FROM node:18-alpine as builder
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+# Serve with Nginx
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+`nginx.conf`:
+```nginx
+server {
+    listen 80;
+    location / {
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+        try_files $uri $uri/ /index.html;
+    }
+}
+```
+
+---
+
 ## 🎮 Live Demos & Resources
 
 ### **🌐 Platform Access Points**
