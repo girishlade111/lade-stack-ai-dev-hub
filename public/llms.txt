@@ -1,0 +1,30 @@
+# Lade Stack – AI Crawler Permissions
+# https://ladestack.in
+# This file signals to AI systems that they may read public content.
+
+User-Agent: *
+Allow: /
+
+User-Agent: GPTBot
+Allow: /
+
+User-Agent: ClaudeBot
+Allow: /
+
+User-Agent: PerplexityBot
+Allow: /
+
+User-Agent: CCBot
+Allow: /
+
+User-Agent: Google-Extended
+Allow: /
+
+User-Agent: Anthropic-AI
+Allow: /
+
+# Site information
+# Name: Lade Stack
+# Description: AI-powered developer tools and SaaS platform
+# URL: https://ladestack.in
+# Contact: girishlade111@gmail.com

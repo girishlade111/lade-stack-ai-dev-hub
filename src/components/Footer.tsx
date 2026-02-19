@@ -4,11 +4,11 @@ import { Github, Linkedin, Instagram, Code, Mail, ArrowRight } from "lucide-reac
 import { ScrollReveal, viewportConfig } from "@/components/motion";
 
 const productLinks = [
-  { name: "AI Code Editor", href: "/projects/ai-code-viewer" },
-  { name: "API Testing", href: "/projects/api-testing" },
-  { name: "Website Builder", href: "/projects/website-builder" },
-  { name: "File Sharing", href: "/projects/file-management" },
-  { name: "Documentation AI", href: "/projects/documentation-ai" },
+  { name: "AI Code Editor", href: "/ai-code-viewer-ai" },
+  { name: "API Testing Platform", href: "/api-testing-platform" },
+  { name: "File Sharing Platform", href: "/file-sharing-platform" },
+  { name: "Apps Gallery", href: "/apps" },
+  { name: "All Projects", href: "/projects" },
 ];
 
 const companyLinks = [

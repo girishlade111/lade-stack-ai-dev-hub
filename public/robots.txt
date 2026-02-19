@@ -1,20 +1,25 @@
-# Lade Stack - robots.txt
+# Lade Stack – robots.txt
 # https://ladestack.in
 
+# Default: allow all crawlers
 User-agent: *
 Allow: /
 Disallow: /apps/admin
 
-# Allow AI bots
-User-agent: GPTBot
+# Major search engines
+User-agent: Googlebot
 Allow: /
 
-User-agent: CCBot
+User-agent: Bingbot
 Allow: /
 
-User-agent: Google-Extended
+User-agent: Yandex
 Allow: /
 
+User-agent: Baiduspider
+Allow: /
+
+# Social media crawlers
 User-agent: FacebookBot
 Allow: /
 
@@ -22,6 +27,22 @@ User-agent: Twitterbot
 Allow: /
 
 User-agent: LinkedInBot
+Allow: /
+
+# AI crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Google-Extended
 Allow: /
 
 # Sitemaps
