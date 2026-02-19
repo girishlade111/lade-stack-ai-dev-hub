@@ -128,9 +128,22 @@ const Projects = () => {
         <div className="absolute bottom-[10%] left-[30%] w-[500px] h-[350px] bg-[radial-gradient(ellipse_at_center,_rgba(110,143,106,0.05),_transparent_55%)]" />
       </div>
       <SEO
-        title="Our Projects - Lade Stack"
-        description="Explore our suite of AI-powered developer tools designed to boost productivity and streamline your workflow."
-        keywords="AI tools, developer tools, API testing, website builder, file management, documentation AI"
+        title="Our Projects – AI-Powered Developer Tools | Lade Stack"
+        description="Explore our suite of AI-powered developer tools: API testing platform, AI website builder, secure file sharing, and documentation summarizer. Built for modern teams."
+        keywords="AI developer projects, API testing platform, AI website builder, file management tool, documentation AI, Lade Stack projects, open source tools"
+        ogTitle="Lade Stack Projects – AI Developer Tools Suite"
+        ogDescription="Production-ready AI tools for API testing, website building, file sharing, and documentation."
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          "name": "Lade Stack Projects",
+          "url": "https://ladestack.in/projects",
+          "description": "Collection of AI-powered developer tools by Lade Stack.",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Lade Stack"
+          }
+        }}
       />
       <Header />
       <main className="pt-16">

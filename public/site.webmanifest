@@ -1,11 +1,13 @@
 {
-  "name": "Lade Stack",
-  "short_name": "LadeStack",
-  "description": "AI-Powered Developer Tools & SaaS Solutions",
+  "name": "Lade Stack – AI-Powered Developer Platform",
+  "short_name": "Lade Stack",
+  "description": "AI-powered developer tools and SaaS solutions for modern development teams. API testing, code editing, file sharing, and more.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0f172a",
   "theme_color": "#6366f1",
+  "orientation": "portrait-primary",
+  "categories": ["developer tools", "productivity", "utilities"],
   "icons": [
     {
       "src": "/favicon.ico",

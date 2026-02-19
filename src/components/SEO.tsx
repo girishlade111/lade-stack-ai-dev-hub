@@ -15,7 +15,13 @@ interface SEOProps {
   twitterDescription?: string;
   twitterImage?: string;
   structuredData?: object | object[];
+  noIndex?: boolean;
+  author?: string;
 }
+
+const SITE_NAME = 'Lade Stack';
+const DEFAULT_OG_IMAGE = 'https://ladestack.in/og-image.png';
+const BASE_URL = 'https://ladestack.in';
 
 const SEO = ({
   title,
@@ -24,7 +30,7 @@ const SEO = ({
   canonicalUrl,
   ogTitle,
   ogDescription,
-  ogImage,
+  ogImage = DEFAULT_OG_IMAGE,
   ogUrl,
   ogType = 'website',
   twitterCard = 'summary_large_image',
@@ -32,6 +38,8 @@ const SEO = ({
   twitterDescription,
   twitterImage,
   structuredData,
+  noIndex = false,
+  author,
 }: SEOProps) => {
   useEffect(() => {
     // Update Title
@@ -63,27 +71,35 @@ const SEO = ({
 
     // Get current URL safely
     const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+    const currentPath = typeof window !== 'undefined' ? window.location.pathname : '/';
+
+    // Robots
+    updateMeta('robots', noIndex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
 
     // Basic Meta Tags
     updateMeta('description', description || '');
     updateMeta('keywords', keywords || '');
+    if (author) {
+      updateMeta('author', author);
+    }
 
     // Open Graph
     updateMeta('og:title', ogTitle || title, 'property');
     updateMeta('og:description', ogDescription || description || '', 'property');
-    updateMeta('og:image', ogImage || '', 'property');
+    updateMeta('og:image', ogImage || DEFAULT_OG_IMAGE, 'property');
     updateMeta('og:url', ogUrl || currentUrl, 'property');
     updateMeta('og:type', ogType, 'property');
-    updateMeta('og:site_name', 'Lade Stack', 'property');
+    updateMeta('og:site_name', SITE_NAME, 'property');
 
     // Twitter
     updateMeta('twitter:card', twitterCard);
     updateMeta('twitter:title', twitterTitle || ogTitle || title);
     updateMeta('twitter:description', twitterDescription || ogDescription || description || '');
-    updateMeta('twitter:image', twitterImage || ogImage || '');
+    updateMeta('twitter:image', twitterImage || ogImage || DEFAULT_OG_IMAGE);
 
     // Canonical
-    updateLink('canonical', canonicalUrl || currentUrl);
+    const canonicalHref = canonicalUrl || `${BASE_URL}${currentPath}`;
+    updateLink('canonical', canonicalHref);
 
     // Structured Data (JSON-LD)
     const existingScripts = document.querySelectorAll('script[type="application/ld+json"][data-generated="true"]');
@@ -100,9 +116,6 @@ const SEO = ({
       });
     }
 
-    // Cleanup function (optional, but good for SPA navigation if we want to reset)
-    // For now, we rely on the next page's SEO component to overwrite.
-    // However, removing structured data on unmount is a good idea to avoid accumulation.
     return () => {
       const scripts = document.querySelectorAll('script[type="application/ld+json"][data-generated="true"]');
       scripts.forEach(script => script.remove());
@@ -122,6 +135,8 @@ const SEO = ({
     twitterDescription,
     twitterImage,
     structuredData,
+    noIndex,
+    author,
   ]);
 
   return null;

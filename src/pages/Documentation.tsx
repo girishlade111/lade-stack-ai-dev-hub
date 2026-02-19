@@ -255,9 +255,22 @@ const Documentation = () => {
         <div className="absolute bottom-0 left-[40%] w-[500px] h-[300px] bg-[radial-gradient(ellipse_at_center,_rgba(110,143,106,0.05),_transparent_50%)]" />
       </div>
       <SEO
-        title="Documentation - Lade Stack"
-        description="Comprehensive guides, API references, and tutorials to help you make the most of Lade Stack's powerful development tools."
-        keywords="documentation, API reference, tutorials, developer guides, Lade Stack docs, software development tools"
+        title="Documentation – Guides & API Reference | Lade Stack"
+        description="Comprehensive documentation for Lade Stack's developer tools. Step-by-step guides, API references, and tutorials to get started quickly."
+        keywords="Lade Stack documentation, API reference, developer guides, getting started tutorial, SDK docs, integration guides, developer onboarding"
+        ogTitle="Lade Stack Documentation"
+        ogDescription="Guides, API references, and tutorials for Lade Stack's AI developer tools."
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "TechArticle",
+          "name": "Lade Stack Documentation",
+          "url": "https://ladestack.in/docs",
+          "description": "Comprehensive documentation for Lade Stack developer tools.",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Lade Stack"
+          }
+        }}
       />
       <Header />
       <main className="pt-24 pb-16">

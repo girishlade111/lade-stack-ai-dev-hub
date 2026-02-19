@@ -210,9 +210,18 @@ const AppsGallery: React.FC = () => {
   return (
     <>
       <SEO
-        title="Apps Gallery - Lade Stack"
-        description="Discover our collection of lifetime-free tools designed to enhance your development workflow."
-        keywords="apps gallery, developer tools, free tools, web development, Lade Stack apps"
+        title="Apps Gallery – Free Developer Tools Collection | Lade Stack"
+        description="Discover Lade Stack's collection of lifetime-free developer tools. AI code editors, API testers, file managers, and more — all free, forever."
+        keywords="free developer tools, apps gallery, AI tools collection, open source developer apps, web development tools, Lade Stack free apps"
+        ogTitle="Apps Gallery – Free Tools by Lade Stack"
+        ogDescription="Lifetime-free developer tools: AI code editors, API testers, file managers, and more."
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          "name": "Lade Stack Apps Gallery",
+          "url": "https://ladestack.in/apps",
+          "description": "Collection of free developer tools by Lade Stack."
+        }}
       />
       <Header />
       <main className="min-h-screen bg-background pt-14 sm:pt-16 lg:pt-20 relative overflow-hidden">

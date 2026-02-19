@@ -37,6 +37,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { useEffect, useState, useRef } from "react";
 
 const FileSharingPlatform = () => {
@@ -235,6 +236,27 @@ const FileSharingPlatform = () => {
         <div className="absolute top-[40%] left-0 w-[500px] h-[400px] bg-[radial-gradient(ellipse_at_center,_rgba(139,175,135,0.07),_transparent_55%)]" />
         <div className="absolute bottom-0 right-[20%] w-[500px] h-[350px] bg-[radial-gradient(ellipse_at_center,_rgba(110,143,106,0.05),_transparent_55%)]" />
       </div>
+      <SEO
+        title="Lade Share – Secure File Sharing Platform | Lade Stack"
+        description="Share files securely with end-to-end encryption, expiring links, and real-time collaboration. Upload, manage, and share documents, images, and videos with enterprise-grade security."
+        keywords="secure file sharing, encrypted file transfer, file management platform, cloud file sharing, temporary file sharing, expiring links, Lade Share"
+        ogTitle="Lade Share – Secure File Sharing Platform"
+        ogDescription="Share files securely with end-to-end encryption and expiring links. Enterprise-grade security for teams."
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "Lade Share",
+          "description": "Secure file sharing platform with end-to-end encryption, expiring links, and real-time collaboration.",
+          "url": "https://ladestack.in/file-sharing-platform",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web Browser",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        }}
+      />
       <Header />
       <main className="pt-16">
         {/* Optimized Hero Section */}

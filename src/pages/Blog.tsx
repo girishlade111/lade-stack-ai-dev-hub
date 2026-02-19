@@ -78,9 +78,23 @@ const Blog = () => {
         <div className="absolute bottom-0 left-0 w-[400px] h-[300px] bg-[radial-gradient(ellipse_at_center,_rgba(110,143,106,0.05),_transparent_55%)]" />
       </div>
       <SEO
-        title="Blog - Lade Stack | AI Development Insights"
-        description="Explore the latest insights, tutorials, and trends in AI software development, API testing, and developer productivity."
-        keywords="AI development blog, software engineering trends, API testing tutorials, developer productivity tips"
+        title="Blog – AI Development Insights & Tutorials | Lade Stack"
+        description="Explore the latest insights, tutorials, and trends in AI software development, API testing, and developer productivity from the Lade Stack team."
+        keywords="AI development blog, software engineering trends, API testing tutorials, developer productivity tips, coding best practices, web development guides"
+        ogTitle="Lade Stack Blog – AI Development Insights"
+        ogDescription="Expert tutorials, guides, and insights on AI-powered development, API testing, and modern software engineering."
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "Blog",
+          "name": "Lade Stack Blog",
+          "url": "https://ladestack.in/blog",
+          "description": "AI development insights, tutorials, and engineering best practices.",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Lade Stack",
+            "url": "https://ladestack.in"
+          }
+        }}
       />
       <Header />
       <main className="pt-16">

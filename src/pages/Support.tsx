@@ -86,9 +86,18 @@ const Support = () => {
         <div className="absolute top-[45%] right-0 w-[450px] h-[350px] bg-[radial-gradient(ellipse_at_center,_rgba(139,175,135,0.06),_transparent_55%)]" />
       </div>
       <SEO
-        title="Support Center - Lade Stack"
-        description="Get help with Lade Stack's platform, troubleshoot issues, and find answers to common questions."
-        keywords="support, help center, customer service, troubleshooting, FAQ, Lade Stack support"
+        title="Support Center – Help & FAQ | Lade Stack"
+        description="Get help with Lade Stack's platform. Troubleshoot issues, browse FAQs, or contact our support team. We respond within 24 hours."
+        keywords="Lade Stack support, help center, customer service, troubleshooting, FAQ, technical support, developer support"
+        ogTitle="Lade Stack Support Center"
+        ogDescription="Get help with Lade Stack's AI developer tools. FAQs, troubleshooting, and 24-hour support."
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "name": "Lade Stack Support",
+          "url": "https://ladestack.in/support",
+          "description": "Support center and FAQ for Lade Stack platform."
+        }}
       />
       <Header />
       <main className="pt-24 pb-16">
