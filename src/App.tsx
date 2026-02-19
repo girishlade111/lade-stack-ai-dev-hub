@@ -11,6 +11,8 @@ import { MotionConfig } from "framer-motion";
 import LoadingScreen from "@/components/LoadingScreen";
 import ScrollProgress from "@/components/ScrollProgress";
 import SmoothScroll from "@/components/SmoothScroll";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -107,6 +109,8 @@ const App = () => (
         </MotionConfig>
       </ThemeProvider>
     </QueryClientProvider>
+    <Analytics />
+    <SpeedInsights />
   </ErrorBoundary>
 );
 
