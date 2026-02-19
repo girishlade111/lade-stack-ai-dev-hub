@@ -11,6 +11,7 @@ import { MotionConfig } from "framer-motion";
 import LoadingScreen from "@/components/LoadingScreen";
 import ScrollProgress from "@/components/ScrollProgress";
 import SmoothScroll from "@/components/SmoothScroll";
+import { Analytics } from "@vercel/analytics/react";
 
 const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -102,6 +103,7 @@ const App = () => (
             </Suspense>
             <Toaster />
             <Sonner />
+            <Analytics />
           </SmoothScroll>
         </BrowserRouter>
         </MotionConfig>
