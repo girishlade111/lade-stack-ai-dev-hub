@@ -287,16 +287,19 @@ export function AnimatedCounter({
   useEffect(() => {
     if (!isInView) return;
     let startTime: number;
+    let rafId: number;
 
     function animate(currentTime: number) {
       if (!startTime) startTime = currentTime;
       const progress = Math.min((currentTime - startTime) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.round(eased * target));
-      if (progress < 1) requestAnimationFrame(animate);
+      if (progress < 1) rafId = requestAnimationFrame(animate);
     }
 
-    requestAnimationFrame(animate);
+    rafId = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(rafId);
   }, [isInView, target, duration]);
 
   return (

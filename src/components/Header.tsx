@@ -52,7 +52,7 @@ export default function Header() {
       <motion.header
         className={`sticky top-0 z-50 w-full transition-all duration-300 ${
           scrolled
-            ? "border-b border-[#E6E6E6] dark:border-white/10 bg-[#F5F3EB]/70 dark:bg-[#1e1c18]/60 backdrop-blur-xl"
+            ? "border-b border-[#E6E6E6] dark:border-white/10 bg-[#F5F3EB]/85 dark:bg-[#1e1c18]/80 backdrop-blur-md md:backdrop-blur-xl"
             : "bg-[#F5F3EB] dark:bg-[#1e1c18]"
         }`}
         initial={{ y: -80, opacity: 0 }}

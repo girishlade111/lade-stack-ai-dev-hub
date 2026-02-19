@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { MotionConfig } from "framer-motion";
 import LoadingScreen from "@/components/LoadingScreen";
 import ScrollProgress from "@/components/ScrollProgress";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -72,6 +73,7 @@ const App = () => (
   <ErrorBoundary>
     <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme="light" storageKey="ladestack-theme">
+        <MotionConfig reducedMotion="user">
         <BrowserRouter>
           <SmoothScroll>
             <LoadingScreen />
@@ -102,6 +104,7 @@ const App = () => (
             <Sonner />
           </SmoothScroll>
         </BrowserRouter>
+        </MotionConfig>
       </ThemeProvider>
     </QueryClientProvider>
   </ErrorBoundary>

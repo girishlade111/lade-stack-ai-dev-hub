@@ -59,12 +59,15 @@ function FloatingShape({
 
 export default function HeroGeometric() {
   const [mounted, setMounted] = useState(false);
+  const [isMobile] = useState(() =>
+    typeof window !== "undefined" && window.innerWidth < 768
+  );
   useEffect(() => setMounted(true), []);
 
   return (
     <div className="absolute inset-0 overflow-hidden bg-[#0a0a0a]">
-      {/* ── Geometric shapes ─────────────────────────────── */}
-      {mounted && (
+      {/* ── Geometric shapes — skip on mobile for performance ── */}
+      {mounted && !isMobile && (
         <>
           <FloatingShape
             delay={0.2}
@@ -98,10 +101,10 @@ export default function HeroGeometric() {
             gradient="linear-gradient(135deg, rgba(110,143,106,0.18) 0%, rgba(110,143,106,0.03) 100%)"
             className="bottom-[10%] right-[5%]"
           />
-          {/* Subtle center glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#6E8F6A]/[0.04] blur-[120px]" />
         </>
       )}
+      {/* Subtle center glow — always shown */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#6E8F6A]/[0.04] blur-[120px]" />
 
       {/* ── Grain overlay ────────────────────────────────── */}
       <div

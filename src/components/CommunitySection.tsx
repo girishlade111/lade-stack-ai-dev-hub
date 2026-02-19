@@ -110,6 +110,8 @@ function TestimonialCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const isVisible = useInView(carouselRef, { amount: 0.1 });
 
   const visibleCount = 3;
   const maxIndex = testimonials.length - visibleCount;
@@ -122,13 +124,16 @@ function TestimonialCarousel() {
     setActiveIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
   }, [maxIndex]);
 
+  // Only auto-advance when section is visible and not paused
   useEffect(() => {
     if (timerRef.current) clearInterval(timerRef.current);
-    timerRef.current = setInterval(() => {
-      if (!isPaused) next();
-    }, 5000);
+    if (!isPaused && isVisible) {
+      timerRef.current = setInterval(() => {
+        next();
+      }, 5000);
+    }
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [isPaused, next]);
+  }, [isPaused, isVisible, next]);
 
   const visibleTestimonials = useMemo(() => {
     return testimonials.slice(activeIndex, activeIndex + visibleCount);
@@ -136,6 +141,7 @@ function TestimonialCarousel() {
 
   return (
     <div
+      ref={carouselRef}
       className="relative"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}

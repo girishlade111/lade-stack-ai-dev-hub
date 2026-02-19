@@ -174,6 +174,8 @@ function LightHero() {
           alt=""
           className="w-full h-full object-cover"
           loading="eager"
+          decoding="async"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#F5F3EB]/80 via-[#F5F3EB]/60 to-[#F5F3EB]/90" />
         <div className="absolute inset-0 bg-radial-fade" />

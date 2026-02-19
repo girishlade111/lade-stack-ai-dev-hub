@@ -2,6 +2,7 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Rocket, Eye, CheckCircle, Zap, Shield, Globe, Code, ChevronDown } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem, SoftCard, SectionDivider, fadeInUp, viewportConfig } from "@/components/motion";
 import { useRef, useState } from "react";
+import AboutDarkShader from "@/components/ui/about-dark-shader";
 
 const timelineItems = [
   {
@@ -127,13 +128,15 @@ function VisionItem({ item, index }: { item: typeof visionItems[0]; index: numbe
 
 export default function AboutSection() {
   return (
-    <section className="relative py-24 md:py-32 bg-white dark:bg-black">
-      {/* Dark theme gradient overlays */}
+    <section className="relative py-24 md:py-32 bg-white dark:bg-black overflow-hidden">
+      {/* WebGL animated background — dark mode only, skipped on mobile */}
+      <AboutDarkShader />
+      {/* Dark theme gradient overlays — semi-transparent to let shader show */}
       <div className="absolute inset-0 hidden dark:block pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0a0a] to-black opacity-95" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,_rgba(110,143,106,0.12),_transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_80%_50%,_rgba(110,143,106,0.06),_transparent_50%)]" />
-        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#6E8F6A]/[0.04] to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/40" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,_rgba(110,143,106,0.15),_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_80%_50%,_rgba(110,143,106,0.08),_transparent_50%)]" />
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#6E8F6A]/[0.06] to-transparent" />
       </div>
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
