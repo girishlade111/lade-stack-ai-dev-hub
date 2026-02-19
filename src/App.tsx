@@ -12,10 +12,7 @@ import LoadingScreen from "@/components/LoadingScreen";
 import ScrollProgress from "@/components/ScrollProgress";
 import SmoothScroll from "@/components/SmoothScroll";
 import { Analytics } from "@vercel/analytics/react";
-<<<<<<< HEAD
 import { SpeedInsights } from "@vercel/speed-insights/react";
-=======
->>>>>>> 3b668ed9a89afd1be6e09e64647739e3e70ad94d
 
 const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -107,7 +104,6 @@ const App = () => (
             </Suspense>
             <Toaster />
             <Sonner />
-            <Analytics />
           </SmoothScroll>
         </BrowserRouter>
         </MotionConfig>
