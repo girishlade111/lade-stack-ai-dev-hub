@@ -472,7 +472,7 @@ const PrivacyPolicy = () => {
                   <div className="bg-neutral-800/50 border border-neutral-700 rounded-xl p-6 mb-6">
                     <p className="text-white font-medium mb-2">Lade Stack</p>
                     <p className="text-neutral-400">Email: privacy@ladestack.in</p>
-                    <p className="text-neutral-400">Address: San Francisco, CA</p>
+                    <p className="text-neutral-400">Address: Mumbai, Maharashtra, India</p>
                   </div>
 
                   <div className="mt-8 pt-6 border-t border-neutral-800">

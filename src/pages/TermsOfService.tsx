@@ -467,12 +467,12 @@ const TermsOfService = () => {
                 </h2>
                 <div className="border-t border-neutral-800 pt-6">
                   <p className="text-neutral-300 leading-relaxed mb-4">
-                    These Terms shall be governed by and construed in accordance with the laws of California, without
+                    These Terms shall be governed by and construed in accordance with the laws of India, without
                     regard to its conflict of law provisions.
                   </p>
                   <p className="text-neutral-300 leading-relaxed mb-4">
-                    Any disputes arising from these Terms shall be resolved exclusively in the state or federal courts
-                    located in San Francisco, California.
+                    Any disputes arising from these Terms shall be resolved exclusively in the courts
+                    located in Mumbai, Maharashtra, India.
                   </p>
                 </div>
 
@@ -505,7 +505,7 @@ const TermsOfService = () => {
                   <div className="bg-neutral-800/50 border border-neutral-700 rounded-xl p-6 mb-6">
                     <p className="text-white font-medium mb-2">Lade Stack</p>
                     <p className="text-neutral-400">Email: legal@ladestack.in</p>
-                    <p className="text-neutral-400">Address: San Francisco, CA</p>
+                    <p className="text-neutral-400">Address: Mumbai, Maharashtra, India</p>
                   </div>
 
                   <div className="mt-8 pt-6 border-t border-neutral-800">

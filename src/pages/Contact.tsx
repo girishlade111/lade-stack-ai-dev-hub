@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
-import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
+import { Mail, MapPin, Clock, Send, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -19,26 +19,30 @@ const Contact = () => {
       "name": "Lade Stack",
       "contactPoint": {
         "@type": "ContactPoint",
-        "email": "girishlade111@gmail.com",
+        "email": "admin@ladestack.in",
         "contactType": "customer support",
         "availableLanguage": "English",
         "hoursAvailable": {
-          "@type": "OpeningHours",
+          "@type": "OpeningHoursSpecification",
           "dayOfWeek": [
             "Monday",
             "Tuesday",
             "Wednesday",
             "Thursday",
-            "Friday"
+            "Friday",
+            "Saturday",
+            "Sunday"
           ],
-          "opens": "09:00",
-          "closes": "18:00"
+          "opens": "00:00",
+          "closes": "23:59"
         }
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Mumbai",
+        "addressRegion": "Maharashtra",
+        "addressCountry": "IN"
       }
-    },
-    "potentialAction": {
-      "@type": "ContactAction",
-      "target": "https://ladestack.in/contact"
     }
   };
 
@@ -46,47 +50,60 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email Us",
-      content: "support@ladestack.in",
-      description: "Our support team responds within 24 hours"
+      content: "admin@ladestack.in",
+      description: "Our team responds within a few hours",
+      href: "mailto:admin@ladestack.in"
     },
     {
-      icon: Phone,
-      title: "Call Us",
-      content: "+1 (555) 123-4567",
-      description: "Mon-Fri from 8am to 5pm PST"
+      icon: MessageSquare,
+      title: "Contact Support",
+      content: "Available via Email Support Only",
+      description: "Reach out anytime — we're always here to help",
+      href: null
     },
     {
       icon: MapPin,
       title: "Visit Us",
-      content: "San Francisco, CA",
-      description: "Available for scheduled meetings"
+      content: "Mumbai, Maharashtra, India",
+      description: "Available for scheduled meetings",
+      href: null
     },
     {
       icon: Clock,
       title: "Business Hours",
-      content: "Monday - Friday",
-      description: "9:00 AM - 6:00 PM PST"
+      content: "Open 24 Hours",
+      description: "7 Days a Week",
+      href: null
     }
   ];
 
   const faqs = [
     {
-      question: "How quickly can I expect a response to my inquiry?",
-      answer: "We typically respond to all inquiries within 24 hours during business days. For urgent matters, please call our support line."
+      question: "How quickly can I expect a response?",
+      answer: "We typically respond within a few hours as we operate 24/7. For complex queries, our team may take up to 24 hours to provide a thorough response."
     },
     {
-      question: "Do you offer technical support with your products?",
-      answer: "Yes, all our plans include technical support. Premium plans include priority support with faster response times."
+      question: "Do you provide enterprise support?",
+      answer: "Yes, we offer priority support and custom enterprise solutions tailored to your team's needs. Reach out to discuss your requirements."
+    },
+    {
+      question: "Is Lade Stack available globally?",
+      answer: "Yes, our platform is accessible worldwide. All tools are cloud-based and available from any location with an internet connection."
     },
     {
       question: "Can I schedule a demo of your platform?",
-      answer: "Absolutely! You can book a personalized demo through our website or contact our sales team directly."
+      answer: "Absolutely. Send us an email at admin@ladestack.in with your preferred time and we'll set up a personalized walkthrough."
     },
     {
-      question: "What payment methods do you accept?",
-      answer: "We accept all major credit cards, PayPal, and bank transfers for annual plans."
+      question: "Do you offer technical support with your products?",
+      answer: "Yes, all users receive technical support. We also offer documentation, guides, and direct assistance for implementation."
     }
   ];
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert("Message received. We will contact you soon.");
+  };
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
@@ -96,17 +113,14 @@ const Contact = () => {
         <div className="absolute bottom-[20%] left-0 w-[500px] h-[400px] bg-[radial-gradient(ellipse_at_center,_rgba(139,175,135,0.07),_transparent_55%)]" />
       </div>
       <SEO
-        title="Contact Lade Stack - Get in Touch for AI Development Support"
-        description="Get in touch with Lade Stack for AI development support, technical assistance, and enterprise solutions. Our team responds within 24 hours."
-        keywords="Lade Stack contact, AI development support, technical assistance, enterprise solutions, customer support, software development help"
-        ogTitle="Contact Lade Stack - Get in Touch for AI Development Support"
+        title="Contact Lade Stack – Get in Touch for AI Development Support"
+        description="Contact Lade Stack for AI development support, technical assistance, and enterprise solutions. We operate 24/7 and respond within hours. Based in Mumbai, India."
+        keywords="Lade Stack contact, AI development support, technical assistance, enterprise solutions, customer support, Mumbai"
+        ogTitle="Contact Lade Stack – AI Development Support"
         ogDescription="Get in touch with Lade Stack for AI development support, technical assistance, and enterprise solutions."
         ogType="website"
-        ogUrl={window.location.href}
-        ogImage={`${window.location.origin}/og-contact.png`}
-        twitterCard="summary_large_image"
-        twitterTitle="Contact Lade Stack - AI Development Support"
-        twitterDescription="Get in touch for AI development support and technical assistance."
+        twitterTitle="Contact Lade Stack – AI Development Support"
+        twitterDescription="Get in touch for AI development support and technical assistance. 24/7 availability."
         structuredData={contactStructuredData}
       />
       <Header />
@@ -119,7 +133,7 @@ const Contact = () => {
                 Get in Touch
               </h1>
               <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-                Have questions about our platform? Need help with implementation? Our team is here to assist you every step of the way.
+                Have questions about our platform? Need help with implementation? Our team is available around the clock to assist you.
               </p>
             </div>
           </div>
@@ -146,9 +160,15 @@ const Contact = () => {
                           <h3 className="text-sm font-medium text-foreground mb-1">
                             {info.title}
                           </h3>
-                          <p className="text-xs text-muted-foreground mb-1">
-                            {info.content}
-                          </p>
+                          {info.href ? (
+                            <a href={info.href} className="text-xs text-muted-foreground hover:text-foreground transition-colors mb-1 block">
+                              {info.content}
+                            </a>
+                          ) : (
+                            <p className="text-xs text-muted-foreground mb-1">
+                              {info.content}
+                            </p>
+                          )}
                           <p className="text-xs text-muted-foreground">
                             {info.description}
                           </p>
@@ -157,22 +177,22 @@ const Contact = () => {
                     ))}
                   </div>
 
-                  {/* Map Placeholder */}
+                  {/* Google Map Embed */}
                   <div className="mt-4">
                     <h3 className="text-sm font-medium text-foreground mb-2">
                       Our Location
                     </h3>
-                    <div className="border border-border rounded-lg h-24 flex items-center justify-center">
-                      <div className="text-center">
-                        <MapPin className="w-6 h-6 text-muted-foreground mx-auto mb-1" />
-                        <p className="text-xs font-medium text-foreground">
-                          San Francisco, California
-                        </p>
-                        <p className="text-xs text-muted-foreground">
-                          Available for meetings by appointment
-                        </p>
-                      </div>
+                    <div className="relative w-full h-64 rounded-xl overflow-hidden border border-border">
+                      <iframe
+                        src="https://www.google.com/maps?q=Mumbai,India&output=embed"
+                        className="absolute inset-0 w-full h-full"
+                        loading="lazy"
+                        title="Lade Stack Location - Mumbai, India"
+                      />
                     </div>
+                    <p className="text-xs text-muted-foreground mt-2">
+                      Mumbai, Maharashtra, India · Available for scheduled meetings
+                    </p>
                   </div>
                 </div>
 
@@ -183,7 +203,7 @@ const Contact = () => {
                   </h2>
 
                   <div className="border border-border rounded-lg p-4">
-                    <form className="space-y-3">
+                    <form onSubmit={handleSubmit} className="space-y-3">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                           <label htmlFor="firstName" className="block text-xs font-medium text-foreground mb-1">
@@ -192,7 +212,8 @@ const Contact = () => {
                           <Input
                             id="firstName"
                             placeholder="Your first name"
-                            className="text-xs"
+                            className="text-xs bg-muted border-border focus:ring-primary"
+                            required
                           />
                         </div>
                         <div>
@@ -202,7 +223,8 @@ const Contact = () => {
                           <Input
                             id="lastName"
                             placeholder="Your last name"
-                            className="text-xs"
+                            className="text-xs bg-muted border-border focus:ring-primary"
+                            required
                           />
                         </div>
                       </div>
@@ -215,7 +237,8 @@ const Contact = () => {
                           id="email"
                           type="email"
                           placeholder="your.email@example.com"
-                          className="text-xs"
+                          className="text-xs bg-muted border-border focus:ring-primary"
+                          required
                         />
                       </div>
 
@@ -226,7 +249,8 @@ const Contact = () => {
                         <Input
                           id="subject"
                           placeholder="How can we help you?"
-                          className="text-xs"
+                          className="text-xs bg-muted border-border focus:ring-primary"
+                          required
                         />
                       </div>
 
@@ -238,18 +262,19 @@ const Contact = () => {
                           id="message"
                           placeholder="Tell us about your project or question..."
                           rows={3}
-                          className="text-xs"
+                          className="text-xs bg-muted border-border focus:ring-primary"
+                          required
                         />
                       </div>
 
-                      <Button size="sm" className="w-full text-xs">
+                      <Button type="submit" size="sm" className="w-full text-xs">
                         Send Message
                         <Send className="w-3 h-3 ml-1" />
                       </Button>
                     </form>
 
                     <div className="mt-3 text-center">
-                      <Link to="/projects" className="text-xs text-muted-foreground hover:underline">
+                      <Link to="/projects" className="text-xs text-muted-foreground hover:text-foreground hover:underline transition-colors">
                         Learn more about our projects
                       </Link>
                     </div>
@@ -301,19 +326,23 @@ const Contact = () => {
                   Need Immediate Assistance?
                 </h3>
                 <p className="text-xs text-muted-foreground mb-3 max-w-2xl mx-auto">
-                  Our support team is available 24/7 to help you with any technical issues or questions about our platform.
+                  Our team is available 24/7 to help you with any technical issues or questions about our platform.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-2 justify-center">
-                  <Button size="sm" className="w-full sm:w-auto">
-                    Open a Support Ticket
-                  </Button>
-                  <Button variant="outline" size="sm" className="w-full sm:w-auto">
-                    Live Chat
-                  </Button>
+                  <a href="mailto:admin@ladestack.in">
+                    <Button size="sm" className="w-full sm:w-auto">
+                      Email Us Directly
+                    </Button>
+                  </a>
+                  <Link to="/support">
+                    <Button variant="outline" size="sm" className="w-full sm:w-auto">
+                      Visit Support Center
+                    </Button>
+                  </Link>
                 </div>
 
                 <div className="mt-3">
-                  <Link to="/about" className="text-xs text-muted-foreground hover:underline">
+                  <Link to="/about" className="text-xs text-muted-foreground hover:text-foreground hover:underline transition-colors">
                     Learn more about our company
                   </Link>
                 </div>

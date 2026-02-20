@@ -29,7 +29,7 @@ const socialLinks = [
   { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/girish-lade-075bba201/" },
   { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/girish_lade_/" },
   { icon: Code, label: "CodePen", href: "https://codepen.io/Girish-Lade-the-looper" },
-  { icon: Mail, label: "Email", href: "mailto:girishlade111@gmail.com" },
+  { icon: Mail, label: "Email", href: "mailto:admin@ladestack.in" },
 ];
 
 function FooterLink({ to, children, external = false }: { to: string; children: React.ReactNode; external?: boolean }) {

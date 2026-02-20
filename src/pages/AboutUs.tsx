@@ -70,7 +70,7 @@ const AboutUs = () => {
           },
           "contactPoint": {
             "@type": "ContactPoint",
-            "email": "girishlade111@gmail.com",
+            "email": "admin@ladestack.in",
             "contactType": "customer support"
           },
           "sameAs": [

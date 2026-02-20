@@ -101,7 +101,7 @@ const AICodeViewerAI = () => {
             "@type": "Person",
             "name": "Girish Lade",
             "url": "https://ladestack.in",
-            "email": "girishlade111@gmail.com"
+            "email": "admin@ladestack.in"
           },
           "publisher": {
             "@type": "Organization",
@@ -845,7 +845,7 @@ const AICodeViewerAI = () => {
                     <span className="text-sm">CodePen</span>
                   </a>
                   <a
-                    href="mailto:girishlade111@gmail.com"
+                    href="mailto:admin@ladestack.in"
                     className="text-gray-600 dark:text-gray-300 hover:text-green-500 transition-colors flex items-center gap-2"
                   >
                     <span className="text-sm">Email</span>

@@ -12,7 +12,7 @@ const Support = () => {
       title: "Email Support",
       description: "Send us an email and we'll respond within 24 hours",
       responseTime: "24 hours",
-      action: "support@ladestack.in"
+      action: "admin@ladestack.in"
     },
     {
       icon: MessageCircle,

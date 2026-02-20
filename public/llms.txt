@@ -27,4 +27,4 @@ Allow: /
 # Name: Lade Stack
 # Description: AI-powered developer tools and SaaS platform
 # URL: https://ladestack.in
-# Contact: girishlade111@gmail.com
+# Contact: admin@ladestack.in
