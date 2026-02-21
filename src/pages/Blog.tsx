@@ -1,64 +1,45 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Clock, Calendar, ArrowRight, Search, Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import { blogPosts } from "../data/blogPosts";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
-const blogPosts = [
-  {
-    id: 1,
-    title: "The Future of AI in Software Development: Complete Guide 2024",
-    excerpt: "Comprehensive guide to AI-powered development tools, trends, and technologies transforming software engineering in 2024. Learn how AI is reshaping coding, testing, and deployment.",
-    date: "2024-06-15",
-    readTime: "18 min read",
-    category: "AI Innovation",
-    image: "ai-development"
-  },
-  {
-    id: 2,
-    title: "10 Proven Developer Productivity Hacks: Boost Efficiency by 300%",
-    excerpt: "Discover the most effective productivity strategies used by top developers at Google, Microsoft, and Amazon. Complete guide to coding efficiency, workflow optimization, and burnout prevention.",
-    date: "2024-05-28",
-    readTime: "25 min read",
-    category: "Productivity",
-    image: "developer-productivity"
-  },
-  {
-    id: 3,
-    title: "Building Scalable REST APIs: Complete Architecture Guide 2024",
-    excerpt: "Master REST API architecture, design patterns, performance optimization, security best practices, and deployment strategies for production-ready APIs at scale.",
-    date: "2024-05-20",
-    readTime: "28 min read",
-    category: "API Development",
-    image: "api-architecture"
-  },
-  {
-    id: 4,
-    title: "No-Code Revolution: Build Apps Without Coding in 2024",
-    excerpt: "Complete guide to no-code/low-code platforms, visual development tools, and automation workflows. Learn to build production apps, websites, and APIs without writing a single line of code.",
-    date: "2024-05-15",
-    readTime: "32 min read",
-    category: "No-Code Development",
-    image: "no-code-development"
-  },
-  {
-    id: 5,
-    title: "Web Application Security: Complete Guide to OWASP Top 10 in 2024",
-    excerpt: "Master web security fundamentals, OWASP Top 10 vulnerabilities, security best practices, and advanced protection strategies for modern web applications and APIs.",
-    date: "2024-05-10",
-    readTime: "35 min read",
-    category: "Security",
-    image: "web-security"
-  }
+const categories = [
+  "All",
+  "AI Development",
+  "Generative AI",
+  "SaaS Architecture",
+  "Backend as a Service",
+  "API Design & Scaling",
+  "Cloud Computing",
+  "Virtual Machines",
+  "DevOps & CI/CD",
+  "Security in Web Apps",
+  "AI Production Systems"
 ];
 
-const categories = ["All", "AI Innovation", "Productivity", "API Development", "No-Code Development", "Security", "DevOps"];
+const POSTS_PER_PAGE = 6;
 
 const Blog = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategory, searchQuery]);
 
   const filteredPosts = blogPosts.filter(post => {
     const matchesCategory = selectedCategory === "All" || post.category === selectedCategory;
@@ -67,7 +48,15 @@ const Blog = () => {
     return matchesCategory && matchesSearch;
   });
 
-  const featuredPost = blogPosts[0];
+  const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
+  const start = (currentPage - 1) * POSTS_PER_PAGE;
+  const visiblePosts = filteredPosts.slice(start, start + POSTS_PER_PAGE);
+
+  const handlePageChange = (page: number) => {
+    if (page < 1 || page > totalPages) return;
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
@@ -142,60 +131,97 @@ const Blog = () => {
         <section className="py-12 sm:py-16">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
-              {filteredPosts.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                  {filteredPosts.map((post) => (
-                    <div
-                      key={post.id}
-                      className="group bg-card rounded-xl overflow-hidden border border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 flex flex-col"
-                    >
-                      <div className="aspect-video bg-muted relative overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
-                        <img
-                          src={`/blog/${post.image}.jpg`}
-                          alt={post.title}
-                          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                          onError={(e) => {
-                            e.currentTarget.src = 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop';
-                          }}
-                        />
-                        <div className="absolute bottom-4 left-4 z-20">
-                          <span className="px-2 py-1 bg-primary text-primary-foreground text-xs font-medium rounded-md">
-                            {post.category}
-                          </span>
-                        </div>
-                      </div>
-
-                      <div className="p-6 flex-1 flex flex-col">
-                        <div className="flex items-center text-xs text-muted-foreground mb-3 gap-4">
-                          <div className="flex items-center">
-                            <Calendar className="w-3 h-3 mr-1" />
-                            {new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
-                          </div>
-                          <div className="flex items-center">
-                            <Clock className="w-3 h-3 mr-1" />
-                            {post.readTime}
+              {visiblePosts.length > 0 ? (
+                <>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12">
+                    {visiblePosts.map((post) => (
+                      <div
+                        key={post.id}
+                        className="group bg-card rounded-xl overflow-hidden border border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 flex flex-col"
+                      >
+                        <div className="aspect-video bg-muted relative overflow-hidden">
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
+                          <img
+                            src={`/blog-covers/${post.image}.svg`}
+                            alt={post.title}
+                            className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                            onError={(e) => {
+                              e.currentTarget.src = 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop';
+                            }}
+                          />
+                          <div className="absolute bottom-4 left-4 z-20">
+                            <span className="px-2 py-1 bg-primary text-primary-foreground text-xs font-medium rounded-md">
+                              {post.category}
+                            </span>
                           </div>
                         </div>
 
-                        <h3 className="text-xl font-bold text-foreground mb-3 line-clamp-2 group-hover:text-primary transition-colors">
-                          {post.title}
-                        </h3>
+                        <div className="p-6 flex-1 flex flex-col">
+                          <div className="flex items-center text-xs text-muted-foreground mb-3 gap-4">
+                            <div className="flex items-center">
+                              <Calendar className="w-3 h-3 mr-1" />
+                              {new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                            </div>
+                            <div className="flex items-center">
+                              <Clock className="w-3 h-3 mr-1" />
+                              {post.readTime}
+                            </div>
+                          </div>
 
-                        <p className="text-muted-foreground text-sm mb-4 line-clamp-3 flex-1">
-                          {post.excerpt}
-                        </p>
+                          <h3 className="text-xl font-bold text-foreground mb-3 line-clamp-2 group-hover:text-primary transition-colors">
+                            {post.title}
+                          </h3>
 
-                        <Button variant="ghost" className="w-full justify-between group/btn hover:bg-primary/5" asChild>
-                          <Link to={`/blog/${post.id}`}>
-                            Read Article
-                            <ArrowRight className="w-4 h-4 ml-2 transform group-hover/btn:translate-x-1 transition-transform" />
-                          </Link>
-                        </Button>
+                          <p className="text-muted-foreground text-sm mb-4 line-clamp-3 flex-1">
+                            {post.excerpt}
+                          </p>
+
+                          <Button variant="ghost" className="w-full justify-between group/btn hover:bg-primary/5" asChild>
+                            <Link to={`/blog/${post.slug}`}>
+                              Read Article
+                              <ArrowRight className="w-4 h-4 ml-2 transform group-hover/btn:translate-x-1 transition-transform" />
+                            </Link>
+                          </Button>
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+
+                  {/* Pagination */}
+                  {totalPages > 1 && (
+                    <Pagination>
+                      <PaginationContent>
+                        <PaginationItem>
+                          <PaginationPrevious
+                            href="#"
+                            onClick={(e) => { e.preventDefault(); handlePageChange(currentPage - 1); }}
+                            className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
+                          />
+                        </PaginationItem>
+
+                        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                          <PaginationItem key={page}>
+                            <PaginationLink
+                              href="#"
+                              isActive={currentPage === page}
+                              onClick={(e) => { e.preventDefault(); handlePageChange(page); }}
+                            >
+                              {page}
+                            </PaginationLink>
+                          </PaginationItem>
+                        ))}
+
+                        <PaginationItem>
+                          <PaginationNext
+                            href="#"
+                            onClick={(e) => { e.preventDefault(); handlePageChange(currentPage + 1); }}
+                            className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
+                          />
+                        </PaginationItem>
+                      </PaginationContent>
+                    </Pagination>
+                  )}
+                </>
               ) : (
                 <div className="text-center py-20">
                   <h3 className="text-xl font-semibold text-foreground mb-2">No articles found</h3>
