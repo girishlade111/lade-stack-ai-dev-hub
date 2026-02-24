@@ -290,42 +290,160 @@ const AboutUs = () => {
         </section>
 
         {/* ══════════════════════════════════════════════════ PIVOT POINT */}
-        <section className="py-16 sm:py-20">
+        <section className="py-16 sm:py-24 overflow-hidden">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-5xl mx-auto">
+
+              {/* ── Section header ──────────────────────────────────── */}
               <motion.div
                 variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-                className="relative rounded-3xl overflow-hidden border border-[#6E8F6A]/20 bg-gradient-to-br from-[#6E8F6A]/8 via-background to-background p-8 sm:p-12"
+                className="text-center mb-12"
               >
-                {/* Glow top */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-32 bg-[#6E8F6A]/10 blur-3xl pointer-events-none" />
-                {/* Large decorative quote mark */}
-                <div className="absolute top-6 right-8 text-[120px] font-serif leading-none text-[#6E8F6A]/6 select-none pointer-events-none">
-                  ❝
-                </div>
+                <SectionLabel icon={Lightbulb} text="The turning moment" />
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight">
+                  The Pivot <span className="text-[#6E8F6A]">Point</span>
+                </h2>
+              </motion.div>
 
-                <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-                  <div className="md:col-span-1 flex flex-col items-start gap-3">
-                    <div className="w-12 h-12 rounded-2xl bg-[#6E8F6A]/15 flex items-center justify-center">
-                      <Lightbulb className="w-6 h-6 text-[#6E8F6A]" />
-                    </div>
-                    <h3 className="text-2xl sm:text-3xl font-bold text-foreground">
-                      The Pivot<br />Point
-                    </h3>
-                    <div className="h-1 w-12 rounded-full bg-[#6E8F6A]" />
+              {/* ── Before → After transformation cards ─────────────── */}
+              <div className="relative flex flex-col md:flex-row items-stretch gap-4 md:gap-0 mb-10">
+
+                {/* BEFORE card */}
+                <motion.div
+                  variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true }}
+                  className="flex-1 relative rounded-3xl border border-border bg-background p-7 sm:p-8 md:rounded-r-none md:border-r-0"
+                >
+                  {/* Top label */}
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted/60 border border-border text-muted-foreground text-[11px] font-bold uppercase tracking-widest mb-6">
+                    <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/60" />
+                    Before
                   </div>
 
-                  <div className="md:col-span-2">
+                  <div className="space-y-5">
+                    {[
+                      { icon: "🔧", label: "AI integrations", sub: "Personal experiments & scripts" },
+                      { icon: "🎨", label: "UX/UI design", sub: "Crafting interfaces solo"         },
+                      { icon: "⚙️", label: "Backend systems", sub: "One-off productivity tools"    },
+                    ].map(({ icon, label, sub }) => (
+                      <div key={label} className="flex items-center gap-4">
+                        <div className="w-10 h-10 rounded-xl bg-muted/50 border border-border flex items-center justify-center text-lg flex-shrink-0">
+                          {icon}
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-foreground">{label}</p>
+                          <p className="text-xs text-muted-foreground">{sub}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+
+                {/* Centre arrow connector */}
+                <div className="relative z-10 flex items-center justify-center self-center md:self-auto md:-mx-1">
+                  <motion.div
+                    initial={{ scale: 0, rotate: -90 }}
+                    whileInView={{ scale: 1, rotate: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    className="w-12 h-12 rounded-full bg-[#6E8F6A] shadow-lg shadow-[#6E8F6A]/30 flex items-center justify-center flex-shrink-0 rotate-90 md:rotate-0"
+                  >
+                    <ArrowRight className="w-5 h-5 text-white" />
+                  </motion.div>
+                </div>
+
+                {/* AFTER card */}
+                <motion.div
+                  variants={fadeRight} initial="hidden" whileInView="visible" viewport={{ once: true }}
+                  className="flex-1 relative rounded-3xl border border-[#6E8F6A]/25 bg-gradient-to-br from-[#6E8F6A]/8 via-background to-background p-7 sm:p-8 md:rounded-l-none md:border-l-0 overflow-hidden"
+                >
+                  {/* Background glow */}
+                  <div className="absolute top-0 right-0 w-48 h-48 bg-[#6E8F6A]/10 blur-3xl pointer-events-none rounded-full" />
+
+                  {/* Top label */}
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#6E8F6A]/10 border border-[#6E8F6A]/20 text-[#6E8F6A] text-[11px] font-bold uppercase tracking-widest mb-6">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#6E8F6A] animate-pulse" />
+                    After
+                  </div>
+
+                  <div className="relative space-y-5">
+                    {[
+                      { icon: "🤖", label: "AI-powered suite",     sub: "5+ tools for every workflow"       },
+                      { icon: "🌍", label: "Global developer reach", sub: "1,000+ creators empowered"        },
+                      { icon: "🚀", label: "Lade Stack ecosystem",  sub: "Unified, free, production-grade"   },
+                    ].map(({ icon, label, sub }) => (
+                      <div key={label} className="flex items-center gap-4">
+                        <div className="w-10 h-10 rounded-xl bg-[#6E8F6A]/12 border border-[#6E8F6A]/20 flex items-center justify-center text-lg flex-shrink-0">
+                          {icon}
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-foreground">{label}</p>
+                          <p className="text-xs text-muted-foreground">{sub}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* ── Main copy block ──────────────────────────────────── */}
+              <motion.div
+                variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
+                className="relative rounded-3xl border border-border bg-background overflow-hidden"
+              >
+                {/* Colour strip on the left edge */}
+                <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#6E8F6A] via-[#8BAF87] to-[#6E8F6A]/20 rounded-l-3xl" />
+
+                <div className="p-8 sm:p-10 pl-10 sm:pl-12 grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
+
+                  {/* Left: decorative label stack */}
+                  <div className="lg:col-span-2 flex flex-col gap-4">
+                    <div className="w-14 h-14 rounded-2xl bg-[#6E8F6A]/12 border border-[#6E8F6A]/20 flex items-center justify-center">
+                      <Lightbulb className="w-7 h-7 text-[#6E8F6A]" />
+                    </div>
+                    <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                      The moment everything changed
+                    </p>
+                    {/* Animated underline */}
+                    <motion.div
+                      className="h-px bg-gradient-to-r from-[#6E8F6A] to-transparent"
+                      initial={{ width: 0 }}
+                      whileInView={{ width: "100%" }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                    />
+                    {/* Keyword chips */}
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      {["AI integrations", "UX/UI design", "Backend systems"].map((chip) => (
+                        <span key={chip} className="px-2.5 py-1 rounded-full text-[11px] font-medium text-muted-foreground bg-muted/50 border border-border">
+                          {chip}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Right: the actual paragraph — word-for-word original */}
+                  <div className="lg:col-span-3 space-y-5">
                     <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
                       What began as Girish's early work in AI integrations, UX/UI design, and
                       backend systems became the foundation for something bigger. The transition
                       from personal productivity tools to an entire suite of intelligent development
-                      utilities wasn't just business growth — it was a response to a calling. A
-                      calling to empower developers worldwide, regardless of their scale or resources.
+                      utilities wasn't just business growth — it was a response to a calling.
                     </p>
+
+                    {/* Highlighted pull-quote */}
+                    <div className="relative rounded-2xl bg-[#6E8F6A]/8 border border-[#6E8F6A]/15 px-6 py-5">
+                      <div className="absolute -top-3 left-6 text-4xl text-[#6E8F6A]/40 font-serif leading-none select-none">
+                        ❝
+                      </div>
+                      <p className="text-base sm:text-lg font-semibold text-foreground leading-relaxed">
+                        A calling to empower developers worldwide, regardless of their scale
+                        or resources.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </motion.div>
+
             </div>
           </div>
         </section>
