@@ -10,6 +10,7 @@ const ValuesSection = lazy(() => import("@/components/ValuesSection"));
 const ImpactSection = lazy(() => import("@/components/ImpactSection"));
 const ProductsSection = lazy(() => import("@/components/ProductsSection"));
 const CommunitySection = lazy(() => import("@/components/CommunitySection"));
+const Testimonials = lazy(() => import("@/components/Testimonials"));
 const Footer = lazy(() => import("@/components/Footer"));
 
 // Minimal inline fallback — no extra deps, no motion overhead
@@ -61,6 +62,9 @@ export default function Index() {
         </Suspense>
         <Suspense fallback={<SectionFallback />}>
           <CommunitySection />
+        </Suspense>
+        <Suspense fallback={<SectionFallback />}>
+          <Testimonials />
         </Suspense>
       </main>
       <Suspense fallback={<SectionFallback />}>
