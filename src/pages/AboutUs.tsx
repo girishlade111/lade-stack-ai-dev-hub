@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import {
   Lightbulb, Users, Award, Eye, ExternalLink,
   Sparkles, ArrowRight, Github, Linkedin, Instagram,
+  Cpu, Palette, ServerCog, Bot, Globe, Layers,
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -321,13 +322,13 @@ const AboutUs = () => {
 
                   <div className="space-y-5">
                     {[
-                      { icon: "🔧", label: "AI integrations", sub: "Personal experiments & scripts" },
-                      { icon: "🎨", label: "UX/UI design", sub: "Crafting interfaces solo"         },
-                      { icon: "⚙️", label: "Backend systems", sub: "One-off productivity tools"    },
-                    ].map(({ icon, label, sub }) => (
+                      { Icon: Cpu,       label: "AI integrations", sub: "Personal experiments & scripts" },
+                      { Icon: Palette,   label: "UX/UI design",    sub: "Crafting interfaces solo"       },
+                      { Icon: ServerCog, label: "Backend systems",  sub: "One-off productivity tools"    },
+                    ].map(({ Icon, label, sub }) => (
                       <div key={label} className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-xl bg-muted/50 border border-border flex items-center justify-center text-lg flex-shrink-0">
-                          {icon}
+                        <div className="w-10 h-10 rounded-xl bg-muted/50 border border-border flex items-center justify-center flex-shrink-0 text-muted-foreground">
+                          <Icon className="w-5 h-5" />
                         </div>
                         <div>
                           <p className="text-sm font-semibold text-foreground">{label}</p>
@@ -367,13 +368,13 @@ const AboutUs = () => {
 
                   <div className="relative space-y-5">
                     {[
-                      { icon: "🤖", label: "AI-powered suite",     sub: "5+ tools for every workflow"       },
-                      { icon: "🌍", label: "Global developer reach", sub: "1,000+ creators empowered"        },
-                      { icon: "🚀", label: "Lade Stack ecosystem",  sub: "Unified, free, production-grade"   },
-                    ].map(({ icon, label, sub }) => (
+                      { Icon: Bot,    label: "AI-powered suite",      sub: "5+ tools for every workflow"     },
+                      { Icon: Globe,  label: "Global developer reach", sub: "1,000+ creators empowered"      },
+                      { Icon: Layers, label: "Lade Stack ecosystem",   sub: "Unified, free, production-grade" },
+                    ].map(({ Icon, label, sub }) => (
                       <div key={label} className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-xl bg-[#6E8F6A]/12 border border-[#6E8F6A]/20 flex items-center justify-center text-lg flex-shrink-0">
-                          {icon}
+                        <div className="w-10 h-10 rounded-xl bg-[#6E8F6A]/12 border border-[#6E8F6A]/20 flex items-center justify-center flex-shrink-0 text-[#6E8F6A]">
+                          <Icon className="w-5 h-5" />
                         </div>
                         <div>
                           <p className="text-sm font-semibold text-foreground">{label}</p>
