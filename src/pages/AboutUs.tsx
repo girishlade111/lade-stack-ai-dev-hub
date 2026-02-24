@@ -230,10 +230,15 @@ const AboutUs = () => {
                 <div className="flex flex-col md:flex-row items-center gap-6">
                   <div className="flex-shrink-0">
                     <div className="relative">
+                      {/* Image is 2262×3393 (2:3 portrait). Width is fixed; height
+                          follows the natural aspect ratio via aspect-[2/3] so the
+                          full portrait is visible without cropping. */}
                       <img
                         src={girishImage}
                         alt="Girish Lade - Founder & Lead Developer"
-                        className="w-24 h-24 sm:w-32 sm:h-32 rounded-2xl object-cover shadow-lg"
+                        width={2262}
+                        height={3393}
+                        className="w-24 sm:w-32 aspect-[2/3] rounded-2xl object-cover shadow-lg"
                       />
                       <div className="absolute -top-2 -right-2 w-8 h-8 bg-foreground rounded-full flex items-center justify-center">
                         <Award className="w-4 h-4 text-background" />
