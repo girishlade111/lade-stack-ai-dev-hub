@@ -21,6 +21,11 @@ export default defineConfig(({ mode }) => ({
     minify: "esbuild",
     cssMinify: true,
     sourcemap: false,
+    // Never inline images as base64 — we want them as separate files so
+    // the browser can cache them independently and fetch them in parallel.
+    // Especially critical for background.avif (49 KB) and background.webp (73 KB)
+    // which we want the browser to start fetching as early as possible.
+    assetsInlineLimit: 0,
     rollupOptions: {
       output: {
         manualChunks(id) {

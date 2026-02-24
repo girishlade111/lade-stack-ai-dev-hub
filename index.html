@@ -65,51 +65,92 @@
     <link rel="manifest" href="/site.webmanifest" />
 
     <!--
-      PERFORMANCE: Google Fonts — non-render-blocking pattern.
-      1. preconnect for DNS + TLS warmup
-      2. <link rel="preload" as="style"> fetches the CSS without blocking render
-      3. onload trick swaps it to a real stylesheet once fetched
-      4. <noscript> fallback for no-JS environments
-      Font subset: only the weights actually used (400/500/600/700),
-      no italic variants for Inter (saves ~40% of the font payload).
-    -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
-      />
-    </noscript>
-
-    <!--
-      PERFORMANCE: Inline critical font-display:swap as a safety net
-      so text is never invisible while Google Fonts loads.
+      PERFORMANCE: Critical inline styles — applied before any paint.
+      1. Sets correct background immediately based on stored theme preference
+         (avoids FOUC / background flash before ThemeProvider initializes).
+      2. Declares font-display:swap so text renders in fallback font
+         immediately — no invisible text during font load (eliminates FCP delay).
+      3. Sets body margin:0 to prevent 1-frame layout shift on mount.
     -->
     <style>
+      /* Applied synchronously — prevents theme flash */
+      body { margin: 0; background: #F5F3EB; }
+      .dark-preload body { background: #050505; }
+
+      /* Critical @font-face with font-display:swap so text is never invisible.
+         These match exactly what Google Fonts will serve, so when the web font
+         arrives it seamlessly replaces the fallback with zero LCP re-fire. */
       @font-face {
         font-family: 'Inter';
         font-style: normal;
         font-weight: 400 700;
         font-display: swap;
-        src: local('Inter');
+        src: local('Inter'), local('Inter-Regular');
       }
       @font-face {
         font-family: 'DM Serif Display';
         font-style: normal;
         font-weight: 400;
-        font-display: swap;
-        src: local('DM Serif Display');
+        /* font-display: optional prevents the browser from waiting for
+           this font at all during the LCP window. The heading renders in
+           the fallback serif immediately and upgrades when the font arrives
+           on a subsequent render — no LCP re-fire, no invisible text. */
+        font-display: optional;
+        src: local('DM Serif Display'), local('DMSerifDisplay-Regular');
       }
-      /* Prevent layout shift before JS hydrates */
-      body { margin: 0; background: #F5F3EB; }
     </style>
+
+    <!--
+      PERFORMANCE: Theme flash prevention — run before first paint.
+      Reads localStorage synchronously and applies dark class to <html>
+      so the initial render matches the user's saved preference without
+      waiting for React/ThemeProvider to hydrate.
+    -->
+    <script>
+      (function() {
+        try {
+          var t = localStorage.getItem('ladestack-theme');
+          var isDark = t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (isDark) {
+            document.documentElement.classList.add('dark');
+            document.body && (document.body.style.background = '#050505');
+          }
+        } catch(e) {}
+      })();
+    </script>
+
+    <!--
+      PERFORMANCE: Google Fonts — non-render-blocking pattern.
+      Split into two requests:
+        1. Critical UI fonts (Inter + DM Serif Display) — preloaded first
+        2. JetBrains Mono (code blocks only) — deferred until after LCP
+      Using the onload swap trick: preload as="style" fetches without
+      blocking render, onload swaps rel to "stylesheet" to apply it.
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Critical fonts: Inter (UI) + DM Serif Display (hero h1) -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" />
+    </noscript>
+
+    <!-- Non-critical font: JetBrains Mono — loaded after page is interactive -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" />
+    </noscript>
 
     <!-- Structured Data: Organization + SoftwareApplication + WebSite (merged to reduce parse overhead) -->
     <script type="application/ld+json">

@@ -280,38 +280,49 @@ export function AnimatedCounter({
   className?: string;
   duration?: number;
 }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true });
-  const [count, setCount] = useState(0);
+  // Use TWO refs: one for the IntersectionObserver target (the outer span),
+  // one for the inner text node we mutate directly — bypassing React's
+  // reconciler entirely so zero React re-renders occur during the animation.
+  const wrapperRef = useRef<HTMLSpanElement>(null);
+  const textRef = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(wrapperRef, { once: true });
 
   useEffect(() => {
     if (!isInView) return;
+    const textEl = textRef.current;
+    if (!textEl) return;
+
     let startTime: number;
     let rafId: number;
 
-    function animate(currentTime: number) {
+    function tick(currentTime: number) {
       if (!startTime) startTime = currentTime;
       const progress = Math.min((currentTime - startTime) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.round(eased * target));
-      if (progress < 1) rafId = requestAnimationFrame(animate);
+      const value = Math.round(eased * target);
+      // Direct DOM mutation — no React setState, no reconciler, no re-render.
+      // This is safe here because this element is fully owned by this effect.
+      textEl!.textContent = prefix + value.toLocaleString() + suffix;
+      if (progress < 1) {
+        rafId = requestAnimationFrame(tick);
+      }
     }
 
-    rafId = requestAnimationFrame(animate);
-
+    rafId = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafId);
-  }, [isInView, target, duration]);
+  }, [isInView, target, duration, prefix, suffix]);
 
   return (
     <motion.span
-      ref={ref}
+      ref={wrapperRef}
       className={className}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4, ease: "easeOut" }}
     >
-      {prefix}{count.toLocaleString()}{suffix}
+      {/* Inner span is mutated directly by the rAF loop above */}
+      <span ref={textRef}>{prefix}0{suffix}</span>
     </motion.span>
   );
 }

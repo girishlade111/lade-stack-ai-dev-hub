@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { motion } from "framer-motion";
 import { Menu, Search, Home, User, Layers, FileText, Mail } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import { SearchModal } from "@/components/ui/search-modal";
@@ -24,12 +24,27 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
-  const { scrollY } = useScroll();
+  // Sentinel ref — a 20px invisible div at the top of the page.
+  // IntersectionObserver fires ONCE when it leaves/enters the viewport,
+  // instead of on every scroll frame. Zero main-thread cost at 60fps.
+  const sentinelRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    setScrolled(latest > 20);
-  });
+  useEffect(() => {
+    const sentinel = sentinelRef.current;
+    if (!sentinel) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // When sentinel is NOT intersecting (scrolled past 20px) → scrolled = true
+        setScrolled(!entry.isIntersecting);
+      },
+      { threshold: 0, rootMargin: "-20px 0px 0px 0px" }
+    );
+
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, []);
 
   // Cmd+K / Ctrl+K shortcut
   const handleKeyDown = useCallback(
@@ -49,6 +64,21 @@ export default function Header() {
 
   return (
     <>
+      {/* Invisible sentinel — IntersectionObserver target. Position it
+          at exactly 20px from top so we detect the "scrolled past 20px" state. */}
+      <div
+        ref={sentinelRef}
+        aria-hidden
+        style={{
+          position: "absolute",
+          top: "20px",
+          left: 0,
+          width: "1px",
+          height: "1px",
+          pointerEvents: "none",
+        }}
+      />
+
       <motion.header
         className={`sticky top-0 z-50 w-full transition-all duration-300 ${
           scrolled

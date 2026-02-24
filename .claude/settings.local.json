@@ -9,7 +9,10 @@
       "Bash(git status:*)",
       "Bash(git add:*)",
       "Bash(git commit -m \"$\\(cat <<''EOF''\nFix merge conflicts and duplicate Analytics component\n\n- Resolve merge conflict markers in package.json and src/App.tsx\n- Keep @vercel/speed-insights dependency and import\n- Remove duplicate <Analytics /> inside SmoothScroll \\(was rendering twice\\)\n- Analytics and SpeedInsights now render once at root level\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(cd C:\\\\Users\\\\a\\\\Downloads\\\\lade-stack-ai-dev-hub:*)",
+      "Bash(node:*)",
+      "Bash(tail:*)"
     ]
   }
 }
