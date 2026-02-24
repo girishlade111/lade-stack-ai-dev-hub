@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react"
+import { createContext, useContext, useEffect, useState, startTransition } from "react"
 
 type Theme = "dark" | "light" | "system"
 
@@ -37,15 +37,17 @@ export function ThemeProvider({
     }
   )
 
-  // Separate function to handle theme changes without causing re-renders
+  // Wrap state update in startTransition so theme toggling never blocks
+  // user input (keeps INP low even while the page re-renders).
   const setTheme = (newTheme: Theme) => {
     try {
       localStorage.setItem(storageKey, newTheme)
-      setThemeState(newTheme)
     } catch (error) {
       console.warn('Failed to save theme preference:', error)
-      setThemeState(newTheme)
     }
+    startTransition(() => {
+      setThemeState(newTheme)
+    })
   }
 
   useEffect(() => {

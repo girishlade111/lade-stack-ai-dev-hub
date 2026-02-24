@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, viewport-fit=cover" />
+    <!-- Removed user-scalable=no / maximum-scale=1.0 — those hurt INP and accessibility -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Lade Stack – AI-Powered Developer Tools & SaaS Solutions for Modern Development</title>
 
     <!-- Enhanced Favicon declarations for better compatibility -->
@@ -48,11 +49,6 @@
     <meta property="og:site_name" content="Lade Stack" />
     <meta property="og:locale" content="en_US" />
 
-    <!-- Google Fonts - Optimized Typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Lade Stack – AI Developer Tools That Boost Productivity 10x" />
@@ -68,77 +64,118 @@
     <!-- Web Manifest -->
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Structured Data: Organization (JSON-LD) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Lade Stack",
-      "url": "https://ladestack.in",
-      "logo": "https://ladestack.in/favicon.ico",
-      "description": "AI-powered developer tools and SaaS solutions for modern development teams.",
-      "founder": {
-        "@type": "Person",
-        "name": "Girish Lade",
-        "url": "https://github.com/girishlade111"
-      },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "email": "admin@ladestack.in",
-        "contactType": "customer support",
-        "availableLanguage": "English"
-      },
-      "sameAs": [
-        "https://github.com/girishlade111",
-        "https://www.linkedin.com/in/girish-lade-075bba201/",
-        "https://www.instagram.com/girish_lade_/",
-        "https://codepen.io/Girish-Lade-the-looper"
-      ]
-    }
-    </script>
+    <!--
+      PERFORMANCE: Google Fonts — non-render-blocking pattern.
+      1. preconnect for DNS + TLS warmup
+      2. <link rel="preload" as="style"> fetches the CSS without blocking render
+      3. onload trick swaps it to a real stylesheet once fetched
+      4. <noscript> fallback for no-JS environments
+      Font subset: only the weights actually used (400/500/600/700),
+      no italic variants for Inter (saves ~40% of the font payload).
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      />
+    </noscript>
 
-    <!-- Structured Data: SoftwareApplication (JSON-LD) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Lade Stack",
-      "description": "AI-powered developer tools and SaaS solutions including API testing platform, website builder, file management system, and documentation summarizer.",
-      "url": "https://ladestack.in",
-      "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "Web Browser",
-      "author": {
-        "@type": "Person",
-        "name": "Girish Lade",
-        "url": "https://github.com/girishlade111"
-      },
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD",
-        "availability": "https://schema.org/InStock"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "ratingCount": "150"
+    <!--
+      PERFORMANCE: Inline critical font-display:swap as a safety net
+      so text is never invisible while Google Fonts loads.
+    -->
+    <style>
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400 700;
+        font-display: swap;
+        src: local('Inter');
       }
-    }
-    </script>
+      @font-face {
+        font-family: 'DM Serif Display';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: local('DM Serif Display');
+      }
+      /* Prevent layout shift before JS hydrates */
+      body { margin: 0; background: #F5F3EB; }
+    </style>
 
-    <!-- Structured Data: WebSite with SearchAction (JSON-LD) -->
+    <!-- Structured Data: Organization + SoftwareApplication + WebSite (merged to reduce parse overhead) -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Lade Stack",
-      "url": "https://ladestack.in",
-      "description": "AI-Powered Developer Tools & SaaS Solutions",
-      "publisher": {
+    [
+      {
+        "@context": "https://schema.org",
         "@type": "Organization",
-        "name": "Lade Stack"
+        "name": "Lade Stack",
+        "url": "https://ladestack.in",
+        "logo": "https://ladestack.in/favicon.ico",
+        "description": "AI-powered developer tools and SaaS solutions for modern development teams.",
+        "founder": {
+          "@type": "Person",
+          "name": "Girish Lade",
+          "url": "https://github.com/girishlade111"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "admin@ladestack.in",
+          "contactType": "customer support",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://github.com/girishlade111",
+          "https://www.linkedin.com/in/girish-lade-075bba201/",
+          "https://www.instagram.com/girish_lade_/",
+          "https://codepen.io/Girish-Lade-the-looper"
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Lade Stack",
+        "description": "AI-powered developer tools and SaaS solutions including API testing platform, website builder, file management system, and documentation summarizer.",
+        "url": "https://ladestack.in",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web Browser",
+        "author": {
+          "@type": "Person",
+          "name": "Girish Lade",
+          "url": "https://github.com/girishlade111"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "ratingCount": "150"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Lade Stack",
+        "url": "https://ladestack.in",
+        "description": "AI-Powered Developer Tools & SaaS Solutions",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Lade Stack"
+        }
       }
-    }
+    ]
     </script>
   </head>
 

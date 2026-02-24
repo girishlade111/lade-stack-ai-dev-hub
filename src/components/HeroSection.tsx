@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { SoftButton } from "@/components/motion";
 import { safeWindowOpen } from "@/utils/safe";
@@ -138,25 +138,18 @@ function HeroContent({ isDark }: { isDark: boolean }) {
   );
 }
 
+// CSS-driven bounce — no JS requestAnimationFrame loop
 function ScrollIndicator({ isDark }: { isDark: boolean }) {
   return (
-    <motion.div
-      className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 1.5, duration: 0.6 }}
+    <div
+      className={`absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 animate-bounce ${
+        isDark ? "text-white/30" : "text-[#777]"
+      }`}
+      style={{ animationDuration: "2.5s" }}
     >
-      <motion.div
-        className={`flex flex-col items-center gap-2 ${
-          isDark ? "text-white/30" : "text-[#777]"
-        }`}
-        animate={{ y: [0, 6, 0] }}
-        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <span className="text-[10px] uppercase tracking-widest">Scroll</span>
-        <ChevronDown className="w-4 h-4" />
-      </motion.div>
-    </motion.div>
+      <span className="text-[10px] uppercase tracking-widest">Scroll</span>
+      <ChevronDown className="w-4 h-4" />
+    </div>
   );
 }
 
@@ -215,6 +208,8 @@ function DarkHero() {
 
 // ═════════════════════════════════════════════════════════════════════
 // MAIN HERO — switches based on theme
+// Uses CSS opacity transition instead of AnimatePresence so we don't
+// unmount/remount the DOM subtree on every theme toggle (cheaper for INP).
 // ═════════════════════════════════════════════════════════════════════
 
 export default function HeroSection() {
@@ -227,28 +222,34 @@ export default function HeroSection() {
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   return (
-    <AnimatePresence mode="wait">
-      {isDark ? (
-        <motion.div
-          key="dark-hero"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <DarkHero />
-        </motion.div>
-      ) : (
-        <motion.div
-          key="light-hero"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <LightHero />
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <div className="relative">
+      {/* Light hero — hidden via CSS when dark, kept in DOM to avoid re-mount cost */}
+      <div
+        style={{
+          opacity: isDark ? 0 : 1,
+          pointerEvents: isDark ? "none" : "auto",
+          position: isDark ? "absolute" : "relative",
+          inset: 0,
+          transition: "opacity 0.3s ease",
+        }}
+        aria-hidden={isDark}
+      >
+        <LightHero />
+      </div>
+
+      {/* Dark hero — hidden via CSS when light */}
+      <div
+        style={{
+          opacity: isDark ? 1 : 0,
+          pointerEvents: isDark ? "auto" : "none",
+          position: isDark ? "relative" : "absolute",
+          inset: 0,
+          transition: "opacity 0.3s ease",
+        }}
+        aria-hidden={!isDark}
+      >
+        <DarkHero />
+      </div>
+    </div>
   );
 }

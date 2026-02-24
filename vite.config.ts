@@ -16,24 +16,62 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
+    // Restore the default 500 KB warning so oversized chunks are visible
+    chunkSizeWarningLimit: 500,
+    minify: "esbuild",
+    cssMinify: true,
+    sourcemap: false,
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          router: ['react-router-dom'],
-          ui: ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-popover'],
-          utils: ['clsx', 'tailwind-merge', 'class-variance-authority'],
+        manualChunks(id) {
+          // React core — loads first, cached aggressively
+          if (id.includes("node_modules/react/") || id.includes("node_modules/react-dom/")) {
+            return "react-core";
+          }
+          // Router
+          if (id.includes("node_modules/react-router-dom") || id.includes("node_modules/react-router/")) {
+            return "router";
+          }
+          // Framer Motion — large, isolated so other chunks don't wait for it
+          if (id.includes("node_modules/framer-motion")) {
+            return "framer-motion";
+          }
+          // Recharts — only used on specific pages
+          if (id.includes("node_modules/recharts") || id.includes("node_modules/d3-")) {
+            return "charts";
+          }
+          // Lottie — heavy animation runtime
+          if (id.includes("node_modules/lottie-react") || id.includes("node_modules/lottie-web")) {
+            return "lottie";
+          }
+          // All Radix UI primitives into one shared chunk
+          if (id.includes("node_modules/@radix-ui/")) {
+            return "radix-ui";
+          }
+          // TanStack Query
+          if (id.includes("node_modules/@tanstack/")) {
+            return "tanstack-query";
+          }
+          // Utility libraries — tiny, loaded early
+          if (
+            id.includes("node_modules/clsx") ||
+            id.includes("node_modules/tailwind-merge") ||
+            id.includes("node_modules/class-variance-authority")
+          ) {
+            return "utils";
+          }
+          // Lenis smooth scroll
+          if (id.includes("node_modules/lenis")) {
+            return "lenis";
+          }
         },
       },
     },
-    chunkSizeWarningLimit: 1000,
-    minify: 'esbuild',
     esbuild: {
-      target: 'es2020',
+      target: "es2020",
     },
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom'],
-    exclude: ['@radix-ui/react-slot'],
+    include: ["react", "react-dom", "react-router-dom"],
   },
 }));

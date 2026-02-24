@@ -1,12 +1,19 @@
+import { lazy, Suspense } from "react";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
-import AboutSection from "@/components/AboutSection";
-import ValuesSection from "@/components/ValuesSection";
-import ImpactSection from "@/components/ImpactSection";
-import CommunitySection from "@/components/CommunitySection";
-import ProductsSection from "@/components/ProductsSection";
-import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+
+// Below-fold sections are lazy-loaded so they don't inflate the initial bundle.
+// They will be fetched only when the browser is idle / when Suspense resolves.
+const AboutSection = lazy(() => import("@/components/AboutSection"));
+const ValuesSection = lazy(() => import("@/components/ValuesSection"));
+const ImpactSection = lazy(() => import("@/components/ImpactSection"));
+const ProductsSection = lazy(() => import("@/components/ProductsSection"));
+const CommunitySection = lazy(() => import("@/components/CommunitySection"));
+const Footer = lazy(() => import("@/components/Footer"));
+
+// Minimal inline fallback — no extra deps, no motion overhead
+const SectionFallback = () => <div className="min-h-[200px]" aria-hidden />;
 
 export default function Index() {
   return (
@@ -32,18 +39,33 @@ export default function Index() {
           }
         }}
       />
+      {/* Header + Hero are critical path — eagerly loaded */}
       <Header />
       <main>
         <HeroSection />
-        <AboutSection />
-        <ValuesSection />
-        <ImpactSection />
-        <div id="products">
-          <ProductsSection />
-        </div>
-        <CommunitySection />
+
+        {/* Everything below the fold deferred until after first paint */}
+        <Suspense fallback={<SectionFallback />}>
+          <AboutSection />
+        </Suspense>
+        <Suspense fallback={<SectionFallback />}>
+          <ValuesSection />
+        </Suspense>
+        <Suspense fallback={<SectionFallback />}>
+          <ImpactSection />
+        </Suspense>
+        <Suspense fallback={<SectionFallback />}>
+          <div id="products">
+            <ProductsSection />
+          </div>
+        </Suspense>
+        <Suspense fallback={<SectionFallback />}>
+          <CommunitySection />
+        </Suspense>
       </main>
-      <Footer />
+      <Suspense fallback={<SectionFallback />}>
+        <Footer />
+      </Suspense>
     </div>
   );
 }
