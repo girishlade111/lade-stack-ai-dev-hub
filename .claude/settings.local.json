@@ -12,7 +12,9 @@
       "Bash(git push:*)",
       "Bash(cd C:\\\\Users\\\\a\\\\Downloads\\\\lade-stack-ai-dev-hub:*)",
       "Bash(node:*)",
-      "Bash(tail:*)"
+      "Bash(tail:*)",
+      "Bash(head:*)",
+      "Bash(cd \"C:\\\\Users\\\\a\\\\Downloads\\\\lade-stack-ai-dev-hub\" && npx tsc --noEmit 2>&1)"
     ]
   }
 }
