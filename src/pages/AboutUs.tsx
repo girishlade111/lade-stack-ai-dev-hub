@@ -228,21 +228,63 @@ const AboutUs = () => {
 
               <div className={`border border-border rounded-2xl p-6 sm:p-8 bg-gradient-to-br from-background to-muted/10 transition-all duration-1000 delay-1200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                 <div className="flex flex-col md:flex-row items-center gap-6">
-                  <div className="flex-shrink-0">
-                    <div className="relative">
-                      {/* Image is 2262×3393 (2:3 portrait). Width is fixed; height
-                          follows the natural aspect ratio via aspect-[2/3] so the
-                          full portrait is visible without cropping. */}
-                      <img
-                        src={girishImage}
-                        alt="Girish Lade - Founder & Lead Developer"
-                        width={2262}
-                        height={3393}
-                        className="w-24 sm:w-32 aspect-[2/3] rounded-2xl object-cover shadow-lg"
+                  <div className="flex-shrink-0 flex justify-center">
+                    {/* ── Profile image component ───────────────────────────
+                        Portrait ratio 2:3 (source: 2262×3393 px).
+                        Outer ring: animated conic-gradient border.
+                        Inner card: glass-effect backdrop with glow.
+                        Badge: floating role label at the bottom.
+                    ──────────────────────────────────────────────────────── */}
+                    <div className="relative group">
+
+                      {/* Ambient glow behind the card */}
+                      <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-[#6E8F6A]/30 via-[#8BAF87]/20 to-[#6E8F6A]/10 blur-xl opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
+
+                      {/* Rotating gradient border ring */}
+                      <div
+                        className="absolute -inset-[2px] rounded-3xl opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+                        style={{
+                          background: "linear-gradient(135deg, #6E8F6A 0%, #C8D9C5 40%, #6E8F6A 70%, #8BAF87 100%)",
+                        }}
                       />
-                      <div className="absolute -top-2 -right-2 w-8 h-8 bg-foreground rounded-full flex items-center justify-center">
-                        <Award className="w-4 h-4 text-background" />
+
+                      {/* Card surface */}
+                      <div className="relative rounded-3xl overflow-hidden shadow-2xl" style={{ width: "160px" }}>
+
+                        {/* Photo — 2:3 portrait ratio preserved */}
+                        <img
+                          src={girishImage}
+                          alt="Girish Lade - Founder & Lead Developer"
+                          width={2262}
+                          height={3393}
+                          className="w-full aspect-[2/3] object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                        />
+
+                        {/* Bottom gradient overlay for the badge */}
+                        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+
+                        {/* Floating role badge */}
+                        <div className="absolute bottom-3 left-0 right-0 flex justify-center">
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-[10px] font-semibold tracking-wide shadow-lg">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#6E8F6A] animate-pulse" />
+                            Founder & CEO
+                          </span>
+                        </div>
                       </div>
+
+                      {/* Award badge — top-right corner */}
+                      <div className="absolute -top-2 -right-2 z-10 w-9 h-9 rounded-full bg-gradient-to-br from-[#6E8F6A] to-[#4a6b47] shadow-lg flex items-center justify-center ring-2 ring-background">
+                        <Award className="w-4 h-4 text-white" />
+                      </div>
+
+                      {/* Decorative dot grid — bottom-left */}
+                      <div
+                        className="absolute -bottom-3 -left-3 w-16 h-16 opacity-30 dark:opacity-20 pointer-events-none"
+                        style={{
+                          backgroundImage: "radial-gradient(circle, #6E8F6A 1px, transparent 1px)",
+                          backgroundSize: "6px 6px",
+                        }}
+                      />
                     </div>
                   </div>
                   <div className="flex-1 text-center md:text-left">
