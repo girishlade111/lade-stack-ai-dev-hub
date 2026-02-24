@@ -1,47 +1,18 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useMemo } from "react";
+import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Search, ExternalLink, ArrowRight, Star, Zap, Clock,
+  CheckCircle, Sparkles, Filter, X, ChevronRight,
+} from "lucide-react";
+import { Input } from "@/components/ui/input";
 import SEO from "@/components/SEO";
-import {
-  Search,
-  Clock,
-  Zap,
-  Github,
-  ExternalLink,
-  Filter,
-  X,
-  ChevronDown,
-  ArrowRight,
-  Star,
-  Grid,
-  List,
-  SlidersHorizontal
-} from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '@/components/ui/select';
-import { Checkbox } from '@/components/ui/checkbox';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
-} from '@/components/ui/dialog';
-import { Separator } from '@/components/ui/separator';
-import { useLocation, useNavigate, Link } from 'react-router-dom';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import { ArrowLeft } from 'lucide-react';
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import appsData from "@/data/apps.json";
 
-// Types
+// ─── Types ────────────────────────────────────────────────────────────────────
+
 interface AppData {
   id: string;
   slug: string;
@@ -58,598 +29,520 @@ interface AppData {
   createdAt: string;
   popularityScore: number;
   iconAlt: string;
+  comingSoon?: boolean;
 }
 
-// Import the apps data
-import appsData from '@/data/apps.json';
+const apps = appsData as AppData[];
 
-const AppsGallery: React.FC = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
+// ─── Category accent colours ──────────────────────────────────────────────────
 
-  // State
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [sortBy, setSortBy] = useState<'relevance' | 'newest' | 'az'>('relevance');
-  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
-  const [isPopular, setIsPopular] = useState(false);
-  const [isNew, setIsNew] = useState(false);
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+const categoryAccent: Record<string, { bg: string; text: string; border: string; glow: string }> = {
+  "Developer Tool": { bg: "bg-violet-500/10", text: "text-violet-500",  border: "border-violet-500/20",  glow: "rgba(139,92,246,0.12)"  },
+  "API Tool":       { bg: "bg-sky-500/10",    text: "text-sky-500",     border: "border-sky-500/20",     glow: "rgba(14,165,233,0.12)"  },
+  "No-Code":        { bg: "bg-orange-500/10", text: "text-orange-500",  border: "border-orange-500/20",  glow: "rgba(249,115,22,0.12)"  },
+  "Productivity":   { bg: "bg-emerald-500/10",text: "text-emerald-500", border: "border-emerald-500/20", glow: "rgba(16,185,129,0.12)"  },
+  "Docs AI":        { bg: "bg-pink-500/10",   text: "text-pink-500",    border: "border-pink-500/20",    glow: "rgba(236,72,153,0.12)"  },
+};
+const defaultAccent = {
+  bg: "bg-[#6E8F6A]/10", text: "text-[#6E8F6A]",
+  border: "border-[#6E8F6A]/20", glow: "rgba(110,143,106,0.12)",
+};
+const getAccent = (cat: string) => categoryAccent[cat] ?? defaultAccent;
 
-  // Extract categories from apps data
-  const categories = useMemo(() => {
-    const uniqueCategories = Array.from(new Set(appsData.map(app => app.category)));
-    return uniqueCategories.sort();
-  }, []);
+// ─── Animation helpers ────────────────────────────────────────────────────────
 
-  // Parse URL params on initial load
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const search = params.get('search') || '';
-    const category = params.get('category');
-    const sort = params.get('sort') as 'relevance' | 'newest' | 'az' || 'relevance';
+const fadeUp = {
+  hidden:   { opacity: 0, y: 24, filter: "blur(4px)" },
+  visible: (i = 0) => ({
+    opacity: 1, y: 0, filter: "blur(0px)",
+    transition: { duration: 0.45, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] as const },
+  }),
+};
 
-    setSearchQuery(search);
+const cardVar = {
+  hidden:   { opacity: 0, y: 20, scale: 0.97 },
+  visible:  { opacity: 1, y: 0,  scale: 1,
+    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const } },
+  exit:     { opacity: 0, scale: 0.95,
+    transition: { duration: 0.18 } },
+};
 
-    if (category) {
-      setSelectedCategories([category]);
-    }
+// ─── Sub-components ───────────────────────────────────────────────────────────
 
-    setSortBy(sort);
-  }, [location.search]);
+function PopularityBar({ score }: { score: number }) {
+  return (
+    <div className="flex items-center gap-2">
+      <div className="flex-1 h-1 rounded-full bg-border overflow-hidden">
+        <motion.div
+          className="h-full rounded-full bg-[#6E8F6A]"
+          initial={{ width: 0 }}
+          whileInView={{ width: `${score}%` }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+        />
+      </div>
+      <span className="text-[11px] font-semibold text-muted-foreground tabular-nums w-7 text-right">
+        {score}
+      </span>
+    </div>
+  );
+}
 
-  // Update URL params when filters change
-  useEffect(() => {
-    const params = new URLSearchParams();
+function AppCard({ app, index }: { app: AppData; index: number }) {
+  const ac    = getAccent(app.category);
+  const isLive = !app.comingSoon;
+  const isNew  = (Date.now() - new Date(app.createdAt).getTime()) < 90 * 24 * 3600 * 1000;
 
-    if (searchQuery) params.set('search', searchQuery);
-    if (selectedCategories.length > 0) params.set('category', selectedCategories[0]);
-    if (sortBy !== 'relevance') params.set('sort', sortBy);
+  // Resolve the correct href
+  const href = isLive && app.id === "ai-code-viewer"
+    ? "https://code.ladestack.in/"
+    : app.landingUrl;
 
-    navigate(`/apps?${params.toString()}`, { replace: true });
-  }, [searchQuery, selectedCategories, sortBy, navigate]);
+  const card = (
+    <motion.div
+      layout
+      variants={cardVar}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      whileHover={{ y: -6, transition: { duration: 0.2 } }}
+      className="group relative flex flex-col h-full rounded-2xl border border-border bg-background overflow-hidden"
+    >
+      {/* Hover glow */}
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{ background: `radial-gradient(ellipse at 50% 0%, ${ac.glow}, transparent 70%)` }}
+      />
 
-  // Filter and sort apps
-  const filteredApps = useMemo(() => {
-    let result = [...appsData];
+      {/* Top colour stripe */}
+      <div className={`h-[3px] w-full ${ac.bg.replace("/10", "/50")}`} />
 
-    // Apply search filter
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
-      result = result.filter(app =>
-        app.title.toLowerCase().includes(query) ||
-        app.tagline.toLowerCase().includes(query) ||
-        app.description.toLowerCase().includes(query) ||
-        app.features.some(feature => feature.toLowerCase().includes(query)) ||
-        app.integrations.some(integration => integration.toLowerCase().includes(query))
-      );
-    }
+      <div className="flex flex-col flex-1 p-6">
 
-    // Apply category filter
-    if (selectedCategories.length > 0) {
-      result = result.filter(app => selectedCategories.includes(app.category));
-    }
+        {/* — Row: icon + status badges ——————————————————————————————— */}
+        <div className="flex items-start justify-between mb-5">
+          {/* Icon */}
+          <div className="relative">
+            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center border overflow-hidden ${ac.border} ${ac.bg}`}>
+              <img src={app.icon} alt={app.iconAlt} className="w-8 h-8 object-contain" loading="lazy" />
+            </div>
+            {/* Live green dot */}
+            {isLive && (
+              <span className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-background" />
+            )}
+          </div>
 
-    // Apply popular filter
-    if (isPopular) {
-      result = result.filter(app => app.popularityScore > 80);
-    }
+          {/* Badges */}
+          <div className="flex flex-col items-end gap-1.5">
+            {isLive ? (
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-[11px] font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                Live
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 text-[11px] font-semibold">
+                <Clock className="w-3 h-3" />
+                Coming Soon
+              </span>
+            )}
+            {isNew && (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#6E8F6A]/10 border border-[#6E8F6A]/20 text-[#6E8F6A] text-[10px] font-bold uppercase tracking-wide">
+                <Sparkles className="w-2.5 h-2.5" />
+                New
+              </span>
+            )}
+          </div>
+        </div>
 
-    // Apply new filter
-    if (isNew) {
-      const thirtyDaysAgo = new Date();
-      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-      result = result.filter(app => new Date(app.createdAt) > thirtyDaysAgo);
-    }
+        {/* — Category pill ——————————————————————————————————————————— */}
+        <div className="mb-3">
+          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold border ${ac.bg} ${ac.text} ${ac.border}`}>
+            {app.category}
+          </span>
+        </div>
 
-    // Apply sorting
-    switch (sortBy) {
-      case 'newest':
-        result.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-        break;
-      case 'az':
-        result.sort((a, b) => a.title.localeCompare(b.title));
-        break;
-      case 'relevance':
-      default:
-        // For relevance, sort by popularity score if there's a search term
-        if (searchQuery) {
-          result.sort((a, b) => {
-            const aMatches = [
-              a.title,
-              a.tagline,
-              a.description,
-              ...a.features,
-              ...a.integrations
-            ].filter(item =>
-              item.toLowerCase().includes(searchQuery.toLowerCase())
-            ).length;
+        {/* — Title ————————————————————————————————————————————————— */}
+        <h3 className="text-[15px] font-bold text-foreground leading-snug mb-2 line-clamp-2 group-hover:text-[#6E8F6A] transition-colors duration-200">
+          {app.title}
+        </h3>
 
-            const bMatches = [
-              b.title,
-              b.tagline,
-              b.description,
-              ...b.features,
-              ...b.integrations
-            ].filter(item =>
-              item.toLowerCase().includes(searchQuery.toLowerCase())
-            ).length;
+        {/* — Tagline ——————————————————————————————————————————————— */}
+        <p className="text-xs text-muted-foreground leading-relaxed mb-4 line-clamp-2">
+          {app.tagline}
+        </p>
 
-            return bMatches - aMatches || b.popularityScore - a.popularityScore;
-          });
-        } else {
-          result.sort((a, b) => b.popularityScore - a.popularityScore);
-        }
-        break;
-    }
+        {/* — Feature chips ————————————————————————————————————————— */}
+        <div className="flex flex-wrap gap-1.5 mb-5">
+          {app.features.slice(0, 3).map((f) => (
+            <span key={f} className="inline-flex items-center gap-1 text-[11px] text-muted-foreground px-2 py-0.5 rounded-md bg-muted/60 border border-border">
+              <CheckCircle className="w-2.5 h-2.5 text-[#6E8F6A]" />
+              {f}
+            </span>
+          ))}
+        </div>
 
-    return result;
-  }, [searchQuery, selectedCategories, sortBy, isPopular, isNew]);
+        {/* — Popularity ——————————————————————————————————————————— */}
+        <div className="mb-5">
+          <span className="inline-flex items-center gap-1 text-[11px] text-muted-foreground font-medium mb-1.5">
+            <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
+            Popularity score
+          </span>
+          <PopularityBar score={app.popularityScore} />
+        </div>
 
-  // Handle category toggle
-  const toggleCategory = (category: string) => {
-    if (selectedCategories.includes(category)) {
-      setSelectedCategories(selectedCategories.filter(c => c !== category));
-    } else {
-      setSelectedCategories([...selectedCategories, category]);
-    }
-  };
+        <div className="flex-1" />
 
-  // Handle clear filters
-  const clearFilters = () => {
-    setSearchQuery('');
-    setSelectedCategories([]);
-    setSortBy('relevance');
-    setIsPopular(false);
-    setIsNew(false);
-  };
+        {/* — Footer ———————————————————————————————————————————————— */}
+        <div className="pt-4 border-t border-border flex items-center justify-between">
+          <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
+            <span className="flex items-center gap-1">
+              <Zap className="w-3 h-3 text-[#6E8F6A]" />
+              {app.timeToValue} setup
+            </span>
+            {app.lifetimeFree && (
+              <span className="flex items-center gap-1 text-[#6E8F6A] font-semibold">
+                <CheckCircle className="w-3 h-3" />
+                Free
+              </span>
+            )}
+          </div>
 
-  // Check if filters are active
-  const hasActiveFilters = searchQuery || selectedCategories.length > 0 || isPopular || isNew;
+          <span className={`flex items-center gap-1 text-xs font-semibold transition-all duration-200 group-hover:gap-2 ${
+            isLive ? "text-[#6E8F6A]" : "text-muted-foreground"
+          }`}>
+            {isLive
+              ? <><ExternalLink className="w-3.5 h-3.5" />Launch</>
+              : <><ArrowRight   className="w-3.5 h-3.5" />Details</>
+            }
+          </span>
+        </div>
+      </div>
+    </motion.div>
+  );
+
+  // External link for the live code editor, internal router Link for everything else
+  if (isLive && app.id === "ai-code-viewer") {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className="block h-full">
+        {card}
+      </a>
+    );
+  }
+  return (
+    <Link to={href} className="block h-full">
+      {card}
+    </Link>
+  );
+}
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
+
+const ALL = "All";
+
+export default function AppsGallery() {
+  const [search,         setSearch]         = useState("");
+  const [activeCategory, setActiveCategory] = useState(ALL);
+  const [showFilters,    setShowFilters]    = useState(false);
+
+  const categories = useMemo(
+    () => [ALL, ...Array.from(new Set(apps.map((a) => a.category))).sort()],
+    [],
+  );
+
+  const filtered = useMemo(() => {
+    const q = search.toLowerCase().trim();
+    return apps.filter((app) => {
+      const catOk = activeCategory === ALL || app.category === activeCategory;
+      const qOk   = !q || [app.title, app.tagline, app.description, ...app.features, ...app.integrations]
+        .some((s) => s.toLowerCase().includes(q));
+      return catOk && qOk;
+    });
+  }, [search, activeCategory]);
+
+  const liveCount   = apps.filter((a) => !a.comingSoon).length;
+  const comingCount = apps.filter((a) =>  a.comingSoon).length;
+  const allIntegrations = [...new Set(apps.flatMap((a) => a.integrations))];
 
   return (
-    <>
+    <div className="min-h-screen bg-background">
       <SEO
-        title="Apps Gallery – Free Developer Tools Collection | Lade Stack"
-        description="Discover Lade Stack's collection of lifetime-free developer tools. AI code editors, API testers, file managers, and more — all free, forever."
-        keywords="free developer tools, apps gallery, AI tools collection, open source developer apps, web development tools, Lade Stack free apps"
-        ogTitle="Apps Gallery – Free Tools by Lade Stack"
-        ogDescription="Lifetime-free developer tools: AI code editors, API testers, file managers, and more."
+        title="Apps Gallery – Lade Stack AI Developer Tools"
+        description="Explore Lade Stack's suite of AI-powered developer tools: code editor, API testing, website builder, file sharing, and documentation AI. All free forever."
+        keywords="AI developer tools, apps gallery, code editor, API testing, website builder, file sharing, documentation AI, Lade Stack"
+        ogTitle="Apps Gallery – Lade Stack AI Developer Tools"
+        ogDescription="Explore and launch AI-powered developer tools built by Lade Stack."
+        ogType="website"
         structuredData={{
           "@context": "https://schema.org",
           "@type": "CollectionPage",
-          "name": "Lade Stack Apps Gallery",
-          "url": "https://ladestack.in/apps",
-          "description": "Collection of free developer tools by Lade Stack."
+          name: "Apps Gallery – Lade Stack",
+          url: "https://ladestack.in/apps",
+          description: "A curated gallery of AI-powered developer tools built by Lade Stack.",
         }}
       />
       <Header />
-      <main className="min-h-screen bg-background pt-14 sm:pt-16 lg:pt-20 relative overflow-hidden">
-        {/* Dark theme gradient overlays */}
-        <div className="absolute inset-0 hidden dark:block pointer-events-none">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[radial-gradient(ellipse_at_center,_rgba(110,143,106,0.11),_transparent_60%)]" />
-          <div className="absolute top-[45%] right-0 w-[500px] h-[400px] bg-[radial-gradient(ellipse_at_center,_rgba(139,175,135,0.06),_transparent_55%)]" />
-          <div className="absolute bottom-0 left-[10%] w-[500px] h-[350px] bg-[radial-gradient(ellipse_at_center,_rgba(110,143,106,0.05),_transparent_50%)]" />
-        </div>
-        <div className="container mx-auto px-5 sm:px-6 lg:px-8 py-8 relative z-10">
-          {/* Hero Section */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-10 text-center"
-          >
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground mb-4 leading-tight">
-              Apps Gallery
-            </h1>
-            <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Discover our collection of lifetime-free tools designed to enhance your development workflow.
-            </p>
-          </motion.div>
 
-          {/* Back Button */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.3, delay: 0.2 }}
-            className="mb-6"
-          >
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => window.history.back()}
-              className="flex items-center gap-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200 h-10 px-4 rounded-lg"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span className="text-sm font-medium">Back</span>
-            </Button>
-          </motion.div>
-
-          {/* Search and Filters */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-10"
-          >
-            <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 items-center">
-              {/* Search Input */}
-              <div className="relative flex-1 w-full">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Search className="h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground" />
-                </div>
-                <Input
-                  type="text"
-                  placeholder="Search apps, features, or keywords..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full h-10 sm:h-12 lg:h-14 pl-10 sm:pl-12 text-sm sm:text-base rounded-lg border-border bg-background text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                />
-              </div>
-
-              {/* Sort and View Controls */}
-              <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
-                {/* Sort Dropdown */}
-                <Select value={sortBy} onValueChange={(value: 'relevance' | 'newest' | 'az') => setSortBy(value)}>
-                  <SelectTrigger className="w-[140px] sm:w-[160px] lg:w-[180px] h-10 sm:h-12 lg:h-14 text-sm sm:text-base rounded-lg border-border bg-background text-foreground">
-                    <SelectValue placeholder="Sort by" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-background border-border">
-                    <SelectItem value="relevance">Most Relevant</SelectItem>
-                    <SelectItem value="newest">Newest</SelectItem>
-                    <SelectItem value="az">A to Z</SelectItem>
-                  </SelectContent>
-                </Select>
-
-                {/* View Toggle */}
-                <div className="flex bg-muted rounded-lg p-1 border border-border">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setViewMode('grid')}
-                    className={`h-8 sm:h-10 lg:h-12 w-8 sm:w-10 lg:w-12 rounded-md transition-fast ${viewMode === 'grid' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
-                      }`}
-                  >
-                    <Grid className="h-4 w-4 sm:h-5 sm:w-5" />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setViewMode('list')}
-                    className={`h-8 sm:h-10 lg:h-12 w-8 sm:w-10 lg:w-12 rounded-md transition-fast ${viewMode === 'list' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
-                      }`}
-                  >
-                    <List className="h-4 w-4 sm:h-5 sm:w-5" />
-                  </Button>
-                </div>
-
-                {/* Mobile Filter Button */}
-                <Dialog open={isMobileFilterOpen} onOpenChange={setIsMobileFilterOpen}>
-                  <DialogTrigger asChild>
-                    <Button
-                      variant="outline"
-                      className="lg:hidden flex items-center gap-2 h-10 sm:h-12 lg:h-14 px-3 sm:px-4 rounded-lg border-border bg-background text-foreground hover:bg-muted"
-                    >
-                      <SlidersHorizontal className="w-4 h-4 sm:w-5 sm:h-5" />
-                      <span className="text-sm sm:text-base">Filters</span>
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-md bg-background border-border">
-                    <DialogHeader>
-                      <DialogTitle className="text-foreground">Filters</DialogTitle>
-                    </DialogHeader>
-                    <div className="grid gap-6 py-4">
-                      <div>
-                        <h3 className="text-sm font-medium text-foreground mb-3">Categories</h3>
-                        <div className="flex flex-wrap gap-2">
-                          {categories.map(category => (
-                            <div key={category} className="flex items-center space-x-2">
-                              <Checkbox
-                                id={`cat-${category}`}
-                                checked={selectedCategories.includes(category)}
-                                onCheckedChange={() => toggleCategory(category)}
-                                className="border-border data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
-                              />
-                              <label
-                                htmlFor={`cat-${category}`}
-                                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-foreground"
-                              >
-                                {category}
-                              </label>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      <Separator className="bg-border" />
-
-                      <div>
-                        <h3 className="text-sm font-medium text-foreground mb-3">Special Filters</h3>
-                        <div className="flex flex-col gap-3">
-                          <div className="flex items-center space-x-3">
-                            <Checkbox
-                              id="popular"
-                              checked={isPopular}
-                              onCheckedChange={(checked) => setIsPopular(!!checked)}
-                              className="border-border data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
-                            />
-                            <label
-                              htmlFor="popular"
-                              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-foreground"
-                            >
-                              Popular
-                            </label>
-                          </div>
-                          <div className="flex items-center space-x-3">
-                            <Checkbox
-                              id="new"
-                              checked={isNew}
-                              onCheckedChange={(checked) => setIsNew(!!checked)}
-                              className="border-border data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
-                            />
-                            <label
-                              htmlFor="new"
-                              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-foreground"
-                            >
-                              New
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </DialogContent>
-                </Dialog>
-              </div>
-            </div>
-
-            {/* Category Chips - Desktop */}
-            <div className="hidden lg:flex flex-wrap gap-3 mt-6">
-              {categories.map(category => (
-                <Badge
-                  key={category}
-                  variant="outline"
-                  className={`cursor-pointer transition-all h-9 px-4 text-sm rounded-full border ${selectedCategories.includes(category)
-                    ? 'bg-primary border-primary text-primary-foreground'
-                    : 'bg-background border-border text-foreground hover:bg-muted'
-                    }`}
-                  onClick={() => toggleCategory(category)}
-                >
-                  {category}
-                  {selectedCategories.includes(category) && (
-                    <X className="ml-2 h-4 w-4" />
-                  )}
-                </Badge>
-              ))}
-
-              <Badge
-                variant="outline"
-                className={`cursor-pointer transition-all h-9 px-4 text-sm rounded-full border ${isPopular
-                  ? 'bg-primary border-primary text-primary-foreground'
-                  : 'bg-background border-border text-foreground hover:bg-muted'
-                  }`}
-                onClick={() => setIsPopular(!isPopular)}
-              >
-                Popular
-                {isPopular && <X className="ml-2 h-4 w-4" />}
-              </Badge>
-
-              <Badge
-                variant="outline"
-                className={`cursor-pointer transition-all h-9 px-4 text-sm rounded-full border ${isNew
-                  ? 'bg-primary border-primary text-primary-foreground'
-                  : 'bg-background border-border text-foreground hover:bg-muted'
-                  }`}
-                onClick={() => setIsNew(!isNew)}
-              >
-                New
-                {isNew && <X className="ml-2 h-4 w-4" />}
-              </Badge>
-            </div>
-
-            {/* Active Filters */}
-            {hasActiveFilters && (
-              <div className="flex flex-wrap items-center gap-3 mt-6 p-4 bg-muted/50 rounded-lg border border-border">
-                <span className="text-sm text-muted-foreground">Active filters:</span>
-                {searchQuery && (
-                  <Badge variant="secondary" className="bg-primary/10 text-primary h-8 px-3 rounded-full">
-                    Search: "{searchQuery}"
-                    <button
-                      onClick={() => setSearchQuery('')}
-                      className="ml-2 text-primary hover:text-primary/80"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
-                  </Badge>
-                )}
-                {selectedCategories.map(category => (
-                  <Badge key={category} variant="secondary" className="bg-primary/10 text-primary h-8 px-3 rounded-full">
-                    {category}
-                    <button
-                      onClick={() => toggleCategory(category)}
-                      className="ml-2 text-primary hover:text-primary/80"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
-                  </Badge>
-                ))}
-                {isPopular && (
-                  <Badge variant="secondary" className="bg-primary/10 text-primary h-8 px-3 rounded-full">
-                    Popular
-                    <button
-                      onClick={() => setIsPopular(false)}
-                      className="ml-2 text-primary hover:text-primary/80"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
-                  </Badge>
-                )}
-                {isNew && (
-                  <Badge variant="secondary" className="bg-primary/10 text-primary h-8 px-3 rounded-full">
-                    New
-                    <button
-                      onClick={() => setIsNew(false)}
-                      className="ml-2 text-primary hover:text-primary/80"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
-                  </Badge>
-                )}
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={clearFilters}
-                  className="text-xs text-muted-foreground hover:text-foreground hover:bg-muted h-8 px-3 rounded-full"
-                >
-                  Clear all
-                </Button>
-              </div>
-            )}
-          </motion.div>
-
-          {/* Results Count */}
-          <div className="mb-6 flex justify-between items-center">
-            <p className="text-sm sm:text-base text-muted-foreground">
-              Showing <span className="text-foreground font-medium">{filteredApps.length}</span> {filteredApps.length === 1 ? 'app' : 'apps'}
-            </p>
+      <main>
+        {/* ════════════════════════════════════════════ HERO */}
+        <section className="relative pt-24 pb-16 overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[520px]
+              bg-[radial-gradient(ellipse_at_top,_rgba(110,143,106,0.10),_transparent_60%)]" />
+            <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-violet-500/5 blur-3xl" />
+            <div className="absolute top-40 -left-20 w-72 h-72 rounded-full bg-sky-500/5 blur-3xl" />
           </div>
 
-          {/* Apps Grid/List */}
-          {filteredApps.length > 0 ? (
-            <motion.div
-              layout
-              className={
-                viewMode === 'grid'
-                  ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8"
-                  : "grid grid-cols-1 gap-6"
-              }
-            >
-              <AnimatePresence>
-                {filteredApps.map((app, index) => (
-                  <motion.div
-                    key={app.id}
-                    layout
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.3, delay: index * 0.05 }}
-                    whileHover={{ y: -4 }}
-                    className="cursor-pointer"
-                  >
-                    <Link to={app.landingUrl} className="block h-full">
-                      <Card
-                        className="h-full flex flex-col bg-background border-border hover:border-primary/50 transition-all duration-300 overflow-hidden group rounded-lg shadow-sm hover:shadow-md"
-                        role="button"
-                        tabIndex={0}
-                        aria-label={`Open ${app.title} — ${app.tagline}`}
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter' || e.key === ' ') {
-                            console.log('App opened:', {
-                              app_id: app.id,
-                              title: app.title,
-                              category: app.category
-                            });
-                          }
-                        }}
-                      >
-                        <CardContent className="p-6 flex flex-col h-full">
-                          <div className="flex items-start gap-4 mb-4">
-                            <div className="bg-muted rounded-lg p-2.5 flex-shrink-0">
-                              <img
-                                src={app.icon}
-                                alt={app.iconAlt}
-                                className="w-12 h-12 object-contain"
-                                loading="lazy"
-                              />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center gap-2 mb-1">
-                                <h3 className="font-semibold text-lg text-foreground truncate">{app.title}</h3>
-                                {new Date(app.createdAt) > new Date(Date.now() - 30 * 24 * 60 * 1000) && (
-                                  <Badge variant="secondary" className="bg-green-100 text-green-700 text-xs h-5 px-1.5 rounded-full">
-                                    New
-                                  </Badge>
-                                )}
-                              </div>
-                              <p className="text-sm text-muted-foreground leading-relaxed">{app.tagline}</p>
-                            </div>
-                          </div>
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div className="max-w-3xl mx-auto text-center">
 
-                          <p className="text-sm text-muted-foreground mb-4 leading-relaxed flex-grow line-clamp-3">
-                            {app.description}
-                          </p>
-
-                          <div className="flex flex-wrap gap-2 mb-4">
-                            {app.lifetimeFree && (
-                              <Badge className="bg-green-100 text-green-700 text-xs h-6 px-2 rounded-full">
-                                Lifetime Free
-                              </Badge>
-                            )}
-                            <Badge variant="secondary" className="bg-primary/10 text-primary text-xs h-6 px-2 rounded-full">
-                              {app.category}
-                            </Badge>
-                          </div>
-
-                          <div className="flex items-center justify-between text-xs text-muted-foreground mb-4 pb-3 border-b border-border">
-                            <div className="flex items-center gap-1.5">
-                              <Clock className="w-3.5 h-3.5" />
-                              <span>{app.timeToValue}</span>
-                            </div>
-                            <div className="flex items-center gap-1">
-                              {app.integrations.slice(0, 2).map((integration, idx) => (
-                                <div key={idx} className="flex items-center gap-1">
-                                  {idx > 0 && <span>•</span>}
-                                  <span>{integration}</span>
-                                </div>
-                              ))}
-                              {app.integrations.length > 2 && (
-                                <span>+{app.integrations.length - 2}</span>
-                              )}
-                            </div>
-                          </div>
-
-                          <div className="flex items-center justify-between mt-auto pt-2">
-                            <div className="flex items-center gap-1.5 text-muted-foreground">
-                              <Star className="w-4 h-4 fill-current text-yellow-400" />
-                              <span className="text-sm">{app.popularityScore}</span>
-                            </div>
-                            <div className="flex items-center text-primary group-hover:text-primary/80 transition-colors">
-                              <span className="text-sm mr-1">Open</span>
-                              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </Link>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </motion.div>
-          ) : (
-            // Empty state
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-20"
-            >
-              <div className="text-muted-foreground text-6xl mb-6">🔍</div>
-              <h3 className="text-xl font-medium text-foreground mb-3">No apps found</h3>
-              <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-                We couldn't find any apps matching your search. Try adjusting your filters or search terms.
-              </p>
-              <Button
-                variant="outline"
-                onClick={clearFilters}
-                className="border-border text-foreground hover:bg-muted h-10 px-6 rounded-lg"
+              <motion.div custom={0} variants={fadeUp} initial="hidden" animate="visible"
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#6E8F6A]/10 border border-[#6E8F6A]/20 text-[#6E8F6A] text-xs font-semibold mb-6"
               >
-                Clear all filters
-              </Button>
-            </motion.div>
-          )}
-        </div>
-      </main>
-      <Footer />
-    </>
-  );
-};
+                <Sparkles className="w-3.5 h-3.5" />
+                {liveCount} Live · {comingCount} Coming Soon
+              </motion.div>
 
-export default AppsGallery;
+              <motion.h1 custom={1} variants={fadeUp} initial="hidden" animate="visible"
+                className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground tracking-tight leading-[1.1] mb-5"
+              >
+                The AI developer
+                <br />
+                <span className="text-[#6E8F6A]">toolkit</span>
+              </motion.h1>
+
+              <motion.p custom={2} variants={fadeUp} initial="hidden" animate="visible"
+                className="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed mb-10"
+              >
+                Every tool you need to code, test, document, and ship —
+                powered by AI and free forever.
+              </motion.p>
+
+              {/* Stats */}
+              <motion.div custom={3} variants={fadeUp} initial="hidden" animate="visible"
+                className="flex flex-wrap justify-center gap-8 sm:gap-12"
+              >
+                {[
+                  { value: `${apps.length}+`, label: "Tools" },
+                  { value: "100%",            label: "Free forever" },
+                  { value: "24/7",            label: "Uptime" },
+                  { value: "1000+",           label: "Developers" },
+                ].map(({ value, label }) => (
+                  <div key={label} className="text-center">
+                    <p className="text-2xl sm:text-3xl font-extrabold text-foreground">{value}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">{label}</p>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* ════════════════════════════════════════════ STICKY FILTER BAR */}
+        <div className="sticky top-16 z-30 bg-background/80 backdrop-blur-md border-b border-border">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div className="flex items-center gap-3">
+
+              {/* Search */}
+              <div className="relative w-full max-w-xs">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+                <Input
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search tools…"
+                  className="pl-9 h-9 text-sm rounded-xl bg-muted/40 border-border focus-visible:ring-[#6E8F6A]/40"
+                />
+                {search && (
+                  <button
+                    onClick={() => setSearch("")}
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </div>
+
+              {/* Desktop category chips */}
+              <div className="hidden sm:flex items-center gap-2">
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(cat)}
+                    className={`px-3.5 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 ${
+                      activeCategory === cat
+                        ? "bg-[#6E8F6A] border-[#6E8F6A] text-white shadow-sm"
+                        : "bg-transparent border-border text-muted-foreground hover:text-foreground hover:border-foreground/30"
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+
+              {/* Mobile filter toggle */}
+              <button
+                onClick={() => setShowFilters((v) => !v)}
+                className="sm:hidden flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-border text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-muted/40 transition-colors"
+              >
+                <Filter className="w-3.5 h-3.5" />
+                Filter
+              </button>
+
+              {/* Count */}
+              <span className="ml-auto flex-shrink-0 text-xs text-muted-foreground">
+                {filtered.length} {filtered.length === 1 ? "tool" : "tools"}
+              </span>
+            </div>
+
+            {/* Mobile categories dropdown */}
+            <AnimatePresence>
+              {showFilters && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.22 }}
+                  className="sm:hidden overflow-hidden"
+                >
+                  <div className="flex flex-wrap gap-2 pt-3">
+                    {categories.map((cat) => (
+                      <button
+                        key={cat}
+                        onClick={() => { setActiveCategory(cat); setShowFilters(false); }}
+                        className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 ${
+                          activeCategory === cat
+                            ? "bg-[#6E8F6A] border-[#6E8F6A] text-white"
+                            : "bg-transparent border-border text-muted-foreground"
+                        }`}
+                      >
+                        {cat}
+                      </button>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* ════════════════════════════════════════════ APPS GRID */}
+        <section className="py-12">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <AnimatePresence mode="popLayout">
+              {filtered.length > 0 ? (
+                <motion.div
+                  key="grid"
+                  layout
+                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto"
+                >
+                  {filtered.map((app, i) => (
+                    <AppCard key={app.id} app={app} index={i} />
+                  ))}
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="empty"
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  className="max-w-sm mx-auto py-24 text-center"
+                >
+                  <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto mb-5">
+                    <Search className="w-7 h-7 text-muted-foreground" />
+                  </div>
+                  <h3 className="text-lg font-bold text-foreground mb-2">No tools found</h3>
+                  <p className="text-sm text-muted-foreground mb-6">
+                    Try a different search or category.
+                  </p>
+                  <button
+                    onClick={() => { setSearch(""); setActiveCategory(ALL); }}
+                    className="px-5 py-2.5 rounded-xl bg-[#6E8F6A] text-white text-sm font-semibold hover:bg-[#5F7F63] transition-colors"
+                  >
+                    Clear filters
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </section>
+
+        {/* ════════════════════════════════════════════ INTEGRATIONS MARQUEE */}
+        <section className="py-12 border-t border-border overflow-hidden">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 mb-6 text-center">
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              Works with your stack
+            </p>
+          </div>
+          <div className="relative">
+            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+            <motion.div
+              className="flex gap-3 w-max"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ duration: 30, ease: "linear", repeat: Infinity }}
+            >
+              {[...allIntegrations, ...allIntegrations].map((item, i) => (
+                <span
+                  key={i}
+                  className="flex-shrink-0 px-5 py-2.5 rounded-full border border-border bg-background text-sm font-medium text-muted-foreground"
+                >
+                  {item}
+                </span>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ════════════════════════════════════════════ BOTTOM CTA */}
+        <section className="py-16">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="relative max-w-4xl mx-auto rounded-3xl overflow-hidden border border-[#6E8F6A]/25 bg-gradient-to-br from-[#6E8F6A]/8 via-background to-background p-10 sm:p-14 text-center"
+            >
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-40 bg-[#6E8F6A]/10 blur-3xl pointer-events-none" />
+
+              <div className="relative">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#6E8F6A]/10 border border-[#6E8F6A]/20 text-[#6E8F6A] text-xs font-semibold mb-5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#6E8F6A] animate-pulse" />
+                  All tools are free forever
+                </div>
+
+                <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
+                  Ready to build smarter?
+                </h3>
+                <p className="text-sm text-muted-foreground mb-8 max-w-lg mx-auto">
+                  Start with the AI Code Viewer now — no signup required.
+                  More tools launching very soon.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <a
+                    href="https://code.ladestack.in/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-xl bg-[#6E8F6A] hover:bg-[#5F7F63] text-white text-sm font-semibold transition-colors duration-200"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    Launch AI Code Viewer
+                  </a>
+                  <Link
+                    to="/projects"
+                    className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-xl border border-border bg-background hover:bg-muted/40 text-foreground text-sm font-semibold transition-colors duration-200"
+                  >
+                    View all projects
+                    <ChevronRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
