@@ -110,8 +110,9 @@
       (function() {
         try {
           var t = localStorage.getItem('ladestack-theme');
-          var isDark = t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches);
-          if (isDark) {
+          // Default is light. Only apply dark if the user explicitly saved "dark".
+          // New visitors (no saved preference) always see the light theme.
+          if (t === 'dark') {
             document.documentElement.classList.add('dark');
             document.body && (document.body.style.background = '#050505');
           }
