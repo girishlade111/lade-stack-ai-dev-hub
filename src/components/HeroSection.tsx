@@ -24,6 +24,110 @@ const trustBadges = [
 ];
 
 // ═════════════════════════════════════════════════════════════════════
+// WORD-REVEAL HEADING
+// Each word materialises individually: slides up from a clip mask,
+// blurs in from 8px → 0, and fades opacity 0 → 1.
+// Line 1 words stagger first, then line 2 words follow.
+// Pure Framer Motion variants — zero timers, zero setState in loops.
+// ═════════════════════════════════════════════════════════════════════
+
+const LINE1_WORDS = ["Build", "smarter", "products"];
+const LINE2_WORDS = ["with", "intelligent", "AI", "tools"];
+
+// Stagger timing constants
+const WORD_STAGGER   = 0.11;  // seconds between each word
+const LINE2_START    = LINE1_WORDS.length * WORD_STAGGER + 0.18; // delay for line 2 start
+
+const wordVariants = {
+  hidden: {
+    opacity: 0,
+    y: 40,
+    filter: "blur(10px)",
+    rotateX: 35,
+  },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    rotateX: 0,
+    transition: {
+      delay: i * WORD_STAGGER,
+      duration: 0.55,
+      ease: [0.22, 1, 0.36, 1], // custom spring-like ease
+    },
+  }),
+};
+
+const line2WordVariants = {
+  hidden: {
+    opacity: 0,
+    y: 40,
+    filter: "blur(10px)",
+    rotateX: 35,
+  },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    rotateX: 0,
+    transition: {
+      delay: LINE2_START + i * WORD_STAGGER,
+      duration: 0.55,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+};
+
+function TypewriterHeading({ isDark }: { isDark: boolean }) {
+  return (
+    <h1
+      className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.2] tracking-[-0.01em] max-w-[900px] ${
+        isDark ? "hero-metallic" : "text-[#1C1C1C]"
+      }`}
+      style={{ fontFamily: "'DM Serif Display', serif", perspective: "600px" }}
+    >
+      {/* Line 1 — each word clips up and de-blurs */}
+      <span className="flex flex-wrap justify-center gap-x-[0.28em] overflow-hidden pb-1">
+        {LINE1_WORDS.map((word, i) => (
+          <motion.span
+            key={word + i}
+            custom={i}
+            variants={wordVariants}
+            initial="hidden"
+            animate="visible"
+            style={{ display: "inline-block", transformOrigin: "bottom center" }}
+          >
+            {word}
+          </motion.span>
+        ))}
+      </span>
+
+      {/* Line 2 — accent colour, staggered after line 1 */}
+      <span
+        className={`flex flex-wrap justify-center gap-x-[0.28em] overflow-hidden pb-1 ${
+          isDark
+            ? "bg-clip-text [-webkit-text-fill-color:transparent] bg-gradient-to-r from-[#6E8F6A] to-[#8BAF87]"
+            : "text-[#6E8F6A]"
+        }`}
+      >
+        {LINE2_WORDS.map((word, i) => (
+          <motion.span
+            key={word + i}
+            custom={i}
+            variants={line2WordVariants}
+            initial="hidden"
+            animate="visible"
+            style={{ display: "inline-block", transformOrigin: "bottom center" }}
+          >
+            {word}
+          </motion.span>
+        ))}
+      </span>
+    </h1>
+  );
+}
+
+// ═════════════════════════════════════════════════════════════════════
 // SHARED — Unified content stack used by BOTH heroes
 // Animation delays are compressed to front-load LCP (the h1) and push
 // decorative elements (badges, trust text) to after the LCP window.
@@ -46,23 +150,8 @@ function HeroContent({ isDark }: { isDark: boolean }) {
         AI-Powered Developer Platform
       </motion.div>
 
-      {/* 2. Main Heading — LCP element. No delay, instant entrance.
-          The h1 is the element Chrome measures for LCP. Starting its
-          animation immediately (delay:0) means it is visible as soon
-          as React mounts — minimizing the gap between JS-ready and LCP. */}
-      <motion.h1
-        className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] tracking-[-0.01em] max-w-[900px] ${
-          isDark ? "hero-metallic" : "text-[#1C1C1C]"
-        }`}
-        style={{ fontFamily: "'DM Serif Display', serif" }}
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0 }}
-      >
-        Build smarter products
-        <br />
-        <span className={isDark ? "bg-clip-text [-webkit-text-fill-color:transparent] bg-gradient-to-r from-[#6E8F6A] to-[#8BAF87]" : "text-[#6E8F6A]"}>with intelligent AI tools</span>
-      </motion.h1>
+      {/* 2. Main Heading — typewriter animation */}
+      <TypewriterHeading isDark={isDark} />
 
       {/* 3. Subheading */}
       <motion.p
