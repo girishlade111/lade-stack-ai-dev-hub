@@ -1,377 +1,477 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import {
   Github, Linkedin, Instagram, Code, Mail,
   ArrowRight, ArrowUpRight, Code2, Cpu,
-  Globe, FileText, Brain, Sparkles,
-  MapPin, ExternalLink, ChevronRight,
+  Globe, FileText, Brain, Sparkles, Check,
+  MapPin, Shield, Zap, Heart,
 } from "lucide-react";
 import { safeWindowOpen } from "@/utils/safe";
 
-// ─── Data ──────────────────────────────────────────────────────────────────
+// ─── Data ───────────────────────────────────────────────────────────────────
 
 const products = [
-  { name: "AI Code Editor",    href: "/ai-code-viewer-ai",         icon: Code2,     color: "#6E8F6A", live: true  },
-  { name: "API Testing",       href: "/api-testing-platform",      icon: Cpu,       color: "#4ec2e8", live: false },
-  { name: "No-Code Builder",   href: "/projects/website-builder",  icon: Globe,     color: "#b47ee8", live: false },
-  { name: "Documentation AI",  href: "/projects/documentation-ai", icon: Brain,     color: "#e8a64e", live: false },
-  { name: "File Sharing",      href: "/file-sharing-platform",     icon: FileText,  color: "#e87070", live: false },
+  { name: "AI Code Editor",   href: "/ai-code-viewer-ai",         icon: Code2,    color: "#6E8F6A", live: true  },
+  { name: "API Tester",       href: "/api-testing-platform",      icon: Cpu,      color: "#4ec2e8", live: false },
+  { name: "No-Code Builder",  href: "/projects/website-builder",  icon: Globe,    color: "#b47ee8", live: false },
+  { name: "Doc Generator",    href: "/projects/documentation-ai", icon: Brain,    color: "#e8a64e", live: false },
+  { name: "File Sharing",     href: "/file-sharing-platform",     icon: FileText, color: "#e87070", live: false },
 ];
 
-const company = [
-  { name: "About",         href: "/about"   },
-  { name: "Blog",          href: "/blog"    },
-  { name: "Contact",       href: "/contact" },
-  { name: "Apps Gallery",  href: "/apps"    },
-  { name: "All Projects",  href: "/projects"},
-];
-
-const resources = [
-  { name: "Documentation", href: "/docs"    },
-  { name: "Support",        href: "/support" },
-  { name: "Privacy Policy", href: "/privacy" },
-  { name: "Terms of Service", href: "/terms" },
+const navColumns = [
+  {
+    heading: "Platform",
+    links: [
+      { label: "AI Code Editor",  href: "/ai-code-viewer-ai"        },
+      { label: "API Tester",      href: "/api-testing-platform"     },
+      { label: "No-Code Builder", href: "/projects/website-builder" },
+      { label: "Doc Generator",   href: "/projects/documentation-ai"},
+      { label: "File Sharing",    href: "/file-sharing-platform"    },
+      { label: "Apps Gallery",    href: "/apps"                     },
+    ],
+  },
+  {
+    heading: "Company",
+    links: [
+      { label: "About",        href: "/about"    },
+      { label: "Blog",         href: "/blog"     },
+      { label: "All Projects", href: "/projects" },
+      { label: "Contact",      href: "/contact"  },
+    ],
+  },
+  {
+    heading: "Resources",
+    links: [
+      { label: "Documentation",   href: "/docs"    },
+      { label: "Support",         href: "/support" },
+      { label: "Privacy Policy",  href: "/privacy" },
+      { label: "Terms of Service",href: "/terms"   },
+    ],
+  },
 ];
 
 const socials = [
-  { icon: Github,    label: "GitHub",    href: "https://github.com/girishlade111",                            color: "#6E8F6A" },
-  { icon: Linkedin,  label: "LinkedIn",  href: "https://www.linkedin.com/in/girish-lade-075bba201/",          color: "#0A66C2" },
-  { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/girish_lade_/",                     color: "#E1306C" },
-  { icon: Code,      label: "CodePen",   href: "https://codepen.io/Girish-Lade-the-looper",                   color: "#e8a64e" },
-  { icon: Mail,      label: "Email",     href: "mailto:admin@ladestack.in",                                    color: "#b47ee8" },
+  { icon: Github,    label: "GitHub",    href: "https://github.com/girishlade111",                   color: "#6E8F6A" },
+  { icon: Linkedin,  label: "LinkedIn",  href: "https://www.linkedin.com/in/girish-lade-075bba201/", color: "#0A66C2" },
+  { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/girish_lade_/",            color: "#E1306C" },
+  { icon: Code,      label: "CodePen",   href: "https://codepen.io/Girish-Lade-the-looper",          color: "#FFC933" },
+  { icon: Mail,      label: "Email",     href: "mailto:admin@ladestack.in",                           color: "#b47ee8" },
 ];
 
-const stats = [
-  { value: "50K+",  label: "Developers"   },
-  { value: "5",     label: "AI Products"  },
-  { value: "100+",  label: "Countries"    },
-  { value: "Free",  label: "Forever"      },
+const trustItems = [
+  { icon: Shield, text: "SOC 2 Compliant"   },
+  { icon: Zap,    text: "99.9% Uptime"      },
+  { icon: Heart,  text: "Free Forever"      },
+  { icon: Globe,  text: "100+ Countries"    },
 ];
 
 // ─── Newsletter ─────────────────────────────────────────────────────────────
 
 function Newsletter() {
-  const [email, setEmail]     = useState("");
-  const [status, setStatus]   = useState<"idle" | "sent">("idle");
+  const [email,  setEmail]  = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "done">("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const submit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim()) return;
-    setStatus("sent");
-    setEmail("");
-    setTimeout(() => setStatus("idle"), 3500);
+    setStatus("sending");
+    setTimeout(() => { setStatus("done"); setEmail(""); }, 900);
+    setTimeout(() => setStatus("idle"), 4400);
   };
 
   return (
-    <div className="rounded-2xl border border-[#E6E6E6] dark:border-white/[0.07] bg-white/60 dark:bg-white/[0.02] p-5">
-      <div className="flex items-center gap-2 mb-1">
-        <Sparkles className="w-3.5 h-3.5 text-[#6E8F6A]" />
-        <p className="text-xs font-semibold text-neutral-900 dark:text-white">Stay in the loop</p>
-      </div>
-      <p className="text-[11px] text-neutral-500 dark:text-neutral-500 mb-4 leading-relaxed">
-        New tools, tutorials, and updates — straight to your inbox. No spam, ever.
+    <div>
+      <p className="text-sm font-semibold text-neutral-900 dark:text-white mb-1">
+        Stay ahead of the curve
+      </p>
+      <p className="text-xs text-neutral-500 dark:text-neutral-500 mb-4 leading-relaxed">
+        New tools, tutorials, and updates. No spam, ever.
       </p>
 
-      {status === "sent" ? (
-        <motion.div
-          className="flex items-center gap-2 py-2.5 text-[#6E8F6A]"
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <span className="text-xs font-medium">✓ You're on the list!</span>
-        </motion.div>
-      ) : (
-        <form onSubmit={handleSubmit} className="flex gap-2">
-          <input
-            type="email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            placeholder="your@email.com"
-            required
-            className="flex-1 min-w-0 px-3 py-2 text-xs bg-white dark:bg-white/[0.05] border border-[#E6E6E6] dark:border-white/[0.08] rounded-xl text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-white/30 focus:outline-none focus:border-[#6E8F6A]/50 transition-colors duration-200"
-          />
-          <motion.button
-            type="submit"
-            className="flex-shrink-0 w-9 h-9 bg-[#6E8F6A] text-white rounded-xl flex items-center justify-center"
-            whileHover={{ scale: 1.06, backgroundColor: "#5F7F63" }}
-            whileTap={{ scale: 0.94 }}
-            transition={{ duration: 0.15 }}
+      <AnimatePresence mode="wait">
+        {status === "done" ? (
+          <motion.div
+            key="done"
+            className="flex items-center gap-2 h-10 text-[#6E8F6A]"
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
           >
-            <ArrowRight className="w-3.5 h-3.5" />
-          </motion.button>
-        </form>
-      )}
+            <div className="w-5 h-5 rounded-full bg-[#6E8F6A]/15 flex items-center justify-center">
+              <Check className="w-3 h-3" />
+            </div>
+            <span className="text-sm font-medium">You're on the list!</span>
+          </motion.div>
+        ) : (
+          <motion.form
+            key="form"
+            onSubmit={submit}
+            className="flex gap-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <input
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              placeholder="your@email.com"
+              required
+              className="flex-1 min-w-0 h-10 px-3.5 text-sm bg-white dark:bg-white/[0.05] border border-[#E0E0E0] dark:border-white/[0.09] rounded-xl text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-white/25 focus:outline-none focus:border-[#6E8F6A]/60 transition-colors duration-200"
+            />
+            <motion.button
+              type="submit"
+              disabled={status === "sending"}
+              className="flex-shrink-0 h-10 px-4 bg-[#6E8F6A] text-white text-sm font-semibold rounded-xl flex items-center gap-1.5 disabled:opacity-60"
+              whileHover={{ scale: 1.03, backgroundColor: "#5F7F63" }}
+              whileTap={{ scale: 0.96 }}
+              transition={{ duration: 0.15 }}
+            >
+              {status === "sending" ? (
+                <motion.div
+                  className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 0.7, repeat: Infinity, ease: "linear" }}
+                />
+              ) : (
+                <>Subscribe <ArrowRight className="w-3.5 h-3.5" /></>
+              )}
+            </motion.button>
+          </motion.form>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
 
-// ─── Animated stat pill ─────────────────────────────────────────────────────
+// ─── Product pill (floating row) ────────────────────────────────────────────
 
-function StatPill({ value, label, index }: { value: string; label: string; index: number }) {
+function ProductPill({ product, index }: { product: typeof products[0]; index: number }) {
+  const Icon = product.icon;
   return (
     <motion.div
-      className="flex flex-col items-center gap-0.5 px-4 py-3 rounded-xl bg-white/60 dark:bg-white/[0.03] border border-[#E6E6E6] dark:border-white/[0.06]"
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.07, duration: 0.35 }}
+      transition={{ delay: index * 0.07, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
-      <span className="text-base font-bold text-neutral-900 dark:text-white tracking-tight leading-none">{value}</span>
-      <span className="text-[9px] text-neutral-500 dark:text-neutral-500">{label}</span>
+      <Link
+        to={product.href}
+        className="group flex items-center gap-2.5 px-4 py-2.5 rounded-2xl border border-[#E6E6E6] dark:border-white/[0.07] bg-white/80 dark:bg-white/[0.03] hover:border-[#C8C8C8] dark:hover:border-white/[0.14] transition-all duration-200"
+      >
+        <div
+          className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
+          style={{ background: `${product.color}18` }}
+        >
+          <Icon className="w-3.5 h-3.5" style={{ color: product.color }} />
+        </div>
+        <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors whitespace-nowrap">
+          {product.name}
+        </span>
+        {product.live && (
+          <span
+            className="ml-auto text-[9px] font-bold px-1.5 py-0.5 rounded-full"
+            style={{ background: `${product.color}18`, color: product.color }}
+          >
+            LIVE
+          </span>
+        )}
+        {!product.live && (
+          <span className="ml-auto text-[9px] text-neutral-400 dark:text-neutral-600 font-medium">Soon</span>
+        )}
+      </Link>
     </motion.div>
   );
 }
 
-// ─── Column heading ─────────────────────────────────────────────────────────
+// ─── Animated grid lines (decorative) ──────────────────────────────────────
 
-function ColHead({ children }: { children: React.ReactNode }) {
+function GridLines() {
   return (
-    <h4 className="text-[11px] font-bold uppercase tracking-[0.12em] text-neutral-400 dark:text-neutral-600 mb-5">
-      {children}
-    </h4>
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden>
+      {[20, 50, 80].map(p => (
+        <div key={p} className="absolute left-0 right-0 h-px bg-[#6E8F6A]/[0.04] dark:bg-[#6E8F6A]/[0.06]" style={{ top: `${p}%` }} />
+      ))}
+      {[25, 50, 75].map(p => (
+        <div key={p} className="absolute top-0 bottom-0 w-px bg-[#6E8F6A]/[0.04] dark:bg-[#6E8F6A]/[0.06]" style={{ left: `${p}%` }} />
+      ))}
+    </div>
   );
 }
 
-// ─── Footer link ────────────────────────────────────────────────────────────
+// ─── Large wordmark (decorative) ────────────────────────────────────────────
 
-function FLink({ to, external, children }: { to: string; external?: boolean; children: React.ReactNode }) {
-  const cls = "group flex items-center gap-1 text-sm text-neutral-600 dark:text-neutral-400 hover:text-[#6E8F6A] dark:hover:text-white transition-colors duration-200";
-  const inner = (
-    <>
-      {children}
-      <ChevronRight className="w-3 h-3 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-200" />
-    </>
+function Wordmark() {
+  return (
+    <div
+      className="absolute bottom-0 left-0 right-0 flex items-end justify-center overflow-hidden pointer-events-none select-none"
+      aria-hidden
+    >
+      <span
+        className="font-bold leading-none tracking-[-0.04em] whitespace-nowrap"
+        style={{
+          fontSize: "clamp(60px, 14vw, 180px)",
+          color: "transparent",
+          WebkitTextStroke: "1px",
+          WebkitTextStrokeColor: "rgba(110,143,106,0.07)",
+          marginBottom: "-0.12em",
+        }}
+      >
+        LADE STACK
+      </span>
+    </div>
   );
-  if (external) return <a href={to} target="_blank" rel="noopener noreferrer" className={cls}>{inner}</a>;
-  return <Link to={to} className={cls}>{inner}</Link>;
 }
 
-// ─── Main Footer ────────────────────────────────────────────────────────────
+// ─── Main Footer ─────────────────────────────────────────────────────────────
 
 export default function Footer() {
-  const year      = new Date().getFullYear();
-  const ref       = useRef<HTMLElement>(null);
-  const inView    = useInView(ref, { once: true, amount: 0.1 });
+  const year    = new Date().getFullYear();
+  const footRef = useRef<HTMLElement>(null);
+  const inView  = useInView(footRef, { once: true, amount: 0.05 });
+
+  const { scrollYProgress } = useScroll({ target: footRef, offset: ["start end", "end end"] });
+  const wordmarkY = useTransform(scrollYProgress, [0, 1], ["8%", "0%"]);
 
   return (
-    <footer ref={ref} className="relative bg-[#EFEAE0] dark:bg-[#060606] border-t border-[#E0DACE] dark:border-white/[0.06] overflow-hidden">
+    <footer
+      ref={footRef}
+      className="relative bg-[#EFEAE0] dark:bg-[#050505] overflow-hidden"
+    >
+      <GridLines />
 
-      {/* ── Background atmosphere ── */}
+      {/* ── Atmosphere ── */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Light */}
         <div className="absolute inset-0 dark:hidden">
-          <div className="absolute top-0 left-1/4 w-[600px] h-[400px] bg-[radial-gradient(ellipse,_rgba(110,143,106,0.08),_transparent_60%)]" />
-          <div className="absolute bottom-0 right-0 w-[400px] h-[300px] bg-[radial-gradient(ellipse,_rgba(110,143,106,0.06),_transparent_60%)]" />
+          <div className="absolute top-0 left-0 w-[700px] h-[500px] bg-[radial-gradient(ellipse,_rgba(110,143,106,0.09),_transparent_60%)]" />
+          <div className="absolute bottom-0 right-0 w-[500px] h-[400px] bg-[radial-gradient(ellipse,_rgba(110,143,106,0.06),_transparent_60%)]" />
         </div>
-        {/* Dark */}
         <div className="absolute inset-0 hidden dark:block">
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#6E8F6A]/20 to-transparent" />
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-[radial-gradient(ellipse,_rgba(110,143,106,0.09),_transparent_60%)]" />
-          <div className="absolute bottom-0 right-0 w-[500px] h-[300px] bg-[radial-gradient(ellipse,_rgba(180,126,232,0.04),_transparent_60%)]" />
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#6E8F6A]/25 to-transparent" />
+          <div className="absolute top-0 left-0 w-[800px] h-[600px] bg-[radial-gradient(ellipse,_rgba(110,143,106,0.08),_transparent_60%)]" />
+          <div className="absolute top-0 right-0 w-[600px] h-[500px] bg-[radial-gradient(ellipse,_rgba(78,194,232,0.04),_transparent_60%)]" />
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[900px] h-[300px] bg-[radial-gradient(ellipse,_rgba(110,143,106,0.05),_transparent_60%)]" />
         </div>
-        <div className="absolute inset-0 dot-pattern opacity-[0.25]" />
+        <div className="absolute inset-0 dot-pattern opacity-[0.22]" />
       </div>
 
-      {/* ── Pre-footer CTA band ── */}
-      <motion.div
-        className="relative border-b border-[#E0DACE] dark:border-white/[0.05]"
-        initial={{ opacity: 0, y: 20 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            {/* Left copy */}
-            <div className="text-center md:text-left">
-              <p className="text-xl font-bold text-neutral-900 dark:text-white mb-1">
-                Start building smarter — it's free
+      {/* ══════════════════════════════════════════
+          ZONE 1 — Big CTA hero band
+      ══════════════════════════════════════════ */}
+      <div className="relative z-10 border-b border-[#E0DACE] dark:border-white/[0.06]">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+            {/* Left — editorial headline */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="tag-pill inline-flex items-center gap-2 mb-5">
+                <Sparkles className="w-3.5 h-3.5" />
+                Free forever
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-neutral-900 dark:text-white leading-[1.12] mb-5">
+                Build smarter.<br />
+                <span className="text-[#6E8F6A]">Ship faster.</span><br />
+                Pay nothing.
+              </h2>
+              <p className="text-neutral-500 dark:text-neutral-400 text-base leading-relaxed max-w-md mb-8">
+                Five enterprise-grade AI tools — unified, open, and completely free.
+                No credit card. No usage limits. No catch.
               </p>
-              <p className="text-sm text-neutral-500 dark:text-neutral-500">
-                5 AI tools. No credit card. No usage limits. Lifetime access.
-              </p>
-            </div>
-            {/* CTAs */}
-            <div className="flex items-center gap-3 flex-shrink-0">
-              <motion.button
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#6E8F6A] text-white text-sm font-semibold shadow-sm hover:bg-[#5F7F63] transition-colors duration-200"
-                whileHover={{ y: -1 }}
-                whileTap={{ scale: 0.97 }}
-                onClick={() => safeWindowOpen("https://code.ladestack.in/")}
-              >
-                Try for Free
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </motion.button>
-              <Link
-                to="/apps"
-                className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl border border-[#D0D0D0] dark:border-white/[0.12] text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:border-[#6E8F6A]/40 hover:text-[#6E8F6A] dark:hover:text-white transition-colors duration-200"
-              >
-                Browse All Products
-              </Link>
-            </div>
+
+              {/* Trust chips */}
+              <div className="flex flex-wrap gap-2">
+                {trustItems.map((t, i) => {
+                  const Icon = t.icon;
+                  return (
+                    <motion.div
+                      key={t.text}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#E0E0E0] dark:border-white/[0.08] bg-white/60 dark:bg-white/[0.03] text-xs font-medium text-neutral-600 dark:text-neutral-400"
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={inView ? { opacity: 1, scale: 1 } : {}}
+                      transition={{ delay: 0.2 + i * 0.06, duration: 0.3 }}
+                    >
+                      <Icon className="w-3 h-3 text-[#6E8F6A]" />
+                      {t.text}
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </motion.div>
+
+            {/* Right — product pills grid + CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.55, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-col gap-5"
+            >
+              {/* Product pill grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {products.map((p, i) => (
+                  <ProductPill key={p.name} product={p} index={i} />
+                ))}
+              </div>
+
+              {/* CTA buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                <motion.button
+                  className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#6E8F6A] text-white text-sm font-bold shadow-[0_4px_20px_rgba(110,143,106,0.30)] hover:bg-[#5F7F63] hover:shadow-[0_4px_24px_rgba(110,143,106,0.40)] transition-all duration-200"
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => safeWindowOpen("https://code.ladestack.in/")}
+                >
+                  Start Building Free
+                  <ArrowUpRight className="w-4 h-4" />
+                </motion.button>
+                <Link
+                  to="/apps"
+                  className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-[#D0D0D0] dark:border-white/[0.12] text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:border-[#6E8F6A]/50 hover:text-[#6E8F6A] dark:hover:text-white transition-all duration-200"
+                >
+                  Explore All Products
+                </Link>
+              </div>
+            </motion.div>
           </div>
         </div>
-      </motion.div>
+      </div>
 
-      {/* ── Main footer grid ── */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-18">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+      {/* ══════════════════════════════════════════
+          ZONE 2 — Main nav grid
+      ══════════════════════════════════════════ */}
+      <div className="relative z-10 border-b border-[#E0DACE] dark:border-white/[0.05]">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-14">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1.4fr] gap-10 lg:gap-8">
 
-          {/* ── Brand column (4 cols) ── */}
-          <motion.div
-            className="lg:col-span-4"
-            initial={{ opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.45, delay: 0.05 }}
-          >
-            {/* Logo */}
-            <Link to="/" className="inline-flex items-center gap-2.5 mb-5 group">
-              <div className="w-9 h-9 rounded-xl bg-[#6E8F6A] flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform duration-200">
-                <span className="text-xs font-mono font-bold text-white leading-none">{"</>"}</span>
-              </div>
-              <span className="text-base font-bold text-neutral-900 dark:text-white">
-                Lade <span className="text-[#6E8F6A]">Stack</span>
-              </span>
-            </Link>
+            {/* Brand */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.45, delay: 0.08 }}
+            >
+              <Link to="/" className="inline-flex items-center gap-2.5 mb-5 group">
+                <div className="w-10 h-10 rounded-2xl bg-[#6E8F6A] flex items-center justify-center shadow-sm group-hover:scale-105 group-hover:shadow-[0_0_16px_rgba(110,143,106,0.45)] transition-all duration-200">
+                  <span className="text-sm font-mono font-bold text-white leading-none">{"</>"}</span>
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-neutral-900 dark:text-white leading-tight">
+                    Lade <span className="text-[#6E8F6A]">Stack</span>
+                  </p>
+                  <p className="text-[10px] text-neutral-400 dark:text-neutral-600 font-mono">v2.0 · 2026</p>
+                </div>
+              </Link>
 
-            <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed mb-5 max-w-xs">
-              The AI-powered development ecosystem. Enterprise-grade tools built for modern
-              developers — free, open, and built to last.
-            </p>
+              <p className="text-sm text-neutral-500 dark:text-neutral-500 leading-relaxed mb-6 max-w-[220px]">
+                The AI-powered dev ecosystem. Enterprise tools, zero cost, built in the open.
+              </p>
 
-            {/* Stats mini-grid */}
-            <div className="grid grid-cols-4 gap-2 mb-6">
-              {stats.map((s, i) => (
-                <StatPill key={s.label} {...s} index={i} />
-              ))}
-            </div>
-
-            {/* Social row */}
-            <div className="flex items-center gap-2 mb-6">
-              {socials.map((s) => (
-                <motion.a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s.label}
-                  className="w-9 h-9 rounded-xl bg-white dark:bg-white/[0.04] border border-[#E6E6E6] dark:border-white/[0.07] flex items-center justify-center text-neutral-500 dark:text-neutral-500 hover:text-white dark:hover:text-white transition-all duration-200"
-                  whileHover={{ y: -2, scale: 1.05, backgroundColor: s.color, borderColor: s.color }}
-                  whileTap={{ scale: 0.93 }}
-                  transition={{ duration: 0.18 }}
-                >
-                  <s.icon className="w-3.5 h-3.5" />
-                </motion.a>
-              ))}
-            </div>
-
-            {/* Location */}
-            <div className="flex items-center gap-1.5 text-[11px] text-neutral-400 dark:text-neutral-600">
-              <MapPin className="w-3 h-3" />
-              <span>Built with ♥ by Girish Lade</span>
-            </div>
-          </motion.div>
-
-          {/* ── Products column (3 cols) ── */}
-          <motion.div
-            className="lg:col-span-3"
-            initial={{ opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.45, delay: 0.12 }}
-          >
-            <ColHead>Products</ColHead>
-            <ul className="flex flex-col gap-3">
-              {products.map((p) => {
-                const Icon = p.icon;
-                return (
-                  <li key={p.name}>
-                    <Link
-                      to={p.href}
-                      className="group flex items-center gap-2.5 text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors duration-200"
-                    >
-                      <div
-                        className="w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-200"
-                        style={{ background: `${p.color}15` }}
-                      >
-                        <Icon className="w-3 h-3" style={{ color: p.color }} />
-                      </div>
-                      <span className="flex-1">{p.name}</span>
-                      {p.live ? (
-                        <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#6E8F6A] opacity-80" />
-                      ) : (
-                        <span className="flex-shrink-0 text-[9px] font-medium text-neutral-400 dark:text-neutral-600">Soon</span>
-                      )}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </motion.div>
-
-          {/* ── Company column (2 cols) ── */}
-          <motion.div
-            className="lg:col-span-2"
-            initial={{ opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.45, delay: 0.18 }}
-          >
-            <ColHead>Company</ColHead>
-            <ul className="flex flex-col gap-3">
-              {company.map((l) => (
-                <li key={l.name}>
-                  <FLink to={l.href}>{l.name}</FLink>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* ── Resources + Newsletter (3 cols) ── */}
-          <motion.div
-            className="lg:col-span-3 flex flex-col gap-7"
-            initial={{ opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.45, delay: 0.24 }}
-          >
-            <div>
-              <ColHead>Resources</ColHead>
-              <ul className="flex flex-col gap-3">
-                {resources.map((l) => (
-                  <li key={l.name}>
-                    <FLink to={l.href}>{l.name}</FLink>
-                  </li>
+              {/* Socials */}
+              <div className="flex flex-wrap gap-2 mb-5">
+                {socials.map((s) => (
+                  <motion.a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={s.label}
+                    className="w-8 h-8 rounded-xl bg-white dark:bg-white/[0.04] border border-[#E6E6E6] dark:border-white/[0.07] flex items-center justify-center text-neutral-500 dark:text-neutral-500 transition-all duration-200"
+                    whileHover={{ y: -2, scale: 1.08 }}
+                    whileTap={{ scale: 0.92 }}
+                    animate={{}}
+                    style={{ "--hover-color": s.color } as React.CSSProperties}
+                    onMouseEnter={e => {
+                      const el = e.currentTarget;
+                      el.style.backgroundColor = s.color;
+                      el.style.borderColor = s.color;
+                      el.style.color = "#fff";
+                    }}
+                    onMouseLeave={e => {
+                      const el = e.currentTarget;
+                      el.style.backgroundColor = "";
+                      el.style.borderColor = "";
+                      el.style.color = "";
+                    }}
+                    transition={{ duration: 0.15 }}
+                  >
+                    <s.icon className="w-3.5 h-3.5" />
+                  </motion.a>
                 ))}
-              </ul>
-            </div>
+              </div>
+
+              <div className="flex items-center gap-1.5 text-[11px] text-neutral-400 dark:text-neutral-600">
+                <MapPin className="w-3 h-3 flex-shrink-0" />
+                Built with ♥ by Girish Lade
+              </div>
+            </motion.div>
+
+            {/* Nav columns */}
+            {navColumns.map((col, ci) => (
+              <motion.div
+                key={col.heading}
+                initial={{ opacity: 0, y: 16 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.45, delay: 0.12 + ci * 0.07 }}
+              >
+                <h4 className="text-[10px] font-bold uppercase tracking-[0.14em] text-neutral-400 dark:text-neutral-600 mb-5">
+                  {col.heading}
+                </h4>
+                <ul className="flex flex-col gap-3">
+                  {col.links.map((l) => (
+                    <li key={l.label}>
+                      <Link
+                        to={l.href}
+                        className="group flex items-center gap-1 text-sm text-neutral-600 dark:text-neutral-400 hover:text-[#6E8F6A] dark:hover:text-white transition-colors duration-200"
+                      >
+                        <span className="w-0 group-hover:w-2 overflow-hidden transition-all duration-200 flex-shrink-0">
+                          <span className="block w-1 h-1 rounded-full bg-[#6E8F6A]" />
+                        </span>
+                        {l.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
 
             {/* Newsletter */}
-            <Newsletter />
-          </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.45, delay: 0.33 }}
+            >
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.14em] text-neutral-400 dark:text-neutral-600 mb-5">
+                Newsletter
+              </h4>
+              <Newsletter />
+            </motion.div>
+          </div>
         </div>
       </div>
 
-      {/* ── Bottom bar ── */}
-      <motion.div
-        className="relative z-10 border-t border-[#E0DACE] dark:border-white/[0.05]"
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.5, delay: 0.35 }}
-      >
+      {/* ══════════════════════════════════════════
+          ZONE 3 — Bottom bar
+      ══════════════════════════════════════════ */}
+      <div className="relative z-10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-5">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
 
-            {/* Left — copyright */}
-            <p className="text-xs text-neutral-500 dark:text-neutral-600 text-center sm:text-left">
+            {/* Left */}
+            <p className="text-xs text-neutral-500 dark:text-neutral-600 order-2 sm:order-1 text-center sm:text-left">
               © {year} Lade Stack · All rights reserved
             </p>
 
-            {/* Center — legal links */}
-            <div className="flex items-center gap-4">
+            {/* Center */}
+            <div className="flex items-center gap-1 order-1 sm:order-2">
               {[
                 { label: "Privacy", href: "/privacy" },
                 { label: "Terms",   href: "/terms"   },
               ].map((l, i) => (
-                <span key={l.label} className="flex items-center gap-4">
-                  {i > 0 && <span className="w-px h-3 bg-[#D0D0D0] dark:bg-white/[0.1]" />}
+                <span key={l.label} className="flex items-center">
+                  {i > 0 && <span className="mx-3 w-px h-3 bg-[#D0D0D0] dark:bg-white/[0.08]" />}
                   <Link
                     to={l.href}
                     className="text-xs text-neutral-500 dark:text-neutral-600 hover:text-[#6E8F6A] dark:hover:text-white transition-colors duration-200"
@@ -382,8 +482,8 @@ export default function Footer() {
               ))}
             </div>
 
-            {/* Right — live indicator */}
-            <div className="flex items-center gap-1.5 text-xs text-neutral-500 dark:text-neutral-600">
+            {/* Right — status */}
+            <div className="flex items-center gap-1.5 text-xs text-neutral-500 dark:text-neutral-600 order-3">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#6E8F6A] opacity-50" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#6E8F6A]" />
@@ -392,7 +492,12 @@ export default function Footer() {
             </div>
           </div>
         </div>
-      </motion.div>
+
+        {/* Wordmark */}
+        <motion.div style={{ y: wordmarkY }}>
+          <Wordmark />
+        </motion.div>
+      </div>
     </footer>
   );
 }
