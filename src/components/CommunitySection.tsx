@@ -1,5 +1,5 @@
-import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { motion, useInView, useAnimationFrame } from "framer-motion";
+import { useRef, useState, useCallback } from "react";
 import {
   Users, Github, MessageSquare, BookOpen, Zap,
   Globe, Code2, Rocket, ArrowUpRight, GitBranch,
@@ -218,63 +218,105 @@ function LiveActivityFeed() {
   );
 }
 
-function ContributionHeatmap() {
-  // 10 weeks × 7 days = 70 cells with pseudo-random values
-  const weeks = Array.from({ length: 10 }, (_, wi) =>
-    Array.from({ length: 7 }, (_, di) => {
-      const seed = (wi * 7 + di + wi * di) % 17;
-      return seed < 4 ? 0 : seed < 8 ? 1 : seed < 12 ? 2 : seed < 15 ? 3 : 4;
-    })
-  );
+const techTags = [
+  { label: "React",       color: "#61DAFB", row: 0 },
+  { label: "TypeScript",  color: "#3178C6", row: 0 },
+  { label: "Node.js",     color: "#6E8F6A", row: 0 },
+  { label: "Python",      color: "#e8a64e", row: 0 },
+  { label: "Next.js",     color: "#888",    row: 1 },
+  { label: "Tailwind",    color: "#38BDF8", row: 1 },
+  { label: "GraphQL",     color: "#E10098", row: 1 },
+  { label: "Docker",      color: "#2496ED", row: 1 },
+  { label: "Rust",        color: "#CE422B", row: 1 },
+  { label: "Go",          color: "#00ADD8", row: 2 },
+  { label: "PostgreSQL",  color: "#336791", row: 2 },
+  { label: "Redis",       color: "#DC382D", row: 2 },
+  { label: "AWS",         color: "#FF9900", row: 2 },
+  { label: "Vercel",      color: "#888",    row: 2 },
+  { label: "Supabase",    color: "#3ECF8E", row: 3 },
+  { label: "Prisma",      color: "#5A67D8", row: 3 },
+  { label: "Vue",         color: "#42B883", row: 3 },
+  { label: "Svelte",      color: "#FF3E00", row: 3 },
+];
 
-  const intensityLight = ["#E8E8E8", "#C5D9C4", "#9DC09A", "#6E8F6A", "#4a6347"];
-  const intensityDark  = ["#2a2622", "#2e4030", "#3d5c3a", "#4d7348", "#6E8F6A"];
+function TechStackCloud() {
+  const [hovered, setHovered] = useState<string | null>(null);
+  const offsetsRef = useRef<number[]>(techTags.map((_, i) => i * 1.4));
+  const elemsRef = useRef<(HTMLSpanElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isPausedRef = useRef(false);
+
+  useAnimationFrame((_, delta) => {
+    if (isPausedRef.current) return;
+    offsetsRef.current = offsetsRef.current.map((o) => o + delta * 0.00018);
+    elemsRef.current.forEach((el, i) => {
+      if (!el) return;
+      const t = offsetsRef.current[i];
+      const y = Math.sin(t) * 5;
+      const x = Math.cos(t * 0.6) * 3;
+      el.style.transform = `translate(${x}px, ${y}px)`;
+    });
+  });
+
+  const setRef = useCallback((el: HTMLSpanElement | null, i: number) => {
+    elemsRef.current[i] = el;
+  }, []);
+
+  // Group by row
+  const rows = [0, 1, 2, 3].map((r) => techTags.filter((t) => t.row === r));
 
   return (
-    <div className="rounded-2xl bg-white dark:bg-white/[0.03] border border-[#E6E6E6] dark:border-white/[0.07] p-5">
-      <div className="flex items-center justify-between mb-4">
-        <span className="text-xs font-semibold text-neutral-900 dark:text-white">Contribution Activity</span>
-        <span className="text-[10px] font-mono text-neutral-400 dark:text-neutral-500">Last 10 weeks</span>
+    <div
+      ref={containerRef}
+      className="rounded-2xl bg-white dark:bg-white/[0.03] border border-[#E6E6E6] dark:border-white/[0.07] p-5 overflow-hidden"
+      onMouseEnter={() => { isPausedRef.current = true; }}
+      onMouseLeave={() => { isPausedRef.current = false; setHovered(null); }}
+    >
+      {/* Header */}
+      <div className="flex items-center justify-between mb-5">
+        <span className="text-xs font-semibold text-neutral-900 dark:text-white">Works with your stack</span>
+        <span className="text-[10px] font-mono text-neutral-400 dark:text-neutral-500">18+ languages & tools</span>
       </div>
-      <div className="flex gap-1.5">
-        {weeks.map((week, wi) => (
-          <div key={wi} className="flex flex-col gap-1.5">
-            {week.map((level, di) => (
-              <motion.div
-                key={di}
-                className="w-4 h-4 rounded-sm cursor-default"
-                initial={{ opacity: 0, scale: 0.5 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: (wi * 7 + di) * 0.005, duration: 0.25 }}
-                title={`${level * 3} contributions`}
-                style={undefined}
-              >
-                {/* Light */}
-                <div
-                  className="w-full h-full rounded-sm dark:hidden"
-                  style={{ background: intensityLight[level] }}
-                />
-                {/* Dark */}
-                <div
-                  className="w-full h-full rounded-sm hidden dark:block"
-                  style={{ background: intensityDark[level] }}
-                />
-              </motion.div>
-            ))}
+
+      {/* Tag rows */}
+      <div className="flex flex-col gap-2.5">
+        {rows.map((row, ri) => (
+          <div key={ri} className="flex flex-wrap gap-2 justify-center">
+            {row.map((tag, ti) => {
+              const globalIndex = techTags.findIndex((t) => t.label === tag.label);
+              const isHov = hovered === tag.label;
+              return (
+                <span
+                  key={tag.label}
+                  ref={(el) => setRef(el, globalIndex)}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-medium border cursor-default select-none transition-all duration-200"
+                  style={{
+                    background: isHov ? `${tag.color}18` : "transparent",
+                    borderColor: isHov ? `${tag.color}60` : "var(--border-color, #E6E6E6)",
+                    color: isHov ? tag.color : undefined,
+                    willChange: "transform",
+                  }}
+                  onMouseEnter={() => setHovered(tag.label)}
+                >
+                  {/* Color dot */}
+                  <span
+                    className="w-1.5 h-1.5 rounded-full flex-shrink-0 transition-all duration-200"
+                    style={{ background: tag.color, opacity: isHov ? 1 : 0.5, transform: isHov ? "scale(1.3)" : "scale(1)" }}
+                  />
+                  <span className={`transition-colors duration-200 ${isHov ? "" : "text-neutral-600 dark:text-neutral-400"}`}>
+                    {tag.label}
+                  </span>
+                </span>
+              );
+            })}
           </div>
         ))}
       </div>
-      <div className="flex items-center gap-1.5 mt-3 justify-end">
-        <span className="text-[10px] text-neutral-400">Less</span>
-        {[0, 1, 2, 3, 4].map((l) => (
-          <div key={l} className="flex">
-            <div className="w-3 h-3 rounded-sm dark:hidden" style={{ background: intensityLight[l] }} />
-            <div className="w-3 h-3 rounded-sm hidden dark:block" style={{ background: intensityDark[l] }} />
-          </div>
-        ))}
-        <span className="text-[10px] text-neutral-400">More</span>
-      </div>
+
+      {/* Footer hint */}
+      <p className="text-center text-[10px] text-neutral-400 dark:text-neutral-600 mt-4">
+        Hover to explore · Integrates seamlessly
+      </p>
     </div>
   );
 }
@@ -350,7 +392,7 @@ export default function CommunitySection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-16">
           <LiveActivityFeed />
           <div className="flex flex-col gap-4">
-            <ContributionHeatmap />
+            <TechStackCloud />
 
             {/* "Open to contributions" banner */}
             <motion.div
