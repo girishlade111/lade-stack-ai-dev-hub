@@ -1,11 +1,11 @@
-import { motion, useInView, useAnimationFrame } from "framer-motion";
-import { useRef, useState, useCallback } from "react";
+import { motion, useInView, useAnimationFrame, AnimatePresence } from "framer-motion";
+import { useRef, useState, useCallback, useEffect } from "react";
 import {
   Users, Github, MessageSquare, BookOpen, Zap,
-  Globe, Code2, Rocket, ArrowUpRight, GitBranch,
-  Star, GitPullRequest, Terminal, Layers,
+  Globe, Code2, Rocket, ArrowUpRight,
+  Star, Terminal, Layers, Sparkles, ChevronRight,
 } from "lucide-react";
-import { ScrollReveal, StaggerContainer, StaggerItem, SoftButton, SectionDivider } from "@/components/motion";
+import { ScrollReveal, SoftButton, SectionDivider } from "@/components/motion";
 import { safeWindowOpen } from "@/utils/safe";
 
 // ─── Data ──────────────────────────────────────────────────────────────────
@@ -74,13 +74,53 @@ const highlights = [
   },
 ];
 
-const activityFeed = [
-  { icon: GitPullRequest, user: "alex_dev", action: "merged a PR to", target: "lade-ai-editor", time: "2m ago", color: "text-[#6E8F6A]" },
-  { icon: Star,          user: "sarah_k",   action: "starred",          target: "lade-api-tester",  time: "5m ago", color: "text-amber-500" },
-  { icon: GitBranch,     user: "m_patel",   action: "forked",           target: "lade-templates",   time: "11m ago", color: "text-sky-500" },
-  { icon: Terminal,      user: "ej_zhang",  action: "deployed via",     target: "lade-cli",         time: "18m ago", color: "text-purple-500" },
-  { icon: GitPullRequest,user: "d_mart",    action: "opened PR in",     target: "lade-docs",        time: "24m ago", color: "text-[#6E8F6A]" },
-  { icon: Star,          user: "priya_r",   action: "starred",          target: "lade-ai-editor",   time: "31m ago", color: "text-amber-500" },
+const aiShowcases = [
+  {
+    id: "editor",
+    label: "AI Code Editor",
+    icon: Code2,
+    accent: "#6E8F6A",
+    prompt: "// AI: refactor this to async/await",
+    lines: [
+      { text: "async function fetchUser(id: string) {", color: "text-sky-400" },
+      { text: "  const res = await fetch(`/api/users/${id}`);", color: "text-neutral-300 dark:text-neutral-300" },
+      { text: "  if (!res.ok) throw new Error('Not found');", color: "text-rose-400" },
+      { text: "  return res.json() as Promise<User>;", color: "text-[#6E8F6A]" },
+      { text: "}", color: "text-sky-400" },
+    ],
+    badge: "Refactored in 0.3s",
+  },
+  {
+    id: "api",
+    label: "API Tester",
+    icon: Zap,
+    accent: "#e8a64e",
+    prompt: "POST /api/auth/login  →  200 OK",
+    lines: [
+      { text: `{`, color: "text-neutral-400" },
+      { text: `  "token": "eyJhbGci...Xk9Q",`, color: "text-[#e8a64e]" },
+      { text: `  "user": { "id": "u_8f2k", "role": "admin" },`, color: "text-neutral-300 dark:text-neutral-300" },
+      { text: `  "expires_in": 3600`, color: "text-sky-400" },
+      { text: `}`, color: "text-neutral-400" },
+    ],
+    badge: "Auto-generated test ✓",
+  },
+  {
+    id: "docs",
+    label: "AI Doc Generator",
+    icon: BookOpen,
+    accent: "#7c86e8",
+    prompt: "/** AI: document this function */",
+    lines: [
+      { text: "/**", color: "text-neutral-500" },
+      { text: " * Authenticates a user and returns a JWT.", color: "text-neutral-400" },
+      { text: " * @param email - User's email address", color: "text-[#7c86e8]" },
+      { text: " * @param password - Plaintext password", color: "text-[#7c86e8]" },
+      { text: " * @returns Signed JWT token string", color: "text-[#6E8F6A]" },
+      { text: " */", color: "text-neutral-500" },
+    ],
+    badge: "Docs in 0.8s",
+  },
 ];
 
 // ─── Sub-components ────────────────────────────────────────────────────────
@@ -170,51 +210,189 @@ function HighlightCard({ item, index }: { item: (typeof highlights)[0]; index: n
   );
 }
 
-function LiveActivityFeed() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.2 });
+function TypewriterLine({ text, color, delay }: { text: string; color: string; delay: number }) {
+  const [displayed, setDisplayed] = useState("");
+  const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    setDisplayed("");
+    setDone(false);
+    const timeout = setTimeout(() => {
+      let i = 0;
+      const interval = setInterval(() => {
+        i++;
+        setDisplayed(text.slice(0, i));
+        if (i >= text.length) {
+          clearInterval(interval);
+          setDone(true);
+        }
+      }, 18);
+      return () => clearInterval(interval);
+    }, delay);
+    return () => clearTimeout(timeout);
+  }, [text, delay]);
 
   return (
-    <div
+    <span className={`font-mono text-[11px] leading-relaxed block ${color}`}>
+      {displayed}
+      {!done && <span className="inline-block w-[6px] h-[13px] bg-current opacity-70 ml-0.5 animate-pulse align-middle" />}
+    </span>
+  );
+}
+
+function AIShowcase() {
+  const [active, setActive] = useState(0);
+  const [key, setKey] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.3 });
+
+  const switchTo = useCallback((idx: number) => {
+    setActive(idx);
+    setKey((k) => k + 1);
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setActive((prev) => {
+        const next = (prev + 1) % aiShowcases.length;
+        setKey((k) => k + 1);
+        return next;
+      });
+    }, 5500);
+  }, []);
+
+  useEffect(() => {
+    if (!inView) return;
+    timerRef.current = setInterval(() => {
+      setActive((prev) => {
+        const next = (prev + 1) % aiShowcases.length;
+        setKey((k) => k + 1);
+        return next;
+      });
+    }, 5500);
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, [inView]);
+
+  const showcase = aiShowcases[active];
+  const Icon = showcase.icon;
+
+  return (
+    <motion.div
       ref={ref}
-      className="rounded-2xl bg-white dark:bg-white/[0.03] border border-[#E6E6E6] dark:border-white/[0.07] overflow-hidden"
+      className="rounded-2xl bg-white dark:bg-white/[0.03] border border-[#E6E6E6] dark:border-white/[0.07] overflow-hidden flex flex-col h-full"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.45, ease: "easeOut" }}
     >
-      {/* Header */}
-      <div className="flex items-center justify-between px-5 py-4 border-b border-[#E6E6E6] dark:border-white/[0.06]">
+      {/* Header bar */}
+      <div className="flex items-center justify-between px-5 py-3.5 border-b border-[#E6E6E6] dark:border-white/[0.06]">
         <div className="flex items-center gap-2">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#6E8F6A] opacity-60" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#6E8F6A]" />
-          </span>
-          <span className="text-xs font-semibold text-neutral-900 dark:text-white">Live Activity</span>
+          <Sparkles className="w-3.5 h-3.5 text-[#6E8F6A]" />
+          <span className="text-xs font-semibold text-neutral-900 dark:text-white">AI in Action</span>
         </div>
-        <span className="text-[10px] text-neutral-400 dark:text-neutral-500 font-mono">Community feed</span>
+        {/* Tab switcher */}
+        <div className="flex items-center gap-1">
+          {aiShowcases.map((s, i) => {
+            const TabIcon = s.icon;
+            return (
+              <button
+                key={s.id}
+                onClick={() => switchTo(i)}
+                className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-[10px] font-medium transition-all duration-200 ${
+                  i === active
+                    ? "text-white"
+                    : "text-neutral-500 dark:text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300"
+                }`}
+                style={i === active ? { background: s.accent } : {}}
+              >
+                <TabIcon className="w-3 h-3" />
+                <span className="hidden sm:inline">{s.label}</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
-      {/* Feed rows */}
-      <div className="divide-y divide-[#E6E6E6] dark:divide-white/[0.04]">
-        {activityFeed.map((item, i) => {
-          const Icon = item.icon;
-          return (
-            <motion.div
-              key={i}
-              className="flex items-center gap-3 px-5 py-3"
-              initial={{ opacity: 0, x: -12 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ delay: i * 0.09 + 0.2, duration: 0.35, ease: "easeOut" }}
+      {/* Terminal body */}
+      <div className="flex-1 bg-[#1a1a1a] dark:bg-[#111] p-5 flex flex-col gap-3">
+        {/* Window chrome dots */}
+        <div className="flex items-center gap-1.5 mb-1">
+          <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
+          <span className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
+          <span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
+          <span className="font-mono text-[10px] text-neutral-600 ml-2">{showcase.label.toLowerCase().replace(/ /g, "-")}.ts</span>
+        </div>
+
+        {/* Prompt line */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={`prompt-${active}`}
+            initial={{ opacity: 0, x: -8 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="flex items-center gap-2"
+          >
+            <Terminal className="w-3 h-3 text-neutral-600 flex-shrink-0" />
+            <span className="font-mono text-[11px] text-neutral-500">{showcase.prompt}</span>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Separator */}
+        <div className="border-t border-white/[0.06]" />
+
+        {/* Animated code lines */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={`lines-${key}`}
+            className="flex flex-col gap-0.5"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            {showcase.lines.map((line, i) => (
+              <TypewriterLine
+                key={`${key}-${i}`}
+                text={line.text}
+                color={line.color}
+                delay={i * 220}
+              />
+            ))}
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Badge */}
+        <AnimatePresence>
+          <motion.div
+            key={`badge-${key}`}
+            className="mt-auto flex items-center gap-1.5 self-start"
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: showcase.lines.length * 0.22 + 0.3, duration: 0.3 }}
+          >
+            <span
+              className="text-[10px] font-medium px-2.5 py-1 rounded-full"
+              style={{ background: `${showcase.accent}25`, color: showcase.accent }}
             >
-              <Icon className={`w-3.5 h-3.5 flex-shrink-0 ${item.color}`} />
-              <p className="text-[12px] text-neutral-600 dark:text-neutral-400 leading-none flex-1 min-w-0">
-                <span className="font-medium text-neutral-900 dark:text-white">@{item.user}</span>
-                {" "}{item.action}{" "}
-                <span className="font-mono text-[11px] text-neutral-500 dark:text-neutral-500">{item.target}</span>
-              </p>
-              <span className="text-[10px] text-neutral-400 dark:text-neutral-500 flex-shrink-0 font-mono">{item.time}</span>
-            </motion.div>
-          );
-        })}
+              ✦ {showcase.badge}
+            </span>
+          </motion.div>
+        </AnimatePresence>
       </div>
-    </div>
+
+      {/* Progress bar */}
+      <div className="h-[2px] bg-[#E6E6E6] dark:bg-white/[0.05] relative overflow-hidden">
+        <motion.div
+          key={`progress-${key}`}
+          className="absolute inset-y-0 left-0 rounded-full"
+          style={{ background: showcase.accent }}
+          initial={{ width: "0%" }}
+          animate={{ width: "100%" }}
+          transition={{ duration: 5.5, ease: "linear" }}
+        />
+      </div>
+    </motion.div>
   );
 }
 
@@ -390,7 +568,7 @@ export default function CommunitySection() {
 
         {/* ── Bottom two-column: activity + heatmap ── */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-16">
-          <LiveActivityFeed />
+          <AIShowcase />
           <div className="flex flex-col gap-4">
             <TechStackCloud />
 
