@@ -1,49 +1,62 @@
-import { motion, useInView, AnimatePresence } from "framer-motion";
-import { Users, Star, Github, ChevronLeft, ChevronRight } from "lucide-react";
-import { ScrollReveal, StaggerContainer, StaggerItem, SoftCard, SoftButton, SectionDivider } from "@/components/motion";
+import { motion } from "framer-motion";
+import { Users, Github, MessageSquare, BookOpen, Zap, Globe, Code2, Rocket } from "lucide-react";
+import { ScrollReveal, StaggerContainer, StaggerItem, SoftButton, SectionDivider } from "@/components/motion";
 import { safeWindowOpen } from "@/utils/safe";
-import { useRef, useState, useEffect, useCallback, useMemo } from "react";
 
-const testimonials = [
+const communityHighlights = [
   {
-    name: "Alex Chen",
-    role: "Senior Developer",
-    company: "TechCorp",
-    content: "Lade Stack's AI Code Editor transformed how I write and review code. The AI suggestions are surprisingly accurate.",
-    avatar: "AC",
-    rating: 5,
+    icon: Code2,
+    title: "Open Source",
+    description: "All core tools are open source. Fork, contribute, and shape the future of AI-powered development.",
+    cta: "View on GitHub",
+    url: "https://github.com/girishlade111",
+    color: "text-[#6E8F6A]",
+    bg: "bg-[#6E8F6A]/10 dark:bg-[#6E8F6A]/10",
   },
   {
-    name: "Sarah Kim",
-    role: "Full Stack Engineer",
-    company: "StartupX",
-    content: "The API testing platform saved us weeks of manual testing. It auto-generates test cases that actually make sense.",
-    avatar: "SK",
-    rating: 5,
+    icon: MessageSquare,
+    title: "Community Discord",
+    description: "Connect with 50K+ developers. Get help, share projects, and collaborate in real time.",
+    cta: "Join Discord",
+    url: "https://discord.gg/ladestack",
+    color: "text-indigo-500",
+    bg: "bg-indigo-500/10",
   },
   {
-    name: "Michael Patel",
-    role: "DevOps Lead",
-    company: "CloudScale",
-    content: "Enterprise-grade tools at zero cost. Lade Stack is what every developer platform should aspire to be.",
-    avatar: "MP",
-    rating: 5,
+    icon: BookOpen,
+    title: "Documentation",
+    description: "Comprehensive guides, API references, and tutorials to get you productive in minutes.",
+    cta: "Read Docs",
+    url: "https://docs.ladestack.in/",
+    color: "text-amber-500",
+    bg: "bg-amber-500/10",
   },
   {
-    name: "Emily Zhang",
-    role: "Tech Lead",
-    company: "InnovateLab",
-    content: "The AI documentation generator cut our docs time by 80%. It understands code context better than any tool I've used.",
-    avatar: "EZ",
-    rating: 5,
+    icon: Rocket,
+    title: "Starter Templates",
+    description: "Production-ready templates built with best practices. Launch your next project in seconds.",
+    cta: "Browse Templates",
+    url: "https://ladestack.in/",
+    color: "text-rose-500",
+    bg: "bg-rose-500/10",
   },
   {
-    name: "David Martinez",
-    role: "Frontend Developer",
-    company: "DesignFlow",
-    content: "Website builder with AI is incredible. Generated a production-ready landing page from a single prompt in minutes.",
-    avatar: "DM",
-    rating: 4,
+    icon: Globe,
+    title: "Global Events",
+    description: "Hackathons, webinars, and workshops hosted worldwide. Learn, build, and connect with peers.",
+    cta: "See Events",
+    url: "https://ladestack.in/",
+    color: "text-sky-500",
+    bg: "bg-sky-500/10",
+  },
+  {
+    icon: Zap,
+    title: "Weekly Challenges",
+    description: "Sharpen your skills with AI-powered coding challenges. Win badges, climb the leaderboard.",
+    cta: "Join Challenge",
+    url: "https://ladestack.in/",
+    color: "text-purple-500",
+    bg: "bg-purple-500/10",
   },
 ];
 
@@ -54,141 +67,35 @@ const communityStats = [
   { value: "4.9", label: "Avg Rating" },
 ];
 
-function AnimatedStars({ count }: { count: number }) {
-  return (
-    <div className="flex items-center gap-0.5">
-      {[...Array(5)].map((_, i) => (
-        <Star
-          key={i}
-          className={`w-3.5 h-3.5 ${
-            i < count ? "fill-amber-400 text-amber-400" : "fill-[#E6E6E6] text-[#E6E6E6] dark:fill-[#444] dark:text-[#444]"
-          }`}
-        />
-      ))}
-    </div>
-  );
-}
-
-function TestimonialCard({ testimonial, index }: {
-  testimonial: typeof testimonials[0];
+function CommunityHighlightCard({
+  item,
+  index,
+}: {
+  item: (typeof communityHighlights)[0];
   index: number;
 }) {
+  const Icon = item.icon;
   return (
     <motion.div
-      className="flex-shrink-0 w-full md:w-[calc(33.333%-16px)]"
+      className="soft-card p-6 flex flex-col gap-4 h-full group cursor-pointer"
       initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ delay: index * 0.08, duration: 0.4 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.07, duration: 0.4 }}
+      whileHover={{ y: -4 }}
+      onClick={() => safeWindowOpen(item.url)}
     >
-      <motion.div
-        className="soft-card p-6 h-full"
-        whileHover={{ y: -4 }}
-        transition={{ duration: 0.3 }}
-      >
-        <AnimatedStars count={testimonial.rating} />
-
-        <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed my-5">
-          "{testimonial.content}"
-        </p>
-
-        <div className="flex items-center gap-3 mt-auto">
-          <div className="w-10 h-10 rounded-full bg-[#E7EDD8] dark:bg-[#6E8F6A]/20 flex items-center justify-center text-xs font-semibold text-[#6E8F6A]">
-            {testimonial.avatar}
-          </div>
-          <div>
-            <p className="text-sm font-medium text-neutral-900 dark:text-white">{testimonial.name}</p>
-            <p className="text-xs text-neutral-500 dark:text-neutral-500">{testimonial.role} at {testimonial.company}</p>
-          </div>
-        </div>
-      </motion.div>
+      <div className={`w-10 h-10 rounded-xl ${item.bg} flex items-center justify-center`}>
+        <Icon className={`w-5 h-5 ${item.color}`} />
+      </div>
+      <div className="flex-1">
+        <h3 className="text-sm font-semibold text-neutral-900 dark:text-white mb-1.5">{item.title}</h3>
+        <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">{item.description}</p>
+      </div>
+      <span className={`text-xs font-medium ${item.color} flex items-center gap-1 group-hover:gap-2 transition-all`}>
+        {item.cta} <span>→</span>
+      </span>
     </motion.div>
-  );
-}
-
-function TestimonialCarousel() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const isVisible = useInView(carouselRef, { amount: 0.1 });
-
-  const visibleCount = 3;
-  const maxIndex = testimonials.length - visibleCount;
-
-  const next = useCallback(() => {
-    setActiveIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-  }, [maxIndex]);
-
-  const prev = useCallback(() => {
-    setActiveIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
-  }, [maxIndex]);
-
-  // Only auto-advance when section is visible and not paused
-  useEffect(() => {
-    if (timerRef.current) clearInterval(timerRef.current);
-    if (!isPaused && isVisible) {
-      timerRef.current = setInterval(() => {
-        next();
-      }, 5000);
-    }
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [isPaused, isVisible, next]);
-
-  const visibleTestimonials = useMemo(() => {
-    return testimonials.slice(activeIndex, activeIndex + visibleCount);
-  }, [activeIndex]);
-
-  return (
-    <div
-      ref={carouselRef}
-      className="relative"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
-      <div className="hidden md:flex absolute -left-4 top-1/2 -translate-y-1/2 z-10">
-        <button
-          onClick={prev}
-          className="w-9 h-9 rounded-full bg-white dark:bg-[#2a2622] border border-border flex items-center justify-center text-neutral-500 hover:text-neutral-900 dark:hover:text-white shadow-sm transition-colors"
-        >
-          <ChevronLeft className="w-4 h-4" />
-        </button>
-      </div>
-      <div className="hidden md:flex absolute -right-4 top-1/2 -translate-y-1/2 z-10">
-        <button
-          onClick={next}
-          className="w-9 h-9 rounded-full bg-white dark:bg-[#2a2622] border border-border flex items-center justify-center text-neutral-500 hover:text-neutral-900 dark:hover:text-white shadow-sm transition-colors"
-        >
-          <ChevronRight className="w-4 h-4" />
-        </button>
-      </div>
-
-      <div className="flex gap-6 overflow-hidden">
-        <AnimatePresence mode="popLayout">
-          {visibleTestimonials.map((testimonial, i) => (
-            <TestimonialCard
-              key={testimonial.name}
-              testimonial={testimonial}
-              index={i}
-            />
-          ))}
-        </AnimatePresence>
-      </div>
-
-      <div className="flex justify-center gap-2 mt-8">
-        {Array.from({ length: maxIndex + 1 }).map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setActiveIndex(i)}
-            className={`h-1.5 rounded-full transition-all duration-300 ${
-              i === activeIndex
-                ? "w-8 bg-[#6E8F6A]"
-                : "w-1.5 bg-[#ccc] dark:bg-[#444] hover:bg-[#999]"
-            }`}
-          />
-        ))}
-      </div>
-    </div>
   );
 }
 
@@ -230,8 +137,10 @@ export default function CommunitySection() {
           ))}
         </StaggerContainer>
 
-        <div className="mb-16">
-          <TestimonialCarousel />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
+          {communityHighlights.map((item, i) => (
+            <CommunityHighlightCard key={item.title} item={item} index={i} />
+          ))}
         </div>
 
         <ScrollReveal>
