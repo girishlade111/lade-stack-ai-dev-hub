@@ -220,16 +220,13 @@ export function SoftButton({
   };
 
   return (
-    <motion.button
+    <button
       onClick={onClick}
-      className={`inline-flex items-center justify-center gap-2 font-medium transition-colors duration-200 ${sizeMap[size]} ${variantMap[variant]} ${className}`}
-      whileHover={{ y: -1 }}
-      whileTap={{ scale: 0.98 }}
-      transition={{ duration: 0.2, ease: "easeOut" }}
+      className={`soft-btn inline-flex items-center justify-center gap-2 font-medium ${sizeMap[size]} ${variantMap[variant]} ${className}`}
     >
       {children}
       {showArrow && <ArrowRight className="w-4 h-4" />}
-    </motion.button>
+    </button>
   );
 }
 

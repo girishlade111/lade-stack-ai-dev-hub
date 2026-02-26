@@ -323,3 +323,63 @@
 .dark ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.25);
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   PERFORMANCE: CSS keyframes replacing framer-motion JS animations.
+   These run on the compositor thread — zero main-thread cost.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Header slide-in (replaces motion.header initial/animate) */
+@keyframes header-slide-in {
+  from {
+    transform: translateY(-80px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Hero word reveal (replaces per-word motion.span with blur/rotateX) */
+@keyframes hero-word-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(44px) rotateX(30deg);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+    filter: blur(0px);
+  }
+}
+
+/* Hero fade-in-up for sub-elements (badge, copy, buttons, etc.) */
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero underline grow */
+@keyframes hero-underline-grow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* SoftButton hover — compositor-only */
+.soft-btn {
+  transition: transform 0.2s ease-out, background-color 0.2s ease-out;
+}
+.soft-btn:hover {
+  transform: translateY(-1px);
+}
+.soft-btn:active {
+  transform: scale(0.98);
+}

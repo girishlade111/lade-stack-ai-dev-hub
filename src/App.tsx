@@ -7,7 +7,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { MotionConfig } from "framer-motion";
+
 import LoadingScreen from "@/components/LoadingScreen";
 import ScrollProgress from "@/components/ScrollProgress";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -75,38 +75,36 @@ const App = () => (
   <ErrorBoundary>
     <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme="light" storageKey="ladestack-theme">
-        <MotionConfig reducedMotion="user">
-          <BrowserRouter>
-            <SmoothScroll>
-              <LoadingScreen />
-              <ScrollProgress />
-              <ScrollToTop />
-              <Suspense fallback={<PageLoader />}>
-                <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="/about" element={<AboutUs />} />
-                  <Route path="/projects" element={<Projects />} />
-                  <Route path="/projects/:projectId" element={<ProjectDetail />} />
-                  <Route path="/file-sharing-platform" element={<FileSharingPlatform />} />
-                  <Route path="/blog" element={<Blog />} />
-                  <Route path="/blog/:slug" element={<BlogPost />} />
-                  <Route path="/contact" element={<Contact />} />
-                  <Route path="/privacy" element={<PrivacyPolicy />} />
-                  <Route path="/terms" element={<TermsOfService />} />
-                  <Route path="/support" element={<Support />} />
-                  <Route path="/docs" element={<Documentation />} />
-                  <Route path="/ai-code-viewer-ai" element={<AICodeViewerAI />} />
-                  <Route path="/api-testing-platform" element={<ApiTestingPlatform />} />
-                  <Route path="/apps" element={<AppsGallery />} />
-                  <Route path="/apps/admin" element={<AppsAdmin />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </Suspense>
-              <Toaster />
-              <Sonner />
-            </SmoothScroll>
-          </BrowserRouter>
-        </MotionConfig>
+        <BrowserRouter>
+          <SmoothScroll>
+            <LoadingScreen />
+            <ScrollProgress />
+            <ScrollToTop />
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/about" element={<AboutUs />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/projects/:projectId" element={<ProjectDetail />} />
+                <Route path="/file-sharing-platform" element={<FileSharingPlatform />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/privacy" element={<PrivacyPolicy />} />
+                <Route path="/terms" element={<TermsOfService />} />
+                <Route path="/support" element={<Support />} />
+                <Route path="/docs" element={<Documentation />} />
+                <Route path="/ai-code-viewer-ai" element={<AICodeViewerAI />} />
+                <Route path="/api-testing-platform" element={<ApiTestingPlatform />} />
+                <Route path="/apps" element={<AppsGallery />} />
+                <Route path="/apps/admin" element={<AppsAdmin />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+            <Toaster />
+            <Sonner />
+          </SmoothScroll>
+        </BrowserRouter>
       </ThemeProvider>
     </QueryClientProvider>
     <Analytics />

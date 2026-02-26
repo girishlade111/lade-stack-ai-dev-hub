@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
 import { Menu, Search, Home, User, Layers, FileText, Mail } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import { SearchModal } from "@/components/ui/search-modal";
@@ -24,9 +23,6 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
-  // Sentinel ref — a 20px invisible div at the top of the page.
-  // IntersectionObserver fires ONCE when it leaves/enters the viewport,
-  // instead of on every scroll frame. Zero main-thread cost at 60fps.
   const sentinelRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
@@ -36,7 +32,6 @@ export default function Header() {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // When sentinel is NOT intersecting (scrolled past 20px) → scrolled = true
         setScrolled(!entry.isIntersecting);
       },
       { threshold: 0, rootMargin: "-20px 0px 0px 0px" }
@@ -64,8 +59,7 @@ export default function Header() {
 
   return (
     <>
-      {/* Invisible sentinel — IntersectionObserver target. Position it
-          at exactly 20px from top so we detect the "scrolled past 20px" state. */}
+      {/* Invisible sentinel — IntersectionObserver target */}
       <div
         ref={sentinelRef}
         aria-hidden
@@ -79,15 +73,17 @@ export default function Header() {
         }}
       />
 
-      <motion.header
-        className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-          scrolled
+      {/*
+        CSS-only header animation replaces framer-motion.
+        The @keyframes header-slide-in is defined in index.css.
+        This removes framer-motion from the Header's critical bundle.
+      */}
+      <header
+        className={`sticky top-0 z-50 w-full transition-all duration-300 ${scrolled
             ? "border-b border-[#E6E6E6] dark:border-white/10 bg-[#F5F3EB]/85 dark:bg-[#1e1c18]/80 backdrop-blur-md md:backdrop-blur-xl"
             : "bg-[#F5F3EB] dark:bg-[#1e1c18]"
-        }`}
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+          }`}
+        style={{ animation: "header-slide-in 0.5s ease-out both" }}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 h-16">
           {/* ── LEFT: Logo ─────────────────────────────────── */}
@@ -141,15 +137,13 @@ export default function Header() {
             {/* Theme toggle */}
             <ThemeToggle />
 
-            {/* CTA (desktop) */}
+            {/* CTA (desktop) — CSS hover/active replaces motion.button */}
             <Link to="/apps" className="hidden md:block">
-              <motion.button
-                className="h-9 px-5 text-sm font-medium bg-[#6E8F6A] text-white rounded-lg hover:bg-[#5F7F63] transition-colors duration-200"
-                whileHover={{ y: -1 }}
-                whileTap={{ scale: 0.98 }}
+              <button
+                className="h-9 px-5 text-sm font-medium bg-[#6E8F6A] text-white rounded-lg hover:bg-[#5F7F63] transition-all duration-200 hover:-translate-y-px active:scale-[0.98]"
               >
                 Get Started
-              </motion.button>
+              </button>
             </Link>
 
             {/* Mobile hamburger */}
@@ -202,7 +196,7 @@ export default function Header() {
             </Sheet>
           </div>
         </div>
-      </motion.header>
+      </header>
 
       {/* Search Modal */}
       <SearchModal open={searchOpen} onOpenChange={setSearchOpen} />

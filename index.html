@@ -142,13 +142,23 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" />
     </noscript>
 
-    <!-- Non-critical font: JetBrains Mono — loaded after page is interactive -->
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
+    <!-- Non-critical font: JetBrains Mono — deferred until idle to free
+         bandwidth for the hero background image (the LCP element). -->
+    <script>
+      (function(){
+        var loadFont = function(){
+          var l = document.createElement('link');
+          l.rel = 'stylesheet';
+          l.href = 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap';
+          document.head.appendChild(l);
+        };
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(loadFont);
+        } else {
+          setTimeout(loadFont, 2000);
+        }
+      })();
+    </script>
     <noscript>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" />
     </noscript>
