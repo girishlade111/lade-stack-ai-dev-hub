@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
-  Code2, Globe, FileText, Brain, Cpu, Image, FileCheck,
+  Code2, Globe, FileText, Brain, Cpu, Image, FileCheck, MapPin,
   ExternalLink, Layers, ArrowRight, ArrowUpRight,
   Check, Zap, Clock, Star, ChevronRight,
   Sparkles,
@@ -203,6 +203,30 @@ const products = [
     color: "#2563EB",
     trackColor: "#2563EB22",
     popularity: 82,
+    badge: "New",
+  },
+  {
+    id: "bharat-land",
+    icon: MapPin,
+    title: "Bharat Land Converter",
+    shortTitle: "Bharat Land",
+    tagline: "Convert land units across India",
+    description:
+      "Convert land measurement units across India — Bigha, Guntha, Acre, Hectare, and more, state-wise accurate.",
+    features: [
+      "All India Units",
+      "Instant Convert",
+      "State-wise Accuracy",
+      "100% Free",
+    ],
+    tags: ["Productivity"],
+    status: "Live" as const,
+    url: "https://land.ladestack.in/",
+    internalUrl: "https://land.ladestack.in/",
+    timeToValue: "Instant",
+    color: "#EA580C",
+    trackColor: "#EA580C22",
+    popularity: 78,
     badge: "New",
   },
 ];
