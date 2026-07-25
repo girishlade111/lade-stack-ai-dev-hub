@@ -138,7 +138,7 @@ const LadeSuite = () => {
               <Card
                 key={app.id}
                 className="group border border-border hover:border-border/80 transition-all duration-300 hover:shadow-lg hover:scale-105 bg-card dark:bg-card/80 cursor-pointer"
-                onClick={() => safeWindowOpen(`/projects/${app.id}`)}
+                onClick={() => safeWindowOpen('/apps')}
               >
                 <CardHeader className="p-3">
                   <div className="relative mb-3">
@@ -211,9 +211,9 @@ const LadeSuite = () => {
                   variant="outline"
                   size="sm"
                   className="text-xs"
-                  onClick={() => safeWindowOpen('/projects')}
+                  onClick={() => safeWindowOpen('/apps')}
                 >
-                  View All Projects
+                  Explore All Products
                 </Button>
               </div>
               

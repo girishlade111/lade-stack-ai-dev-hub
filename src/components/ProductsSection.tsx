@@ -822,9 +822,9 @@ export default function ProductsSection() {
                   Explore All Products
                 </SoftButton>
               </Link>
-              <Link to="/projects">
+              <Link to="/about">
                 <SoftButton variant="secondary" size="lg">
-                  View Roadmap
+                  About Lade Stack
                 </SoftButton>
               </Link>
             </div>

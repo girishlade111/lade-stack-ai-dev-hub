@@ -451,7 +451,7 @@ function HeroLeft({ isDark }: { isDark: boolean }) {
         >
           Start Building Free
         </SoftButton>
-        <Link to="/projects">
+        <Link to="/apps">
           <SoftButton
             variant="secondary"
             size="lg"

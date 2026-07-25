@@ -530,10 +530,10 @@ export default function AppsGallery() {
                     Launch AI Code Viewer
                   </a>
                   <Link
-                    to="/projects"
+                    to="/about"
                     className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-xl border border-border bg-background hover:bg-muted/40 text-foreground text-sm font-semibold transition-colors duration-200"
                   >
-                    View all projects
+                    About Lade Stack
                     <ChevronRight className="w-4 h-4" />
                   </Link>
                 </div>
