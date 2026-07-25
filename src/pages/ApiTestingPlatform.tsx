@@ -533,9 +533,9 @@ const ApiTestingPlatform: React.FC = () => {
             {/* Back Button */}
             <div className="mb-6 sm:mb-8">
               <Button variant="ghost" asChild className="text-muted-foreground hover:text-foreground">
-                <Link to="/projects">
+                <Link to="/apps">
                   <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back to Projects
+                  Back to Products
                 </Link>
               </Button>
             </div>
