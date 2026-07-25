@@ -42,7 +42,7 @@ const products: SearchItem[] = [
     id: "api-testing",
     title: "API Testing Platform",
     description: "Test and debug APIs with real-time feedback.",
-    href: "/api-testing-platform",
+    href: "/apps",
     icon: <FlaskConical className="h-4 w-4" />,
   },
   {
@@ -56,7 +56,7 @@ const products: SearchItem[] = [
     id: "file-sharing",
     title: "File Sharing",
     description: "Secure file management and sharing platform.",
-    href: "/file-sharing-platform",
+    href: "/apps",
     icon: <Upload className="h-4 w-4" />,
   },
   {
