@@ -281,7 +281,7 @@ export default function Footer() {
                 Pay nothing.
               </h2>
               <p className="text-neutral-500 dark:text-neutral-400 text-base leading-relaxed max-w-md mb-8">
-                Five enterprise-grade AI tools — unified, open, and completely free.
+                Six enterprise-grade AI tools — unified, open, and completely free.
                 No credit card. No usage limits. No catch.
               </p>
 
