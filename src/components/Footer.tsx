@@ -17,10 +17,10 @@ const products = [
   { name: "LS Image Compress",href: "https://img.ladestack.in/",  icon: Image,    color: "#8B5CF6", live: true  },
   { name: "Swift Resume",     href: "https://resume.ladestack.in/",icon: FileCheck,color: "#2563EB", live: true  },
   { name: "Bharat Land",      href: "https://land.ladestack.in/",  icon: MapPin,   color: "#EA580C", live: true  },
-  { name: "API Tester",       href: "/api-testing-platform",      icon: Cpu,      color: "#4ec2e8", live: false },
+  { name: "API Tester",       href: "/apps",                      icon: Cpu,      color: "#4ec2e8", live: false },
   { name: "No-Code Builder",  href: "/apps",                      icon: Globe,    color: "#b47ee8", live: false },
   { name: "Doc Generator",    href: "/apps",                      icon: Brain,    color: "#e8a64e", live: false },
-  { name: "File Sharing",     href: "/file-sharing-platform",     icon: FileText, color: "#e87070", live: false },
+  { name: "File Sharing",     href: "/apps",                      icon: FileText, color: "#e87070", live: false },
 ];
 
 const navColumns = [
@@ -32,10 +32,10 @@ const navColumns = [
       { label: "LS Image Compress",href: "https://img.ladestack.in/" },
       { label: "Swift Resume",     href: "https://resume.ladestack.in/" },
       { label: "Bharat Land",      href: "https://land.ladestack.in/" },
-      { label: "API Tester",       href: "/api-testing-platform"     },
+      { label: "API Tester",       href: "/apps"                     },
       { label: "No-Code Builder",  href: "/apps"                     },
       { label: "Doc Generator",    href: "/apps"                     },
-      { label: "File Sharing",     href: "/file-sharing-platform"    },
+      { label: "File Sharing",     href: "/apps"                     },
       { label: "Apps Gallery",     href: "/apps"                     },
     ],
   },
