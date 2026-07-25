@@ -35,7 +35,7 @@ const products: SearchItem[] = [
     id: "code-editor",
     title: "AI Code Editor",
     description: "Smart coding assistant powered by AI.",
-    href: "/projects/lade-code",
+    href: "/ai-code-viewer-ai",
     icon: <Code className="h-4 w-4" />,
   },
   {
@@ -63,7 +63,7 @@ const products: SearchItem[] = [
     id: "no-code-builder",
     title: "No-Code Builder",
     description: "Build websites without writing code.",
-    href: "/projects/lade-builder",
+    href: "/apps",
     icon: <Blocks className="h-4 w-4" />,
   },
 ];
