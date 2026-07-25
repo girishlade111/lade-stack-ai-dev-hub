@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
-  Code2, Globe, FileText, Brain, Cpu,
+  Code2, Globe, FileText, Brain, Cpu, Image,
   ExternalLink, Layers, ArrowRight, ArrowUpRight,
   Check, Zap, Clock, Star, ChevronRight,
   Sparkles,
@@ -155,6 +155,30 @@ const products = [
     color: "#E5322D",
     trackColor: "#E5322D22",
     popularity: 88,
+    badge: "New",
+  },
+  {
+    id: "ls-img",
+    icon: Image,
+    title: "LS Image Compressor",
+    shortTitle: "LS Image",
+    tagline: "9+ image formats, up to 90% smaller",
+    description:
+      "Compress and convert JPG, PNG, WebP, HEIC, AVIF, TIFF, GIF, SVG, ICO — up to 90% smaller, 100% in-browser.",
+    features: [
+      "Client-Side Only",
+      "9+ Formats",
+      "No Uploads",
+      "100% Privacy",
+    ],
+    tags: ["Productivity"],
+    status: "Live" as const,
+    url: "https://img.ladestack.in/",
+    internalUrl: "https://img.ladestack.in/",
+    timeToValue: "Instant",
+    color: "#8B5CF6",
+    trackColor: "#8B5CF622",
+    popularity: 85,
     badge: "New",
   },
 ];
@@ -620,7 +644,7 @@ export default function ProductsSection() {
               {" "}suite
             </h2>
             <p className="text-neutral-500 dark:text-neutral-400 text-lg max-w-xl mx-auto leading-relaxed">
-              Six AI-powered tools that cover every phase of modern development — unified, free, and production-ready.
+              Seven AI-powered tools that cover every phase of modern development — unified, free, and production-ready.
             </p>
           </div>
         </ScrollReveal>
@@ -704,7 +728,7 @@ export default function ProductsSection() {
                     </div>
                     <div>
                       <p className="text-xs font-semibold text-neutral-900 dark:text-white">Free forever</p>
-                      <p className="text-[10px] text-neutral-500 dark:text-neutral-500 mt-0.5">All 6 tools. No credit card.</p>
+                      <p className="text-[10px] text-neutral-500 dark:text-neutral-500 mt-0.5">All 7 tools. No credit card.</p>
                     </div>
                   </motion.div>
                 </div>
