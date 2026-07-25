@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Activity, Globe, FolderOpen, BookOpen, Monitor, FileText, Image, FileCheck, ArrowRight } from 'lucide-react';
+import { Activity, Globe, FolderOpen, BookOpen, Monitor, FileText, Image, FileCheck, MapPin, ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -79,6 +79,15 @@ const LadeSuite = () => {
       coverImage: '/swift-resume-project.svg',
       category: 'Productivity',
       status: 'Live'
+    },
+    {
+      id: 'bharat-land',
+      icon: MapPin,
+      title: 'Bharat Land Converter',
+      description: 'Convert land measurement units across India — Bigha, Guntha, Acre, Hectare, and more, state-wise accurate.',
+      coverImage: '/bharat-land-project.svg',
+      category: 'Productivity',
+      status: 'Live'
     }
   ], []);
 
@@ -109,7 +118,7 @@ const LadeSuite = () => {
             </h2>
             
             <p className="text-sm text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Eight powerful AI-powered tools covering your entire development lifecycle. 
+              Nine powerful AI-powered tools covering your entire development lifecycle. 
               Each app saves 10+ hours per week and integrates seamlessly.
             </p>
           </div>
