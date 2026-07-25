@@ -13,6 +13,7 @@ import { safeWindowOpen } from "@/utils/safe";
 
 const products = [
   { name: "AI Code Editor",   href: "/ai-code-viewer-ai",         icon: Code2,    color: "#6E8F6A", live: true  },
+  { name: "LS PDF Toolkit",   href: "https://pdf.ladestack.in/",  icon: FileText, color: "#E5322D", live: true  },
   { name: "API Tester",       href: "/api-testing-platform",      icon: Cpu,      color: "#4ec2e8", live: false },
   { name: "No-Code Builder",  href: "/projects/website-builder",  icon: Globe,    color: "#b47ee8", live: false },
   { name: "Doc Generator",    href: "/projects/documentation-ai", icon: Brain,    color: "#e8a64e", live: false },
@@ -24,6 +25,7 @@ const navColumns = [
     heading: "Platform",
     links: [
       { label: "AI Code Editor",  href: "/ai-code-viewer-ai"        },
+      { label: "LS PDF Toolkit",  href: "https://pdf.ladestack.in/" },
       { label: "API Tester",      href: "/api-testing-platform"     },
       { label: "No-Code Builder", href: "/projects/website-builder" },
       { label: "Doc Generator",   href: "/projects/documentation-ai"},
