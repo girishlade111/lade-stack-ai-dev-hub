@@ -776,7 +776,7 @@ export default function ProductsSection() {
                     </div>
                     <div>
                       <p className="text-xs font-semibold text-neutral-900 dark:text-white">Free forever</p>
-                      <p className="text-[10px] text-neutral-500 dark:text-neutral-500 mt-0.5">All 8 tools. No credit card.</p>
+                      <p className="text-[10px] text-neutral-500 dark:text-neutral-500 mt-0.5">All 9 tools. No credit card.</p>
                     </div>
                   </motion.div>
                 </div>
