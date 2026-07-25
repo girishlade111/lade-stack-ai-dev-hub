@@ -332,7 +332,13 @@ function ProductStrip() {
         {[...products, ...products].map((p, i) => (
           <button
             key={i}
-            onClick={() => safeWindowOpen(p.url)}
+            onClick={() => {
+              if (p.url.startsWith("http")) {
+                safeWindowOpen(p.url);
+              } else {
+                window.location.href = p.url;
+              }
+            }}
             className="flex-shrink-0 flex items-center gap-3 px-5 py-3 rounded-2xl border border-[#E6E6E6] dark:border-white/[0.07] bg-white dark:bg-white/[0.02] hover:border-[#C8C8C8] dark:hover:border-white/[0.15] transition-colors duration-200 group"
           >
             <div
@@ -360,7 +366,7 @@ function ProductStrip() {
 
 const snapStats = [
   { to: 50,  suffix: "K+", label: "Developers" },
-  { to: 5,   suffix: "+",  label: "AI Products" },
+  { to: 9,   suffix: "",   label: "AI Products" },
   { to: 100, suffix: "+",  label: "Countries" },
   { to: 99,  suffix: "%",  label: "Uptime" },
 ];
