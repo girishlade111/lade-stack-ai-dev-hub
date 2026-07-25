@@ -160,9 +160,9 @@ const AICodeViewerAI = () => {
                 className="mb-8"
               >
                 <Button variant="ghost" asChild className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100">
-                  <Link to="/projects/ai-code-viewer">
+                  <Link to="/apps">
                     <ArrowLeft className="w-4 h-4 mr-2" />
-                    Back to Project
+                    Back to Products
                   </Link>
                 </Button>
               </motion.div>
@@ -789,8 +789,8 @@ const AICodeViewerAI = () => {
                 </h4>
                 <ul className="space-y-2">
                   <li>
-                    <Link to="/projects" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                      Projects
+                    <Link to="/apps" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                      Products
                     </Link>
                   </li>
                   <li>
