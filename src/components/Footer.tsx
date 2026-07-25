@@ -44,7 +44,7 @@ const navColumns = [
     links: [
       { label: "About",        href: "/about"    },
       { label: "Blog",         href: "/blog"     },
-      { label: "All Projects", href: "/projects" },
+      { label: "All Products", href: "/apps"     },
       { label: "Contact",      href: "/contact"  },
     ],
   },
