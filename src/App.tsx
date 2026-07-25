@@ -17,7 +17,6 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const AboutUs = lazy(() => import("./pages/AboutUs"));
-const FileSharingPlatform = lazy(() => import("./pages/FileSharingPlatform"));
 const Blog = lazy(() => import("./pages/Blog.tsx"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 const Contact = lazy(() => import("./pages/Contact"));
@@ -26,7 +25,6 @@ const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 const Support = lazy(() => import("./pages/Support"));
 const Documentation = lazy(() => import("./pages/Documentation"));
 const AICodeViewerAI = lazy(() => import("./pages/AICodeViewerAI"));
-const ApiTestingPlatform = lazy(() => import("./pages/ApiTestingPlatform"));
 const AppsGallery = lazy(() => import("./pages/AppsGallery"));
 const AppsAdmin = lazy(() => import("./pages/AppsAdmin"));
 
