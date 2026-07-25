@@ -1,9 +1,9 @@
-import { motion, useInView, useAnimationFrame, AnimatePresence } from "framer-motion";
-import { useRef, useState, useCallback, useEffect } from "react";
+import { motion } from "framer-motion";
+import { useState } from "react";
 import {
   Users, Github, MessageSquare, BookOpen, Zap,
   Globe, Code2, Rocket, ArrowUpRight,
-  Star, Terminal, Layers, Sparkles, ChevronRight,
+  Star, Layers,
 } from "lucide-react";
 import { ScrollReveal, SoftButton, SectionDivider } from "@/components/motion";
 import { safeWindowOpen } from "@/utils/safe";
