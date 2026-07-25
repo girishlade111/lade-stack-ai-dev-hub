@@ -104,5 +104,22 @@
     "createdAt": "2025-03-25",
     "popularityScore": 88,
     "iconAlt": "LS PDF icon"
+  },
+  {
+    "id": "ls-img",
+    "slug": "ls-img",
+    "title": "LS Image Compressor",
+    "tagline": "Compress and convert 9+ image formats with 100% in-browser privacy",
+    "description": "Compress and convert JPG, PNG, WebP, HEIC, AVIF, TIFF, GIF, SVG, ICO — up to 90% smaller, 100% in-browser.",
+    "icon": "/ls-img-project.svg",
+    "category": "Productivity",
+    "features": ["Client-Side Only", "9+ Formats", "No Uploads"],
+    "timeToValue": "Instant",
+    "integrations": ["Canvas API", "WebAssembly", "Web Workers"],
+    "lifetimeFree": true,
+    "landingUrl": "https://img.ladestack.in/",
+    "createdAt": "2025-03-26",
+    "popularityScore": 85,
+    "iconAlt": "LS Image Compressor icon"
   }
 ]
