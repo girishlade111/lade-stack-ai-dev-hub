@@ -80,7 +80,6 @@ const App = () => (
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/about" element={<AboutUs />} />
-                <Route path="/file-sharing-platform" element={<FileSharingPlatform />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:slug" element={<BlogPost />} />
                 <Route path="/contact" element={<Contact />} />
@@ -89,7 +88,6 @@ const App = () => (
                 <Route path="/support" element={<Support />} />
                 <Route path="/docs" element={<Documentation />} />
                 <Route path="/ai-code-viewer-ai" element={<AICodeViewerAI />} />
-                <Route path="/api-testing-platform" element={<ApiTestingPlatform />} />
                 <Route path="/apps" element={<AppsGallery />} />
                 <Route path="/apps/admin" element={<AppsAdmin />} />
                 <Route path="*" element={<NotFound />} />
