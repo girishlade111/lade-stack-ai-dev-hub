@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Activity, Globe, FolderOpen, BookOpen, Monitor, ArrowRight } from 'lucide-react';
+import { Activity, Globe, FolderOpen, BookOpen, Monitor, FileText, ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -52,6 +52,15 @@ const LadeSuite = () => {
       coverImage: '/AIcode.png',
       category: 'Development',
       status: 'Available'
+    },
+    {
+      id: 'ls-pdf',
+      icon: FileText,
+      title: 'LS PDF — AI-Powered PDF Toolkit',
+      description: '17 client-side tools to merge, split, compress, protect, and convert PDFs. Zero uploads, 100% privacy.',
+      coverImage: '/ls-pdf-project.svg',
+      category: 'Productivity',
+      status: 'Live'
     }
   ], []);
 
@@ -82,7 +91,7 @@ const LadeSuite = () => {
             </h2>
             
             <p className="text-sm text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Five powerful AI-powered tools covering your entire development lifecycle. 
+              Six powerful AI-powered tools covering your entire development lifecycle. 
               Each app saves 10+ hours per week and integrates seamlessly.
             </p>
           </div>
