@@ -9,6 +9,7 @@ const AboutSection = lazy(() => import("@/components/AboutSection"));
 const ValuesSection = lazy(() => import("@/components/ValuesSection"));
 const ImpactSection = lazy(() => import("@/components/ImpactSection"));
 const ProductsSection = lazy(() => import("@/components/ProductsSection"));
+const FreeForeverSection = lazy(() => import("@/components/FreeForeverSection"));
 const CommunitySection = lazy(() => import("@/components/CommunitySection"));
 const Testimonials = lazy(() => import("@/components/Testimonials"));
 const Footer = lazy(() => import("@/components/Footer"));
@@ -59,6 +60,9 @@ export default function Index() {
           <div id="products">
             <ProductsSection />
           </div>
+        </Suspense>
+        <Suspense fallback={<SectionFallback />}>
+          <FreeForeverSection />
         </Suspense>
         <Suspense fallback={<SectionFallback />}>
           <CommunitySection />
