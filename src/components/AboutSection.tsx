@@ -69,11 +69,15 @@ const visionFeatures = [
 ];
 
 const products = [
-  { name: "AI Code Editor", tag: "Write · Review · Ship",      color: "#6E8F6A", url: "https://code.ladestack.in/" },
-  { name: "API Tester",     tag: "Test · Mock · Automate",     color: "#4ec2e8", url: "https://api.ladestack.in/" },
-  { name: "Doc Generator",  tag: "Write · Sync · Publish",     color: "#e8a64e", url: "https://docs.ladestack.in/" },
-  { name: "No-Code Builder", tag: "Design · Launch · Scale",   color: "#b47ee8", url: "https://builder.ladestack.in/" },
-  { name: "File Sharing",   tag: "Upload · Manage · Share",    color: "#e87070", url: "https://files.ladestack.in/" },
+  { name: "AI Code Editor",   tag: "Write · Review · Ship",      color: "#6E8F6A", url: "https://code.ladestack.in/" },
+  { name: "LS PDF Toolkit",   tag: "17 Tools · Zero Uploads",    color: "#E5322D", url: "https://pdf.ladestack.in/" },
+  { name: "LS Image Compress",tag: "9+ Formats · In-Browser", color: "#8B5CF6", url: "https://img.ladestack.in/" },
+  { name: "Swift Resume",     tag: "ATS-Optimized · Live Score", color: "#2563EB", url: "https://resume.ladestack.in/" },
+  { name: "Bharat Land",      tag: "All India Units · Instant",  color: "#EA580C", url: "https://land.ladestack.in/" },
+  { name: "API Tester",       tag: "Test · Mock · Automate",     color: "#4ec2e8", url: "/apps" },
+  { name: "No-Code Builder",  tag: "Design · Launch · Scale",   color: "#b47ee8", url: "/apps" },
+  { name: "Doc Generator",    tag: "Write · Sync · Publish",     color: "#e8a64e", url: "/apps" },
+  { name: "File Sharing",     tag: "Upload · Manage · Share",    color: "#e87070", url: "/apps" },
 ];
 
 // ─── Animated number counter (direct DOM, zero re-renders) ─────────────────
