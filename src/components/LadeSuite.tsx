@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Activity, Globe, FolderOpen, BookOpen, Monitor, FileText, ArrowRight } from 'lucide-react';
+import { Activity, Globe, FolderOpen, BookOpen, Monitor, FileText, Image, ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -61,6 +61,15 @@ const LadeSuite = () => {
       coverImage: '/ls-pdf-project.svg',
       category: 'Productivity',
       status: 'Live'
+    },
+    {
+      id: 'ls-img',
+      icon: Image,
+      title: 'LS Image Compressor',
+      description: 'Compress and convert JPG, PNG, WebP, HEIC, AVIF, TIFF, GIF, SVG, ICO — up to 90% smaller, 100% in-browser.',
+      coverImage: '/ls-img-project.svg',
+      category: 'Productivity',
+      status: 'Live'
     }
   ], []);
 
@@ -91,7 +100,7 @@ const LadeSuite = () => {
             </h2>
             
             <p className="text-sm text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Six powerful AI-powered tools covering your entire development lifecycle. 
+              Seven powerful AI-powered tools covering your entire development lifecycle. 
               Each app saves 10+ hours per week and integrates seamlessly.
             </p>
           </div>
