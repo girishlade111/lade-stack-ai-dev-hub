@@ -4,7 +4,7 @@ import { motion, useInView, useScroll, useTransform, AnimatePresence } from "fra
 import {
   Github, Linkedin, Instagram, Code, Mail,
   ArrowRight, ArrowUpRight, Code2, Cpu,
-  Globe, FileText, Brain, Sparkles, Check,
+  Globe, FileText, Brain, Image, Sparkles, Check,
   MapPin, Shield, Zap, Heart,
 } from "lucide-react";
 import { safeWindowOpen } from "@/utils/safe";
@@ -14,6 +14,7 @@ import { safeWindowOpen } from "@/utils/safe";
 const products = [
   { name: "AI Code Editor",   href: "/ai-code-viewer-ai",         icon: Code2,    color: "#6E8F6A", live: true  },
   { name: "LS PDF Toolkit",   href: "https://pdf.ladestack.in/",  icon: FileText, color: "#E5322D", live: true  },
+  { name: "LS Image Compress",href: "https://img.ladestack.in/",  icon: Image,    color: "#8B5CF6", live: true  },
   { name: "API Tester",       href: "/api-testing-platform",      icon: Cpu,      color: "#4ec2e8", live: false },
   { name: "No-Code Builder",  href: "/projects/website-builder",  icon: Globe,    color: "#b47ee8", live: false },
   { name: "Doc Generator",    href: "/projects/documentation-ai", icon: Brain,    color: "#e8a64e", live: false },
@@ -24,13 +25,14 @@ const navColumns = [
   {
     heading: "Platform",
     links: [
-      { label: "AI Code Editor",  href: "/ai-code-viewer-ai"        },
-      { label: "LS PDF Toolkit",  href: "https://pdf.ladestack.in/" },
-      { label: "API Tester",      href: "/api-testing-platform"     },
-      { label: "No-Code Builder", href: "/projects/website-builder" },
-      { label: "Doc Generator",   href: "/projects/documentation-ai"},
-      { label: "File Sharing",    href: "/file-sharing-platform"    },
-      { label: "Apps Gallery",    href: "/apps"                     },
+      { label: "AI Code Editor",   href: "/ai-code-viewer-ai"        },
+      { label: "LS PDF Toolkit",   href: "https://pdf.ladestack.in/" },
+      { label: "LS Image Compress",href: "https://img.ladestack.in/" },
+      { label: "API Tester",       href: "/api-testing-platform"     },
+      { label: "No-Code Builder",  href: "/projects/website-builder" },
+      { label: "Doc Generator",    href: "/projects/documentation-ai"},
+      { label: "File Sharing",     href: "/file-sharing-platform"    },
+      { label: "Apps Gallery",     href: "/apps"                     },
     ],
   },
   {
@@ -281,7 +283,7 @@ export default function Footer() {
                 Pay nothing.
               </h2>
               <p className="text-neutral-500 dark:text-neutral-400 text-base leading-relaxed max-w-md mb-8">
-                Six enterprise-grade AI tools — unified, open, and completely free.
+                Seven enterprise-grade AI tools — unified, open, and completely free.
                 No credit card. No usage limits. No catch.
               </p>
 
