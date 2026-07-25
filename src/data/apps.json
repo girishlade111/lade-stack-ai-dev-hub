@@ -87,5 +87,22 @@
     "createdAt": "2025-02-28",
     "popularityScore": 90,
     "iconAlt": "AI Code Viewer icon"
+  },
+  {
+    "id": "ls-pdf",
+    "slug": "ls-pdf",
+    "title": "LS PDF — AI-Powered PDF Toolkit",
+    "tagline": "17 client-side tools to merge, split, compress, protect, and convert PDFs",
+    "description": "17 client-side tools to merge, split, compress, protect, and convert PDFs. Zero uploads, 100% privacy.",
+    "icon": "/ls-pdf-project.svg",
+    "category": "Productivity",
+    "features": ["Client-Side Only", "17 Tools", "No Uploads"],
+    "timeToValue": "Instant",
+    "integrations": ["Client-Side JS", "WebAssembly", "Web Workers"],
+    "lifetimeFree": true,
+    "landingUrl": "https://pdf.ladestack.in/",
+    "createdAt": "2025-03-25",
+    "popularityScore": 88,
+    "iconAlt": "LS PDF icon"
   }
 ]

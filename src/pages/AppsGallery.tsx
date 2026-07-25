@@ -220,8 +220,9 @@ function AppCard({ app, index }: { app: AppData; index: number }) {
     </motion.div>
   );
 
-  // External link for the live code editor, internal router Link for everything else
-  if (isLive && app.id === "ai-code-viewer") {
+  // External link for live external apps, internal router Link for everything else
+  const isExternal = isLive && (app.landingUrl.startsWith("http") || app.id === "ai-code-viewer");
+  if (isExternal) {
     return (
       <a href={href} target="_blank" rel="noopener noreferrer" className="block h-full">
         {card}

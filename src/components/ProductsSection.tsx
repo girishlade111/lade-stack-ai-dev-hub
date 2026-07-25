@@ -133,6 +133,30 @@ const products = [
     popularity: 76,
     badge: "Coming Soon",
   },
+  {
+    id: "ls-pdf",
+    icon: FileText,
+    title: "LS PDF — AI-Powered PDF Toolkit",
+    shortTitle: "LS PDF",
+    tagline: "17 client-side tools, 100% privacy",
+    description:
+      "17 client-side tools to merge, split, compress, protect, and convert PDFs. Zero uploads, 100% privacy.",
+    features: [
+      "Client-Side Only",
+      "17 Tools",
+      "No Uploads",
+      "100% Privacy",
+    ],
+    tags: ["Productivity"],
+    status: "Live" as const,
+    url: "https://pdf.ladestack.in/",
+    internalUrl: "https://pdf.ladestack.in/",
+    timeToValue: "Instant",
+    color: "#E5322D",
+    trackColor: "#E5322D22",
+    popularity: 88,
+    badge: "New",
+  },
 ];
 
 const categories = ["All", "AI Tools", "Developer", "Productivity"];
@@ -596,7 +620,7 @@ export default function ProductsSection() {
               {" "}suite
             </h2>
             <p className="text-neutral-500 dark:text-neutral-400 text-lg max-w-xl mx-auto leading-relaxed">
-              Five AI-powered tools that cover every phase of modern development — unified, free, and production-ready.
+              Six AI-powered tools that cover every phase of modern development — unified, free, and production-ready.
             </p>
           </div>
         </ScrollReveal>
@@ -680,7 +704,7 @@ export default function ProductsSection() {
                     </div>
                     <div>
                       <p className="text-xs font-semibold text-neutral-900 dark:text-white">Free forever</p>
-                      <p className="text-[10px] text-neutral-500 dark:text-neutral-500 mt-0.5">All 5 tools. No credit card.</p>
+                      <p className="text-[10px] text-neutral-500 dark:text-neutral-500 mt-0.5">All 6 tools. No credit card.</p>
                     </div>
                   </motion.div>
                 </div>
