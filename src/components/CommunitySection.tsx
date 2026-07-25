@@ -67,11 +67,97 @@ const highlights = [
     icon: Zap,
     label: "Weekly Challenges",
     accent: "#b47ee8",
-    description: "AI-powered coding challenges every week. Earn badges,// ─── Main Section ──────────────────────────────────────────────────────────r hint */}
-      <p className="text-center text-[10px] text-neutral-400 dark:text-neutral-600 mt-4">
-        Hover to explore · Integrates seamlessly
-      </p>
-    </div>
+    description: "AI-powered coding challenges every week. Earn badges, climb the leaderboard, win prizes.",
+    cta: "Join Challenge",
+    url: "https://ladestack.in/",
+    stat: "Active weekly",
+  },
+];
+
+// ─── Sub-components ────────────────────────────────────────────────────────
+
+function StatPill({ stat, index }: { stat: (typeof communityStats)[0]; index: number }) {
+  const Icon = stat.icon;
+  return (
+    <motion.div
+      className="flex flex-col items-center gap-1 px-6 py-5 rounded-2xl bg-white/70 dark:bg-white/[0.04] border border-[#E6E6E6] dark:border-white/[0.07] backdrop-blur-sm"
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.08, duration: 0.45, ease: "easeOut" }}
+      whileHover={{ y: -3, transition: { duration: 0.2 } }}
+    >
+      <Icon className="w-4 h-4 text-[#6E8F6A] mb-1" />
+      <span className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">{stat.value}</span>
+      <span className="text-xs text-neutral-500 dark:text-neutral-500">{stat.label}</span>
+    </motion.div>
+  );
+}
+
+function HighlightCard({ item, index }: { item: (typeof highlights)[0]; index: number }) {
+  const [hovered, setHovered] = useState(false);
+  const Icon = item.icon;
+
+  return (
+    <motion.div
+      className="relative group flex flex-col gap-4 p-6 rounded-2xl bg-white dark:bg-white/[0.03] border border-[#E6E6E6] dark:border-white/[0.07] overflow-hidden cursor-pointer"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.06, duration: 0.45, ease: "easeOut" }}
+      whileHover={{ y: -4, transition: { duration: 0.25 } }}
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
+      onClick={() => safeWindowOpen(item.url)}
+    >
+      {/* Accent glow on hover */}
+      <motion.div
+        className="absolute inset-0 rounded-2xl pointer-events-none"
+        style={{ background: `radial-gradient(ellipse 70% 60% at 20% 0%, ${item.accent}18, transparent 70%)` }}
+        animate={{ opacity: hovered ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+      />
+
+      {/* Top row */}
+      <div className="flex items-start justify-between relative z-10">
+        <div
+          className="w-10 h-10 rounded-xl flex items-center justify-center"
+          style={{ background: `${item.accent}18` }}
+        >
+          <Icon className="w-5 h-5" style={{ color: item.accent }} />
+        </div>
+        <motion.div
+          animate={{ opacity: hovered ? 1 : 0.3, x: hovered ? 0 : -4, y: hovered ? 0 : 4 }}
+          transition={{ duration: 0.25 }}
+        >
+          <ArrowUpRight className="w-4 h-4 text-neutral-400 dark:text-neutral-500" />
+        </motion.div>
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 flex-1">
+        <div className="flex items-center gap-2 mb-2">
+          <h3 className="text-sm font-semibold text-neutral-900 dark:text-white">{item.label}</h3>
+          <span
+            className="text-[10px] font-medium px-2.5 py-0.5 rounded-full"
+            style={{ background: `${item.accent}18`, color: item.accent }}
+          >
+            {item.stat}
+          </span>
+        </div>
+        <p className="text-[13px] text-neutral-500 dark:text-neutral-400 leading-relaxed">{item.description}</p>
+      </div>
+
+      {/* CTA */}
+      <motion.span
+        className="relative z-10 text-xs font-medium flex items-center gap-1"
+        style={{ color: item.accent }}
+        animate={{ gap: hovered ? "6px" : "4px" }}
+        transition={{ duration: 0.2 }}
+      >
+        {item.cta} <ArrowUpRight className="w-3 h-3" />
+      </motion.span>
+    </motion.div>
   );
 }
 
