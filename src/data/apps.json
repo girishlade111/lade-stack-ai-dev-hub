@@ -138,5 +138,22 @@
     "createdAt": "2025-03-27",
     "popularityScore": 82,
     "iconAlt": "Swift Resume icon"
+  },
+  {
+    "id": "bharat-land",
+    "slug": "bharat-land",
+    "title": "Bharat Land Converter",
+    "tagline": "Convert land measurement units across India with state-wise accuracy",
+    "description": "Convert land measurement units across India — Bigha, Guntha, Acre, Hectare, and more, state-wise accurate.",
+    "icon": "/bharat-land-project.svg",
+    "category": "Productivity",
+    "features": ["All India Units", "Instant Convert", "State-wise Accuracy"],
+    "timeToValue": "Instant",
+    "integrations": ["State Unit Specs", "Client-Side Math"],
+    "lifetimeFree": true,
+    "landingUrl": "https://land.ladestack.in/",
+    "createdAt": "2025-03-28",
+    "popularityScore": 78,
+    "iconAlt": "Bharat Land Converter icon"
   }
 ]
