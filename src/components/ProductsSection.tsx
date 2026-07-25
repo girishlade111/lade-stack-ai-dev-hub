@@ -692,7 +692,7 @@ export default function ProductsSection() {
               {" "}suite
             </h2>
             <p className="text-neutral-500 dark:text-neutral-400 text-lg max-w-xl mx-auto leading-relaxed">
-              Eight AI-powered tools that cover every phase of modern development — unified, free, and production-ready.
+              Nine AI-powered tools that cover every phase of modern development — unified, free, and production-ready.
             </p>
           </div>
         </ScrollReveal>
