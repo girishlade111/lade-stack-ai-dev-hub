@@ -566,39 +566,31 @@ export default function CommunitySection() {
           ))}
         </div>
 
-        {/* ── Bottom two-column: activity + heatmap ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-16">
-          <AIShowcase />
-          <div className="flex flex-col gap-4">
-            <TechStackCloud />
-
-            {/* "Open to contributions" banner */}
-            <motion.div
-              className="relative overflow-hidden rounded-2xl bg-[#6E8F6A] p-6 flex items-center justify-between gap-4"
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3, duration: 0.45 }}
-            >
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_100%_at_100%_50%,_rgba(255,255,255,0.08),_transparent)]" />
-              <div className="relative z-10">
-                <p className="text-white font-semibold text-sm mb-0.5">Open to contributions</p>
-                <p className="text-white/70 text-xs leading-relaxed">
-                  Every PR matters. We review, merge, and celebrate every contribution.
-                </p>
-              </div>
-              <motion.button
-                className="relative z-10 flex-shrink-0 flex items-center gap-2 bg-white/15 hover:bg-white/25 text-white text-xs font-medium px-4 py-2.5 rounded-xl border border-white/20 transition-colors"
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
-                onClick={() => safeWindowOpen("https://github.com/girishlade111")}
-              >
-                <Github className="w-4 h-4" />
-                Contribute
-              </motion.button>
-            </motion.div>
+        {/* ── "Open to contributions" banner ── */}
+        <motion.div
+          className="relative overflow-hidden rounded-2xl bg-[#6E8F6A] p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-4 mb-16 max-w-4xl mx-auto"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3, duration: 0.45 }}
+        >
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_100%_at_100%_50%,_rgba(255,255,255,0.08),_transparent)]" />
+          <div className="relative z-10 text-center sm:text-left">
+            <p className="text-white font-semibold text-base mb-1">Open to contributions</p>
+            <p className="text-white/80 text-xs sm:text-sm leading-relaxed">
+              Every PR matters. We review, merge, and celebrate every contribution.
+            </p>
           </div>
-        </div>
+          <motion.button
+            className="relative z-10 flex-shrink-0 flex items-center gap-2 bg-white/15 hover:bg-white/25 text-white text-xs font-medium px-5 py-2.5 rounded-xl border border-white/20 transition-colors"
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.97 }}
+            onClick={() => safeWindowOpen("https://github.com/girishlade111")}
+          >
+            <Github className="w-4 h-4" />
+            Contribute
+          </motion.button>
+        </motion.div>
 
         {/* ── CTA ── */}
         <ScrollReveal>
