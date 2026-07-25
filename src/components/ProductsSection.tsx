@@ -28,12 +28,6 @@ const products = [
     internalUrl: "https://pdf.ladestack.in/",
     color: "#E5322D",
   },
-    title: "LS PDF",
-    tagline: "17 client-side tools, 100% privacy",
-    url: "https://pdf.ladestack.in/",
-    internalUrl: "https://pdf.ladestack.in/",
-    color: "#E5322D",
-  },
   {
     id: "ls-img",
     icon: Image,
