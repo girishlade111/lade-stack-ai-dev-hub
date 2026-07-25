@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Activity, Globe, FolderOpen, BookOpen, Monitor, FileText, Image, ArrowRight } from 'lucide-react';
+import { Activity, Globe, FolderOpen, BookOpen, Monitor, FileText, Image, FileCheck, ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -70,6 +70,15 @@ const LadeSuite = () => {
       coverImage: '/ls-img-project.svg',
       category: 'Productivity',
       status: 'Live'
+    },
+    {
+      id: 'swift-resume',
+      icon: FileCheck,
+      title: 'Swift Resume',
+      description: 'ATS-optimized resume builder with live preview, custom templates, and real-time scoring.',
+      coverImage: '/swift-resume-project.svg',
+      category: 'Productivity',
+      status: 'Live'
     }
   ], []);
 
@@ -100,7 +109,7 @@ const LadeSuite = () => {
             </h2>
             
             <p className="text-sm text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Seven powerful AI-powered tools covering your entire development lifecycle. 
+              Eight powerful AI-powered tools covering your entire development lifecycle. 
               Each app saves 10+ hours per week and integrates seamlessly.
             </p>
           </div>

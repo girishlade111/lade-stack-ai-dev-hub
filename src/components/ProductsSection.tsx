@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
-  Code2, Globe, FileText, Brain, Cpu, Image,
+  Code2, Globe, FileText, Brain, Cpu, Image, FileCheck,
   ExternalLink, Layers, ArrowRight, ArrowUpRight,
   Check, Zap, Clock, Star, ChevronRight,
   Sparkles,
@@ -179,6 +179,30 @@ const products = [
     color: "#8B5CF6",
     trackColor: "#8B5CF622",
     popularity: 85,
+    badge: "New",
+  },
+  {
+    id: "swift-resume",
+    icon: FileCheck,
+    title: "Swift Resume",
+    shortTitle: "Swift Resume",
+    tagline: "ATS-optimized resume builder & scoring",
+    description:
+      "ATS-optimized resume builder with live preview, custom templates, and real-time scoring.",
+    features: [
+      "ATS Optimized",
+      "Live Preview",
+      "PDF Export",
+      "Real-Time Scoring",
+    ],
+    tags: ["Productivity"],
+    status: "Live" as const,
+    url: "https://resume.ladestack.in/",
+    internalUrl: "https://resume.ladestack.in/",
+    timeToValue: "Instant",
+    color: "#2563EB",
+    trackColor: "#2563EB22",
+    popularity: 82,
     badge: "New",
   },
 ];
@@ -644,7 +668,7 @@ export default function ProductsSection() {
               {" "}suite
             </h2>
             <p className="text-neutral-500 dark:text-neutral-400 text-lg max-w-xl mx-auto leading-relaxed">
-              Seven AI-powered tools that cover every phase of modern development — unified, free, and production-ready.
+              Eight AI-powered tools that cover every phase of modern development — unified, free, and production-ready.
             </p>
           </div>
         </ScrollReveal>
@@ -728,7 +752,7 @@ export default function ProductsSection() {
                     </div>
                     <div>
                       <p className="text-xs font-semibold text-neutral-900 dark:text-white">Free forever</p>
-                      <p className="text-[10px] text-neutral-500 dark:text-neutral-500 mt-0.5">All 7 tools. No credit card.</p>
+                      <p className="text-[10px] text-neutral-500 dark:text-neutral-500 mt-0.5">All 8 tools. No credit card.</p>
                     </div>
                   </motion.div>
                 </div>

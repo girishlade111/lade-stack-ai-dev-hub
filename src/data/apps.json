@@ -121,5 +121,22 @@
     "createdAt": "2025-03-26",
     "popularityScore": 85,
     "iconAlt": "LS Image Compressor icon"
+  },
+  {
+    "id": "swift-resume",
+    "slug": "swift-resume",
+    "title": "Swift Resume",
+    "tagline": "ATS-optimized resume builder with live preview & real-time scoring",
+    "description": "ATS-optimized resume builder with live preview, custom templates, and real-time scoring.",
+    "icon": "/swift-resume-project.svg",
+    "category": "Productivity",
+    "features": ["ATS Optimized", "Live Preview", "PDF Export"],
+    "timeToValue": "Instant",
+    "integrations": ["PDF Export", "ATS Parser", "Browser Storage"],
+    "lifetimeFree": true,
+    "landingUrl": "https://resume.ladestack.in/",
+    "createdAt": "2025-03-27",
+    "popularityScore": 82,
+    "iconAlt": "Swift Resume icon"
   }
 ]
