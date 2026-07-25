@@ -128,9 +128,9 @@ const Projects = () => {
         <div className="absolute bottom-[10%] left-[30%] w-[500px] h-[350px] bg-[radial-gradient(ellipse_at_center,_rgba(110,143,106,0.05),_transparent_55%)]" />
       </div>
       <SEO
-        title="Our Projects – AI-Powered Developer Tools | Lade Stack"
-        description="Explore our suite of AI-powered developer tools: API testing platform, AI website builder, secure file sharing, and documentation summarizer. Built for modern teams."
-        keywords="AI developer projects, API testing platform, AI website builder, file management tool, documentation AI, Lade Stack projects, open source tools"
+        title="Projects – Lade Stack AI Developer Ecosystem"
+        description="Explore Lade Stack's AI-powered SaaS products: API Testing, AI Website Builder, File Sharing Platform, Documentation AI, and AI Code Viewer."
+        keywords="AI tools, API testing, website builder, file sharing, documentation AI, AI code editor, Lade Stack"
         ogTitle="Lade Stack Projects – AI Developer Tools Suite"
         ogDescription="Production-ready AI tools for API testing, website building, file sharing, and documentation."
         structuredData={{
@@ -155,7 +155,7 @@ const Projects = () => {
                 Our Projects
               </h1>
               <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-                Five powerful SaaS tools that cover your entire development lifecycle. Each tool saves 10+ hours per week and integrates seamlessly with your existing workflow.
+                Six powerful SaaS tools that cover your entire development lifecycle. Each tool saves 10+ hours per week and integrates seamlessly with your existing workflow.
               </p>
             </div>
           </div>
