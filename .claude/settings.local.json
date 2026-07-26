@@ -16,7 +16,12 @@
       "Bash(head:*)",
       "Bash(cd \"C:\\\\Users\\\\a\\\\Downloads\\\\lade-stack-ai-dev-hub\" && npx tsc --noEmit 2>&1)",
       "Bash(npm run *)",
-      "Bash(git check-ignore *)"
+      "Bash(git check-ignore *)",
+      "Bash(sort -u)",
+      "Bash(echo \"--- exist in public? ---\")",
+      "Bash([ -f \"public/$f\" ])",
+      "Bash(echo 'EXISTS: __TRACKED_VAR__')",
+      "Bash(echo 'MISSING: __TRACKED_VAR__')"
     ]
   }
 }
