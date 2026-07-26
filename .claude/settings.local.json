@@ -14,7 +14,8 @@
       "Bash(node:*)",
       "Bash(tail:*)",
       "Bash(head:*)",
-      "Bash(cd \"C:\\\\Users\\\\a\\\\Downloads\\\\lade-stack-ai-dev-hub\" && npx tsc --noEmit 2>&1)"
+      "Bash(cd \"C:\\\\Users\\\\a\\\\Downloads\\\\lade-stack-ai-dev-hub\" && npx tsc --noEmit 2>&1)",
+      "Bash(npm run *)"
     ]
   }
 }
