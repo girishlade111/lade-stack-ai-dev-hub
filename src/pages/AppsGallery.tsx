@@ -326,7 +326,7 @@ export default function AppsGallery() {
                   { value: `${apps.length}+`, label: "Tools" },
                   { value: "100%",            label: "Free forever" },
                   { value: "24/7",            label: "Uptime" },
-                  { value: "1000+",           label: "Developers" },
+                  { value: "8K+",             label: "Developers" },
                 ].map(({ value, label }) => (
                   <div key={label} className="text-center">
                     <p className="text-2xl sm:text-3xl font-extrabold text-foreground">{value}</p>

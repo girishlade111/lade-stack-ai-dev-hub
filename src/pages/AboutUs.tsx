@@ -199,7 +199,7 @@ const AboutUs = () => {
                 {[
                   { value: "2020", label: "Founded" },
                   { value: "5+",   label: "AI Tools" },
-                  { value: "1k+",  label: "Developers" },
+                  { value: "8K+",  label: "Developers" },
                   { value: "100%", label: "Free" },
                 ].map(({ value, label }) => (
                   <div key={label} className="text-center p-4 rounded-2xl border border-border bg-background/60">
@@ -231,7 +231,7 @@ const AboutUs = () => {
                       { year: "2020", title: "The Beginning", text: "Girish starts building personal dev tools and AI automation experiments." },
                       { year: "2022", title: "First Products", text: "Multi-LLM projects, e-commerce suites, and productivity platforms take shape." },
                       { year: "2024", title: "Lade Stack Born", text: "The vision crystallises — a unified AI developer ecosystem for everyone." },
-                      { year: "2025", title: "Growing Fast", text: "5+ tools live, 1000+ developers, and the roadmap keeps expanding." },
+                      { year: "2025", title: "Growing Fast", text: "5+ tools live, 8K+ developers, and the roadmap keeps expanding." },
                     ].map(({ year, title, text }, i) => (
                       <motion.div
                         key={year}

@@ -365,8 +365,8 @@ function ProductStrip() {
 // ─── Stats row ─────────────────────────────────────────────────────────────
 
 const snapStats = [
-  { to: 50,  suffix: "K+", label: "Developers" },
-  { to: 9,   suffix: "",   label: "AI Products" },
+  { to: 8,   suffix: "K+", label: "Developers" },
+  { to: 80,  suffix: "+",  label: "Projects Built" },
   { to: 100, suffix: "+",  label: "Countries" },
   { to: 99,  suffix: "%",  label: "Uptime" },
 ];

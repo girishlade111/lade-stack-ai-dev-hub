@@ -11,10 +11,10 @@ import { safeWindowOpen } from "@/utils/safe";
 // ─── Data ──────────────────────────────────────────────────────────────────
 
 const communityStats = [
-  { value: "50K+", label: "Developers", icon: Users },
+  { value: "8K+", label: "Developers", icon: Users },
   { value: "12K+", label: "Projects Built", icon: Layers },
   { value: "100+", label: "Countries", icon: Globe },
-  { value: "4.9★", label: "Avg Rating", icon: Star },
+  { value: "4.1★", label: "Avg Rating", icon: Star },
 ];
 
 const highlights = [
@@ -31,10 +31,10 @@ const highlights = [
     icon: MessageSquare,
     label: "Discord Community",
     accent: "#7c86e8",
-    description: "Real-time help, project showcases, and collaboration with 50K+ developers worldwide.",
+    description: "Real-time help, project showcases, and collaboration with 8K+ developers worldwide.",
     cta: "Join Discord",
     url: "https://discord.gg/ladestack",
-    stat: "50K members",
+    stat: "8K members",
   },
   {
     icon: BookOpen,

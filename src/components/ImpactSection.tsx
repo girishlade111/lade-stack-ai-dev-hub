@@ -16,7 +16,7 @@ const heroStats = [
     border: "border-[#6E8F6A]/20",
   },
   {
-    value: 50, suffix: "K+",
+    value: 8, suffix: "K+",
     label: "Active Developers",
     sub: "worldwide, growing daily",
     icon: Users,

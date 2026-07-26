@@ -63,7 +63,7 @@ const commitments = [
     bullets: [
       "Public GitHub roadmap",
       "Community feature requests",
-      "12K+ developer community"
+      "8K+ developer community"
     ],
   },
 ];
@@ -327,7 +327,7 @@ export default function FreeForeverSection() {
                 Ready to Experience AI Development Without Barriers?
               </h3>
               <p className="text-white/80 text-sm sm:text-base max-w-xl mx-auto mb-8">
-                Join over 50,000 developers building smarter, faster, and 100% free with Lade Stack.
+                Join over 8,000 developers building smarter, faster, and 100% free with Lade Stack.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

@@ -227,13 +227,13 @@ function optimizeCode(code) {
                   Trusted by Developers Worldwide
                 </h3>
                 <p className="text-xs text-muted-foreground max-w-2xl mx-auto">
-                  Join 50,000+ developers building the future with AI-powered tools.
+                  Join 8,000+ developers building the future with AI-powered tools.
                 </p>
               </div>
               
               <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3">
                 {[
-                  { value: "50K+", label: "Developers" },
+                  { value: "8K+", label: "Developers" },
                   { value: "99.9%", label: "Uptime" },
                   { value: "10x", label: "Faster" },
                   { value: "24/7", label: "Support" }

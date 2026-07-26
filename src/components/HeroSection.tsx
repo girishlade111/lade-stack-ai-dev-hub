@@ -31,7 +31,7 @@ const products = [
 ];
 
 const trustStats = [
-  { value: "50K+", label: "Developers" },
+  { value: "8K+", label: "Developers" },
   { value: "5", label: "AI Products" },
   { value: "100+", label: "Countries" },
   { value: "Free", label: "Forever" },
