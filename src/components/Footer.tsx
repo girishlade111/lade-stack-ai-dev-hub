@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, memo } from "react";
 import { Link } from "react-router-dom";
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import {
@@ -155,7 +155,7 @@ function Newsletter() {
 
 // ─── Product pill (floating row) ────────────────────────────────────────────
 
-function ProductPill({ product, index }: { product: typeof products[0]; index: number }) {
+const ProductPill = memo(function ProductPill({ product, index }: { product: typeof products[0]; index: number }) {
   const Icon = product.icon;
   const isExternal = product.href.startsWith("http");
 
@@ -212,11 +212,11 @@ function ProductPill({ product, index }: { product: typeof products[0]; index: n
       )}
     </motion.div>
   );
-}
+});
 
 // ─── Animated grid lines (decorative) ──────────────────────────────────────
 
-function GridLines() {
+const GridLines = memo(function GridLines() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden>
       {[20, 50, 80].map(p => (
@@ -227,7 +227,7 @@ function GridLines() {
       ))}
     </div>
   );
-}
+});
 
 // ─── Large wordmark (decorative) ────────────────────────────────────────────
 

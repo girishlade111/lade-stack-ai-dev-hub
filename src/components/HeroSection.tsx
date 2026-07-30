@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState, useRef } from "react";
 import {
   ArrowRight, ChevronDown, Zap, Code2,
   FileText, Globe, Database, Star, ArrowUpRight,
@@ -144,14 +144,31 @@ function HeroHeading({ isDark }: { isDark: boolean }) {
 
 function ProductCards() {
   const [active, setActive] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isVisible = useRef(true);
 
   useEffect(() => {
-    const t = setInterval(() => setActive(p => (p + 1) % products.length), 2800);
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { isVisible.current = entry.isIntersecting; },
+      { threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      if (isVisible.current) {
+        setActive(p => (p + 1) % products.length);
+      }
+    }, 2800);
     return () => clearInterval(t);
   }, []);
 
   return (
-    <div className="relative w-full max-w-sm mx-auto lg:mx-0">
+    <div ref={containerRef} className="relative w-full max-w-sm mx-auto lg:mx-0">
       {/* Glow behind cards */}
       <div className="absolute inset-0 rounded-3xl bg-[radial-gradient(ellipse_80%_60%_at_50%_50%,_rgba(110,143,106,0.10),_transparent_70%)] blur-xl" />
 

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo, memo } from "react";
 import { Link } from "react-router-dom";
 import {
   Clock,
@@ -70,7 +70,7 @@ const staggerContainer = {
 };
 
 /* ── Category pill ── */
-function CategoryBadge({ category, size = "sm" }: { category: string; size?: "sm" | "xs" }) {
+const CategoryBadge = memo(function CategoryBadge({ category, size = "sm" }: { category: string; size?: "sm" | "xs" }) {
   const colors = CATEGORY_COLORS[category] ?? { bg: "bg-muted", text: "text-muted-foreground", border: "border-border", dot: "bg-muted-foreground" };
   return (
     <span className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 font-medium ${size === "xs" ? "text-[10px]" : "text-xs"} ${colors.bg} ${colors.text} ${colors.border}`}>
@@ -78,7 +78,7 @@ function CategoryBadge({ category, size = "sm" }: { category: string; size?: "sm
       {category}
     </span>
   );
-}
+});
 
 /* ── Featured hero card (first post) ── */
 function FeaturedCard({ post }: { post: (typeof blogPosts)[0] }) {
@@ -144,7 +144,7 @@ function FeaturedCard({ post }: { post: (typeof blogPosts)[0] }) {
 }
 
 /* ── Regular blog card ── */
-function BlogCard({ post, index }: { post: (typeof blogPosts)[0]; index: number }) {
+const BlogCard = memo(function BlogCard({ post, index }: { post: (typeof blogPosts)[0]; index: number }) {
   const colors = CATEGORY_COLORS[post.category] ?? { bg: "bg-muted", text: "text-muted-foreground", border: "border-border", dot: "bg-muted-foreground" };
   return (
     <motion.div
@@ -201,7 +201,7 @@ function BlogCard({ post, index }: { post: (typeof blogPosts)[0]; index: number 
       </div>
     </motion.div>
   );
-}
+});
 
 /* ── Main page ── */
 const Blog = () => {
@@ -214,22 +214,22 @@ const Blog = () => {
     setCurrentPage(1);
   }, [selectedCategory, searchQuery]);
 
-  const filteredPosts = blogPosts.filter((post) => {
+  const filteredPosts = useMemo(() => blogPosts.filter((post) => {
     const matchesCategory = selectedCategory === "All" || post.category === selectedCategory;
     const matchesSearch =
       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
-  });
+  }), [selectedCategory, searchQuery]);
 
-  const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
+  const totalPages = useMemo(() => Math.ceil(filteredPosts.length / POSTS_PER_PAGE), [filteredPosts.length]);
   const start = (currentPage - 1) * POSTS_PER_PAGE;
-  const visiblePosts = filteredPosts.slice(start, start + POSTS_PER_PAGE);
+  const visiblePosts = useMemo(() => filteredPosts.slice(start, start + POSTS_PER_PAGE), [filteredPosts, start]);
 
   // First post shown as featured only on page 1 with no filters
   const isDefaultView = selectedCategory === "All" && searchQuery === "" && currentPage === 1;
-  const featuredPost = isDefaultView ? visiblePosts[0] : null;
-  const gridPosts = isDefaultView ? visiblePosts.slice(1) : visiblePosts;
+  const featuredPost = useMemo(() => isDefaultView ? visiblePosts[0] : null, [isDefaultView, visiblePosts]);
+  const gridPosts = useMemo(() => isDefaultView ? visiblePosts.slice(1) : visiblePosts, [isDefaultView, visiblePosts]);
 
   const handlePageChange = (page: number) => {
     if (page < 1 || page > totalPages) return;
