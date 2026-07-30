@@ -43,23 +43,23 @@ const AnimatedEditor: React.FC<AnimatedEditorProps> = ({ theme }) => {
   const [suggestions, setSuggestions] = useState<Array<{text: string, type: string}>>([]);
 
   useEffect(() => {
+    if (!isTyping) return;
+
     const interval = setInterval(() => {
-      if (isTyping) {
-        setCurrentLine((prev) => {
-          const nextLine = prev + 1;
-          if (nextLine < codeLines.length) {
-            setDisplayedText(prev => prev + codeLines[prev] + '\n');
-            return nextLine;
-          } else {
+      setCurrentLine((prevLine) => {
+        if (prevLine < codeLines.length) {
+          setDisplayedText(prevText => prevText + codeLines[prevLine] + '\n');
+          const nextLine = prevLine + 1;
+          if (nextLine >= codeLines.length) {
             setIsTyping(false);
-            // Start showing AI suggestions
             setTimeout(() => {
               setSuggestions(aiSuggestions);
             }, 500);
-            return prev;
           }
-        });
-      }
+          return nextLine;
+        }
+        return prevLine;
+      });
     }, 200);
 
     return () => clearInterval(interval);
