@@ -14,10 +14,41 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 
+interface GuideSection {
+  title: string;
+  content: string;
+}
+
+interface Category {
+  id: string;
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  description: string;
+  articles: number;
+  guide: {
+    overview: string;
+    sections: GuideSection[];
+  };
+}
+
+interface ArticleContent {
+  intro: string;
+  steps: string[];
+  summary: string;
+}
+
+interface Article {
+  id: string;
+  title: string;
+  category: string;
+  readTime: string;
+  content: ArticleContent;
+}
+
 const Documentation = () => {
   const [query, setQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<any>(null);
-  const [selectedArticle, setSelectedArticle] = useState<any>(null);
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
   const [showAllChangelog, setShowAllChangelog] = useState(false);
   const [showComingSoon, setShowComingSoon] = useState(false);
 
@@ -498,7 +529,7 @@ const Documentation = () => {
                 <p className="text-foreground">{selectedCategory?.guide?.overview}</p>
              </div>
              <div className="space-y-4">
-                {selectedCategory?.guide?.sections.map((section: any, idx: number) => (
+                {selectedCategory?.guide?.sections.map((section: GuideSection, idx: number) => (
                     <div key={idx} className="border-l-2 border-primary pl-4">
                         <h4 className="text-lg font-semibold text-foreground mb-2">{section.title}</h4>
                         <div className="text-muted-foreground whitespace-pre-wrap font-mono text-sm bg-black/20 p-3 rounded">{section.content}</div>

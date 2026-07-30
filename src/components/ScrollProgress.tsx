@@ -21,7 +21,7 @@ export default function ScrollProgress() {
     if (!bar) return;
 
     // Feature-detect CSS scroll-driven animations (Chrome 115+, Edge 115+)
-    // @ts-ignore — non-standard property, intentional feature detect
+    // @ts-expect-error — non-standard property, intentional feature detect
     if (CSS.supports("animation-timeline", "scroll()")) {
       // Apply via JS to avoid TypeScript/Tailwind parse errors for non-standard props
       bar.style.animationName = "scroll-progress-grow";
