@@ -6,60 +6,60 @@ interface AnimatedEditorProps {
   theme: string;
 }
 
+const codeLines = [
+  'function createButton() {',
+  '  return \'<button onclick="alert()">Click</button>\';',
+  '}'
+];
+
+const enhancedCodeLines = [
+  'function createButton() {',
+  '  const button = document.createElement(\'button\');',
+  '  button.textContent = \'Click me\';',
+  '  button.className = \'btn-primary\';',
+  '  button.setAttribute(\'aria-label\', \'Primary action\');',
+  '  ',
+  '  button.addEventListener(\'click\', (event) => {',
+  '    event.preventDefault();',
+  '    handleClick();',
+  '  });',
+  '  ',
+  '  return button;',
+  '}'
+];
+
+const aiSuggestions = [
+  { text: "Add accessibility attributes", type: "accessibility" },
+  { text: "Use semantic HTML structure", type: "semantic" },
+  { text: "Implement proper event handling", type: "security" },
+  { text: "Separate concerns (no inline handlers)", type: "best-practice" },
+  { text: "Enhanced security and maintainability", type: "performance" }
+];
+
 const AnimatedEditor: React.FC<AnimatedEditorProps> = ({ theme }) => {
   const [displayedText, setDisplayedText] = useState('');
   const [currentLine, setCurrentLine] = useState(0);
   const [isTyping, setIsTyping] = useState(true);
   const [suggestions, setSuggestions] = useState<Array<{text: string, type: string}>>([]);
 
-  const codeLines = [
-    'function createButton() {',
-    '  return \'<button onclick="alert()">Click</button>\';',
-    '}'
-  ];
-
-  const enhancedCodeLines = [
-    'function createButton() {',
-    '  const button = document.createElement(\'button\');',
-    '  button.textContent = \'Click me\';',
-    '  button.className = \'btn-primary\';',
-    '  button.setAttribute(\'aria-label\', \'Primary action\');',
-    '  ',
-    '  button.addEventListener(\'click\', (event) => {',
-    '    event.preventDefault();',
-    '    handleClick();',
-    '  });',
-    '  ',
-    '  return button;',
-    '}'
-  ];
-
-  const aiSuggestions = [
-    { text: "Add accessibility attributes", type: "accessibility" },
-    { text: "Use semantic HTML structure", type: "semantic" },
-    { text: "Implement proper event handling", type: "security" },
-    { text: "Separate concerns (no inline handlers)", type: "best-practice" },
-    { text: "Enhanced security and maintainability", type: "performance" }
-  ];
-
   useEffect(() => {
+    if (!isTyping) return;
+
     const interval = setInterval(() => {
-      if (isTyping) {
-        setCurrentLine((prev) => {
-          const nextLine = prev + 1;
-          if (nextLine < codeLines.length) {
-            setDisplayedText(prev => prev + codeLines[prev] + '\n');
-            return nextLine;
-          } else {
+      setCurrentLine((prevLine) => {
+        if (prevLine < codeLines.length) {
+          setDisplayedText(prevText => prevText + codeLines[prevLine] + '\n');
+          const nextLine = prevLine + 1;
+          if (nextLine >= codeLines.length) {
             setIsTyping(false);
-            // Start showing AI suggestions
             setTimeout(() => {
               setSuggestions(aiSuggestions);
             }, 500);
-            return prev;
           }
-        });
-      }
+          return nextLine;
+        }
+        return prevLine;
+      });
     }, 200);
 
     return () => clearInterval(interval);

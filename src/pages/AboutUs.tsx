@@ -641,6 +641,8 @@ const AboutUs = () => {
                             alt="Girish Lade - Founder & Lead Developer"
                             width={2262}
                             height={3393}
+                            loading="lazy"
+                            decoding="async"
                             className="w-full aspect-[2/3] object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
                           />
                           {/* Bottom overlay + badge */}

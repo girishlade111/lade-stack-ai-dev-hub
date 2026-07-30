@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, memo } from "react";
 import { Link } from "react-router-dom";
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import {
@@ -155,8 +155,37 @@ function Newsletter() {
 
 // ─── Product pill (floating row) ────────────────────────────────────────────
 
-function ProductPill({ product, index }: { product: typeof products[0]; index: number }) {
+const ProductPill = memo(function ProductPill({ product, index }: { product: typeof products[0]; index: number }) {
   const Icon = product.icon;
+  const isExternal = product.href.startsWith("http");
+
+  const content = (
+    <>
+      <div
+        className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
+        style={{ background: `${product.color}18` }}
+      >
+        <Icon className="w-3.5 h-3.5" style={{ color: product.color }} />
+      </div>
+      <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors whitespace-nowrap">
+        {product.name}
+      </span>
+      {product.live && (
+        <span
+          className="ml-auto text-[9px] font-bold px-1.5 py-0.5 rounded-full"
+          style={{ background: `${product.color}18`, color: product.color }}
+        >
+          LIVE
+        </span>
+      )}
+      {!product.live && (
+        <span className="ml-auto text-[9px] text-neutral-400 dark:text-neutral-600 font-medium">Soon</span>
+      )}
+    </>
+  );
+
+  const className = "group flex items-center gap-2.5 px-4 py-2.5 rounded-2xl border border-[#E6E6E6] dark:border-white/[0.07] bg-white/80 dark:bg-white/[0.03] hover:border-[#C8C8C8] dark:hover:border-white/[0.14] transition-all duration-200";
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
@@ -164,38 +193,30 @@ function ProductPill({ product, index }: { product: typeof products[0]; index: n
       viewport={{ once: true }}
       transition={{ delay: index * 0.07, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
-      <Link
-        to={product.href}
-        className="group flex items-center gap-2.5 px-4 py-2.5 rounded-2xl border border-[#E6E6E6] dark:border-white/[0.07] bg-white/80 dark:bg-white/[0.03] hover:border-[#C8C8C8] dark:hover:border-white/[0.14] transition-all duration-200"
-      >
-        <div
-          className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
-          style={{ background: `${product.color}18` }}
+      {isExternal ? (
+        <a
+          href={product.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={className}
         >
-          <Icon className="w-3.5 h-3.5" style={{ color: product.color }} />
-        </div>
-        <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors whitespace-nowrap">
-          {product.name}
-        </span>
-        {product.live && (
-          <span
-            className="ml-auto text-[9px] font-bold px-1.5 py-0.5 rounded-full"
-            style={{ background: `${product.color}18`, color: product.color }}
-          >
-            LIVE
-          </span>
-        )}
-        {!product.live && (
-          <span className="ml-auto text-[9px] text-neutral-400 dark:text-neutral-600 font-medium">Soon</span>
-        )}
-      </Link>
+          {content}
+        </a>
+      ) : (
+        <Link
+          to={product.href}
+          className={className}
+        >
+          {content}
+        </Link>
+      )}
     </motion.div>
   );
-}
+});
 
 // ─── Animated grid lines (decorative) ──────────────────────────────────────
 
-function GridLines() {
+const GridLines = memo(function GridLines() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden>
       {[20, 50, 80].map(p => (
@@ -206,7 +227,7 @@ function GridLines() {
       ))}
     </div>
   );
-}
+});
 
 // ─── Large wordmark (decorative) ────────────────────────────────────────────
 
@@ -428,19 +449,36 @@ export default function Footer() {
                   {col.heading}
                 </h4>
                 <ul className="flex flex-col gap-3">
-                  {col.links.map((l) => (
-                    <li key={l.label}>
-                      <Link
-                        to={l.href}
-                        className="group flex items-center gap-1 text-sm text-neutral-600 dark:text-neutral-400 hover:text-[#6E8F6A] dark:hover:text-white transition-colors duration-200"
-                      >
-                        <span className="w-0 group-hover:w-2 overflow-hidden transition-all duration-200 flex-shrink-0">
-                          <span className="block w-1 h-1 rounded-full bg-[#6E8F6A]" />
-                        </span>
-                        {l.label}
-                      </Link>
-                    </li>
-                  ))}
+                  {col.links.map((l) => {
+                    const isExternal = l.href.startsWith("http");
+                    return (
+                      <li key={l.label}>
+                        {isExternal ? (
+                          <a
+                            href={l.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group flex items-center gap-1 text-sm text-neutral-600 dark:text-neutral-400 hover:text-[#6E8F6A] dark:hover:text-white transition-colors duration-200"
+                          >
+                            <span className="w-0 group-hover:w-2 overflow-hidden transition-all duration-200 flex-shrink-0">
+                              <span className="block w-1 h-1 rounded-full bg-[#6E8F6A]" />
+                            </span>
+                            {l.label}
+                          </a>
+                        ) : (
+                          <Link
+                            to={l.href}
+                            className="group flex items-center gap-1 text-sm text-neutral-600 dark:text-neutral-400 hover:text-[#6E8F6A] dark:hover:text-white transition-colors duration-200"
+                          >
+                            <span className="w-0 group-hover:w-2 overflow-hidden transition-all duration-200 flex-shrink-0">
+                              <span className="block w-1 h-1 rounded-full bg-[#6E8F6A]" />
+                            </span>
+                            {l.label}
+                          </Link>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               </motion.div>
             ))}
