@@ -52,10 +52,11 @@ for (const file of files) {
   const content = f.readFileSync(file.trim(), 'utf8');
   for (const m of content.matchAll(linkRe)) {
     const href = m[1];
-    const dyn = href.replace(/\/[^/]+$/, '/:slug');
-    if (!known.has(href) && href !== '/blog/:slug' && !(href.startsWith('/blog/') && slugs.has(href.slice(6)))) {
-      // allow concrete slug links and template-generated links
-      if (!href.startsWith('/blog/${')) bad.push(`${file} -> ${href}`);
+    if (href.startsWith('/blog/')) {
+      // concrete slug link (`/blog/${post.slug}` template counts as slug-family)
+      if (!slugs.has(href.slice(6)) && !href.includes('${')) bad.push(`${file} -> ${href}`);
+    } else if (!known.has(href)) {
+      bad.push(`${file} -> ${href}`);
     }
   }
 }
