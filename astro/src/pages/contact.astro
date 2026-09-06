@@ -1,0 +1,66 @@
+---
+/**
+ * /contact — manifest route: src/pages/Contact.tsx → url_path "/contact"
+ * Canonical: https://ladestack.in/contact
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    description:
+      'Get in touch with Lade Stack for AI development support, technical assistance, and enterprise solutions.',
+    mainEntity: {
+      '@type': 'Organization',
+      address: {
+        '@type': 'PostalAddress',
+        addressCountry: 'IN',
+        addressLocality: 'Mumbai',
+        addressRegion: 'Maharashtra',
+      },
+      contactPoint: {
+        '@type': 'ContactPoint',
+        availableLanguage: 'English',
+        contactType: 'customer support',
+        email: 'admin@ladestack.in',
+      },
+      name: 'Lade Stack',
+    },
+    name: 'Contact Lade Stack',
+    url: 'https://ladestack.in/contact',
+  },
+];
+---
+
+<BaseLayout
+  title="Contact Lade Stack – Get in Touch for AI Development Support"
+  description="Contact Lade Stack for AI development support, technical assistance, and enterprise solutions. We operate 24/7 and respond within hours. Based in Mumbai, India."
+  canonical="https://ladestack.in/contact"
+  robots={{ index: true, follow: true, custom: 'max-image-preview:large, max-snippet:-1, max-video-preview:-1' }}
+  openGraph={{
+    title: 'Contact Lade Stack – AI Development Support',
+    description:
+      'Get in touch with Lade Stack for AI development support, technical assistance, and enterprise solutions.',
+    url: 'https://ladestack.in/contact',
+    type: 'website',
+    image: 'https://ladestack.in/og-image.png',
+  }}
+  twitter={{
+    card: 'summary_large_image',
+    title: 'Contact Lade Stack – AI Development Support',
+    description: 'Get in touch for AI development support and technical assistance. 24/7 availability.',
+    image: 'https://ladestack.in/og-image.png',
+  }}
+  structuredData={structuredData}
+>
+  <h1>Contact Lade Stack</h1>
+  <p>
+    AI development support, technical assistance, and enterprise solutions —
+    operating 24/7 from Mumbai, India.
+  </p>
+  <p>
+    Email <a href="mailto:admin@ladestack.in">admin@ladestack.in</a> or visit the{' '}
+    <a href="/support">Support Center</a>.
+  </p>
+</BaseLayout>

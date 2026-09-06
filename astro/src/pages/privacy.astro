@@ -1,0 +1,36 @@
+---
+/**
+ * /privacy — manifest route: src/pages/PrivacyPolicy.tsx → url_path "/privacy"
+ * Canonical: https://ladestack.in/privacy (no page-level JSON-LD in manifest)
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Privacy Policy - Lade Stack"
+  description="Read our Privacy Policy to understand how we collect, use, and protect your personal information at Lade Stack."
+  canonical="https://ladestack.in/privacy"
+  robots={{ index: true, follow: true, custom: 'max-image-preview:large, max-snippet:-1, max-video-preview:-1' }}
+  openGraph={{
+    title: 'Privacy Policy - Lade Stack',
+    description:
+      'Read our Privacy Policy to understand how we collect, use, and protect your personal information at Lade Stack.',
+    url: 'https://ladestack.in/privacy',
+    type: 'website',
+    image: 'https://ladestack.in/og-image.png',
+  }}
+  twitter={{
+    card: 'summary_large_image',
+    title: 'Privacy Policy - Lade Stack',
+    description:
+      'Read our Privacy Policy to understand how we collect, use, and protect your personal information at Lade Stack.',
+    image: 'https://ladestack.in/og-image.png',
+  }}
+  structuredData={[]}
+>
+  <h1>Privacy Policy</h1>
+  <p>How Lade Stack collects, uses, and protects your personal information.</p>
+  <p>
+    Questions? <a href="/contact">Contact us</a>.
+  </p>
+</BaseLayout>

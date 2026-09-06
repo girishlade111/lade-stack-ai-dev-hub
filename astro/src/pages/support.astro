@@ -1,0 +1,49 @@
+---
+/**
+ * /support — manifest route: src/pages/Support.tsx → url_path "/support"
+ * Canonical: https://ladestack.in/support
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    description: 'Support center and FAQ for Lade Stack platform.',
+    name: 'Lade Stack Support',
+    url: 'https://ladestack.in/support',
+  },
+];
+---
+
+<BaseLayout
+  title="Support Center – Help & FAQ | Lade Stack"
+  description="Get help with Lade Stack's platform. Troubleshoot issues, browse FAQs, or contact our support team. We respond within 24 hours."
+  canonical="https://ladestack.in/support"
+  robots={{ index: true, follow: true, custom: 'max-image-preview:large, max-snippet:-1, max-video-preview:-1' }}
+  openGraph={{
+    title: 'Lade Stack Support Center',
+    description:
+      "Get help with Lade Stack's AI developer tools. FAQs, troubleshooting, and 24-hour support.",
+    url: 'https://ladestack.in/support',
+    type: 'website',
+    image: 'https://ladestack.in/og-image.png',
+  }}
+  twitter={{
+    card: 'summary_large_image',
+    title: 'Lade Stack Support Center',
+    description:
+      "Get help with Lade Stack's AI developer tools. FAQs, troubleshooting, and 24-hour support.",
+    image: 'https://ladestack.in/og-image.png',
+  }}
+  structuredData={structuredData}
+>
+  <h1>Support Center</h1>
+  <p>
+    Troubleshoot issues, browse FAQs, or contact our support team — we respond
+    within 24 hours.
+  </p>
+  <p>
+    <a href="/contact">Contact Support Team</a> · <a href="/docs">Documentation</a>
+  </p>
+</BaseLayout>
