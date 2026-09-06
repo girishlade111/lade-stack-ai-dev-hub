@@ -1,0 +1,78 @@
+---
+/**
+ * /blog/:slug — manifest dynamic route: src/pages/BlogPost.tsx
+ *   url_path "/blog/:slug", is_dynamic true, dynamic_param_key "slug"
+ *
+ * getStaticPaths() emits all 27 slugs from the ported dataset, so the final
+ * URLs match the manifest canonical template https://ladestack.in/blog/{slug}
+ * exactly. Per-post title/description/OG/Twitter/JSON-LD follow the manifest
+ * dynamic templates ({post.title} | Lade Stack Blog, {post.excerpt}, …).
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { blogPosts } from '../../data/blogPosts';
+
+export function getStaticPaths() {
+  return blogPosts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const canonical = `https://ladestack.in/blog/${post.slug}`;
+const title = `${post.title} | Lade Stack Blog`;
+const coverImage = `https://ladestack.in/blog-covers/${post.image}.svg`;
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    articleSection: post.category,
+    author: { '@type': 'Person', name: post.author, url: 'https://ladestack.in/about' },
+    dateModified: post.date,
+    datePublished: post.date,
+    description: post.excerpt,
+    headline: post.title,
+    image: coverImage,
+    keywords: post.keywords.join(', '),
+    mainEntityOfPage: { '@id': canonical, '@type': 'WebPage' },
+    publisher: {
+      '@type': 'Organization',
+      logo: { '@type': 'ImageObject', url: 'https://ladestack.in/logo.png' },
+      name: 'Lade Stack',
+    },
+  },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={post.excerpt}
+  canonical={canonical}
+  robots={{ index: true, follow: true, custom: 'max-image-preview:large, max-snippet:-1, max-video-preview:-1' }}
+  openGraph={{
+    title,
+    description: post.excerpt,
+    url: canonical,
+    type: 'article',
+    image: coverImage,
+  }}
+  twitter={{
+    card: 'summary_large_image',
+    title,
+    description: post.excerpt,
+    image: coverImage,
+  }}
+  structuredData={structuredData}
+>
+  <nav aria-label="Breadcrumb">
+    <a href="/">Home</a> / <a href="/blog">Blog</a> / {post.title}
+  </nav>
+  <article>
+    <h1>{post.title}</h1>
+    <p>
+      By {post.author} · {post.date} · {post.readTime} · {post.category}
+    </p>
+    <p>{post.excerpt}</p>
+    <p>
+      <a href="/blog">Back to Blog</a>
+    </p>
+  </article>
+</BaseLayout>

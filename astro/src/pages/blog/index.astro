@@ -1,0 +1,56 @@
+---
+/**
+ * /blog — manifest route: src/pages/Blog.tsx → url_path "/blog"
+ * Canonical: https://ladestack.in/blog
+ * Links every post via /blog/{slug} (manifest internal_links_outbound).
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { blogPosts } from '../../data/blogPosts';
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    description: 'AI development insights, tutorials, and engineering best practices.',
+    name: 'Lade Stack Blog',
+    publisher: { '@type': 'Organization', name: 'Lade Stack', url: 'https://ladestack.in' },
+    url: 'https://ladestack.in/blog',
+  },
+];
+---
+
+<BaseLayout
+  title="Blog – AI Development Insights & Tutorials | Lade Stack"
+  description="Explore the latest insights, tutorials, and trends in AI software development, API testing, and developer productivity from the Lade Stack team."
+  canonical="https://ladestack.in/blog"
+  robots={{ index: true, follow: true, custom: 'max-image-preview:large, max-snippet:-1, max-video-preview:-1' }}
+  openGraph={{
+    title: 'Lade Stack Blog - AI Development Insights',
+    description:
+      'Expert tutorials, guides, and insights on AI-powered development, API testing, and modern software engineering.',
+    url: 'https://ladestack.in/blog',
+    type: 'website',
+    image: 'https://ladestack.in/og-image.png',
+  }}
+  twitter={{
+    card: 'summary_large_image',
+    title: 'Lade Stack Blog - AI Development Insights',
+    description:
+      'Expert tutorials, guides, and insights on AI-powered development, API testing, and modern software engineering.',
+    image: 'https://ladestack.in/og-image.png',
+  }}
+  structuredData={structuredData}
+>
+  <h1>Lade Stack Blog</h1>
+  <p>AI development insights, tutorials, and engineering best practices.</p>
+  <ul>
+    {
+      blogPosts.map((post) => (
+        <li>
+          <a href={`/blog/${post.slug}`}>{post.title}</a>
+          <p>{post.excerpt}</p>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>

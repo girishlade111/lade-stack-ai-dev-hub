@@ -1,0 +1,72 @@
+---
+/**
+ * /about — manifest route: src/pages/AboutUs.tsx → url_path "/about"
+ * Canonical: https://ladestack.in/about
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      email: 'admin@ladestack.in',
+    },
+    description:
+      'AI-powered development tools ecosystem founded by Girish Lade, democratizing advanced development tools for creators and startups worldwide.',
+    founder: {
+      '@type': 'Person',
+      description:
+        'Multi-disciplinary engineer and designer with expertise in AI systems, web development, and user experience',
+      jobTitle: 'Founder & Lead Developer',
+      name: 'Girish Lade',
+      url: 'https://ladestack.in/about',
+    },
+    foundingDate: '2020',
+    logo: 'https://ladestack.in/logo.png',
+    name: 'Lade Stack',
+    sameAs: [
+      'https://www.instagram.com/girish_lade_/',
+      'https://www.linkedin.com/in/girish-lade-075bba201/',
+      'https://github.com/girishlade111',
+      'https://codepen.io/Girish-Lade-the-looper',
+    ],
+    url: 'https://ladestack.in',
+  },
+];
+---
+
+<BaseLayout
+  title="About Lade Stack - Empowering Developers Through AI Innovation & Visionary Leadership"
+  description="Discover Lade Stack's inspiring journey from a developer's vision to an AI-powered development ecosystem. Founded by Girish Lade, we democratize advanced development tools for creators worldwide."
+  canonical="https://ladestack.in/about"
+  robots={{ index: true, follow: true, custom: 'max-image-preview:large, max-snippet:-1, max-video-preview:-1' }}
+  openGraph={{
+    title: 'About Lade Stack - Visionary AI Development Tools & Founder Story',
+    description:
+      'Learn how Girish Lade transformed from a passionate developer to founding Lade Stack - an AI-powered ecosystem revolutionizing how creators build, test, and deploy modern applications.',
+    url: 'https://ladestack.in/about',
+    type: 'website',
+    image: 'https://ladestack.in/og-about.png',
+  }}
+  twitter={{
+    card: 'summary_large_image',
+    title: 'About Lade Stack - AI Development Revolution & Founder Story',
+    description:
+      "Discover how Girish Lade's vision became Lade Stack - transforming developer workflows through AI-powered tools and innovation.",
+    image: 'https://ladestack.in/og-about.png',
+  }}
+  structuredData={structuredData}
+>
+  <h1>About Lade Stack</h1>
+  <p>
+    From a developer&apos;s vision to an AI-powered development ecosystem founded
+    by Girish Lade — democratizing advanced development tools for creators
+    worldwide.
+  </p>
+  <p>
+    <a href="/">Home</a> · <a href="/apps">Apps</a> · <a href="/contact">Contact</a>
+  </p>
+</BaseLayout>
