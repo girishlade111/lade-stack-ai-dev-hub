@@ -1,0 +1,838 @@
+{
+  "redirects": [],
+  "routes": [
+    {
+      "dynamic_param_key": null,
+      "file_path": "src/pages/Index.tsx",
+      "internal_links_outbound": [
+        "/",
+        "/about",
+        "/apps",
+        "/ai-code-viewer-ai",
+        "/blog",
+        "/contact",
+        "/docs",
+        "/support",
+        "/privacy",
+        "/terms"
+      ],
+      "is_dynamic": false,
+      "meta": {
+        "canonical": "https://ladestack.in/",
+        "description": "The complete AI-powered development ecosystem. Intelligent tools for coding, API testing, website building, file sharing, and documentation — all free. Built for modern developers.",
+        "open_graph": {
+          "description": "Enterprise-grade AI tools at startup velocity. Code editing, API testing, file sharing, and automation for 10x developer productivity.",
+          "image": "https://ladestack.in/og-image.png",
+          "title": "Lade Stack – AI-Powered Developer Ecosystem",
+          "type": "website",
+          "url": "https://ladestack.in/"
+        },
+        "robots": {
+          "custom": "max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "follow": true,
+          "index": true
+        },
+        "title": "Lade Stack – AI-Powered Developer Platform | Build Smarter, Ship Faster",
+        "twitter": {
+          "card": "summary_large_image",
+          "description": "Enterprise-grade AI tools at startup velocity. Code editing, API testing, file sharing, and automation for 10x developer productivity.",
+          "image": "https://ladestack.in/og-image.png",
+          "title": "Lade Stack – AI-Powered Developer Ecosystem"
+        }
+      },
+      "structured_data": [
+        {
+          "raw_json_ld": {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "applicationCategory": "DeveloperApplication",
+            "description": "AI-powered developer tools platform with code editor, API testing, website builder, and file management.",
+            "name": "Lade Stack",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            },
+            "operatingSystem": "Web Browser",
+            "url": "https://ladestack.in"
+          },
+          "type": "WebApplication"
+        },
+        {
+          "raw_json_ld": {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "availableLanguage": "English",
+              "contactType": "customer support",
+              "email": "admin@ladestack.in"
+            },
+            "description": "AI-powered developer tools and SaaS solutions for modern development teams.",
+            "founder": {
+              "@type": "Person",
+              "name": "Girish Lade",
+              "url": "https://github.com/girishlade111"
+            },
+            "logo": "https://ladestack.in/favicon.ico",
+            "name": "Lade Stack",
+            "sameAs": [
+              "https://github.com/girishlade111",
+              "https://www.linkedin.com/in/girish-lade-075bba201/",
+              "https://www.instagram.com/girish_lade_/",
+              "https://codepen.io/Girish-Lade-the-looper"
+            ],
+            "url": "https://ladestack.in"
+          },
+          "type": "Organization"
+        },
+        {
+          "raw_json_ld": {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingCount": "150",
+              "ratingValue": "4.1"
+            },
+            "applicationCategory": "DeveloperApplication",
+            "author": {
+              "@type": "Person",
+              "name": "Girish Lade",
+              "url": "https://github.com/girishlade111"
+            },
+            "description": "AI-powered developer tools and SaaS solutions including API testing platform, website builder, file management system, and documentation summarizer.",
+            "name": "Lade Stack",
+            "offers": {
+              "@type": "Offer",
+              "availability": "https://schema.org/InStock",
+              "price": "0",
+              "priceCurrency": "USD"
+            },
+            "operatingSystem": "Web Browser",
+            "url": "https://ladestack.in"
+          },
+          "type": "SoftwareApplication"
+        },
+        {
+          "raw_json_ld": {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "description": "AI-Powered Developer Tools & SaaS Solutions",
+            "name": "Lade Stack",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Lade Stack"
+            },
+            "url": "https://ladestack.in"
+          },
+          "type": "WebSite"
+        }
+      ],
+      "url_path": "/"
+    },
+    {
+      "dynamic_param_key": null,
+      "file_path": "src/pages/AboutUs.tsx",
+      "internal_links_outbound": [
+        "/",
+        "/about",
+        "/apps",
+        "/blog",
+        "/contact",
+        "/privacy",
+        "/terms",
+        "/docs",
+        "/support",
+        "/ai-code-viewer-ai"
+      ],
+      "is_dynamic": false,
+      "meta": {
+        "canonical": "https://ladestack.in/about",
+        "description": "Discover Lade Stack's inspiring journey from a developer's vision to an AI-powered development ecosystem. Founded by Girish Lade, we democratize advanced development tools for creators worldwide.",
+        "open_graph": {
+          "description": "Learn how Girish Lade transformed from a passionate developer to founding Lade Stack - an AI-powered ecosystem revolutionizing how creators build, test, and deploy modern applications.",
+          "image": "https://ladestack.in/og-about.png",
+          "title": "About Lade Stack - Visionary AI Development Tools & Founder Story",
+          "type": "website",
+          "url": "https://ladestack.in/about"
+        },
+        "robots": {
+          "custom": "max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "follow": true,
+          "index": true
+        },
+        "title": "About Lade Stack - Empowering Developers Through AI Innovation & Visionary Leadership",
+        "twitter": {
+          "card": "summary_large_image",
+          "description": "Discover how Girish Lade's vision became Lade Stack - transforming developer workflows through AI-powered tools and innovation.",
+          "image": "https://ladestack.in/og-about.png",
+          "title": "About Lade Stack - AI Development Revolution & Founder Story"
+        }
+      },
+      "structured_data": [
+        {
+          "raw_json_ld": {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "customer support",
+              "email": "admin@ladestack.in"
+            },
+            "description": "AI-powered development tools ecosystem founded by Girish Lade, democratizing advanced development tools for creators and startups worldwide.",
+            "founder": {
+              "@type": "Person",
+              "description": "Multi-disciplinary engineer and designer with expertise in AI systems, web development, and user experience",
+              "jobTitle": "Founder & Lead Developer",
+              "name": "Girish Lade",
+              "url": "https://ladestack.in/about"
+            },
+            "foundingDate": "2020",
+            "logo": "https://ladestack.in/logo.png",
+            "name": "Lade Stack",
+            "sameAs": [
+              "https://www.instagram.com/girish_lade_/",
+              "https://www.linkedin.com/in/girish-lade-075bba201/",
+              "https://github.com/girishlade111",
+              "https://codepen.io/Girish-Lade-the-looper"
+            ],
+            "url": "https://ladestack.in"
+          },
+          "type": "Organization"
+        }
+      ],
+      "url_path": "/about"
+    },
+    {
+      "dynamic_param_key": null,
+      "file_path": "src/pages/Blog.tsx",
+      "internal_links_outbound": [
+        "/",
+        "/about",
+        "/apps",
+        "/blog",
+        "/blog/:slug",
+        "/contact",
+        "/docs",
+        "/support",
+        "/privacy",
+        "/terms"
+      ],
+      "is_dynamic": false,
+      "meta": {
+        "canonical": "https://ladestack.in/blog",
+        "description": "Explore the latest insights, tutorials, and trends in AI software development, API testing, and developer productivity from the Lade Stack team.",
+        "open_graph": {
+          "description": "Expert tutorials, guides, and insights on AI-powered development, API testing, and modern software engineering.",
+          "image": "https://ladestack.in/og-image.png",
+          "title": "Lade Stack Blog - AI Development Insights",
+          "type": "website",
+          "url": "https://ladestack.in/blog"
+        },
+        "robots": {
+          "custom": "max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "follow": true,
+          "index": true
+        },
+        "title": "Blog – AI Development Insights & Tutorials | Lade Stack",
+        "twitter": {
+          "card": "summary_large_image",
+          "description": "Expert tutorials, guides, and insights on AI-powered development, API testing, and modern software engineering.",
+          "image": "https://ladestack.in/og-image.png",
+          "title": "Lade Stack Blog - AI Development Insights"
+        }
+      },
+      "structured_data": [
+        {
+          "raw_json_ld": {
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            "description": "AI development insights, tutorials, and engineering best practices.",
+            "name": "Lade Stack Blog",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Lade Stack",
+              "url": "https://ladestack.in"
+            },
+            "url": "https://ladestack.in/blog"
+          },
+          "type": "Blog"
+        }
+      ],
+      "url_path": "/blog"
+    },
+    {
+      "dynamic_param_key": "slug",
+      "file_path": "src/pages/BlogPost.tsx",
+      "internal_links_outbound": [
+        "/",
+        "/blog",
+        "/blog/:slug"
+      ],
+      "is_dynamic": true,
+      "meta": {
+        "canonical": "https://ladestack.in/blog/{slug}",
+        "description": "{post.excerpt} — e.g. Comprehensive guide to AI-powered development tools, trends, and technologies transforming software engineering in 2024.",
+        "open_graph": {
+          "description": "{post.excerpt}",
+          "image": "https://ladestack.in/blog-covers/{post.image}.svg",
+          "title": "{post.title} | Lade Stack Blog",
+          "type": "article",
+          "url": "https://ladestack.in/blog/{slug}"
+        },
+        "robots": {
+          "custom": "max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "follow": true,
+          "index": true
+        },
+        "title": "{post.title} | Lade Stack Blog",
+        "twitter": {
+          "card": "summary_large_image",
+          "description": "{post.excerpt}",
+          "image": "https://ladestack.in/blog-covers/{post.image}.svg",
+          "title": "{post.title} | Lade Stack Blog"
+        }
+      },
+      "structured_data": [
+        {
+          "raw_json_ld": {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "articleSection": "{post.category}",
+            "author": {
+              "@type": "Person",
+              "name": "{post.author}",
+              "url": "https://ladestack.in/about"
+            },
+            "dateModified": "{post.date}",
+            "datePublished": "{post.date}",
+            "description": "{post.excerpt}",
+            "headline": "{post.title}",
+            "image": "https://ladestack.in/blog-covers/{post.image}.svg",
+            "keywords": "{post.keywords}",
+            "mainEntityOfPage": {
+              "@id": "https://ladestack.in/blog/{slug}",
+              "@type": "WebPage"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://ladestack.in/logo.png"
+              },
+              "name": "Lade Stack"
+            }
+          },
+          "type": "BlogPosting"
+        }
+      ],
+      "url_path": "/blog/:slug"
+    },
+    {
+      "dynamic_param_key": null,
+      "file_path": "src/pages/Contact.tsx",
+      "internal_links_outbound": [
+        "/",
+        "/about",
+        "/apps",
+        "/blog",
+        "/contact",
+        "/support",
+        "/docs",
+        "/privacy",
+        "/terms"
+      ],
+      "is_dynamic": false,
+      "meta": {
+        "canonical": "https://ladestack.in/contact",
+        "description": "Contact Lade Stack for AI development support, technical assistance, and enterprise solutions. We operate 24/7 and respond within hours. Based in Mumbai, India.",
+        "open_graph": {
+          "description": "Get in touch with Lade Stack for AI development support, technical assistance, and enterprise solutions.",
+          "image": "https://ladestack.in/og-image.png",
+          "title": "Contact Lade Stack – AI Development Support",
+          "type": "website",
+          "url": "https://ladestack.in/contact"
+        },
+        "robots": {
+          "custom": "max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "follow": true,
+          "index": true
+        },
+        "title": "Contact Lade Stack – Get in Touch for AI Development Support",
+        "twitter": {
+          "card": "summary_large_image",
+          "description": "Get in touch for AI development support and technical assistance. 24/7 availability.",
+          "image": "https://ladestack.in/og-image.png",
+          "title": "Contact Lade Stack – AI Development Support"
+        }
+      },
+      "structured_data": [
+        {
+          "raw_json_ld": {
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            "description": "Get in touch with Lade Stack for AI development support, technical assistance, and enterprise solutions.",
+            "mainEntity": {
+              "@type": "Organization",
+              "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "IN",
+                "addressLocality": "Mumbai",
+                "addressRegion": "Maharashtra"
+              },
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "availableLanguage": "English",
+                "contactType": "customer support",
+                "email": "admin@ladestack.in"
+              },
+              "name": "Lade Stack"
+            },
+            "name": "Contact Lade Stack",
+            "url": "https://ladestack.in/contact"
+          },
+          "type": "ContactPage"
+        }
+      ],
+      "url_path": "/contact"
+    },
+    {
+      "dynamic_param_key": null,
+      "file_path": "src/pages/PrivacyPolicy.tsx",
+      "internal_links_outbound": [
+        "/",
+        "/about",
+        "/apps",
+        "/blog",
+        "/contact",
+        "/privacy",
+        "/terms",
+        "/docs",
+        "/support"
+      ],
+      "is_dynamic": false,
+      "meta": {
+        "canonical": "https://ladestack.in/privacy",
+        "description": "Read our Privacy Policy to understand how we collect, use, and protect your personal information at Lade Stack.",
+        "open_graph": {
+          "description": "Read our Privacy Policy to understand how we collect, use, and protect your personal information at Lade Stack.",
+          "image": "https://ladestack.in/og-image.png",
+          "title": "Privacy Policy - Lade Stack",
+          "type": "website",
+          "url": "https://ladestack.in/privacy"
+        },
+        "robots": {
+          "custom": "max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "follow": true,
+          "index": true
+        },
+        "title": "Privacy Policy - Lade Stack",
+        "twitter": {
+          "card": "summary_large_image",
+          "description": "Read our Privacy Policy to understand how we collect, use, and protect your personal information at Lade Stack.",
+          "image": "https://ladestack.in/og-image.png",
+          "title": "Privacy Policy - Lade Stack"
+        }
+      },
+      "structured_data": [],
+      "url_path": "/privacy"
+    },
+    {
+      "dynamic_param_key": null,
+      "file_path": "src/pages/TermsOfService.tsx",
+      "internal_links_outbound": [
+        "/",
+        "/about",
+        "/apps",
+        "/blog",
+        "/contact",
+        "/privacy",
+        "/terms",
+        "/docs",
+        "/support"
+      ],
+      "is_dynamic": false,
+      "meta": {
+        "canonical": "https://ladestack.in/terms",
+        "description": "Read our Terms of Service to understand the rules and regulations for using Lade Stack's services.",
+        "open_graph": {
+          "description": "Read our Terms of Service to understand the rules and regulations for using Lade Stack's services.",
+          "image": "https://ladestack.in/og-image.png",
+          "title": "Terms of Service - Lade Stack",
+          "type": "website",
+          "url": "https://ladestack.in/terms"
+        },
+        "robots": {
+          "custom": "max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "follow": true,
+          "index": true
+        },
+        "title": "Terms of Service - Lade Stack",
+        "twitter": {
+          "card": "summary_large_image",
+          "description": "Read our Terms of Service to understand the rules and regulations for using Lade Stack's services.",
+          "image": "https://ladestack.in/og-image.png",
+          "title": "Terms of Service - Lade Stack"
+        }
+      },
+      "structured_data": [],
+      "url_path": "/terms"
+    },
+    {
+      "dynamic_param_key": null,
+      "file_path": "src/pages/Support.tsx",
+      "internal_links_outbound": [
+        "/",
+        "/about",
+        "/apps",
+        "/blog",
+        "/contact",
+        "/docs",
+        "/support",
+        "/privacy",
+        "/terms"
+      ],
+      "is_dynamic": false,
+      "meta": {
+        "canonical": "https://ladestack.in/support",
+        "description": "Get help with Lade Stack's platform. Troubleshoot issues, browse FAQs, or contact our support team. We respond within 24 hours.",
+        "open_graph": {
+          "description": "Get help with Lade Stack's AI developer tools. FAQs, troubleshooting, and 24-hour support.",
+          "image": "https://ladestack.in/og-image.png",
+          "title": "Lade Stack Support Center",
+          "type": "website",
+          "url": "https://ladestack.in/support"
+        },
+        "robots": {
+          "custom": "max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "follow": true,
+          "index": true
+        },
+        "title": "Support Center – Help & FAQ | Lade Stack",
+        "twitter": {
+          "card": "summary_large_image",
+          "description": "Get help with Lade Stack's AI developer tools. FAQs, troubleshooting, and 24-hour support.",
+          "image": "https://ladestack.in/og-image.png",
+          "title": "Lade Stack Support Center"
+        }
+      },
+      "structured_data": [
+        {
+          "raw_json_ld": {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "description": "Support center and FAQ for Lade Stack platform.",
+            "name": "Lade Stack Support",
+            "url": "https://ladestack.in/support"
+          },
+          "type": "FAQPage"
+        }
+      ],
+      "url_path": "/support"
+    },
+    {
+      "dynamic_param_key": null,
+      "file_path": "src/pages/Documentation.tsx",
+      "internal_links_outbound": [
+        "/",
+        "/about",
+        "/apps",
+        "/blog",
+        "/contact",
+        "/docs",
+        "/support",
+        "/privacy",
+        "/terms"
+      ],
+      "is_dynamic": false,
+      "meta": {
+        "canonical": "https://ladestack.in/docs",
+        "description": "Comprehensive documentation for Lade Stack's developer tools. Step-by-step guides, API references, and tutorials to get started quickly.",
+        "open_graph": {
+          "description": "Guides, API references, and tutorials for Lade Stack's AI developer tools.",
+          "image": "https://ladestack.in/og-image.png",
+          "title": "Lade Stack Documentation",
+          "type": "website",
+          "url": "https://ladestack.in/docs"
+        },
+        "robots": {
+          "custom": "max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "follow": true,
+          "index": true
+        },
+        "title": "Documentation – Guides & API Reference | Lade Stack",
+        "twitter": {
+          "card": "summary_large_image",
+          "description": "Guides, API references, and tutorials for Lade Stack's AI developer tools.",
+          "image": "https://ladestack.in/og-image.png",
+          "title": "Lade Stack Documentation"
+        }
+      },
+      "structured_data": [
+        {
+          "raw_json_ld": {
+            "@context": "https://schema.org",
+            "@type": "TechArticle",
+            "description": "Comprehensive documentation for Lade Stack developer tools.",
+            "name": "Lade Stack Documentation",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Lade Stack"
+            },
+            "url": "https://ladestack.in/docs"
+          },
+          "type": "TechArticle"
+        }
+      ],
+      "url_path": "/docs"
+    },
+    {
+      "dynamic_param_key": null,
+      "file_path": "src/pages/AICodeViewerAI.tsx",
+      "internal_links_outbound": [
+        "/",
+        "/about",
+        "/apps",
+        "/blog",
+        "/contact",
+        "/ai-code-viewer-ai",
+        "/docs",
+        "/support",
+        "/privacy",
+        "/terms"
+      ],
+      "is_dynamic": false,
+      "meta": {
+        "canonical": "https://ladestack.in/ai-code-viewer-ai",
+        "description": "Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance. The ultimate development tool for modern web creators.",
+        "open_graph": {
+          "description": "Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance.",
+          "image": "https://ladestack.in/AIcode.png",
+          "title": "CodeEnhance AI - AI-Powered Frontend Development Tool",
+          "type": "website",
+          "url": "https://ladestack.in/ai-code-viewer-ai"
+        },
+        "robots": {
+          "custom": "max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "follow": true,
+          "index": true
+        },
+        "title": "CodeEnhance AI - AI-Powered HTML, CSS & JS Code Viewer, Compiler, Editor & Enhancer",
+        "twitter": {
+          "card": "summary_large_image",
+          "description": "Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance.",
+          "image": "https://ladestack.in/AIcode.png",
+          "title": "CodeEnhance AI - AI-Powered Frontend Development"
+        }
+      },
+      "structured_data": [
+        {
+          "raw_json_ld": {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingCount": "156",
+              "ratingValue": "4.8"
+            },
+            "applicationCategory": "DeveloperApplication",
+            "creator": {
+              "@type": "Person",
+              "email": "admin@ladestack.in",
+              "name": "Girish Lade",
+              "url": "https://ladestack.in"
+            },
+            "description": "AI-powered HTML, CSS & JS code viewer, compiler, editor, and enhancer for modern web development",
+            "name": "CodeEnhance AI",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            },
+            "operatingSystem": "Web Browser",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Lade Stack",
+              "url": "https://ladestack.in"
+            },
+            "url": "https://ladestack.in/ai-code-viewer-ai"
+          },
+          "type": "SoftwareApplication"
+        }
+      ],
+      "url_path": "/ai-code-viewer-ai"
+    },
+    {
+      "dynamic_param_key": null,
+      "file_path": "src/pages/AppsGallery.tsx",
+      "internal_links_outbound": [
+        "/",
+        "/about",
+        "/apps",
+        "/ai-code-viewer-ai",
+        "/blog",
+        "/contact",
+        "/docs",
+        "/support",
+        "/privacy",
+        "/terms"
+      ],
+      "is_dynamic": false,
+      "meta": {
+        "canonical": "https://ladestack.in/apps",
+        "description": "Explore Lade Stack's suite of AI-powered developer tools: code editor, API testing, website builder, file sharing, and documentation AI. All free forever.",
+        "open_graph": {
+          "description": "Explore and launch AI-powered developer tools built by Lade Stack.",
+          "image": "https://ladestack.in/og-image.png",
+          "title": "Apps Gallery – Lade Stack AI Developer Tools",
+          "type": "website",
+          "url": "https://ladestack.in/apps"
+        },
+        "robots": {
+          "custom": "max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "follow": true,
+          "index": true
+        },
+        "title": "Apps Gallery – Lade Stack AI Developer Tools",
+        "twitter": {
+          "card": "summary_large_image",
+          "description": "Explore and launch AI-powered developer tools built by Lade Stack.",
+          "image": "https://ladestack.in/og-image.png",
+          "title": "Apps Gallery – Lade Stack AI Developer Tools"
+        }
+      },
+      "structured_data": [
+        {
+          "raw_json_ld": {
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "description": "A curated gallery of AI-powered developer tools built by Lade Stack.",
+            "name": "Apps Gallery – Lade Stack",
+            "url": "https://ladestack.in/apps"
+          },
+          "type": "CollectionPage"
+        }
+      ],
+      "url_path": "/apps"
+    },
+    {
+      "dynamic_param_key": null,
+      "file_path": "src/pages/AppsAdmin.tsx",
+      "internal_links_outbound": [
+        "/",
+        "/apps"
+      ],
+      "is_dynamic": false,
+      "meta": {
+        "canonical": "https://ladestack.in/apps/admin",
+        "description": null,
+        "open_graph": {
+          "description": null,
+          "image": "https://ladestack.in/og-image.png",
+          "title": "Apps Admin Dashboard - Lade Stack",
+          "type": "website",
+          "url": "https://ladestack.in/apps/admin"
+        },
+        "robots": {
+          "custom": null,
+          "follow": false,
+          "index": false
+        },
+        "title": "Apps Admin Dashboard - Lade Stack",
+        "twitter": {
+          "card": "summary_large_image",
+          "description": null,
+          "image": "https://ladestack.in/og-image.png",
+          "title": "Apps Admin Dashboard - Lade Stack"
+        }
+      },
+      "structured_data": [],
+      "url_path": "/apps/admin"
+    },
+    {
+      "dynamic_param_key": null,
+      "file_path": "src/pages/NotFound.tsx",
+      "internal_links_outbound": [
+        "/"
+      ],
+      "is_dynamic": false,
+      "meta": {
+        "canonical": "https://ladestack.in/404",
+        "description": null,
+        "open_graph": {
+          "description": null,
+          "image": "https://ladestack.in/og-image.png",
+          "title": "404 - Page Not Found - Lade Stack",
+          "type": "website",
+          "url": "https://ladestack.in/404"
+        },
+        "robots": {
+          "custom": null,
+          "follow": false,
+          "index": false
+        },
+        "title": "404 - Page Not Found - Lade Stack",
+        "twitter": {
+          "card": "summary_large_image",
+          "description": null,
+          "image": "https://ladestack.in/og-image.png",
+          "title": "404 - Page Not Found - Lade Stack"
+        }
+      },
+      "structured_data": [],
+      "url_path": "/*"
+    }
+  ],
+  "site_config": {
+    "default_locale": "en",
+    "site_url": "https://ladestack.in",
+    "trailing_slash": false
+  },
+  "sitemap": {
+    "changefreq": "weekly",
+    "included_paths": [
+      "https://ladestack.in/",
+      "https://ladestack.in/about",
+      "https://ladestack.in/apps",
+      "https://ladestack.in/ai-code-viewer-ai",
+      "https://ladestack.in/blog",
+      "https://ladestack.in/blog/future-of-ai-in-software-development",
+      "https://ladestack.in/blog/building-ai-powered-code-review-systems",
+      "https://ladestack.in/blog/machine-learning-pipelines-for-web-developers",
+      "https://ladestack.in/blog/generative-ai-for-content-creation",
+      "https://ladestack.in/blog/building-rag-applications-vector-databases",
+      "https://ladestack.in/blog/fine-tuning-llms-domain-specific-tasks",
+      "https://ladestack.in/blog/multi-tenant-saas-architecture-patterns",
+      "https://ladestack.in/blog/building-subscription-billing-systems",
+      "https://ladestack.in/blog/scaling-saas-applications-million-users",
+      "https://ladestack.in/blog/baas-platforms-compared-firebase-supabase-appwrite",
+      "https://ladestack.in/blog/building-serverless-backends-with-baas",
+      "https://ladestack.in/blog/real-time-data-sync-backend-services",
+      "https://ladestack.in/blog/rest-vs-graphql-choosing-right-api-paradigm",
+      "https://ladestack.in/blog/api-rate-limiting-throttling-strategies",
+      "https://ladestack.in/blog/building-api-gateways-microservices",
+      "https://ladestack.in/blog/cloud-cost-optimization-strategies-startups",
+      "https://ladestack.in/blog/multi-cloud-architecture-aws-azure-gcp",
+      "https://ladestack.in/blog/containers-vs-vms-when-to-use-each",
+      "https://ladestack.in/blog/optimizing-vm-performance-production-workloads",
+      "https://ladestack.in/blog/gitops-managing-infrastructure-with-git",
+      "https://ladestack.in/blog/building-zero-downtime-deployment-pipelines",
+      "https://ladestack.in/blog/infrastructure-as-code-terraform-pulumi",
+      "https://ladestack.in/blog/zero-trust-security-web-applications",
+      "https://ladestack.in/blog/owasp-top-10-complete-mitigation-guide",
+      "https://ladestack.in/blog/implementing-oauth2-openid-connect",
+      "https://ladestack.in/blog/mlops-deploying-ml-models-production",
+      "https://ladestack.in/blog/monitoring-ai-systems-in-production",
+      "https://ladestack.in/contact",
+      "https://ladestack.in/docs",
+      "https://ladestack.in/support",
+      "https://ladestack.in/privacy",
+      "https://ladestack.in/terms",
+      "https://ladestack.in/projects",
+      "https://ladestack.in/file-sharing-platform",
+      "https://ladestack.in/api-testing-platform"
+    ],
+    "priority": "0.8"
+  }
+}
