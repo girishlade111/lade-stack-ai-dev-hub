@@ -140,11 +140,12 @@ const BRANDS: Record<string, string> = {
 export interface Props {
   name: string;
   class?: string;
+  style?: string;
 }
 
-const { name, class: cls = 'w-4 h-4' } = Astro.props;
+const { name, class: cls = 'w-4 h-4', style = '' } = Astro.props;
 const raw = LUCIDE[name] ?? BRANDS[name] ?? '';
-const svg = raw ? raw.replace('<svg', `<svg class="${cls}" aria-hidden="true"`) : '';
+const svg = raw ? raw.replace('<svg', `<svg class="${cls}" aria-hidden="true"${style ? ` style="${style}"` : ''}`) : '';
 ---
 
 <Fragment set:html={svg} />
