@@ -4,6 +4,14 @@
  * Canonical: https://ladestack.in/
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Values from '../components/Values.astro';
+import Impact from '../components/Impact.astro';
+import Products from '../components/Products.astro';
+import FreeForever from '../components/FreeForever.astro';
+import Community from '../components/Community.astro';
+import Testimonials from '../components/Testimonials.astro';
 
 const structuredData = [
   {
@@ -89,13 +97,14 @@ const structuredData = [
   }}
   structuredData={structuredData}
 >
-  <h1>Lade Stack – AI-Powered Developer Platform</h1>
-  <p>
-    The complete AI-powered development ecosystem. Intelligent tools for coding,
-    API testing, website building, file sharing, and documentation — all free.
-  </p>
-  <p>
-    <a href="/apps">Explore the Apps Gallery</a> · <a href="/blog">Read the Blog</a> ·{' '}
-    <a href="/about">About Lade Stack</a> · <a href="/contact">Contact</a>
-  </p>
+  <Hero />
+  <About />
+  <Values />
+  <Impact />
+  <div id="products">
+    <Products />
+  </div>
+  <FreeForever />
+  <Community />
+  <Testimonials />
 </BaseLayout>
