@@ -52,6 +52,8 @@ for (const file of files) {
   const content = f.readFileSync(file.trim(), 'utf8');
   for (const m of content.matchAll(linkRe)) {
     const href = m[1];
+    const last = href.split('/').pop();
+    if (last.includes('.')) continue; // static asset (e.g. /favicon.ico) served from public/
     if (href.startsWith('/blog/')) {
       // concrete slug link (`/blog/${post.slug}` template counts as slug-family)
       if (!slugs.has(href.slice(6)) && !href.includes('${')) bad.push(`${file} -> ${href}`);
