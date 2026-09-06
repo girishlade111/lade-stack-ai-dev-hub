@@ -1,0 +1,62 @@
+---
+/**
+ * /ai-code-viewer-ai — manifest route: src/pages/AICodeViewerAI.tsx
+ * Canonical: https://ladestack.in/ai-code-viewer-ai
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    aggregateRating: { '@type': 'AggregateRating', ratingCount: '156', ratingValue: '4.8' },
+    applicationCategory: 'DeveloperApplication',
+    creator: {
+      '@type': 'Person',
+      email: 'admin@ladestack.in',
+      name: 'Girish Lade',
+      url: 'https://ladestack.in',
+    },
+    description:
+      'AI-powered HTML, CSS & JS code viewer, compiler, editor, and enhancer for modern web development',
+    name: 'CodeEnhance AI',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    operatingSystem: 'Web Browser',
+    publisher: { '@type': 'Organization', name: 'Lade Stack', url: 'https://ladestack.in' },
+    url: 'https://ladestack.in/ai-code-viewer-ai',
+  },
+];
+---
+
+<BaseLayout
+  title="CodeEnhance AI - AI-Powered HTML, CSS & JS Code Viewer, Compiler, Editor & Enhancer"
+  description="Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance. The ultimate development tool for modern web creators."
+  canonical="https://ladestack.in/ai-code-viewer-ai"
+  robots={{ index: true, follow: true, custom: 'max-image-preview:large, max-snippet:-1, max-video-preview:-1' }}
+  openGraph={{
+    title: 'CodeEnhance AI - AI-Powered Frontend Development Tool',
+    description:
+      'Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance.',
+    url: 'https://ladestack.in/ai-code-viewer-ai',
+    type: 'website',
+    image: 'https://ladestack.in/AIcode.png',
+  }}
+  twitter={{
+    card: 'summary_large_image',
+    title: 'CodeEnhance AI - AI-Powered Frontend Development',
+    description:
+      'Transform your frontend code with AI intelligence. Edit, compile, and enhance HTML, CSS & JS with real-time AI assistance.',
+    image: 'https://ladestack.in/AIcode.png',
+  }}
+  structuredData={structuredData}
+>
+  <h1>CodeEnhance AI</h1>
+  <p>
+    AI-powered HTML, CSS &amp; JS code viewer, compiler, editor, and enhancer with
+    real-time AI assistance.
+  </p>
+  <p>
+    <a href="/apps">Back to Apps Gallery</a> · <a href="/docs">Docs</a> ·{' '}
+    <a href="/contact">Contact</a>
+  </p>
+</BaseLayout>

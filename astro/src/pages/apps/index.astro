@@ -1,0 +1,47 @@
+---
+/**
+ * /apps — manifest route: src/pages/AppsGallery.tsx → url_path "/apps"
+ * Canonical: https://ladestack.in/apps
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    description: 'A curated gallery of AI-powered developer tools built by Lade Stack.',
+    name: 'Apps Gallery – Lade Stack',
+    url: 'https://ladestack.in/apps',
+  },
+];
+---
+
+<BaseLayout
+  title="Apps Gallery – Lade Stack AI Developer Tools"
+  description="Explore Lade Stack's suite of AI-powered developer tools: code editor, API testing, website builder, file sharing, and documentation AI. All free forever."
+  canonical="https://ladestack.in/apps"
+  robots={{ index: true, follow: true, custom: 'max-image-preview:large, max-snippet:-1, max-video-preview:-1' }}
+  openGraph={{
+    title: 'Apps Gallery – Lade Stack AI Developer Tools',
+    description: 'Explore and launch AI-powered developer tools built by Lade Stack.',
+    url: 'https://ladestack.in/apps',
+    type: 'website',
+    image: 'https://ladestack.in/og-image.png',
+  }}
+  twitter={{
+    card: 'summary_large_image',
+    title: 'Apps Gallery – Lade Stack AI Developer Tools',
+    description: 'Explore and launch AI-powered developer tools built by Lade Stack.',
+    image: 'https://ladestack.in/og-image.png',
+  }}
+  structuredData={structuredData}
+>
+  <h1>Apps Gallery</h1>
+  <p>AI-powered developer tools: code editor, API testing, website builder, and more.</p>
+  <ul>
+    <li><a href="/ai-code-viewer-ai">AI Code Viewer</a></li>
+  </ul>
+  <p>
+    <a href="/about">About</a> · <a href="/docs">Docs</a>
+  </p>
+</BaseLayout>

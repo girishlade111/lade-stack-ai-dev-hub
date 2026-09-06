@@ -1,0 +1,45 @@
+---
+/**
+ * /docs — manifest route: src/pages/Documentation.tsx → url_path "/docs"
+ * Canonical: https://ladestack.in/docs
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    description: 'Comprehensive documentation for Lade Stack developer tools.',
+    name: 'Lade Stack Documentation',
+    publisher: { '@type': 'Organization', name: 'Lade Stack' },
+    url: 'https://ladestack.in/docs',
+  },
+];
+---
+
+<BaseLayout
+  title="Documentation – Guides & API Reference | Lade Stack"
+  description="Comprehensive documentation for Lade Stack's developer tools. Step-by-step guides, API references, and tutorials to get started quickly."
+  canonical="https://ladestack.in/docs"
+  robots={{ index: true, follow: true, custom: 'max-image-preview:large, max-snippet:-1, max-video-preview:-1' }}
+  openGraph={{
+    title: 'Lade Stack Documentation',
+    description: "Guides, API references, and tutorials for Lade Stack's AI developer tools.",
+    url: 'https://ladestack.in/docs',
+    type: 'website',
+    image: 'https://ladestack.in/og-image.png',
+  }}
+  twitter={{
+    card: 'summary_large_image',
+    title: 'Lade Stack Documentation',
+    description: "Guides, API references, and tutorials for Lade Stack's AI developer tools.",
+    image: 'https://ladestack.in/og-image.png',
+  }}
+  structuredData={structuredData}
+>
+  <h1>Documentation</h1>
+  <p>Step-by-step guides, API references, and tutorials for Lade Stack&apos;s tools.</p>
+  <p>
+    Need help? <a href="/support">Support Center</a> · <a href="/contact">Contact</a>
+  </p>
+</BaseLayout>
