@@ -37,12 +37,16 @@ console.log(`sitemap URLs resolving to a built page: ${ok}/${j.sitemap.included_
 console.log('UNRESOLVED:');
 missing.forEach((m) => console.log(' - ' + m));
 
-// Internal-link check: every href used in Header/Footer/pages must be in-manifest or external
+// Internal-link check: every internal href must resolve to a built page or slug
 const linkRe = /href="(\/[^"]*)"/g;
-const known = new Set([...Object.keys(staticPages), '/blog/:slug', '/*', ...[...slugs].map((s) => '/blog/' + s)]);
-import { execSync } from 'node:child_process';
-const files = execSync('git ls-files astro/src -- "*.astro" 2>nul || dir /s /b astro\\src\\*.astro', { shell: 'powershell.exe' })
-  .toString().split(/\r?\n/).filter(Boolean);
+const known = new Set(Object.keys(staticPages));
+function walk(dir) {
+  return f.readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
+    const p = dir + '/' + e.name;
+    return e.isDirectory() ? walk(p) : p.endsWith('.astro') ? [p] : [];
+  });
+}
+const files = walk('astro/src');
 const bad = [];
 for (const file of files) {
   const content = f.readFileSync(file.trim(), 'utf8');
