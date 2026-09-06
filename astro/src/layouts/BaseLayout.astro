@@ -1,0 +1,54 @@
+---
+/**
+ * BaseLayout.astro — shared document shell for every migrated page.
+ * Receives one manifest `routes[]` entry's meta + structured_data and renders
+ * <SEO> into <head>, plus site-wide Header/Footer carrying the exact
+ * internal-link set from `internal_links_outbound`.
+ */
+import SEO, {
+  type RobotsMeta,
+  type OpenGraphMeta,
+  type TwitterMeta,
+} from '../components/SEO.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+  title: string;
+  description?: string | null;
+  canonical: string;
+  robots?: RobotsMeta;
+  openGraph?: OpenGraphMeta;
+  twitter?: TwitterMeta;
+  structuredData?: Record<string, unknown>[];
+  lang?: string;
+}
+
+const { title, description, canonical, robots, openGraph, twitter, structuredData, lang = 'en' } =
+  Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <SEO
+      title={title}
+      description={description}
+      canonical={canonical}
+      robots={robots}
+      openGraph={openGraph}
+      twitter={twitter}
+      structuredData={structuredData}
+    />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

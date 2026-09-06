@@ -1,0 +1,29 @@
+---
+/**
+ * Footer.astro — site-wide footer.
+ * hrefs are the exact internal paths from the manifest's
+ * `internal_links_outbound` union (legal links included so crawlers keep
+ * the same internal-link graph as the source site).
+ */
+---
+
+<footer>
+  <nav aria-label="Products">
+    <a href="/apps">Apps Gallery</a>
+    <a href="/ai-code-viewer-ai">AI Code Viewer</a>
+  </nav>
+  <nav aria-label="Company">
+    <a href="/about">About</a>
+    <a href="/blog">Blog</a>
+    <a href="/contact">Contact</a>
+  </nav>
+  <nav aria-label="Resources">
+    <a href="/docs">Docs</a>
+    <a href="/support">Support</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+  </nav>
+  <p>
+    <a href="/">Lade Stack</a> — AI-powered developer tools.
+  </p>
+</footer>
