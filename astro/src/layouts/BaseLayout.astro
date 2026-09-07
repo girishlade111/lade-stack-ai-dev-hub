@@ -27,9 +27,11 @@ export interface Props {
   twitter?: TwitterMeta;
   structuredData?: Record<string, unknown>[];
   lang?: string;
+  /** Pages with their own footer (e.g. /ai-code-viewer-ai) set this. */
+  hideFooter?: boolean;
 }
 
-const { title, description, canonical, robots, openGraph, twitter, structuredData, lang = 'en' } =
+const { title, description, canonical, robots, openGraph, twitter, structuredData, lang = 'en', hideFooter = false } =
   Astro.props;
 ---
 
@@ -69,7 +71,7 @@ const { title, description, canonical, robots, openGraph, twitter, structuredDat
     <main>
       <slot />
     </main>
-    <Footer />
+    {!hideFooter && <Footer />}
     <script is:inline>
       (function () {
         document.addEventListener('click', function (e) {
