@@ -16,7 +16,15 @@ const AICodeViewerAI = () => {
   const [email, setEmail] = useState('');
   const [betaEmail, setBetaEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const { theme } = useTheme();
+  
+  // Safely get theme with error handling
+  let theme = 'dark';
+  try {
+    const themeContext = useTheme();
+    theme = themeContext.theme;
+  } catch (error) {
+    console.error('Theme context error:', error);
+  }
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -589,7 +597,6 @@ const AICodeViewerAI = () => {
                         alt="Girish Lade"
                         className="w-full h-full object-cover"
                         loading="lazy"
-                        decoding="async"
                         onError={(e) => {
                           const target = e.currentTarget as HTMLImageElement;
                           target.style.display = 'none';
