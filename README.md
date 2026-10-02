@@ -3854,3 +3854,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 [Privacy Policy](https://ladestack.in/privacy) | [Terms of Service](https://ladestack.in/terms) | [Cookie Policy](https://ladestack.in/cookies)
 
 </div>
+
+---
+
+Built by Girish Lade — https://ladestack.in
